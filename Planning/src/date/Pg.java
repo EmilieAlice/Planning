@@ -7,8 +7,8 @@ import fenetre.Planning;
 
 public class Pg {
 	public static void main(String[] args) {
-		//Planning p = new Planning();
-		MoisAnnee ma = new MoisAnnee();
+		Planning p = new Planning();
+		
 	}
 	
 

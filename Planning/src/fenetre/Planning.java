@@ -22,6 +22,8 @@ import javax.swing.JLabel;
 import com.jgoodies.forms.factories.DefaultComponentFactory;
 import com.toedter.calendar.JDayChooser;
 
+import dao.ModuleDao;
+
 import javax.swing.JTable;
 import javax.swing.JPanel;
 
@@ -38,7 +40,12 @@ import javax.swing.JMenu;
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
+
+import modele.Module;
+
 import java.awt.SystemColor;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Planning {
 
@@ -124,13 +131,7 @@ public class Planning {
 		nombreSemaine.setMaximumRowCount(52);
 		nombreSemaine.setBounds(54, 1, 40, 20);
 		calendrier.add(nombreSemaine);
-		
-		int i = 1;
-		while (i <= 52) {
-			nombreSemaine.addItem(i);
-			i++;			
-		}
-		
+
 		lblMatiere.setBounds(128, 0, 45, 20);
 		calendrier.add(lblMatiere);
 		
@@ -251,5 +252,25 @@ public class Planning {
 		});
 		btnValider.setBounds(341, 227, 83, 23);
 		frame.getContentPane().add(btnValider);
+		
+		/**
+		 * On ajoute les semaines dans la liste semaine
+		 */
+		int i = 1;
+		while (i <= 52) {
+			nombreSemaine.addItem(i);
+			i++;			
+		}
+		
+		/**
+		 * On ajoute la liste des matières avec un nombre d'heures supérieures à 0
+		 */
+		ArrayList<Module> listeModuleDispo = new ArrayList<Module>();
+		ModuleDao remplir = new ModuleDao();
+		listeModuleDispo = remplir.findMatiereAvecHeures(2015, "BTS SIO 2016");
+		
+		for(Module uneMatiere  : listeModuleDispo){
+			nomMatiere.addItem(uneMatiere.getNom());
+		}
 	}
 }
