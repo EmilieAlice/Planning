@@ -7,18 +7,15 @@ import modele.Module;
 import modele.Session;
 
 public class SessionDao {
-	
+
 	private static java.sql.PreparedStatement pfindSession = null;
 	/**
 	 * Requete pour récupérer le nombre d'heures restantes dans la matière
 	 */
 	static {
 		try {
-			pfindSession = ConnexionBase
-					.getConnection()
-					.prepareStatement(
-							"SELECT * FROM lagarenne2015.session "
-									+ "WHERE nom=?; ");
+			pfindSession = ConnexionBase.getConnection().prepareStatement(
+					"SELECT * FROM lagarenne2015.session " + "WHERE nom=?; ");
 		} catch (Exception e) {
 			e.getMessage();
 			System.out.println("Requete findSession échouée.");
@@ -44,8 +41,10 @@ public class SessionDao {
 				session.setDateFin(resultat.getDate("date_fin"));
 				session.setDescription(resultat.getString("description"));
 				session.setId_formation(resultat.getInt("id_formation"));
-				session.setDateDebutInscription(resultat.getDate("date_debut_inscription"));
-				session.setDateFinInscription(resultat.getDate("date_fin_inscription"));
+				session.setDateDebutInscription(resultat
+						.getDate("date_debut_inscription"));
+				session.setDateFinInscription(resultat
+						.getDate("date_fin_inscription"));
 				return session;
 			} else {
 				return session = null;
@@ -55,5 +54,5 @@ public class SessionDao {
 		}
 		return null;
 	}
-	
+
 }
