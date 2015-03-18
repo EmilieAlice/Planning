@@ -10,7 +10,7 @@ public class SessionDao {
 
 	private static java.sql.PreparedStatement pfindSession = null;
 	/**
-	 * Requete pour récupérer le nombre d'heures restantes dans la matière
+	 * Requete pour récupérer une session grâce à son nom
 	 */
 	static {
 		try {
@@ -23,11 +23,10 @@ public class SessionDao {
 	}
 
 	/**
-	 * Méthode qui récupère dans la base données un objet HeuresSessionModule
+	 * Méthode qui récupère dans la base données un objet Session
 	 * 
-	 * @param annee
-	 * @param session
-	 * @return
+	 * @param nom
+	 * @return session
 	 */
 	public Session findSession(String nom) {
 		Session session = new Session();

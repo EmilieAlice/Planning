@@ -2,6 +2,11 @@ package modele;
 
 import java.sql.Date;
 
+/**
+ * Objet Session
+ * @author Jerome
+ *
+ */
 public class Session {
 
 	private int id_session;

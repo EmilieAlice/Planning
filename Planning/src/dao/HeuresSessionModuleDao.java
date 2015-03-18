@@ -94,7 +94,7 @@ public class HeuresSessionModuleDao {
 			pupdateModuleAvecHeures
 					.setInt(3, heureSessionModule.getId_module());
 			int resultat = pupdateModuleAvecHeures.executeUpdate();
-			if (resultat == 1)
+			if (resultat != 0)
 				etat = true;
 		} catch (Exception e) {
 			e.printStackTrace();

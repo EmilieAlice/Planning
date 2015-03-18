@@ -1,5 +1,11 @@
 package modele;
 
+/**
+ * Objet Module(matière)
+ * @author Jerome
+ *
+ */
+
 public class Module {
 
 	private int id_module;

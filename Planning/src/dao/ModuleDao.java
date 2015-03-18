@@ -12,7 +12,7 @@ public class ModuleDao {
 
 	private static java.sql.PreparedStatement pfindModule = null;
 	/**
-	 * Requete pour récupérer le nombre d'heures restantes dans la matière
+	 * Requete pour récupérer un module grâce à son nom
 	 */
 	static {
 		try {
@@ -27,9 +27,8 @@ public class ModuleDao {
 	/**
 	 * Méthode qui récupère dans la base données un objet Module
 	 * 
-	 * @param annee
-	 * @param session
-	 * @return
+	 * @param nom
+	 * @return Module
 	 */
 	public Module findModule(String nom) {
 		Module module = new Module();
@@ -56,7 +55,8 @@ public class ModuleDao {
 
 	private static java.sql.PreparedStatement pfindModuleAvecHeures = null;
 	/**
-	 * Requete pour récupérer le nombre d'heures restantes dans la matière
+	 * Requete pour récupérer une collection de modules dont nombre d'heures
+	 * restantes est supérieur à 0
 	 */
 	static {
 		try {
@@ -76,12 +76,12 @@ public class ModuleDao {
 	}
 
 	/**
-	 * Méthode qui récupère dans la base données les modules qui ont encore des
-	 * heures d'enseignement.
+	 * Méthode qui récupère dans la base données une collection de modules qui
+	 * ont encore des heures d'enseignement.
 	 * 
 	 * @param annee
 	 * @param session
-	 * @return
+	 * @return Collection de Module
 	 */
 	public ArrayList<Module> findModuleAvecHeures(int annee, String session) {
 		ArrayList<Module> listeModule = new ArrayList<Module>();

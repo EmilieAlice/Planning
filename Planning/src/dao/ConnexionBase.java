@@ -4,12 +4,15 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ * Classe de connexion à la base de données. Fournit une connexion à la base de
+ * données lagarenne2015
+ * @author Jerome
+ *
+ */
+
 public class ConnexionBase {
 
-	/**
-	 * Classe de connexion à la base de données. Cela fournit une connexion à la
-	 * base de données traducteur
-	 */
 	private static final String DRIVER_NAME = "com.mysql.jdbc.Driver";
 	static {
 		try {

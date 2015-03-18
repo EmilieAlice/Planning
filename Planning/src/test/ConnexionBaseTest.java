@@ -12,8 +12,8 @@ public class ConnexionBaseTest {
 
 	@Test
 	public void testConnectionBase() throws SQLException {
-		ConnexionBase connection = new ConnexionBase();
-		assertNotNull(connection.getConnection());
+		
+		assertNotNull(ConnexionBase.getConnection());
 	}
 
 }
