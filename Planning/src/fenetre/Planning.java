@@ -4,40 +4,16 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 
-import com.toedter.calendar.JCalendar;
-
-import java.awt.BorderLayout;
-
-import com.toedter.components.JLocaleChooser;
-import com.toedter.calendar.JDateChooser;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-import com.toedter.components.JSpinField;
-import com.toedter.calendar.JMonthChooser;
-
 import javax.swing.JLabel;
 
-import com.jgoodies.forms.factories.DefaultComponentFactory;
-import com.toedter.calendar.JDayChooser;
 
 import dao.ModuleDao;
 
-import javax.swing.JTable;
 import javax.swing.JPanel;
 
-import java.awt.FlowLayout;
-import java.awt.Panel;
-
-import javax.swing.JInternalFrame;
-import javax.swing.JSplitPane;
-import javax.swing.BoxLayout;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
-import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 
@@ -45,14 +21,13 @@ import modele.Module;
 
 import java.awt.SystemColor;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class Planning {
 
 	private JFrame frame = new JFrame();
 	private JPanel calendrier = new JPanel();
 	private JLabel lblSemaine = new JLabel("Semaine");
-	private JComboBox nombreSemaine = new JComboBox();
+	private JLabel numeroSemaine = new JLabel("");
 	private JLabel lblMatiere = new JLabel("Matiere");
 	private JComboBox nomMatiere = new JComboBox();
 	private JPanel planning = new JPanel();
@@ -91,7 +66,7 @@ public class Planning {
 	
 
 	/**
-	 * Launch the application.
+	 * Permet de lancer le planning
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -107,30 +82,30 @@ public class Planning {
 	}
 
 	/**
-	 * Create the application.
+	 * Constructeur comprenant la methode d'initialisation
 	 */
 	public Planning() {
 		initialize();
 	}
 
 	/**
-	 * Initialize the contents of the frame.
+	 * Methode qui initialise la fenetre
 	 */
 	private void initialize() {
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		//frame.setResizable(true);
 		
 		calendrier.setBounds(10, 10, 414, 210);
 		frame.getContentPane().add(calendrier);
 		calendrier.setLayout(null);
 		
-		lblSemaine.setBounds(0, 0, 50, 20);
+		lblSemaine.setBounds(0, 0, 60, 20);
 		calendrier.add(lblSemaine);
 		
-		nombreSemaine.setMaximumRowCount(52);
-		nombreSemaine.setBounds(54, 1, 40, 20);
-		calendrier.add(nombreSemaine);
+		numeroSemaine.setBounds(60, 0, 40, 20);
+		calendrier.add(numeroSemaine);
 
 		lblMatiere.setBounds(128, 0, 45, 20);
 		calendrier.add(lblMatiere);
@@ -252,25 +227,16 @@ public class Planning {
 		});
 		btnValider.setBounds(341, 227, 83, 23);
 		frame.getContentPane().add(btnValider);
-		
-		/**
-		 * On ajoute les semaines dans la liste semaine
-		 */
-		int i = 1;
-		while (i <= 52) {
-			nombreSemaine.addItem(i);
-			i++;			
-		}
-		
+
 		/**
 		 * On ajoute la liste des matières avec un nombre d'heures supérieures à 0
 		 */
-		ArrayList<Module> listeModuleDispo = new ArrayList<Module>();
+		/*ArrayList<Module> listeModuleDispo = new ArrayList<Module>();
 		ModuleDao remplir = new ModuleDao();
 		listeModuleDispo = remplir.findMatiereAvecHeures(2015, "BTS SIO 2016");
 		
 		for(Module uneMatiere  : listeModuleDispo){
 			nomMatiere.addItem(uneMatiere.getNom());
-		}
+		}*/
 	}
 }
