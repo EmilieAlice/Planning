@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import modele.Module;
+import modele.Session;
 
 import com.mysql.jdbc.PreparedStatement;
 
@@ -60,4 +61,6 @@ public class ModuleDao {
 			e.printStackTrace();
 		}return null;
 	}
+	
+	
 }
