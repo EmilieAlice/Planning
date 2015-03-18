@@ -62,9 +62,9 @@ public class ModuleDao {
 	 */
 	static{
 		try {
-			pfindModuleAvecHeures = ConnexionBase.getConnection().prepareStatement("SELECT * FROM lagarenne2015.heures_session_matiere "
-					+ "INNER JOIN module ON heures_session_matiere.id_module = module.id_module "
-					+ "INNER JOIN session ON heures_session_matiere.id_session = session.id_session "
+			pfindModuleAvecHeures = ConnexionBase.getConnection().prepareStatement("SELECT * FROM lagarenne2015.heures_session_module "
+					+ "INNER JOIN module ON heures_session_module.id_module = module.id_module "
+					+ "INNER JOIN session ON heures_session_module.id_session = session.id_session "
 					+ "HAVING nbre_heures_disponibles > ? "
 					+ "AND YEAR(session.date_debut)=? "
 					+ "AND session.nom=?;");
@@ -80,7 +80,7 @@ public class ModuleDao {
 	 * @param session
 	 * @return
 	 */
-	public ArrayList<Module> findMatiereAvecHeures(int annee, String session){
+	public ArrayList<Module> findModuleAvecHeures(int annee, String session){
 		ArrayList<Module> listeModule = new ArrayList<Module>();
 		try {
 			pfindModuleAvecHeures.setInt(1, 0);
