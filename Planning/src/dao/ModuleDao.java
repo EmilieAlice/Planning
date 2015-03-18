@@ -55,7 +55,7 @@ public class ModuleDao {
 
 	private static java.sql.PreparedStatement pfindModuleAvecHeures = null;
 	/**
-	 * Requete pour récupérer une collection de modules dont nombre d'heures
+	 * Requete pour récupérer une collection de modules dont le nombre d'heures
 	 * restantes est supérieur à 0
 	 */
 	static {

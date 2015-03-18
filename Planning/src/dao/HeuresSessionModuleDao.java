@@ -17,14 +17,14 @@ public class HeuresSessionModuleDao {
 			pfindHeuresSessionModule = ConnexionBase
 					.getConnection()
 					.prepareStatement(
-							"SELECT * FROM lagarenne2015.heures_session_matiere "
-									+ "INNER JOIN module ON heures_session_matiere.id_module = module.id_module "
-									+ "INNER JOIN session ON heures_session_matiere.id_session = session.id_session "
-									+ "HAVING id_session = ? "
-									+ "AND id_module=?;");
+							"SELECT * FROM lagarenne2015.heures_session_module "
+									+ "INNER JOIN module ON heures_session_module.id_module = module.id_module "
+									+ "INNER JOIN session ON heures_session_module.id_session = session.id_session "
+									+ "HAVING heures_session_module.id_session = ? "
+									+ "AND heures_session_module.id_module=?;");
 		} catch (Exception e) {
 			e.getMessage();
-			System.out.println("Requete findMatiereAvecHeures échouée.");
+			System.out.println("Requete findHeuresSessionModule échouée.");
 		}
 	}
 
@@ -60,19 +60,19 @@ public class HeuresSessionModuleDao {
 
 	private static java.sql.PreparedStatement pupdateModuleAvecHeures = null;
 	/**
-	 * Requete pour mettre le nombre d'heures restantes dans le module
+	 * Requete pour mettre à jour le nombre d'heures restantes dans le module
 	 */
 	static {
 		try {
 			pupdateModuleAvecHeures = ConnexionBase
 					.getConnection()
 					.prepareStatement(
-							"UPDATE `lagarenne2015`.`heures_session_matiere`"
+							"UPDATE `lagarenne2015`.`heures_session_module`"
 									+ "SET `nbre_heures_disponibles` = ?"
 									+ "WHERE `id_session` = ? AND `id_module` = ?; ");
 		} catch (Exception e) {
 			e.getMessage();
-			System.out.println("Requete updateMatiereAvecHeures échouée.");
+			System.out.println("Requete updateModuleAvecHeures échouée.");
 		}
 	}
 
@@ -84,11 +84,13 @@ public class HeuresSessionModuleDao {
 	 * @param session
 	 * @return
 	 */
-	public boolean updateModuleAvecHeures(HeuresSessionModule heureSessionModule) {
+	public boolean updateModuleAvecHeures(
+			HeuresSessionModule heureSessionModule, int heuresRetirees) {
 		Boolean etat = new Boolean(false);
 		try {
-			pupdateModuleAvecHeures.setInt(1,
-					heureSessionModule.getNbreHeuresDisponibles());
+			pupdateModuleAvecHeures
+					.setInt(1,
+							(heureSessionModule.getNbreHeuresDisponibles() - heuresRetirees));
 			pupdateModuleAvecHeures.setInt(2,
 					heureSessionModule.getId_session());
 			pupdateModuleAvecHeures
