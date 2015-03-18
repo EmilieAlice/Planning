@@ -42,7 +42,46 @@ import java.awt.SystemColor;
 
 public class Planning {
 
-	private JFrame frame;
+	private JFrame frame = new JFrame();
+	private JPanel calendrier = new JPanel();
+	private JLabel lblSemaine = new JLabel("Semaine");
+	private JComboBox nombreSemaine = new JComboBox();
+	private JLabel lblMatiere = new JLabel("Matiere");
+	private JComboBox nomMatiere = new JComboBox();
+	private JPanel planning = new JPanel();
+	private JPanel plageLundi = new JPanel();
+	private JPanel nomLundi = new JPanel();
+	private JLabel lblLundi = new JLabel("Lundi");
+	private JLabel lblDateLundi = new JLabel("");
+	private JPanel plageLundiMatin = new JPanel();
+	private JPanel plageLundiApresMidi = new JPanel();
+	private JPanel plageMardi = new JPanel();
+	private JPanel nomMardi = new JPanel();
+	private JLabel lblMardi = new JLabel("Mardi");
+	private JLabel lblDateMardi = new JLabel("");
+	private JPanel plageMardiMatin = new JPanel();
+	private JPanel plageMardiApresMidi = new JPanel();
+	private JPanel plageMercredi = new JPanel();
+	private JPanel nomMercredi = new JPanel();
+	private JLabel lblMercredi = new JLabel("Mercredi");
+	private JLabel lblDateMercredi = new JLabel("");
+	private JPanel plageMercrediMatin = new JPanel();
+	private JPanel plageMercrediApresMidi = new JPanel();
+	private JPanel plageJeudi = new JPanel();
+	private JPanel nomJeudi = new JPanel();
+	private JLabel lblJeudi = new JLabel("Jeudi");
+	private JLabel lblDateJeudi = new JLabel("");
+	private JPanel plageJeudiMatin = new JPanel();
+	private JPanel plageJeudiApresMidi = new JPanel();
+	private JPanel plageVendredi = new JPanel();
+	private JPanel nomVendredi = new JPanel();
+	private JLabel lblVendredi = new JLabel("Vendredi");
+	private JLabel lblDateVendredi = new JLabel("");
+	private JPanel plageVendrediMatin = new JPanel();
+	private JPanel plageVendrediApresMidi = new JPanel();
+	private JPanel plageHoraire = new JPanel();
+	private JButton btnValider = new JButton("Valider");
+	
 
 	/**
 	 * Launch the application.
@@ -71,21 +110,17 @@ public class Planning {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JPanel calendrier = new JPanel();
 		calendrier.setBounds(10, 10, 414, 210);
 		frame.getContentPane().add(calendrier);
 		calendrier.setLayout(null);
 		
-		JLabel lblSemaine = new JLabel("Semaine");
 		lblSemaine.setBounds(0, 0, 50, 20);
 		calendrier.add(lblSemaine);
 		
-		JComboBox nombreSemaine = new JComboBox();
 		nombreSemaine.setMaximumRowCount(52);
 		nombreSemaine.setBounds(54, 1, 40, 20);
 		calendrier.add(nombreSemaine);
@@ -96,155 +131,120 @@ public class Planning {
 			i++;			
 		}
 		
-		JLabel lblMatiere = new JLabel("Matiere");
 		lblMatiere.setBounds(128, 0, 45, 20);
 		calendrier.add(lblMatiere);
 		
-		JComboBox nomMatiere = new JComboBox();
 		nomMatiere.setBounds(174, 1, 175, 20);
 		calendrier.add(nomMatiere);
 		
-		JPanel planning = new JPanel();
 		planning.setBackground(SystemColor.activeCaption);
 		planning.setBounds(0, 20, 415, 190);
 		calendrier.add(planning);
 		planning.setLayout(null);
 		
-		JPanel plageLundi = new JPanel();
 		plageLundi.setBounds(15, 0, 80, 190);
 		planning.add(plageLundi);
 		plageLundi.setLayout(null);
 		
-		JPanel nomLundi = new JPanel();
 		nomLundi.setBounds(0, 0, 83, 20);
 		plageLundi.add(nomLundi);
 		nomLundi.setLayout(null);
 		
-		JLabel lblLundi = new JLabel("Lundi");
 		lblLundi.setBounds(0, 0, 63, 20);
 		nomLundi.add(lblLundi);
 		
-		JLabel lblDateLundi = new JLabel("");
 		lblDateLundi.setBounds(63, 0, 20, 20);
 		nomLundi.add(lblDateLundi);
 		
-		JPanel plageLundiMatin = new JPanel();
 		plageLundiMatin.setBounds(0, 20, 80, 85);
 		plageLundi.add(plageLundiMatin);
 		
-		JPanel plageLundiApresMidi = new JPanel();
 		plageLundiApresMidi.setBounds(0, 105, 80, 85);
 		plageLundi.add(plageLundiApresMidi);
 		
-		JPanel plageMardi = new JPanel();
 		plageMardi.setBounds(95, 0, 80, 190);
 		planning.add(plageMardi);
 		plageMardi.setLayout(null);
 		
-		JPanel nomMardi = new JPanel();
 		nomMardi.setBounds(0, 0, 83, 20);
 		plageMardi.add(nomMardi);
 		nomMardi.setLayout(null);
 		
-		JLabel lblMardi = new JLabel("Mardi");
 		lblMardi.setBounds(0, 0, 63, 20);
 		nomMardi.add(lblMardi);
 		
-		JLabel lblDateMardi = new JLabel("");
 		lblDateMardi.setBounds(63, 0, 20, 20);
 		nomMardi.add(lblDateMardi);
 		
-		JPanel plageMardiMatin = new JPanel();
 		plageMardiMatin.setBounds(0, 105, 80, 85);
 		plageMardi.add(plageMardiMatin);
 		
-		JPanel plageMardiApresMidi = new JPanel();
 		plageMardiApresMidi.setBounds(0, 20, 80, 85);
 		plageMardi.add(plageMardiApresMidi);
 		
-		JPanel plageMercredi = new JPanel();
 		plageMercredi.setBounds(175, 0, 80, 190);
 		planning.add(plageMercredi);
 		plageMercredi.setLayout(null);
 		
-		JPanel nomMercredi = new JPanel();
 		nomMercredi.setBounds(0, 0, 83, 20);
 		plageMercredi.add(nomMercredi);
 		nomMercredi.setLayout(null);
 		
-		JLabel lblMercredi = new JLabel("Mercredi");
 		lblMercredi.setBounds(0, 0, 63, 20);
 		nomMercredi.add(lblMercredi);
 		
-		JLabel lblDateMercredi = new JLabel("");
 		lblDateMercredi.setBounds(63, 0, 20, 20);
 		nomMercredi.add(lblDateMercredi);
 		
-		JPanel plageMercrediMatin = new JPanel();
 		plageMercrediMatin.setBounds(0, 105, 80, 85);
 		plageMercredi.add(plageMercrediMatin);
 		
-		JPanel plageMercrediApresMidi = new JPanel();
 		plageMercrediApresMidi.setBounds(0, 20, 80, 85);
 		plageMercredi.add(plageMercrediApresMidi);
 		
-		JPanel plageJeudi = new JPanel();
 		plageJeudi.setBounds(255, 0, 80, 190);
 		planning.add(plageJeudi);
 		plageJeudi.setLayout(null);
 		
-		JPanel nomJeudi = new JPanel();
 		nomJeudi.setBounds(0, 0, 83, 20);
 		plageJeudi.add(nomJeudi);
 		nomJeudi.setLayout(null);
 		
-		JLabel lblJeudi = new JLabel("Jeudi");
 		lblJeudi.setBounds(0, 0, 63, 20);
 		nomJeudi.add(lblJeudi);
 		
-		JLabel lblDateJeudi = new JLabel("");
 		lblDateJeudi.setBounds(63, 0, 20, 20);
 		nomJeudi.add(lblDateJeudi);
 		
-		JPanel plageJeudiMatin = new JPanel();
 		plageJeudiMatin.setBounds(0, 105, 80, 85);
 		plageJeudi.add(plageJeudiMatin);
 		
-		JPanel plageJeudiApresMidi = new JPanel();
 		plageJeudiApresMidi.setBounds(0, 20, 80, 85);
 		plageJeudi.add(plageJeudiApresMidi);
 		
-		JPanel plageVendredi = new JPanel();
 		plageVendredi.setBounds(335, 0, 80, 190);
 		planning.add(plageVendredi);
 		plageVendredi.setLayout(null);
 		
-		JPanel nomVendredi = new JPanel();
 		nomVendredi.setBounds(0, 0, 83, 20);
 		plageVendredi.add(nomVendredi);
 		nomVendredi.setLayout(null);
 		
-		JLabel lblVendredi = new JLabel("Vendredi");
 		lblVendredi.setBounds(0, 0, 63, 20);
 		nomVendredi.add(lblVendredi);
 		
-		JLabel lblDateVendredi = new JLabel("");
 		lblDateVendredi.setBounds(63, 0, 20, 20);
 		nomVendredi.add(lblDateVendredi);
 		
-		JPanel plageVendrediMatin = new JPanel();
 		plageVendrediMatin.setBounds(0, 105, 80, 85);
 		plageVendredi.add(plageVendrediMatin);
 		
-		JPanel plageVendrediApresMidi = new JPanel();
 		plageVendrediApresMidi.setBounds(0, 20, 80, 85);
 		plageVendredi.add(plageVendrediApresMidi);
 		
-		JPanel plageHoraire = new JPanel();
 		plageHoraire.setBounds(0, 0, 15, 190);
 		planning.add(plageHoraire);
 		
-		JButton btnValider = new JButton("Valider");
 		btnValider.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
