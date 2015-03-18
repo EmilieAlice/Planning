@@ -9,7 +9,53 @@ import modele.Session;
 import com.mysql.jdbc.PreparedStatement;
 
 public class ModuleDao {
+	
+	private static java.sql.PreparedStatement pfindModule = null;
+	/**
+	 * Requete pour récupérer le nombre d'heures restantes dans la matière
+	 */
+	static {
+		try {
+			pfindModule = ConnexionBase
+					.getConnection()
+					.prepareStatement(
+							"SELECT * FROM lagarenne2015.module "
+									+ "WHERE nom=?; ");
+		} catch (Exception e) {
+			e.getMessage();
+			System.out.println("Requete findSession échouée.");
+		}
+	}
 
+	/**
+	 * Méthode qui récupère dans la base données un objet Module
+	 * 
+	 * @param annee
+	 * @param session
+	 * @return
+	 */
+	public Module findModule(String nom) {
+		Module module = new Module();
+		try {
+			pfindModule.setString(1, nom);
+			ResultSet resultat = pfindModule.executeQuery();
+			if (resultat.next()) {
+				module.setId_module(resultat.getInt("id_module"));
+				module.setNom(resultat.getString("nom"));
+				module.setObjectif(resultat.getString("objectif"));
+				module.setContenu(resultat.getString("contenu"));
+				module.setNb_heures_annuelles(resultat.getInt("nb_heures_annuel"));
+				module.setPrerequis(resultat.getString("prerequis"));
+				return module;
+			} else {
+				return module = null;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	private static java.sql.PreparedStatement pfindModuleAvecHeures = null;
 	/**
 	 * Requete pour récupérer le nombre d'heures restantes dans la matière
