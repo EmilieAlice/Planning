@@ -37,7 +37,7 @@ public class HeuresSessionModuleDaoTest {
 				30);
 		HeuresSessionModuleDao dao = new HeuresSessionModuleDao();
 
-		Boolean test = dao.updateModuleAvecHeures(heureSessionModule, 10);
+		Boolean test = dao.updateModuleAvecHeures(heureSessionModule, 10, false);
 
 		assertTrue(test);
 

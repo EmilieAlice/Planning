@@ -97,7 +97,7 @@ ADD UNIQUE INDEX `id_jour_creneau_UNIQUE` (`id_jour_creneau` ASC);
 
 -- Remplissage de la table jour_creneau
 
-INSERT INTO `lagarenne2015`.`jour_creneau` (`id_jour`, `id_creneau`) VALUES (1, 1),VALUES (1, 2),(2, 1),(2, 2),(3, 1),(3, 2);
+INSERT INTO `lagarenne2015`.`jour_creneau` (`id_jour`, `id_creneau`) VALUES (1, 1),(1, 2),(2, 1),(2, 2),(3, 1),(3, 2);
 
 -- Création de la table contrainte_formateur
 
