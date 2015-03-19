@@ -145,140 +145,140 @@ public class Planning {
 		calendrier.add(numeroSemaine);
 		lblMatiere.setBounds(500, 5, 50, 20);
 		calendrier.add(lblMatiere);
-		nomModule.setBounds(550, 5, 200, 20);
+		nomModule.setBounds(550, 5, 300, 20);
 		nomModule.setBackground(new Color(210, 180, 140));
 		nomModule.addItem(" Selectionner le module ");
 		calendrier.add(nomModule);
-		planning.setBounds(0, 25, 975, 550);
+		planning.setBounds(0, 30, 950, 550);
 
 		planning.setBackground(SystemColor.activeCaption);
 		planning.setLayout(null);
 
-		plageLundi.setBounds(25, 0, 190, 550);
+		plageLundi.setBounds(25, 0, 185, 550);
 		planning.add(plageLundi);
 		plageLundi.setLayout(null);
 		nomLundi.setBackground(SystemColor.inactiveCaption);
 
-		nomLundi.setBounds(0, 0, 83, 20);
+		nomLundi.setBounds(0, 0, 185, 50);
 		plageLundi.add(nomLundi);
 		nomLundi.setLayout(null);
-		lblLundi.setAlignmentX(Component.CENTER_ALIGNMENT);
+		lblLundi.setBackground(new Color(230, 230, 250));
 
-		lblLundi.setBounds(0, 0, 63, 20);
+		lblLundi.setBounds(0, 0, 135, 50);
 		nomLundi.add(lblLundi);
 
-		lblDateLundi.setBounds(63, 0, 20, 20);
+		lblDateLundi.setBounds(150, 0, 35, 50);
 		nomLundi.add(lblDateLundi);
 		plageLundiMatin.setBackground(new Color(230, 230, 250));
 		plageLundiMatin.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(210, 180, 140)));
 
-		plageLundiMatin.setBounds(0, 20, 80, 85);
+		plageLundiMatin.setBounds(0, 50, 185, 200);
 		plageLundi.add(plageLundiMatin);
 		plageLundiApresMidi.setBackground(new Color(230, 230, 250));
 		plageLundiApresMidi.setBorder(new MatteBorder(1, 0, 0, 0, (Color) new Color(210, 180, 140)));
 
-		plageLundiApresMidi.setBounds(0, 105, 80, 85);
+		plageLundiApresMidi.setBounds(0, 300, 185, 250);
 		plageLundi.add(plageLundiApresMidi);
 
-		plageMardi.setBounds(215, 0, 190, 550);
+		plageMardi.setBounds(210, 0, 185, 550);
 		planning.add(plageMardi);
 		plageMardi.setLayout(null);
 		nomMardi.setBackground(SystemColor.inactiveCaption);
 
-		nomMardi.setBounds(0, 0, 83, 20);
+		nomMardi.setBounds(0, 0, 185, 50);
 		plageMardi.add(nomMardi);
 		nomMardi.setLayout(null);
 		lblMardi.setBackground(SystemColor.inactiveCaption);
 
-		lblMardi.setBounds(0, 0, 63, 20);
+		lblMardi.setBounds(0, 0, 135, 50);
 		nomMardi.add(lblMardi);
 
-		lblDateMardi.setBounds(63, 0, 20, 20);
+		lblDateMardi.setBounds(150, 0, 35, 50);
 		nomMardi.add(lblDateMardi);
 		plageMardiMatin.setBackground(new Color(230, 230, 250));
 		plageMardiMatin.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(210, 180, 140)));
 
-		plageMardiMatin.setBounds(0, 20, 80, 85);
+		plageMardiMatin.setBounds(0, 50, 185, 200);
 		plageMardi.add(plageMardiMatin);
 		plageMardiApresMidi.setBackground(new Color(230, 230, 250));
 		plageMardiApresMidi.setBorder(new MatteBorder(1, 0, 0, 0, (Color) new Color(210, 180, 140)));
 
-		plageMardiApresMidi.setBounds(0, 105, 80, 85);
+		plageMardiApresMidi.setBounds(0, 300, 185, 250);
 		plageMardi.add(plageMardiApresMidi);
 
-		plageMercredi.setBounds(175, 0, 80, 190);
+		plageMercredi.setBounds(395, 0, 185, 550);
 		planning.add(plageMercredi);
 		plageMercredi.setLayout(null);
 		nomMercredi.setBackground(SystemColor.inactiveCaption);
 
-		nomMercredi.setBounds(0, 0, 83, 20);
+		nomMercredi.setBounds(0, 0, 185, 50);
 		plageMercredi.add(nomMercredi);
 		nomMercredi.setLayout(null);
 
-		lblMercredi.setBounds(0, 0, 63, 20);
+		lblMercredi.setBounds(0, 0, 135, 50);
 		nomMercredi.add(lblMercredi);
 
-		lblDateMercredi.setBounds(63, 0, 20, 20);
+		lblDateMercredi.setBounds(150, 0, 35, 50);
 		nomMercredi.add(lblDateMercredi);
 		plageMercrediMatin.setBackground(new Color(230, 230, 250));
 		plageMercrediMatin.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(210, 180, 140)));
 
-		plageMercrediMatin.setBounds(0, 20, 80, 85);
+		plageMercrediMatin.setBounds(0, 50, 183, 200);
 		plageMercredi.add(plageMercrediMatin);
 		plageMercrediApresMidi.setBackground(new Color(230, 230, 250));
 		plageMercrediApresMidi.setBorder(new MatteBorder(1, 0, 0, 0, (Color) new Color(210, 180, 140)));
 
-		plageMercrediApresMidi.setBounds(0, 105, 80, 85);
+		plageMercrediApresMidi.setBounds(0, 300, 185, 250);
 		plageMercredi.add(plageMercrediApresMidi);
 
-		plageJeudi.setBounds(255, 0, 80, 190);
+		plageJeudi.setBounds(580, 0, 185, 550);
 		planning.add(plageJeudi);
 		plageJeudi.setLayout(null);
 		nomJeudi.setBackground(SystemColor.inactiveCaption);
 
-		nomJeudi.setBounds(0, 0, 83, 20);
+		nomJeudi.setBounds(0, 0, 185, 50);
 		plageJeudi.add(nomJeudi);
 		nomJeudi.setLayout(null);
 
-		lblJeudi.setBounds(0, 0, 63, 20);
+		lblJeudi.setBounds(0, 0, 135, 50);
 		nomJeudi.add(lblJeudi);
 
-		lblDateJeudi.setBounds(63, 0, 20, 20);
+		lblDateJeudi.setBounds(150, 0, 35, 50);
 		nomJeudi.add(lblDateJeudi);
 		plageJeudiMatin.setBackground(new Color(230, 230, 250));
 		plageJeudiMatin.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(210, 180, 140)));
 
-		plageJeudiMatin.setBounds(0, 20, 80, 85);
+		plageJeudiMatin.setBounds(0, 50, 183, 200);
 		plageJeudi.add(plageJeudiMatin);
 		plageJeudiApresMidi.setBackground(new Color(230, 230, 250));
 		plageJeudiApresMidi.setBorder(new MatteBorder(1, 0, 0, 0, (Color) new Color(210, 180, 140)));
 
-		plageJeudiApresMidi.setBounds(0, 105, 80, 85);
+		plageJeudiApresMidi.setBounds(0, 300, 185, 250);
 		plageJeudi.add(plageJeudiApresMidi);
 
-		plageVendredi.setBounds(335, 0, 80, 190);
+		plageVendredi.setBounds(765, 0, 185, 550);
 		planning.add(plageVendredi);
 		plageVendredi.setLayout(null);
 		nomVendredi.setBackground(SystemColor.inactiveCaption);
 
-		nomVendredi.setBounds(0, 0, 83, 20);
+		nomVendredi.setBounds(0, 0, 185, 50);
 		plageVendredi.add(nomVendredi);
 		nomVendredi.setLayout(null);
 
-		lblVendredi.setBounds(0, 0, 63, 20);
+		lblVendredi.setBounds(0, 0, 135, 50);
 		nomVendredi.add(lblVendredi);
 
-		lblDateVendredi.setBounds(63, 0, 20, 20);
+		lblDateVendredi.setBounds(150, 0, 35, 50);
 		nomVendredi.add(lblDateVendredi);
 		plageVendrediMatin.setBackground(new Color(230, 230, 250));
 		plageVendrediMatin.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(210, 180, 140)));
 
-		plageVendrediMatin.setBounds(0, 20, 80, 85);
+		plageVendrediMatin.setBounds(0, 50, 185, 200);
 		plageVendredi.add(plageVendrediMatin);
 		plageVendrediApresMidi.setBackground(new Color(230, 230, 250));
 		plageVendrediApresMidi.setBorder(new MatteBorder(1, 0, 0, 0, (Color) new Color(210, 180, 140)));
 
-		plageVendrediApresMidi.setBounds(0, 105, 80, 85);
+		plageVendrediApresMidi.setBounds(0, 300, 185, 250);
 		plageVendredi.add(plageVendrediApresMidi);
 		plageHoraire.setBackground(SystemColor.inactiveCaption);
 
