@@ -43,7 +43,7 @@ public class PersonneDao {
 				personne.setPrenom(resultat.getString("prenom"));
 				personne.setNom(resultat.getString("nom"));
 				personne.setAdresse(resultat.getString("adresse"));
-				personne.setCodePostal(resultat.getString("codePostal"));
+				personne.setCodePostal(resultat.getString("code_postal"));
 				personne.setVille(resultat.getString("ville"));
 				personne.setTelephone(resultat.getString("telephone"));
 				personne.setTelephone2(resultat.getString("telephone"));
