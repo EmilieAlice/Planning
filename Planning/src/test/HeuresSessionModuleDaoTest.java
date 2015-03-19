@@ -27,9 +27,7 @@ public class HeuresSessionModuleDaoTest {
 		HeuresSessionModuleDao dao = new HeuresSessionModuleDao();
 		test = dao.findHeuresSessionModule(module, session);
 
-		HeuresSessionModule expected = new HeuresSessionModule(1, 1, 30);
-
-		assertEquals(expected.getId_module(), test.getId_module());
+		assertEquals(1, test.getId_module());
 	}
 
 }
