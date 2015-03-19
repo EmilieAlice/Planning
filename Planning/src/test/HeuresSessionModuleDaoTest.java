@@ -12,7 +12,7 @@ import dao.HeuresSessionModuleDao;
 public class HeuresSessionModuleDaoTest {
 
 	@Test
-	public void testFindHeuresSessionModule() {
+	public void testFindHeuresSessionModule()  {
 
 		Session session = new Session();
 		session.setId_session(1);
@@ -28,6 +28,19 @@ public class HeuresSessionModuleDaoTest {
 		test = dao.findHeuresSessionModule(module, session);
 
 		assertEquals(1, test.getId_module());
+	}
+
+	@Test
+	public void testUpdateHeuresSessionModule() {
+
+		HeuresSessionModule heureSessionModule = new HeuresSessionModule(1, 1,
+				30);
+		HeuresSessionModuleDao dao = new HeuresSessionModuleDao();
+
+		Boolean test = dao.updateModuleAvecHeures(heureSessionModule, 10);
+
+		assertTrue(test);
+
 	}
 
 }
