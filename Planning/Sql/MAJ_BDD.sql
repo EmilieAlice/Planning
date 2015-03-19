@@ -1,12 +1,12 @@
---Amélioration de la base de données
+--  Amélioration de la base de données
 
 
---Changement du nom de la colonne nb_heures de la table module par nb_heures_annuel
+--  Changement du nom de la colonne nb_heures de la table module par nb_heures_annuel
 
 ALTER TABLE `lagarenne2015`.`module` 
 CHANGE COLUMN `nb_heures` `nb_heures_annuel` INT(11) NULL DEFAULT NULL ;
 
---Création de la table qui met en relation la session et le module et qui indique le nombre d'heures disponibles dans ce cas là
+--  Création de la table qui met en relation la session et le module et qui indique le nombre d'heures disponibles dans ce cas là
 
 CREATE TABLE `lagarenne2015`.`heures_session_matiere` (
   `id_session` INT NOT NULL,
@@ -25,11 +25,11 @@ CREATE TABLE `lagarenne2015`.`heures_session_matiere` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
---Remplissage de la table heures_session_matiere
+-- Remplissage de la table heures_session_matiere
 
 INSERT INTO `lagarenne2015`.`heures_session_matiere`(`id_session`,`id_module`,`nbre_heures_disponibles`)VALUES(1,1,30),(1,2,50),(1,3,50), (2,1,30), (2,2,50), (2,3,50), (3,1,30), (3,2,50), (3,3,50);
 
---Creation de la table journee
+-- Creation de la table journee
 
 CREATE TABLE `lagarenne2015`.`jour` (
   `id_jour` INT NOT NULL,
@@ -38,12 +38,12 @@ CREATE TABLE `lagarenne2015`.`jour` (
   UNIQUE INDEX `nom_UNIQUE` (`nom` ASC));
 
 
---Remplissage de la table
+-- Remplissage de la table
 
 INSERT INTO `lagarenne2015`.`jour` (`id_jour`,`nom`) 
 VALUES (1,'Lundi'),(2,'Mardi'),(3,'Mercredi'), (4,'Jeudi'),(5,'Vendredi');
 
---Creation de la table creneau
+-- Creation de la table creneau
 
 CREATE TABLE `lagarenne2015`.`creneau` (
   `id_creneau` INT NOT NULL,
@@ -51,29 +51,29 @@ CREATE TABLE `lagarenne2015`.`creneau` (
   PRIMARY KEY (`id_creneau`),
   UNIQUE INDEX `nom_UNIQUE` (`nom` ASC));
 
---Remplissage de la table créneau
+-- Remplissage de la table créneau
 
 INSERT INTO `lagarenne2015`.`creneau` (`id_creneau`, `nom`) VALUES (1, 'Matin')(2, 'Après-midi');
 
 
---Creation table de contrainte
+-- Creation table de contrainte
 
 CREATE TABLE `lagarenne2015`.`contrainte` (
   `id_contrainte` INT NOT NULL,
-  `id_journee` INT NOT NULL,
+  `id_jour` INT NOT NULL,
   PRIMARY KEY (`id_contrainte`),
-  UNIQUE INDEX `id_jour_UNIQUE` (`id_journee` ASC),
-  CONSTRAINT `id_journee`
+  UNIQUE INDEX `id_jour_UNIQUE` (`id_jour` ASC),
+  CONSTRAINT `id_jour`
     FOREIGN KEY (`id_contrainte`)
-    REFERENCES `lagarenne2015`.`journee` (`id_journee`)
+    REFERENCES `lagarenne2015`.`journee` (`id_jour`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
---Remplissage de la table contrainte
+-- Remplissage de la table contrainte
 
-INSERT INTO `lagarenne2015`.`contrainte` (`id_contrainte`, `id_journee`) VALUES (1, 1),(2, 2),(3, 3),(4, 4),(5, 5),(6, 6);
+INSERT INTO `lagarenne2015`.`contrainte` (`id_contrainte`, `id_jour`) VALUES (1, 1),(2, 2),(3, 3),(4, 4),(5, 5),(6, 6);
 
---Création de la table jour_creneau
+-- Création de la table jour_creneau
 
 CREATE TABLE `lagarenne2015`.`jour_creneau` (
   `id_jour` INT NOT NULL,
@@ -95,11 +95,11 @@ ALTER TABLE `lagarenne2015`.`jour_creneau`
 ADD COLUMN `id_jour_creneau` INT NULL AFTER `id_creneau`,
 ADD UNIQUE INDEX `id_jour_creneau_UNIQUE` (`id_jour_creneau` ASC);
 
---Remplissage de la table jour_creneau
+-- Remplissage de la table jour_creneau
 
 INSERT INTO `lagarenne2015`.`jour_creneau` (`id_jour`, `id_creneau`) VALUES (1, 1),VALUES (1, 2),(2, 1),(2, 2),(3, 1),(3, 2);
 
---Création de la table contrainte_formateur
+-- Création de la table contrainte_formateur
 
 CREATE TABLE `lagarenne2015`.`contrainte_formateur` (
   `id_formateur` INT NOT NULL,
@@ -117,11 +117,11 @@ CREATE TABLE `lagarenne2015`.`contrainte_formateur` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
---Remplissage de la table contrainte_formateur_formateur
+-- Remplissage de la table contrainte_formateur_formateur
 
 INSERT INTO `lagarenne2015`.`contrainte_formateur` (`id_formateur`, `id_jour_creneau`) VALUES (4, 1),(5, 3),(6,5);
 
---MAJ de la table formateur
+-- MAJ de la table formateur
 
 ALTER TABLE `lagarenne2015`.`formateur` 
 ADD COLUMN `id_module` INT NULL AFTER `date_entree`,

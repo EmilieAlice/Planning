@@ -129,13 +129,14 @@ public class Planning {
 	private void initialize() {
 		frame.getContentPane().setForeground(Color.WHITE);
 		frame.getContentPane().setBackground(new Color(222, 184, 135));
-		frame.setBounds(50, 50, 1000, 600);
+		frame.setResizable(false);
+		frame.setBounds(50, 50, 1000, 650);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		calendrier.setBackground(new Color(222, 184, 135));
 		//frame.setResizable(true);
 
-		calendrier.setBounds(25, 25, 975, 575);
+		calendrier.setBounds(25, 25, 950, 600);
 		frame.getContentPane().add(calendrier);
 		calendrier.setLayout(null);
 		lblSemaine.setBounds(5, 5, 50, 20);
@@ -153,7 +154,7 @@ public class Planning {
 		planning.setBackground(SystemColor.activeCaption);
 		planning.setLayout(null);
 
-		plageLundi.setBounds(15, 0, 80, 190);
+		plageLundi.setBounds(25, 0, 190, 550);
 		planning.add(plageLundi);
 		plageLundi.setLayout(null);
 		nomLundi.setBackground(SystemColor.inactiveCaption);
@@ -179,7 +180,7 @@ public class Planning {
 		plageLundiApresMidi.setBounds(0, 105, 80, 85);
 		plageLundi.add(plageLundiApresMidi);
 
-		plageMardi.setBounds(95, 0, 80, 190);
+		plageMardi.setBounds(215, 0, 190, 550);
 		planning.add(plageMardi);
 		plageMardi.setLayout(null);
 		nomMardi.setBackground(SystemColor.inactiveCaption);
@@ -281,7 +282,7 @@ public class Planning {
 		plageVendredi.add(plageVendrediApresMidi);
 		plageHoraire.setBackground(SystemColor.inactiveCaption);
 
-		plageHoraire.setBounds(0, 0, 15, 190);
+		plageHoraire.setBounds(0, 0, 25, 550);
 		planning.add(plageHoraire);
 		calendrier.add(planning);
 
