@@ -67,9 +67,9 @@ public class HeuresSessionModuleDao {
 			pupdateModuleAvecHeures = ConnexionBase
 					.getConnection()
 					.prepareStatement(
-							"UPDATE `lagarenne2015`.`heures_session_module`"
-									+ "SET `nbre_heures_disponibles` = ?"
-									+ "WHERE `id_session` = ? AND `id_module` = ?; ");
+							"UPDATE lagarenne2015.heures_session_module "
+									+ "SET nbre_heures_disponibles = ? "
+									+ "WHERE id_session = ? AND id_module = ?; ");
 		} catch (Exception e) {
 			e.getMessage();
 			System.out.println("Requete updateModuleAvecHeures échouée.");
