@@ -1,9 +1,11 @@
-package dao;
+package test;
 
 import static org.junit.Assert.*;
 import modele.Personne;
 
 import org.junit.Test;
+
+import dao.PersonneDao;
 
 public class PersonneDaoTest {
 

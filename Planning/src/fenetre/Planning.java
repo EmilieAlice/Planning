@@ -23,8 +23,11 @@ import javax.swing.JLabel;
 
 
 
+
+
 import dao.HeuresSessionModuleDao;
 import dao.ModuleDao;
+import dao.PersonneDao;
 import dao.SessionDao;
 
 import javax.swing.JPanel;
@@ -33,6 +36,7 @@ import javax.swing.JButton;
 
 import modele.HeuresSessionModule;
 import modele.Module;
+import modele.Personne;
 import modele.Session;
 
 import java.awt.SystemColor;
@@ -50,10 +54,13 @@ import javax.swing.border.MatteBorder;
 import java.awt.Component;
 
 import javax.swing.border.EmptyBorder;
+
 import java.awt.FlowLayout;
 import java.awt.CardLayout;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 
@@ -339,7 +346,11 @@ public class Planning {
 			Object module = nomModule.getSelectedItem();
 			String string = module.toString();
 			String[] infos = string.split(" ");
-			plageJeudiApresMidi.setText("Séance de " + infos[1]);
+			
+			Personne personne = new Personne();
+			PersonneDao personneDao = new PersonneDao();
+			personne = personneDao.findByNomModule(infos[1]);
+			plageJeudiApresMidi.setText("Séance de " + infos[1] + "\nAvec " + personne.getNom() + " " + personne.getPrenom());
 			plageJeudiMatin.setText("Séance de " + infos[1]);
 			/*
 			if(infos[1] == "Selectionner")
