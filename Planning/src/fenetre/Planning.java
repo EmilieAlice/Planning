@@ -63,9 +63,11 @@ import javax.swing.GroupLayout.Alignment;
 
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
+import java.awt.Font;
 
 public class Planning {
 
+	private int heuresDuModule;
 	private JFrame frame = new JFrame();
 	private JPanel calendrier = new JPanel();
 	private JLabel lblSemaine = new JLabel("Semaine");
@@ -105,6 +107,18 @@ public class Planning {
 	private JLabel plageVendrediApresMidi = new JLabel();
 	private JPanel plageHoraire = new JPanel();
 	private JButton btnValider = new JButton("Valider");
+	private JButton btnSupprimer = new JButton();
+	private JLabel lblPlageSelectionne = new JLabel();
+	private JButton btnSuppLundiMatin = new JButton("Supprimer");
+	private JButton btnSuppLundiApresMidi = new JButton("Supprimer");
+	private JButton btnSuppMardiMatin = new JButton("Supprimer");
+	private JButton btnSuppMardiApresMidi = new JButton("Supprimer");
+	private JButton btnSuppMercrediMatin = new JButton("Supprimer");
+	private JButton btnSuppMercrediApresMidi = new JButton("Supprimer");
+	private JButton btnSuppJeudiMatin = new JButton("Supprimer");
+	private JButton btnSuppJeudiApresMidi = new JButton("Supprimer");
+	private JButton btnSuppVendrediMatin = new JButton("Supprimer");
+	private JButton btnSuppVendrediApresMidi = new JButton("Supprimer");
 
 
 	/**
@@ -150,9 +164,9 @@ public class Planning {
 		calendrier.add(lblSemaine);
 		numeroSemaine.setBounds(55, 5, 15, 20);
 		calendrier.add(numeroSemaine);
-		lblMatiere.setBounds(500, 5, 50, 20);
+		lblMatiere.setBounds(400, 5, 50, 20);
 		calendrier.add(lblMatiere);
-		nomModule.setBounds(550, 5, 300, 20);
+		nomModule.setBounds(450, 5, 300, 20);
 		nomModule.setBackground(new Color(210, 180, 140));
 		nomModule.addItem(" Selectionner le module ");
 		calendrier.add(nomModule);
@@ -181,6 +195,39 @@ public class Planning {
 
 		plageLundiMatin.setBounds(0, 50, 185, 200);
 		plageLundi.add(plageLundiMatin);
+		btnSuppLundiMatin.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		
+		btnSuppLundiMatin.setBounds(75, 165, 90, 20);
+		btnSuppLundiApresMidi.setBounds(75, 210, 90, 20);
+		btnSuppMardiMatin.setBounds(75, 165, 90, 20);
+		btnSuppMardiApresMidi.setBounds(75, 210, 90, 20);
+		btnSuppMercrediMatin.setBounds(75, 165, 90, 20);
+		btnSuppMercrediApresMidi.setBounds(75, 210, 90, 20);
+		btnSuppJeudiMatin.setBounds(75, 165, 90, 20);
+		btnSuppJeudiApresMidi.setBounds(75, 210, 90, 20);
+		btnSuppVendrediMatin.setBounds(75, 165, 90, 20);
+		btnSuppVendrediApresMidi.setBounds(75, 210, 90, 20);
+		plageLundiMatin.add(btnSuppLundiMatin);
+		plageLundiApresMidi.add(btnSuppLundiApresMidi);
+		plageMardiMatin.add(btnSuppMardiMatin);
+		plageMardiApresMidi.add(btnSuppMardiApresMidi);
+		plageMercrediMatin.add(btnSuppMercrediMatin);
+		plageMercrediApresMidi.add(btnSuppMercrediApresMidi);
+		plageJeudiMatin.add(btnSuppJeudiMatin);
+		plageJeudiApresMidi.add(btnSuppJeudiApresMidi);
+		plageVendrediMatin.add(btnSuppVendrediMatin);
+		plageVendrediApresMidi.add(btnSuppVendrediApresMidi);
+		btnSuppLundiMatin.setVisible(false);
+		btnSuppLundiApresMidi.setVisible(false);
+		btnSuppMardiMatin.setVisible(false);
+		btnSuppMardiApresMidi.setVisible(false);
+		btnSuppMercrediMatin.setVisible(false);
+		btnSuppMercrediApresMidi.setVisible(false);
+		btnSuppJeudiMatin.setVisible(false);
+		btnSuppJeudiApresMidi.setVisible(false);
+		btnSuppVendrediMatin.setVisible(false);
+		btnSuppVendrediApresMidi.setVisible(false);
+		
 		plageLundiApresMidi.setBackground(new Color(230, 230, 250));
 		plageLundiApresMidi.setBorder(new MatteBorder(1, 0, 0, 0, (Color) new Color(210, 180, 140)));
 
@@ -292,13 +339,14 @@ public class Planning {
 		plageHoraire.setBounds(0, 0, 25, 550);
 		planning.add(plageHoraire);
 		calendrier.add(planning);
+		btnValider.setBounds(850, 5, 80, 20);
+		calendrier.add(btnValider);
 
 		btnValider.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		btnValider.setBounds(345, 235, 80, 20);
-		frame.getContentPane().add(btnValider);
+		btnSupprimer.setBounds(0, 0, 100, 20);
 
 		/**
 		 * On ajoute la liste des modules avec un nombre d'heures supérieures à 0
@@ -329,35 +377,101 @@ public class Planning {
 		SelectionnePlage selectionnePlage = new SelectionnePlage();
 		plageLundiMatin.addMouseListener(selectionnePlage);
 		plageLundiApresMidi.addMouseListener(selectionnePlage);
-		plageMercrediApresMidi.addMouseListener(selectionnePlage);
-		plageJeudiApresMidi.addMouseListener(selectionnePlage);
-		plageVendrediMatin.addMouseListener(selectionnePlage);		
-		plageMardiApresMidi.addMouseListener(selectionnePlage);
 		plageMardiMatin.addMouseListener(selectionnePlage);
+		plageMardiApresMidi.addMouseListener(selectionnePlage);
 		plageMercrediMatin.addMouseListener(selectionnePlage);
+		plageMercrediApresMidi.addMouseListener(selectionnePlage);
 		plageJeudiMatin.addMouseListener(selectionnePlage);
+		plageJeudiApresMidi.addMouseListener(selectionnePlage);
+		plageVendrediMatin.addMouseListener(selectionnePlage);	
 		plageVendrediApresMidi.addMouseListener(selectionnePlage);
+		
 
 	}
 
 	public class SelectionnePlage implements MouseListener{
 
+
 		public void mouseClicked(MouseEvent e) {
 			Object module = nomModule.getSelectedItem();
 			String string = module.toString();
 			String[] infos = string.split(" ");
+			lblPlageSelectionne= (JLabel) e.getComponent();
 			
+
 			Personne personne = new Personne();
 			PersonneDao personneDao = new PersonneDao();
 			personne = personneDao.findByNomModule(infos[1]);
-			plageJeudiApresMidi.setText("Séance de " + infos[1] + "\nAvec " + personne.getNom() + " " + personne.getPrenom());
-			plageJeudiMatin.setText("Séance de " + infos[1]);
-			/*
+			lblPlageSelectionne.setText("<html><center>Séance de " + infos[1] + "<br>Avec " + personne.getNom() + " " +
+					personne.getPrenom() + "</center></html>");
+			
+			if (lblPlageSelectionne.getSize().height < 201){
+				btnSupprimer = (JButton) lblPlageSelectionne.getComponentAt(75, 165);
+				btnSupprimer.setVisible(true);
+				heuresDuModule = 3;
+				}
+			else{
+				btnSupprimer = (JButton) lblPlageSelectionne.getComponentAt(75, 210);
+				btnSupprimer.setVisible(true);
+				heuresDuModule = 4;
+			}
+				
+			Module leModule = new Module();
+			ModuleDao unModuleDao = new ModuleDao();
+			leModule = unModuleDao.findModule(infos[1]);
+			
+			Session session = new Session();
+			SessionDao sessionDao = new SessionDao();
+			session = sessionDao.findSession("BTS SIO 2016");
+			
+			HeuresSessionModule heureSessionModule = new HeuresSessionModule();
+			HeuresSessionModuleDao heuresSessionDao = new HeuresSessionModuleDao();
+			heureSessionModule = heuresSessionDao.findHeuresSessionModule(leModule, session);
+			heuresSessionDao.updateModuleAvecHeures(heureSessionModule, heuresDuModule, false);
+			
 			if(infos[1] == "Selectionner")
 				System.out.println("Selectionner un module");
 			else 
 				System.out.println("Séance de " + infos[1]);
-			 */
+
+			ArrayList<Module> listeModuleDispo = new ArrayList<Module>();
+			ModuleDao moduleDao = new ModuleDao();
+			listeModuleDispo = moduleDao.findModuleAvecHeures(2015, "BTS SIO 2016");
+			
+			HashMap<Module, Integer> heureDispo = new HashMap<Module, Integer>();
+			HeuresSessionModuleDao heureDispoDao = new HeuresSessionModuleDao();
+
+			for(Module unModule  : listeModuleDispo){
+				heureDispo.put(unModule, heureDispoDao.findHeuresSessionModule(unModule, session).getNbreHeuresDisponibles());
+			}
+
+			Set<Module> lesModules = heureDispo.keySet();
+			String item;
+			for(Module ceModule : lesModules){
+				item = " " + ceModule.getNom() + " (" + heureDispo.get(ceModule) + " heures disponible)";
+				nomModule.addItem(item);
+			}
+			
+			btnSupprimer.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					Module leModule = new Module();
+					ModuleDao unModuleDao = new ModuleDao();
+					leModule = unModuleDao.findModule(infos[1]);
+					
+					Session session = new Session();
+					SessionDao sessionDao = new SessionDao();
+					session = sessionDao.findSession("BTS SIO 2016");
+					
+					HeuresSessionModule heureSessionModule = new HeuresSessionModule();
+					HeuresSessionModuleDao heuresSessionDao = new HeuresSessionModuleDao();
+					heureSessionModule = heuresSessionDao.findHeuresSessionModule(leModule, session);
+					
+					heuresSessionDao.updateModuleAvecHeures(heureSessionModule, heuresDuModule, true);
+					//lblPlageSelectionne.remove
+					btnSupprimer.setVisible(false);
+				}
+			});
+			 
 		}
 
 		@Override
