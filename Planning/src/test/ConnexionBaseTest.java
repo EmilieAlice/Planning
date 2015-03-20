@@ -12,7 +12,7 @@ public class ConnexionBaseTest {
 
 	@Test
 	public void testConnectionBase() throws SQLException {
-		
+
 		assertNotNull(ConnexionBase.getConnection());
 	}
 

@@ -2,6 +2,7 @@ package modele;
 
 /**
  * Objet Module(matière)
+ * 
  * @author Jerome
  *
  */

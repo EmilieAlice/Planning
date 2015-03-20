@@ -4,6 +4,7 @@ import java.sql.Date;
 
 /**
  * Objet Session
+ * 
  * @author Jerome
  *
  */

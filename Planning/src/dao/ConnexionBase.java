@@ -7,6 +7,7 @@ import java.sql.SQLException;
 /**
  * Classe de connexion à la base de données. Fournit une connexion à la base de
  * données lagarenne2015
+ * 
  * @author Jerome
  *
  */

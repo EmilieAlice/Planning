@@ -27,7 +27,8 @@ public class PersonneDao {
 	}
 
 	/**
-	 * Méthode qui récupère dans la base données un objet Personne qui est un formateur
+	 * Méthode qui récupère dans la base données un objet Personne qui est un
+	 * formateur
 	 * 
 	 * @param nomModule
 	 * @return personne

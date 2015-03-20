@@ -58,46 +58,22 @@ INSERT INTO `lagarenne2015`.`creneau` (`id_creneau`, `nom`) VALUES (1, 'Matin')(
 
 -- Creation table de contrainte
 
-CREATE TABLE `lagarenne2015`.`contrainte` (
-  `id_contrainte` INT NOT NULL,
-  `id_jour` INT NOT NULL,
-  PRIMARY KEY (`id_contrainte`),
-  UNIQUE INDEX `id_jour_UNIQUE` (`id_jour` ASC),
-  CONSTRAINT `id_jour`
-    FOREIGN KEY (`id_contrainte`)
-    REFERENCES `lagarenne2015`.`journee` (`id_jour`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+CREATE TABLE `contrainte_formateur` (
+  `id_formateur` int(11) NOT NULL,
+  `id_creneau` int(11) DEFAULT NULL,
+  `id_jour` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_formateur`),
+  KEY `id_creneau_fk_idx` (`id_creneau`),
+  KEY `id_jour_fk_idx` (`id_jour`),
+  CONSTRAINT `id_creneau_fk` FOREIGN KEY (`id_creneau`) REFERENCES `creneau` (`id_creneau`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `id_formateur` FOREIGN KEY (`id_formateur`) REFERENCES `formateur` (`id_personne`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `id_jour_fk` FOREIGN KEY (`id_jour`) REFERENCES `jour` (`id_jour`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 -- Remplissage de la table contrainte
 
-INSERT INTO `lagarenne2015`.`contrainte` (`id_contrainte`, `id_jour`) VALUES (1, 1),(2, 2),(3, 3),(4, 4),(5, 5),(6, 6);
-
--- Création de la table jour_creneau
-
-CREATE TABLE `lagarenne2015`.`jour_creneau` (
-  `id_jour` INT NOT NULL,
-  `id_creneau` INT NOT NULL,
-  PRIMARY KEY (`id_jour`, `id_creneau`),
-  INDEX `id_creneau_idx` (`id_creneau` ASC),
-  CONSTRAINT `id_jour`
-    FOREIGN KEY (`id_jour`)
-    REFERENCES `lagarenne2015`.`jour` (`id_jour`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `id_creneau`
-    FOREIGN KEY (`id_creneau`)
-    REFERENCES `lagarenne2015`.`creneau` (`id_creneau`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
-
-ALTER TABLE `lagarenne2015`.`jour_creneau` 
-ADD COLUMN `id_jour_creneau` INT NULL AFTER `id_creneau`,
-ADD UNIQUE INDEX `id_jour_creneau_UNIQUE` (`id_jour_creneau` ASC);
-
--- Remplissage de la table jour_creneau
-
-INSERT INTO `lagarenne2015`.`jour_creneau` (`id_jour`, `id_creneau`) VALUES (1, 1),(1, 2),(2, 1),(2, 2),(3, 1),(3, 2);
+INSERT INTO `contrainte_formateur` VALUES (4,1,1),(5,2,2),(6,1,3);
 
 -- Création de la table contrainte_formateur
 
