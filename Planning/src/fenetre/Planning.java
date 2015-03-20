@@ -467,7 +467,7 @@ public class Planning {
 					heureSessionModule = heuresSessionDao.findHeuresSessionModule(leModule, session);
 					
 					heuresSessionDao.updateModuleAvecHeures(heureSessionModule, heuresDuModule, true);
-					//lblPlageSelectionne.remove
+					lblPlageSelectionne.setText("<html><center>Cliquez ici pour ajouter un module</center></html>");
 					btnSupprimer.setVisible(false);
 				}
 			});
