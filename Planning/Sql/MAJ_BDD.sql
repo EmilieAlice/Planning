@@ -60,13 +60,13 @@ INSERT INTO `lagarenne2015`.`creneau` (`id_creneau`, `nom`) VALUES (1, 'Matin')(
 
 CREATE TABLE `contrainte_formateur` (
   `id_formateur` int(11) NOT NULL,
-  `id_creneau` int(11) DEFAULT NULL,
-  `id_jour` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_formateur`),
+  `id_creneau` int(11) NOT NULL,
+  `id_jour` int(11) NOT NULL,
+  PRIMARY KEY (`id_formateur`,`id_creneau`,`id_jour`),
   KEY `id_creneau_fk_idx` (`id_creneau`),
   KEY `id_jour_fk_idx` (`id_jour`),
-  CONSTRAINT `id_creneau_fk` FOREIGN KEY (`id_creneau`) REFERENCES `creneau` (`id_creneau`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `id_formateur` FOREIGN KEY (`id_formateur`) REFERENCES `formateur` (`id_personne`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `id_creneau` FOREIGN KEY (`id_creneau`) REFERENCES `creneau` (`id_creneau`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `id_formateur_fk` FOREIGN KEY (`id_formateur`) REFERENCES `formateur` (`id_personne`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `id_jour_fk` FOREIGN KEY (`id_jour`) REFERENCES `jour` (`id_jour`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

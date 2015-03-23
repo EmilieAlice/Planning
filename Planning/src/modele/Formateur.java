@@ -2,7 +2,7 @@ package modele;
 
 import java.sql.Date;
 
-public class Formateur {
+public class Formateur extends Personne {
 
 	private int idPersonne;
 	private Date dateEntree;

@@ -2,7 +2,7 @@ package test;
 
 import static org.junit.Assert.*;
 import modele.Formateur;
-import modele.Personne;
+import modele.Module;
 
 import org.junit.Test;
 
@@ -11,16 +11,21 @@ import dao.FormateurDao;
 public class FormateurDaoTest {
 
 	@Test
-	public void testFindByNomModule() {
+	public void testFindByIdPersonne() {
+		fail("Not yet implemented");
+	}
 
-		Personne personne = new Personne();
-		personne.setIdPersonne(4);
-
-		Formateur formateur = new Formateur();
+	@Test
+	public void testFindByIdModule() {
+		
+		Module moduleTest = new Module();
+		moduleTest.setId_module(1);
 		FormateurDao formateurDao = new FormateurDao();
-		formateur = formateurDao.findByNomModule(personne);
-
-		assertEquals(1, formateur.getIdModule());
+		Formateur formateur = new Formateur();
+		formateur = formateurDao.findByIdModule(moduleTest);
+		
+		assertEquals(4, formateur.getIdPersonne());
+		
 	}
 
 }

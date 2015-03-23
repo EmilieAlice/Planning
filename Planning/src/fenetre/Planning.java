@@ -429,6 +429,9 @@ public class Planning {
 			heureSessionModule = heuresSessionDao.findHeuresSessionModule(leModule, session);
 			heuresSessionDao.updateModuleAvecHeures(heureSessionModule, heuresDuModule, false);
 			
+			//Regexp pour afficher la séance correctement
+			//^[aeiouAEIOU]
+			
 			if(infos[1] == "Selectionner")
 				System.out.println("Selectionner un module");
 			else 
