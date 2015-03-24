@@ -18,8 +18,8 @@ public class FormateurDao {
 					.getConnection()
 					.prepareStatement(
 							"SELECT * FROM lagarenne2015.formateur "
-									+ "INNER JOIN personne on personne.id_personne = formateur.id_personne "
-									+ "WHERE formateur.id_personne = ?;");
+									+ "INNER JOIN personne on personne.id_personne = formateur.id_formateur "
+									+ "WHERE formateur.id_formateur = ?;");
 		} catch (Exception e) {
 			e.getMessage();
 			System.out.println("Requete findByIdPersonne échouée.");
@@ -39,10 +39,9 @@ public class FormateurDao {
 			pfindByIdPersonne.setInt(1, personne.getIdPersonne());
 			ResultSet resultat = pfindByIdPersonne.executeQuery();
 			if (resultat.next()) {
-				formateur.setIdPersonne(resultat.getInt("id_personne"));
+				formateur.setIdPersonne(resultat.getInt("id_formateur"));
 				formateur.setDateEntree(resultat.getDate("date_entree"));
 				formateur.setIdModule(resultat.getInt("id_module"));
-				// Ajoutez les attributs de la personne
 				return formateur;
 			} else {
 				return formateur = null;
@@ -59,11 +58,11 @@ public class FormateurDao {
 	 */
 	static {
 		try {
-			pfindByIdPersonne = ConnexionBase
+			pfindByIdModule = ConnexionBase
 					.getConnection()
 					.prepareStatement(
 							"SELECT * FROM lagarenne2015.formateur "
-									+ "INNER JOIN personne on personne.id_personne = formateur.id_personne "
+									+ "INNER JOIN personne on personne.id_personne = formateur.id_formateur "
 									+ "WHERE formateur.id_module = ?;");
 		} catch (Exception e) {
 			e.getMessage();
@@ -81,8 +80,8 @@ public class FormateurDao {
 	public Formateur findByIdModule(Module module) {
 		Formateur formateur = new Formateur();
 		try {
-			pfindByIdPersonne.setInt(1, module.getId_module());
-			ResultSet resultat = pfindByIdPersonne.executeQuery();
+			pfindByIdModule.setInt(1, module.getId_module());
+			ResultSet resultat = pfindByIdModule.executeQuery();
 			if (resultat.next()) {
 				formateur.setIdPersonne(resultat.getInt("id_personne"));
 				formateur.setDateEntree(resultat.getDate("date_entree"));
@@ -90,7 +89,6 @@ public class FormateurDao {
 				formateur.setCivilite(resultat.getString("civilite"));
 				formateur.setNom(resultat.getString("nom"));
 				formateur.setPrenom(resultat.getString("prenom"));
-				formateur.setAdresse(resultat.getString("adresse"));
 				formateur.setAdresse(resultat.getString("adresse"));
 				formateur.setCodePostal(resultat.getString("code_postal"));
 				formateur.setVille(resultat.getString("ville"));

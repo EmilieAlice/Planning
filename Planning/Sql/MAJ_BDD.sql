@@ -115,3 +115,17 @@ ADD UNIQUE INDEX `id_module_UNIQUE` (`id_module` ASC);
 UPDATE `lagarenne2015`.`formateur` SET `id_module`='1' WHERE `id_personne`='4';
 UPDATE `lagarenne2015`.`formateur` SET `id_module`='2' WHERE `id_personne`='5';
 UPDATE `lagarenne2015`.`formateur` SET `id_module`='3' WHERE `id_personne`='6';
+
+-- Changement dans la table formateur
+
+ALTER TABLE `lagarenne2015`.`formateur` 
+DROP FOREIGN KEY `fk_formateur_personne1`;
+ALTER TABLE `lagarenne2015`.`formateur` 
+CHANGE COLUMN `id_personne` `id_formateur` INT(11) NOT NULL ;
+ALTER TABLE `lagarenne2015`.`formateur` 
+ADD CONSTRAINT `fk_formateur_personne1`
+  FOREIGN KEY (`id_formateur`)
+  REFERENCES `lagarenne2015`.`personne` (`id_personne`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+
