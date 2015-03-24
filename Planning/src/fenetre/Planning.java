@@ -25,14 +25,22 @@ import javax.swing.JLabel;
 
 
 
+
+
+
+
+
+
 import dao.HeuresSessionModuleDao;
 import dao.ModuleDao;
 import dao.PersonneDao;
 import dao.SessionDao;
 
+import javax.swing.ComboBoxModel;
 import javax.swing.JPanel;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
+import javax.swing.JSpinner.DateEditor;
 
 import modele.HeuresSessionModule;
 import modele.Module;
@@ -40,6 +48,7 @@ import modele.Personne;
 import modele.Session;
 
 import java.awt.SystemColor;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
@@ -65,13 +74,16 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Font;
 
+import com.toedter.calendar.DateUtil;
+import com.toedter.calendar.JCalendar;
+import com.toedter.calendar.JDateChooser;
+import com.toedter.calendar.JDayChooser;
+
 public class Planning {
 
 	private int heuresDuModule;
 	private JFrame frame = new JFrame();
 	private JPanel calendrier = new JPanel();
-	private JLabel lblSemaine = new JLabel("Semaine");
-	private JLabel numeroSemaine = new JLabel("");
 	private JLabel lblMatiere = new JLabel("Matiere");
 	private JComboBox nomModule = new JComboBox();
 	private JPanel planning = new JPanel();
@@ -79,32 +91,32 @@ public class Planning {
 	private JPanel nomLundi = new JPanel();
 	private JLabel lblLundi = new JLabel("  Lundi");
 	private JLabel lblDateLundi = new JLabel("");
-	private JLabel plageLundiMatin = new JLabel();
-	private JLabel plageLundiApresMidi = new JLabel();
+	private JLabel plageLundiMatin = new JLabel("<html><center>Cliquez ici pour ajouter un module</center></html>");
+	private JLabel plageLundiApresMidi = new JLabel("<html><center>Cliquez ici pour ajouter un module</center></html>");
 	private JPanel plageMardi = new JPanel();
 	private JPanel nomMardi = new JPanel();
 	private JLabel lblMardi = new JLabel("  Mardi");
 	private JLabel lblDateMardi = new JLabel("");
-	private JLabel plageMardiMatin = new JLabel();
-	private JLabel plageMardiApresMidi = new JLabel();
+	private JLabel plageMardiMatin = new JLabel("<html><center>Cliquez ici pour ajouter un module</center></html>");
+	private JLabel plageMardiApresMidi = new JLabel("<html><center>Cliquez ici pour ajouter un module</center></html>");
 	private JPanel plageMercredi = new JPanel();
 	private JPanel nomMercredi = new JPanel();
 	private JLabel lblMercredi = new JLabel("  Mercredi");
 	private JLabel lblDateMercredi = new JLabel("");
-	private JLabel plageMercrediMatin = new JLabel();
-	private JLabel plageMercrediApresMidi = new JLabel();
+	private JLabel plageMercrediMatin = new JLabel("<html><center>Cliquez ici pour ajouter un module</center></html>");
+	private JLabel plageMercrediApresMidi = new JLabel("<html><center>Cliquez ici pour ajouter un module</center></html>");
 	private JPanel plageJeudi = new JPanel();
 	private JPanel nomJeudi = new JPanel();
 	private JLabel lblJeudi = new JLabel("   Jeudi");
 	private JLabel lblDateJeudi = new JLabel("");
-	private JLabel plageJeudiMatin = new JLabel();
-	private JLabel plageJeudiApresMidi = new JLabel();
+	private JLabel plageJeudiMatin = new JLabel("<html><center>Cliquez ici pour ajouter un module</center></html>");
+	private JLabel plageJeudiApresMidi = new JLabel("<html><center>Cliquez ici pour ajouter un module</center></html>");
 	private JPanel plageVendredi = new JPanel();
 	private JPanel nomVendredi = new JPanel();
 	private JLabel lblVendredi = new JLabel("   Vendredi");
 	private JLabel lblDateVendredi = new JLabel("");
-	private JLabel plageVendrediMatin = new JLabel();
-	private JLabel plageVendrediApresMidi = new JLabel();
+	private JLabel plageVendrediMatin = new JLabel("<html><center>Cliquez ici pour ajouter un module</center></html>");
+	private JLabel plageVendrediApresMidi = new JLabel("<html><center>Cliquez ici pour ajouter un module</center></html>");
 	private JPanel plageHoraire = new JPanel();
 	private JButton btnValider = new JButton("Valider");
 	private JButton btnSupprimer = new JButton();
@@ -160,10 +172,6 @@ public class Planning {
 		calendrier.setBounds(25, 25, 950, 600);
 		frame.getContentPane().add(calendrier);
 		calendrier.setLayout(null);
-		lblSemaine.setBounds(5, 5, 50, 20);
-		calendrier.add(lblSemaine);
-		numeroSemaine.setBounds(55, 5, 15, 20);
-		calendrier.add(numeroSemaine);
 		lblMatiere.setBounds(400, 5, 50, 20);
 		calendrier.add(lblMatiere);
 		nomModule.setBounds(450, 5, 300, 20);
@@ -185,17 +193,21 @@ public class Planning {
 		nomLundi.setLayout(null);
 		lblLundi.setBackground(new Color(230, 230, 250));
 
-		lblLundi.setBounds(0, 0, 135, 50);
+		lblLundi.setBounds(0, 0, 80, 50);
 		nomLundi.add(lblLundi);
 
-		lblDateLundi.setBounds(150, 0, 35, 50);
+		lblDateLundi.setBounds(80, 0, 105, 50);
 		nomLundi.add(lblDateLundi);
+		
+		
+		
 		plageLundiMatin.setBackground(new Color(230, 230, 250));
 		plageLundiMatin.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(210, 180, 140)));
 
 		plageLundiMatin.setBounds(0, 50, 185, 200);
 		plageLundi.add(plageLundiMatin);
 		btnSuppLundiMatin.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		
 		
 		btnSuppLundiMatin.setBounds(75, 165, 90, 20);
 		btnSuppLundiApresMidi.setBounds(75, 210, 90, 20);
@@ -244,10 +256,10 @@ public class Planning {
 		nomMardi.setLayout(null);
 		lblMardi.setBackground(SystemColor.inactiveCaption);
 
-		lblMardi.setBounds(0, 0, 135, 50);
+		lblMardi.setBounds(0, 0, 80, 50);
 		nomMardi.add(lblMardi);
 
-		lblDateMardi.setBounds(150, 0, 35, 50);
+		lblDateMardi.setBounds(80, 0, 105, 50);
 		nomMardi.add(lblDateMardi);
 		plageMardiMatin.setBackground(new Color(230, 230, 250));
 		plageMardiMatin.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(210, 180, 140)));
@@ -269,10 +281,10 @@ public class Planning {
 		plageMercredi.add(nomMercredi);
 		nomMercredi.setLayout(null);
 
-		lblMercredi.setBounds(0, 0, 135, 50);
+		lblMercredi.setBounds(0, 0, 80, 50);
 		nomMercredi.add(lblMercredi);
 
-		lblDateMercredi.setBounds(150, 0, 35, 50);
+		lblDateMercredi.setBounds(80, 0, 105, 50);
 		nomMercredi.add(lblDateMercredi);
 		plageMercrediMatin.setBackground(new Color(230, 230, 250));
 		plageMercrediMatin.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(210, 180, 140)));
@@ -294,10 +306,10 @@ public class Planning {
 		plageJeudi.add(nomJeudi);
 		nomJeudi.setLayout(null);
 
-		lblJeudi.setBounds(0, 0, 135, 50);
+		lblJeudi.setBounds(0, 0, 80, 50);
 		nomJeudi.add(lblJeudi);
 
-		lblDateJeudi.setBounds(150, 0, 35, 50);
+		lblDateJeudi.setBounds(80, 0, 105, 50);
 		nomJeudi.add(lblDateJeudi);
 		plageJeudiMatin.setBackground(new Color(230, 230, 250));
 		plageJeudiMatin.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(210, 180, 140)));
@@ -319,10 +331,10 @@ public class Planning {
 		plageVendredi.add(nomVendredi);
 		nomVendredi.setLayout(null);
 
-		lblVendredi.setBounds(0, 0, 135, 50);
+		lblVendredi.setBounds(0, 0, 80, 50);
 		nomVendredi.add(lblVendredi);
 
-		lblDateVendredi.setBounds(150, 0, 35, 50);
+		lblDateVendredi.setBounds(80, 0, 105, 50);
 		nomVendredi.add(lblDateVendredi);
 		plageVendrediMatin.setBackground(new Color(230, 230, 250));
 		plageVendrediMatin.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(210, 180, 140)));
@@ -348,6 +360,8 @@ public class Planning {
 		});
 		btnSupprimer.setBounds(0, 0, 100, 20);
 
+		
+		
 		/**
 		 * On ajoute la liste des modules avec un nombre d'heures supérieures à 0
 		 */
@@ -365,12 +379,14 @@ public class Planning {
 		for(Module unModule  : listeModuleDispo){
 			heureDispo.put(unModule, heureDispoDao.findHeuresSessionModule(unModule, session).getNbreHeuresDisponibles());
 		}
-
+		
 		Set<Module> lesModules = heureDispo.keySet();
 		for(Module leModule : lesModules){
 			nomModule.addItem(" " + leModule.getNom() + " (" + heureDispo.get(leModule) + " heures disponible)");
 		}
 
+		
+		
 		/**
 		 * On ajoute le module à une plage horaire, cela diminue le nombre d'heure restant du module
 		 */
@@ -391,8 +407,11 @@ public class Planning {
 
 	public class SelectionnePlage implements MouseListener{
 
-
+		/**
+		 * Quand on click sur une plage horaire, ca ajoute une matiere
+		 */
 		public void mouseClicked(MouseEvent e) {
+			
 			Object module = nomModule.getSelectedItem();
 			String string = module.toString();
 			String[] infos = string.split(" ");
@@ -447,13 +466,14 @@ public class Planning {
 			for(Module unModule  : listeModuleDispo){
 				heureDispo.put(unModule, heureDispoDao.findHeuresSessionModule(unModule, session).getNbreHeuresDisponibles());
 			}
-
+			
+			nomModule.removeAll();
 			Set<Module> lesModules = heureDispo.keySet();
 			String item;
 			for(Module ceModule : lesModules){
 				item = " " + ceModule.getNom() + " (" + heureDispo.get(ceModule) + " heures disponible)";
 				nomModule.addItem(item);
-			}
+				}
 			
 			btnSupprimer.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {

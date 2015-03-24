@@ -3,8 +3,11 @@ package fenetre;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+
 import com.toedter.calendar.JCalendar;
+
 import java.awt.BorderLayout;
+import java.awt.event.MouseListener;
 
 public class MoisAnnee {
 
@@ -37,13 +40,14 @@ public class MoisAnnee {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		Planning planning = new Planning();
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JCalendar calendar = new JCalendar();
-		calendar.getDayChooser().setAlwaysFireDayProperty(true);
-		calendar.getDayChooser().setMaxDayCharacters(5);
+		calendar.getDayChooser().addMouseListener((MouseListener) planning);
+		calendar.getDayChooser().getDay();
 		frame.getContentPane().add(calendar, BorderLayout.CENTER);
 	}
 
