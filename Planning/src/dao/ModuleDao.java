@@ -83,12 +83,12 @@ public class ModuleDao {
 	 * @param session
 	 * @return Collection de Module
 	 */
-	public ArrayList<Module> findModuleAvecHeures(int annee, String session) {
+	public ArrayList<Module> findModuleAvecHeures(int annee, Session session) {
 		ArrayList<Module> listeModule = new ArrayList<Module>();
 		try {
 			pfindModuleAvecHeures.setInt(1, 0);
 			pfindModuleAvecHeures.setInt(2, annee);
-			pfindModuleAvecHeures.setString(3, session);
+			pfindModuleAvecHeures.setString(3, session.getNom());
 			ResultSet resultat = pfindModuleAvecHeures.executeQuery();
 			if (resultat != null) {
 				while (resultat.next()) {
