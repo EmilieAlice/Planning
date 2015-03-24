@@ -22,6 +22,7 @@ import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.JSpinner.DateEditor;
 
+import modele.HeureDispoDeModule;
 import modele.HeuresSessionModule;
 import modele.Module;
 import modele.Personne;
@@ -122,6 +123,9 @@ public class Planning {
 	private JButton btnSuppJeudiApresMidi = new JButton("Supprimer");
 	private JButton btnSuppVendrediMatin = new JButton("Supprimer");
 	private JButton btnSuppVendrediApresMidi = new JButton("Supprimer");
+	
+	private HeureDispoDeModule objetHeure = new HeureDispoDeModule();
+	private HashMap<Module, Integer> heureDispo = objetHeure.getHeureDispoDeModule();
 
 	/**
 	 * Permet de lancer le planning
@@ -364,7 +368,7 @@ public class Planning {
 		 * On ajoute la liste des modules avec un nombre d'heures supérieures à
 		 * 0
 		 */
-		ArrayList<Module> listeModuleDispo = new ArrayList<Module>();
+		/*ArrayList<Module> listeModuleDispo = new ArrayList<Module>();
 		ModuleDao moduleDao = new ModuleDao();
 		listeModuleDispo = moduleDao.findModuleAvecHeures(2015, session);
 
@@ -374,15 +378,18 @@ public class Planning {
 		for (Module unModule : listeModuleDispo) {
 			heureDispo.put(unModule,
 					heureDispoDao.findHeuresSessionModule(unModule, session)
-							.getNbreHeuresDisponibles());
-		}
+					.getNbreHeuresDisponibles());
+		}*/
+		
+		
+		
+		objetHeure.ajoute("BTS SIO 2016", 2015);
 
 		Set<Module> lesModules = heureDispo.keySet();
 		for (Module leModule : lesModules) {
 			nomModule.addItem(" " + leModule.getNom() + " ("
 					+ heureDispo.get(leModule) + " heures disponible)");
 		}
-
 		/**
 		 * On ajoute le module à une plage horaire, cela diminue le nombre
 		 * d'heure restant du module
@@ -461,7 +468,7 @@ public class Planning {
 			else
 				System.out.println("Séance de " + infos[1]);
 
-			ArrayList<Module> listeModuleDispo = new ArrayList<Module>();
+			/*ArrayList<Module> listeModuleDispo = new ArrayList<Module>();
 			ModuleDao moduleDao = new ModuleDao();
 			listeModuleDispo = moduleDao.findModuleAvecHeures(2015, session);
 
@@ -471,11 +478,13 @@ public class Planning {
 			for (Module unModule : listeModuleDispo) {
 				heureDispo.put(unModule,
 						heureDispoDao
-								.findHeuresSessionModule(unModule, session)
-								.getNbreHeuresDisponibles());
-			}
+						.findHeuresSessionModule(unModule, session)
+						.getNbreHeuresDisponibles());
+			}*/
 
-			nomModule.removeAll();
+		
+			
+			objetHeure.actualiser("BTS SIO 2016", 2015, leModule);
 			Set<Module> lesModules = heureDispo.keySet();
 			String item;
 			for (Module ceModule : lesModules) {
@@ -501,7 +510,7 @@ public class Planning {
 						heuresSessionDao.updateModuleAvecHeures(
 								heureSessionModule, heuresDuModule, true);
 						lblPlageSelectionne
-								.setText("<html><center>Cliquez ici pour ajouter un module</center></html>");
+						.setText("<html><center>Cliquez ici pour ajouter un module</center></html>");
 						btnSupprimer.setVisible(false);
 					}
 				});

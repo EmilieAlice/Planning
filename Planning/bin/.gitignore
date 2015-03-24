@@ -1,8 +1,7 @@
-/dao/
-/fenetre/
-/test/
 /.DS_Store
-/test/
+/.gitignore
 /dao/
-/modele/
+/date/
 /fenetre/
+/modele/
+/test/
