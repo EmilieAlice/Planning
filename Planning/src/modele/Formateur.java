@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class Formateur extends Personne {
 
-	private int idFormateur;
+	private int idPersonne;
 	private Date dateEntree;
 	private int idModule;
 
@@ -14,17 +14,17 @@ public class Formateur extends Personne {
 
 	public Formateur(int idPersonne, Date dateEntree, int idModule) {
 		super();
-		this.idFormateur = idPersonne;
+		this.idPersonne = idPersonne;
 		this.dateEntree = dateEntree;
 		this.idModule = idModule;
 	}
 
 	public int getIdPersonne() {
-		return idFormateur;
+		return idPersonne;
 	}
 
 	public void setIdPersonne(int idPersonne) {
-		this.idFormateur = idPersonne;
+		this.idPersonne = idPersonne;
 	}
 
 	public Date getDateEntree() {
@@ -45,7 +45,7 @@ public class Formateur extends Personne {
 
 	@Override
 	public String toString() {
-		return "Formateur [idPersonne=" + idFormateur + ", dateEntree="
+		return "Formateur [idPersonne=" + idPersonne + ", dateEntree="
 				+ dateEntree + ", idModule=" + idModule + "]";
 	}
 

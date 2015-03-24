@@ -16,7 +16,7 @@ public class SessionDaoTest {
 
 		session = dao.findSession("BTS Audio 2016");
 
-		assertEquals(2, session.getId_session());
+		assertEquals(3, session.getId_session());
 	}
 
 }
