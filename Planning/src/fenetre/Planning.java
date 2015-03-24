@@ -11,6 +11,26 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JLabel;
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import dao.HeuresSessionModuleDao;
 import dao.ModuleDao;
 import dao.PersonneDao;
@@ -32,7 +52,6 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
-import java.util.regex.Pattern;
 
 import javax.swing.border.BevelBorder;
 
@@ -72,42 +91,32 @@ public class Planning {
 	private JPanel nomLundi = new JPanel();
 	private JLabel lblLundi = new JLabel("  Lundi");
 	private JLabel lblDateLundi = new JLabel("");
-	private JLabel plageLundiMatin = new JLabel(
-			"<html><center>Cliquez ici pour ajouter un module</center></html>");
-	private JLabel plageLundiApresMidi = new JLabel(
-			"<html><center>Cliquez ici pour ajouter un module</center></html>");
+	private JLabel plageLundiMatin = new JLabel("<html><center>Cliquez ici pour ajouter un module</center></html>");
+	private JLabel plageLundiApresMidi = new JLabel("<html><center>Cliquez ici pour ajouter un module</center></html>");
 	private JPanel plageMardi = new JPanel();
 	private JPanel nomMardi = new JPanel();
 	private JLabel lblMardi = new JLabel("  Mardi");
 	private JLabel lblDateMardi = new JLabel("");
-	private JLabel plageMardiMatin = new JLabel(
-			"<html><center>Cliquez ici pour ajouter un module</center></html>");
-	private JLabel plageMardiApresMidi = new JLabel(
-			"<html><center>Cliquez ici pour ajouter un module</center></html>");
+	private JLabel plageMardiMatin = new JLabel("<html><center>Cliquez ici pour ajouter un module</center></html>");
+	private JLabel plageMardiApresMidi = new JLabel("<html><center>Cliquez ici pour ajouter un module</center></html>");
 	private JPanel plageMercredi = new JPanel();
 	private JPanel nomMercredi = new JPanel();
 	private JLabel lblMercredi = new JLabel("  Mercredi");
 	private JLabel lblDateMercredi = new JLabel("");
-	private JLabel plageMercrediMatin = new JLabel(
-			"<html><center>Cliquez ici pour ajouter un module</center></html>");
-	private JLabel plageMercrediApresMidi = new JLabel(
-			"<html><center>Cliquez ici pour ajouter un module</center></html>");
+	private JLabel plageMercrediMatin = new JLabel("<html><center>Cliquez ici pour ajouter un module</center></html>");
+	private JLabel plageMercrediApresMidi = new JLabel("<html><center>Cliquez ici pour ajouter un module</center></html>");
 	private JPanel plageJeudi = new JPanel();
 	private JPanel nomJeudi = new JPanel();
 	private JLabel lblJeudi = new JLabel("   Jeudi");
 	private JLabel lblDateJeudi = new JLabel("");
-	private JLabel plageJeudiMatin = new JLabel(
-			"<html><center>Cliquez ici pour ajouter un module</center></html>");
-	private JLabel plageJeudiApresMidi = new JLabel(
-			"<html><center>Cliquez ici pour ajouter un module</center></html>");
+	private JLabel plageJeudiMatin = new JLabel("<html><center>Cliquez ici pour ajouter un module</center></html>");
+	private JLabel plageJeudiApresMidi = new JLabel("<html><center>Cliquez ici pour ajouter un module</center></html>");
 	private JPanel plageVendredi = new JPanel();
 	private JPanel nomVendredi = new JPanel();
 	private JLabel lblVendredi = new JLabel("   Vendredi");
 	private JLabel lblDateVendredi = new JLabel("");
-	private JLabel plageVendrediMatin = new JLabel(
-			"<html><center>Cliquez ici pour ajouter un module</center></html>");
-	private JLabel plageVendrediApresMidi = new JLabel(
-			"<html><center>Cliquez ici pour ajouter un module</center></html>");
+	private JLabel plageVendrediMatin = new JLabel("<html><center>Cliquez ici pour ajouter un module</center></html>");
+	private JLabel plageVendrediApresMidi = new JLabel("<html><center>Cliquez ici pour ajouter un module</center></html>");
 	private JPanel plageHoraire = new JPanel();
 	private JButton btnValider = new JButton("Valider");
 	private JButton btnSupprimer = new JButton();
@@ -122,6 +131,7 @@ public class Planning {
 	private JButton btnSuppJeudiApresMidi = new JButton("Supprimer");
 	private JButton btnSuppVendrediMatin = new JButton("Supprimer");
 	private JButton btnSuppVendrediApresMidi = new JButton("Supprimer");
+
 
 	/**
 	 * Permet de lancer le planning
@@ -157,7 +167,7 @@ public class Planning {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		calendrier.setBackground(new Color(222, 184, 135));
-		// frame.setResizable(true);
+		//frame.setResizable(true);
 
 		calendrier.setBounds(25, 25, 950, 600);
 		frame.getContentPane().add(calendrier);
@@ -188,14 +198,17 @@ public class Planning {
 
 		lblDateLundi.setBounds(80, 0, 105, 50);
 		nomLundi.add(lblDateLundi);
-
+		
+		
+		
 		plageLundiMatin.setBackground(new Color(230, 230, 250));
-		plageLundiMatin.setBorder(new MatteBorder(0, 0, 1, 0,
-				(Color) new Color(210, 180, 140)));
+		plageLundiMatin.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(210, 180, 140)));
 
 		plageLundiMatin.setBounds(0, 50, 185, 200);
 		plageLundi.add(plageLundiMatin);
 		btnSuppLundiMatin.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		
+		
 		btnSuppLundiMatin.setBounds(75, 165, 90, 20);
 		btnSuppLundiApresMidi.setBounds(75, 210, 90, 20);
 		btnSuppMardiMatin.setBounds(75, 165, 90, 20);
@@ -226,10 +239,9 @@ public class Planning {
 		btnSuppJeudiApresMidi.setVisible(false);
 		btnSuppVendrediMatin.setVisible(false);
 		btnSuppVendrediApresMidi.setVisible(false);
-
+		
 		plageLundiApresMidi.setBackground(new Color(230, 230, 250));
-		plageLundiApresMidi.setBorder(new MatteBorder(1, 0, 0, 0,
-				(Color) new Color(210, 180, 140)));
+		plageLundiApresMidi.setBorder(new MatteBorder(1, 0, 0, 0, (Color) new Color(210, 180, 140)));
 
 		plageLundiApresMidi.setBounds(0, 300, 185, 250);
 		plageLundi.add(plageLundiApresMidi);
@@ -250,14 +262,12 @@ public class Planning {
 		lblDateMardi.setBounds(80, 0, 105, 50);
 		nomMardi.add(lblDateMardi);
 		plageMardiMatin.setBackground(new Color(230, 230, 250));
-		plageMardiMatin.setBorder(new MatteBorder(0, 0, 1, 0,
-				(Color) new Color(210, 180, 140)));
+		plageMardiMatin.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(210, 180, 140)));
 
 		plageMardiMatin.setBounds(0, 50, 185, 200);
 		plageMardi.add(plageMardiMatin);
 		plageMardiApresMidi.setBackground(new Color(230, 230, 250));
-		plageMardiApresMidi.setBorder(new MatteBorder(1, 0, 0, 0,
-				(Color) new Color(210, 180, 140)));
+		plageMardiApresMidi.setBorder(new MatteBorder(1, 0, 0, 0, (Color) new Color(210, 180, 140)));
 
 		plageMardiApresMidi.setBounds(0, 300, 185, 250);
 		plageMardi.add(plageMardiApresMidi);
@@ -277,14 +287,12 @@ public class Planning {
 		lblDateMercredi.setBounds(80, 0, 105, 50);
 		nomMercredi.add(lblDateMercredi);
 		plageMercrediMatin.setBackground(new Color(230, 230, 250));
-		plageMercrediMatin.setBorder(new MatteBorder(0, 0, 1, 0,
-				(Color) new Color(210, 180, 140)));
+		plageMercrediMatin.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(210, 180, 140)));
 
 		plageMercrediMatin.setBounds(0, 50, 183, 200);
 		plageMercredi.add(plageMercrediMatin);
 		plageMercrediApresMidi.setBackground(new Color(230, 230, 250));
-		plageMercrediApresMidi.setBorder(new MatteBorder(1, 0, 0, 0,
-				(Color) new Color(210, 180, 140)));
+		plageMercrediApresMidi.setBorder(new MatteBorder(1, 0, 0, 0, (Color) new Color(210, 180, 140)));
 
 		plageMercrediApresMidi.setBounds(0, 300, 185, 250);
 		plageMercredi.add(plageMercrediApresMidi);
@@ -304,14 +312,12 @@ public class Planning {
 		lblDateJeudi.setBounds(80, 0, 105, 50);
 		nomJeudi.add(lblDateJeudi);
 		plageJeudiMatin.setBackground(new Color(230, 230, 250));
-		plageJeudiMatin.setBorder(new MatteBorder(0, 0, 1, 0,
-				(Color) new Color(210, 180, 140)));
+		plageJeudiMatin.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(210, 180, 140)));
 
 		plageJeudiMatin.setBounds(0, 50, 183, 200);
 		plageJeudi.add(plageJeudiMatin);
 		plageJeudiApresMidi.setBackground(new Color(230, 230, 250));
-		plageJeudiApresMidi.setBorder(new MatteBorder(1, 0, 0, 0,
-				(Color) new Color(210, 180, 140)));
+		plageJeudiApresMidi.setBorder(new MatteBorder(1, 0, 0, 0, (Color) new Color(210, 180, 140)));
 
 		plageJeudiApresMidi.setBounds(0, 300, 185, 250);
 		plageJeudi.add(plageJeudiApresMidi);
@@ -331,14 +337,12 @@ public class Planning {
 		lblDateVendredi.setBounds(80, 0, 105, 50);
 		nomVendredi.add(lblDateVendredi);
 		plageVendrediMatin.setBackground(new Color(230, 230, 250));
-		plageVendrediMatin.setBorder(new MatteBorder(0, 0, 1, 0,
-				(Color) new Color(210, 180, 140)));
+		plageVendrediMatin.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(210, 180, 140)));
 
 		plageVendrediMatin.setBounds(0, 50, 185, 200);
 		plageVendredi.add(plageVendrediMatin);
 		plageVendrediApresMidi.setBackground(new Color(230, 230, 250));
-		plageVendrediApresMidi.setBorder(new MatteBorder(1, 0, 0, 0,
-				(Color) new Color(210, 180, 140)));
+		plageVendrediApresMidi.setBorder(new MatteBorder(1, 0, 0, 0, (Color) new Color(210, 180, 140)));
 
 		plageVendrediApresMidi.setBounds(0, 300, 185, 250);
 		plageVendredi.add(plageVendrediApresMidi);
@@ -356,36 +360,35 @@ public class Planning {
 		});
 		btnSupprimer.setBounds(0, 0, 100, 20);
 
+		
+		
+		/**
+		 * On ajoute la liste des modules avec un nombre d'heures supérieures à 0
+		 */
+		ArrayList<Module> listeModuleDispo = new ArrayList<Module>();
+		ModuleDao moduleDao = new ModuleDao();
+		listeModuleDispo = moduleDao.findModuleAvecHeures(2015, "BTS SIO 2016");
+
 		Session session = new Session();
 		SessionDao sessionDao = new SessionDao();
 		session = sessionDao.findSession("BTS SIO 2016");
 
-		/**
-		 * On ajoute la liste des modules avec un nombre d'heures supérieures à
-		 * 0
-		 */
-		ArrayList<Module> listeModuleDispo = new ArrayList<Module>();
-		ModuleDao moduleDao = new ModuleDao();
-		listeModuleDispo = moduleDao.findModuleAvecHeures(2015, session);
-
 		HashMap<Module, Integer> heureDispo = new HashMap<Module, Integer>();
 		HeuresSessionModuleDao heureDispoDao = new HeuresSessionModuleDao();
 
-		for (Module unModule : listeModuleDispo) {
-			heureDispo.put(unModule,
-					heureDispoDao.findHeuresSessionModule(unModule, session)
-							.getNbreHeuresDisponibles());
+		for(Module unModule  : listeModuleDispo){
+			heureDispo.put(unModule, heureDispoDao.findHeuresSessionModule(unModule, session).getNbreHeuresDisponibles());
 		}
-
+		
 		Set<Module> lesModules = heureDispo.keySet();
-		for (Module leModule : lesModules) {
-			nomModule.addItem(" " + leModule.getNom() + " ("
-					+ heureDispo.get(leModule) + " heures disponible)");
+		for(Module leModule : lesModules){
+			nomModule.addItem(" " + leModule.getNom() + " (" + heureDispo.get(leModule) + " heures disponible)");
 		}
 
+		
+		
 		/**
-		 * On ajoute le module à une plage horaire, cela diminue le nombre
-		 * d'heure restant du module
+		 * On ajoute le module à une plage horaire, cela diminue le nombre d'heure restant du module
 		 */
 		SelectionnePlage selectionnePlage = new SelectionnePlage();
 		plageLundiMatin.addMouseListener(selectionnePlage);
@@ -396,140 +399,126 @@ public class Planning {
 		plageMercrediApresMidi.addMouseListener(selectionnePlage);
 		plageJeudiMatin.addMouseListener(selectionnePlage);
 		plageJeudiApresMidi.addMouseListener(selectionnePlage);
-		plageVendrediMatin.addMouseListener(selectionnePlage);
+		plageVendrediMatin.addMouseListener(selectionnePlage);	
 		plageVendrediApresMidi.addMouseListener(selectionnePlage);
+		
 
 	}
 
-	public class SelectionnePlage implements MouseListener {
+	public class SelectionnePlage implements MouseListener{
 
 		/**
 		 * Quand on click sur une plage horaire, ca ajoute une matiere
 		 */
-
 		public void mouseClicked(MouseEvent e) {
-
+			
 			Object module = nomModule.getSelectedItem();
 			String string = module.toString();
 			String[] infos = string.split(" ");
-			lblPlageSelectionne = (JLabel) e.getComponent();
+			lblPlageSelectionne= (JLabel) e.getComponent();
+			
 
 			Personne personne = new Personne();
 			PersonneDao personneDao = new PersonneDao();
 			personne = personneDao.findByNomModule(infos[1]);
-			if (Pattern.matches("^[aeiouAEIOU].*", infos[1])) {
-				lblPlageSelectionne.setText("<html><center>Séance d'"
-						+ infos[1] + "<br>Avec " + personne.getNom() + " "
-						+ personne.getPrenom() + "</center></html>");
-			} else {
-				lblPlageSelectionne.setText("<html><center>Séance de "
-						+ infos[1] + "<br>Avec " + personne.getNom() + " "
-						+ personne.getPrenom() + "</center></html>");
-			}
-			if (lblPlageSelectionne.getSize().height < 201) {
-				btnSupprimer = (JButton) lblPlageSelectionne.getComponentAt(75,
-						165);
+			lblPlageSelectionne.setText("<html><center>Séance de " + infos[1] + "<br>Avec " + personne.getNom() + " " +
+					personne.getPrenom() + "</center></html>");
+			
+			if (lblPlageSelectionne.getSize().height < 201){
+				btnSupprimer = (JButton) lblPlageSelectionne.getComponentAt(75, 165);
 				btnSupprimer.setVisible(true);
 				heuresDuModule = 3;
-			} else {
-				btnSupprimer = (JButton) lblPlageSelectionne.getComponentAt(75,
-						210);
+				}
+			else{
+				btnSupprimer = (JButton) lblPlageSelectionne.getComponentAt(75, 210);
 				btnSupprimer.setVisible(true);
 				heuresDuModule = 4;
 			}
-
+				
 			Module leModule = new Module();
 			ModuleDao unModuleDao = new ModuleDao();
 			leModule = unModuleDao.findModule(infos[1]);
-
+			
 			Session session = new Session();
 			SessionDao sessionDao = new SessionDao();
 			session = sessionDao.findSession("BTS SIO 2016");
-
+			
 			HeuresSessionModule heureSessionModule = new HeuresSessionModule();
 			HeuresSessionModuleDao heuresSessionDao = new HeuresSessionModuleDao();
-			heureSessionModule = heuresSessionDao.findHeuresSessionModule(
-					leModule, session);
-			heuresSessionDao.updateModuleAvecHeures(heureSessionModule,
-					heuresDuModule, false);
-
-			// Regexp pour afficher la séance correctement
-			// ^[aeiouAEIOU]
-
-			if (infos[1] == "Selectionner")
+			heureSessionModule = heuresSessionDao.findHeuresSessionModule(leModule, session);
+			heuresSessionDao.updateModuleAvecHeures(heureSessionModule, heuresDuModule, false);
+			
+			//Regexp pour afficher la séance correctement
+			//^[aeiouAEIOU]
+			
+			if(infos[1] == "Selectionner")
 				System.out.println("Selectionner un module");
-			else
+			else 
 				System.out.println("Séance de " + infos[1]);
 
 			ArrayList<Module> listeModuleDispo = new ArrayList<Module>();
 			ModuleDao moduleDao = new ModuleDao();
-			listeModuleDispo = moduleDao.findModuleAvecHeures(2015, session);
-
+			listeModuleDispo = moduleDao.findModuleAvecHeures(2015, "BTS SIO 2016");
+			
 			HashMap<Module, Integer> heureDispo = new HashMap<Module, Integer>();
 			HeuresSessionModuleDao heureDispoDao = new HeuresSessionModuleDao();
 
-			for (Module unModule : listeModuleDispo) {
-				heureDispo.put(unModule,
-						heureDispoDao
-								.findHeuresSessionModule(unModule, session)
-								.getNbreHeuresDisponibles());
+			for(Module unModule  : listeModuleDispo){
+				heureDispo.put(unModule, heureDispoDao.findHeuresSessionModule(unModule, session).getNbreHeuresDisponibles());
 			}
-
+			
 			nomModule.removeAll();
 			Set<Module> lesModules = heureDispo.keySet();
 			String item;
-			for (Module ceModule : lesModules) {
-				item = " " + ceModule.getNom() + " ("
-						+ heureDispo.get(ceModule) + " heures disponible)";
+			for(Module ceModule : lesModules){
+				item = " " + ceModule.getNom() + " (" + heureDispo.get(ceModule) + " heures disponible)";
 				nomModule.addItem(item);
-
-				btnSupprimer.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						Module leModule = new Module();
-						ModuleDao unModuleDao = new ModuleDao();
-						leModule = unModuleDao.findModule(infos[1]);
-
-						Session session = new Session();
-						SessionDao sessionDao = new SessionDao();
-						session = sessionDao.findSession("BTS SIO 2016");
-
-						HeuresSessionModule heureSessionModule = new HeuresSessionModule();
-						HeuresSessionModuleDao heuresSessionDao = new HeuresSessionModuleDao();
-						heureSessionModule = heuresSessionDao
-								.findHeuresSessionModule(leModule, session);
-
-						heuresSessionDao.updateModuleAvecHeures(
-								heureSessionModule, heuresDuModule, true);
-						lblPlageSelectionne
-								.setText("<html><center>Cliquez ici pour ajouter un module</center></html>");
-						btnSupprimer.setVisible(false);
-					}
-				});
-			}
-
+				}
+			
+			btnSupprimer.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					Module leModule = new Module();
+					ModuleDao unModuleDao = new ModuleDao();
+					leModule = unModuleDao.findModule(infos[1]);
+					
+					Session session = new Session();
+					SessionDao sessionDao = new SessionDao();
+					session = sessionDao.findSession("BTS SIO 2016");
+					
+					HeuresSessionModule heureSessionModule = new HeuresSessionModule();
+					HeuresSessionModuleDao heuresSessionDao = new HeuresSessionModuleDao();
+					heureSessionModule = heuresSessionDao.findHeuresSessionModule(leModule, session);
+					
+					heuresSessionDao.updateModuleAvecHeures(heureSessionModule, heuresDuModule, true);
+					lblPlageSelectionne.setText("<html><center>Cliquez ici pour ajouter un module</center></html>");
+					btnSupprimer.setVisible(false);
+				}
+			});
+			 
 		}
 
 		@Override
 		public void mouseEntered(MouseEvent e) {
-			/*
-			 * if(plageLundiMatin.getToolTipText() != null)
-			 * System.out.println("plein"); else System.err.println("vide");
-			 */
+			/*if(plageLundiMatin.getToolTipText() != null) 
+			System.out.println("plein");
+			else
+				System.err.println("vide");*/
 		}
 
 		@Override
 		public void mouseExited(MouseEvent e) {
-			// vide pour le moment
+			//vide pour le moment
 		}
 
 		@Override
 		public void mousePressed(MouseEvent e) {
-			// vide pour le moment
+			//vide pour le moment
 		}
 
 		@Override
 		public void mouseReleased(MouseEvent e) {
-			// vide pour le moment
+			//vide pour le moment
 		}
 	}
 }
+

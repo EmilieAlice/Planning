@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 
 import modele.Module;
-import modele.Session;
 
 import org.junit.Test;
 
@@ -43,10 +42,8 @@ public class ModuleDaoTest {
 		listeModuleUn.add(moduleDeux);
 
 		ArrayList<Module> listeModuleDeux = new ArrayList<Module>();
-		Session session = new Session();
-		session.setNom("BTS SIO 2016");
 		ModuleDao dao = new ModuleDao();
-		listeModuleDeux = dao.findModuleAvecHeures(2015, session);
+		listeModuleDeux = dao.findModuleAvecHeures(2015, "BTS SIO 2016");
 		System.out.println(listeModuleDeux);
 
 		Module expected = listeModuleUn.get(1);
