@@ -17,7 +17,7 @@ public class PersonneDao {
 					.getConnection()
 					.prepareStatement(
 							"SELECT * FROM lagarenne2015.formateur "
-									+ "INNER JOIN personne on personne.id_personne = formateur.id_personne "
+									+ "INNER JOIN personne on personne.id_personne = formateur.id_formateur "
 									+ "INNER JOIN module on module.id_module = formateur.id_module "
 									+ "WHERE module.nom = ?;");
 		} catch (Exception e) {
