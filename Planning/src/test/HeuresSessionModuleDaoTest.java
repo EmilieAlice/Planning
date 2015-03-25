@@ -16,12 +16,8 @@ public class HeuresSessionModuleDaoTest {
 
 		Session session = new Session();
 		session.setId_session(3);
-		Module module = new Module(
-				1,
-				"SI2",
-				"Enseigner aux élèves les bases sur le fonctionnement du réseau internet",
-				"Des TP et des cours", 30,
-				"Les prérequis sont le module SI1 et le binaire");
+		Module module = new Module();
+		module.setId_module(1);
 
 		HeuresSessionModule test = new HeuresSessionModule();
 		HeuresSessionModuleDao dao = new HeuresSessionModuleDao();
@@ -44,16 +40,24 @@ public class HeuresSessionModuleDaoTest {
 
 	}
 
-	/*@Test
+	@Test
 	public void testNombresHeuresMisesAJourApresUpdateHeuresSessionModule() {
+		
+		HeuresSessionModule heureSessionModule = new HeuresSessionModule(1, 1, 30);
+		
+		HeuresSessionModuleDao heureSessionModuleDao = new HeuresSessionModuleDao();
 
-		HeuresSessionModule heureSessionModule = new HeuresSessionModule(1, 1,
-				30);
-		HeuresSessionModuleDao dao = new HeuresSessionModuleDao();
+		heureSessionModuleDao.updateModuleAvecHeures(heureSessionModule, 10, true);
+		
+		Session session = new Session();
+		session.setId_session(1);
+		Module module = new Module();
+		module.setId_module(1);
+		
+		HeuresSessionModule test = new HeuresSessionModule();
+		test = heureSessionModuleDao.findHeuresSessionModule(module, session);
 
-		dao.updateModuleAvecHeures(heureSessionModule, 10, false);
-
-		assertTrue(test);
-	}*/
+		assertEquals(40, test.getNbreHeuresDisponibles());
+	}
 
 }

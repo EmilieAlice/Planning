@@ -96,7 +96,7 @@ public class HeuresSessionModuleDao {
 			} else {
 				pupdateModuleAvecHeures
 						.setInt(1,
-								(heureSessionModule.getNbreHeuresDisponibles() - heuresRetirees));
+								((heureSessionModule.getNbreHeuresDisponibles()) - heuresRetirees));
 			}
 			pupdateModuleAvecHeures.setInt(2,
 					heureSessionModule.getId_session());
