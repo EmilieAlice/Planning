@@ -134,6 +134,12 @@ public class Planning {
 	private HashMap<Module, Integer> heureDispoHashMap = heureDispoDeModule.getHeureDispoDeModule();
 	private SelectionnePlage selectionnePlage = new SelectionnePlage();
 	private ArrayList<JLabel> listePlageHoraire = new ArrayList<JLabel>();
+	private Module leModule = new Module();
+	private ModuleDao unModuleDao = new ModuleDao();
+	private Session session = new Session();
+	private SessionDao sessionDao = new SessionDao();
+	private HeuresSessionModule heureSessionModule = new HeuresSessionModule();
+	private HeuresSessionModuleDao heuresSessionDao = new HeuresSessionModuleDao();
 
 
 
@@ -234,7 +240,7 @@ public class Planning {
 		plageJeudiApresMidi.add(btnSuppJeudiApresMidi);
 		plageVendrediMatin.add(btnSuppVendrediMatin);
 		plageVendrediApresMidi.add(btnSuppVendrediApresMidi);
-		btnSuppLundiMatin.setVisible(false);
+		btnSuppLundiMatin.setVisible(true);
 		btnSuppLundiApresMidi.setVisible(false);
 		btnSuppMardiMatin.setVisible(false);
 		btnSuppMardiApresMidi.setVisible(false);
@@ -372,7 +378,14 @@ public class Planning {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
+		
 		btnSupprimer.setBounds(0, 0, 100, 20);
+		btnSuppLundiMatin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				heuresSessionDao.updateModuleAvecHeures(heureSessionModule, 3, true);
+				lblPlageSelectionne.setText("<html><center>Cliquez ici pour ajouter un module</center></html>");
+			}
+		});
 
 
 
@@ -425,6 +438,7 @@ public class Planning {
 		private SessionDao sessionDao = new SessionDao();
 		private HeuresSessionModule heureSessionModule = new HeuresSessionModule();
 		private HeuresSessionModuleDao heuresSessionDao = new HeuresSessionModuleDao();
+		
 		/**
 		 * Quand on click sur une plage horaire, ca ajoute une matiere
 		 */
@@ -434,7 +448,7 @@ public class Planning {
 			lblPlageSelectionne = (JLabel) e.getComponent();
 
 
-			if (lblPlageSelectionne.getSize().height < 201) {
+			/*if (lblPlageSelectionne.getSize().height < 201) {
 				btnSupprimer = (JButton) lblPlageSelectionne.getComponentAt(75,
 						165);
 				btnSupprimer.setVisible(true);
@@ -447,7 +461,7 @@ public class Planning {
 				btnSupprimer.setVisible(true);
 				//4h à celle de l'apres midi
 				heuresDuModule = 4;
-			}
+			}*/
 
 			//On recupere le nom de la matiere
 			Object module = nomModule.getSelectedItem();
@@ -478,21 +492,21 @@ public class Planning {
 					heuresDuModule, false);
 
 			//On actualise la hashmap
-			/*heureDispoDeModule.actualiser("BTS SIO 2016", 2015, leModule);
+			heureDispoDeModule.actualiser("BTS SIO 2016", 2015, leModule);
 			Set<Module> lesModules = heureDispoHashMap.keySet();
-			String item;
 			for (Module ceModule : lesModules) {
+				nomModule.removeAllItems();
 				nomModule.addItem(" " + ceModule.getNom() + " (" + heureDispoHashMap.get(ceModule) + " heures disponible)");
-			}*/
-			btnSupprimer.addActionListener(new ActionListener() {
+			}
+			
+			
+			/*btnSupprimer.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-
 					heuresSessionDao.updateModuleAvecHeures(heureSessionModule, heuresDuModule, true);
 					lblPlageSelectionne.setText("<html><center>Cliquez ici pour ajouter un module</center></html>");
 					btnSupprimer.setVisible(false);
 				}
-			});
-
+			});*/
 
 		}
 
