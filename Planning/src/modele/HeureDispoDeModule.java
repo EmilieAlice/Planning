@@ -49,15 +49,10 @@ public class HeureDispoDeModule {
 		listeModuleDispo = moduleDao.findModuleAvecHeures(anneeDeSession, session);
 		
 		for (Module leModule : listeModuleDispo) {
-			if (leModule.equals(unModule))
-				heureDispoDeModule.replace(leModule, heureDispoDao.findHeuresSessionModule(unModule, session).getNbreHeuresDisponibles());
-			
+			int heureDispo = heureDispoDao.findHeuresSessionModule(leModule, session).getNbreHeuresDisponibles();
+			if (leModule.equals(unModule) && heureDispo > 3)
+				heureDispoDeModule.put(leModule, heureDispo);
 		}
-	}
-	public Set<Module> keySet() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
+	}	
 
 }

@@ -429,11 +429,11 @@ public class Planning {
 		 * Quand on click sur une plage horaire, ca ajoute une matiere
 		 */
 		public void mouseClicked(MouseEvent e) {
-			
+
 			//getComponent() permet de donner la plage dans laquelle on est
 			lblPlageSelectionne = (JLabel) e.getComponent();
 
-			
+
 			if (lblPlageSelectionne.getSize().height < 201) {
 				btnSupprimer = (JButton) lblPlageSelectionne.getComponentAt(75,
 						165);
@@ -448,15 +448,15 @@ public class Planning {
 				//4h à celle de l'apres midi
 				heuresDuModule = 4;
 			}
-			
+
 			//On recupere le nom de la matiere
 			Object module = nomModule.getSelectedItem();
 			String string = module.toString();
 			String[] infos = string.split(" ");
-			
+
 			//On cherche le nom du professeur grace à la matiere
 			personne = personneDao.findByNomModule(infos[1]);
-			
+
 			//Expression reguliere
 			if (Pattern.matches("^[aeiouAEIOU].*", infos[1])) {
 				lblPlageSelectionne.setText("<html><center>Séance d'"
@@ -468,7 +468,7 @@ public class Planning {
 						+ personne.getPrenom() + "</center></html>");
 			}
 
-			
+			//met a jour l'heure dispo d'un module
 			leModule = unModuleDao.findModule(infos[1]);
 			session = sessionDao.findSession("BTS SIO 2016");
 
@@ -477,52 +477,22 @@ public class Planning {
 			heuresSessionDao.updateModuleAvecHeures(heureSessionModule,
 					heuresDuModule, false);
 
-
-			/*ArrayList<Module> listeModuleDispo = new ArrayList<Module>();
-			ModuleDao moduleDao = new ModuleDao();
-			listeModuleDispo = moduleDao.findModuleAvecHeures(2015, session);
-
-			HashMap<Module, Integer> heureDispo = new HashMap<Module, Integer>();
-			HeuresSessionModuleDao heureDispoDao = new HeuresSessionModuleDao();
-
-			for (Module unModule : listeModuleDispo) {
-				heureDispo.put(unModule,
-						heureDispoDao
-						.findHeuresSessionModule(unModule, session)
-						.getNbreHeuresDisponibles());
-			}*/
-
-			heureDispoDeModule.actualiser("BTS SIO 2016", 2015, leModule);
+			//On actualise la hashmap
+			/*heureDispoDeModule.actualiser("BTS SIO 2016", 2015, leModule);
 			Set<Module> lesModules = heureDispoHashMap.keySet();
 			String item;
 			for (Module ceModule : lesModules) {
-				item = " " + ceModule.getNom() + " ("
-						+ heureDispoHashMap.get(ceModule) + " heures disponible)";
-				nomModule.addItem(item);
+				nomModule.addItem(" " + ceModule.getNom() + " (" + heureDispoHashMap.get(ceModule) + " heures disponible)");
+			}*/
+			btnSupprimer.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
 
-				btnSupprimer.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						Module leModule = new Module();
-						ModuleDao unModuleDao = new ModuleDao();
-						leModule = unModuleDao.findModule(infos[1]);
+					heuresSessionDao.updateModuleAvecHeures(heureSessionModule, heuresDuModule, true);
+					lblPlageSelectionne.setText("<html><center>Cliquez ici pour ajouter un module</center></html>");
+					btnSupprimer.setVisible(false);
+				}
+			});
 
-						Session session = new Session();
-						SessionDao sessionDao = new SessionDao();
-						session = sessionDao.findSession("BTS SIO 2016");
-
-						HeuresSessionModule heureSessionModule = new HeuresSessionModule();
-						HeuresSessionModuleDao heuresSessionDao = new HeuresSessionModuleDao();
-						heureSessionModule = heuresSessionDao
-								.findHeuresSessionModule(leModule, session);
-
-						heuresSessionDao.updateModuleAvecHeures(
-								heureSessionModule, heuresDuModule, true);
-						lblPlageSelectionne
-						.setText("<html><center>Cliquez ici pour ajouter un module</center></html>");
-						btnSupprimer.setVisible(false);
-					}
-				});
-			}
 
 		}
 
