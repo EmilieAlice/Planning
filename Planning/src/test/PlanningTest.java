@@ -35,8 +35,8 @@ public class PlanningTest {
 
 		assertEquals(seance, p.getSeance(jour, creneauMatin));
 		assertNull(p.getSeance(jour, creneauApresMidi));
-		assertEquals(premierJour, p.getPremierJour());
-		assertEquals(dernierJour, p.getDernierJour());
+		assertEquals(premierJour, p.getPremierJour(1));
+		assertEquals(dernierJour, p.getDernierJour(1));
 	}
 
 	@Test

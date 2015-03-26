@@ -60,7 +60,7 @@ public class Planning {
 	 * Donne le premier jour de la session
 	 * @return
 	 */
-	public GregorianCalendar getPremierJour(Session session) {
+	public GregorianCalendar getPremierJour(int idSession) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -68,7 +68,7 @@ public class Planning {
 	 * Donne le dernier jour de la session
 	 * @return
 	 */
-	public GregorianCalendar getDernierJour(Session session) {
+	public GregorianCalendar getDernierJour(int idSession) {
 		throw new UnsupportedOperationException();
 	}
 
