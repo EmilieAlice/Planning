@@ -7,15 +7,18 @@ import modele.Seance.Creneau;
 
 public class Planning {
 	
-	private int nbJours;
-
+	/**
+	 * Pour récupérer le nombre de jours
+	 * @return un entier qui correspond au nombre de jours
+	 */
 	public int getNbJours() {
-		return nbJours;
+		throw new UnsupportedOperationException();
 	}
 	
 	public void set() {
 		
 	}
+	
 	/**
 	 * Planning de la session dont l'id est passé en paramètre
 	 * @param idSession
