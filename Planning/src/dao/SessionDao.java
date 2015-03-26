@@ -34,12 +34,12 @@ public class SessionDao {
 			pfindSession.setString(1, nom);
 			ResultSet resultat = pfindSession.executeQuery();
 			if (resultat.next()) {
-				session.setId_session(resultat.getInt("id_session"));
+				session.setIdSession(resultat.getInt("id_session"));
 				session.setNom(resultat.getString("nom"));
 				session.setDateDebut(resultat.getDate("date_debut"));
 				session.setDateFin(resultat.getDate("date_fin"));
 				session.setDescription(resultat.getString("description"));
-				session.setId_formation(resultat.getInt("id_formation"));
+				session.setIdFormation(resultat.getInt("id_formation"));
 				session.setDateDebutInscription(resultat
 						.getDate("date_debut_inscription"));
 				session.setDateFinInscription(resultat

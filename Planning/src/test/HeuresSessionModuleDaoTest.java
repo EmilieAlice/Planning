@@ -15,7 +15,7 @@ public class HeuresSessionModuleDaoTest {
 	public void testFindHeuresSessionModule() {
 
 		Session session = new Session();
-		session.setId_session(3);
+		session.setIdSession(3);
 		Module module = new Module();
 		module.setIdModule(1);
 
@@ -52,7 +52,7 @@ public class HeuresSessionModuleDaoTest {
 				true);
 
 		Session session = new Session();
-		session.setId_session(1);
+		session.setIdSession(1);
 		Module module = new Module();
 		module.setIdModule(1);
 

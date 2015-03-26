@@ -1,6 +1,7 @@
 package modele;
 
 import java.sql.Date;
+import java.util.GregorianCalendar;
 
 /**
  * Objet Session
@@ -10,39 +11,39 @@ import java.sql.Date;
  */
 public class Session {
 
-	private int id_session;
+	private int idSession;
 	private String nom;
-	private Date dateDebut;
-	private Date dateFin;
+	private GregorianCalendar dateDebut;
+	private GregorianCalendar dateFin;
 	private String description;
-	private int id_formation;
-	private Date dateDebutInscription;
-	private Date dateFinInscription;
+	private int idFormation;
+	private GregorianCalendar dateDebutInscription;
+	private GregorianCalendar dateFinInscription;
 
 	public Session() {
 
 	}
 
-	public Session(int id_session, String nom, Date dateDebut, Date dateFin,
-			String description, int id_formation, Date dateDebutInscription,
-			Date dateFinInscription) {
+	public Session(int idSession, String nom, GregorianCalendar dateDebut, GregorianCalendar dateFin,
+			String description, int idFormation, GregorianCalendar dateDebutInscription,
+			GregorianCalendar dateFinInscription) {
 		super();
-		this.id_session = id_session;
+		this.idSession = idSession;
 		this.nom = nom;
 		this.dateDebut = dateDebut;
 		this.dateFin = dateFin;
 		this.description = description;
-		this.id_formation = id_formation;
+		this.idFormation = idFormation;
 		this.dateDebutInscription = dateDebutInscription;
 		this.dateFinInscription = dateFinInscription;
 	}
 
-	public int getId_session() {
-		return id_session;
+	public int getIdSession() {
+		return idSession;
 	}
 
-	public void setId_session(int id_session) {
-		this.id_session = id_session;
+	public void setIdSession(int idSession) {
+		this.idSession = idSession;
 	}
 
 	public String getNom() {
@@ -53,19 +54,19 @@ public class Session {
 		this.nom = nom;
 	}
 
-	public Date getDateDebut() {
+	public GregorianCalendar getDateDebut() {
 		return dateDebut;
 	}
 
-	public void setDateDebut(Date dateDebut) {
+	public void setDateDebut(GregorianCalendar dateDebut) {
 		this.dateDebut = dateDebut;
 	}
 
-	public Date getDateFin() {
+	public GregorianCalendar getDateFin() {
 		return dateFin;
 	}
 
-	public void setDateFin(Date dateFin) {
+	public void setDateFin(GregorianCalendar dateFin) {
 		this.dateFin = dateFin;
 	}
 
@@ -77,36 +78,36 @@ public class Session {
 		this.description = description;
 	}
 
-	public int getId_formation() {
-		return id_formation;
+	public int getIdFormation() {
+		return idFormation;
 	}
 
-	public void setId_formation(int id_formation) {
-		this.id_formation = id_formation;
+	public void setIdFormation(int idFormation) {
+		this.idFormation = idFormation;
 	}
 
-	public Date getDateDebutInscription() {
+	public GregorianCalendar getDateDebutInscription() {
 		return dateDebutInscription;
 	}
 
-	public void setDateDebutInscription(Date dateDebutInscription) {
+	public void setDateDebutInscription(GregorianCalendar dateDebutInscription) {
 		this.dateDebutInscription = dateDebutInscription;
 	}
 
-	public Date getDateFinInscription() {
+	public GregorianCalendar getDateFinInscription() {
 		return dateFinInscription;
 	}
 
-	public void setDateFinInscription(Date dateFinInscription) {
+	public void setDateFinInscription(GregorianCalendar dateFinInscription) {
 		this.dateFinInscription = dateFinInscription;
 	}
 
 	@Override
 	public String toString() {
-		return "Session [id_session=" + id_session + ", nom=" + nom
+		return "Session [id_session=" + idSession + ", nom=" + nom
 				+ ", dateDebut=" + dateDebut + ", dateFin=" + dateFin
 				+ ", description=" + description + ", id_formation="
-				+ id_formation + ", dateDebutInscription="
+				+ idFormation + ", dateDebutInscription="
 				+ dateDebutInscription + ", dateFinInscription="
 				+ dateFinInscription + "]";
 	}

@@ -7,16 +7,6 @@ import modele.Seance.Creneau;
 
 public class Planning {
 	
-	/**
-	 * Pour récupérer le nombre de jours
-	 * @param dernierJour 
-	 * @param premierJour 
-	 * @return un entier qui correspond au nombre de jours
-	 */
-	public int getNbJours(GregorianCalendar premierJour, GregorianCalendar dernierJour) {
-		throw new UnsupportedOperationException();
-	}
-	
 	public void set() {
 		
 	}
@@ -36,7 +26,9 @@ public class Planning {
 	}
 	
 	/**
-	 * 
+	 * Permet d'insérer une séance dans le planning
+	 * Si la séance est null l'insertion échoue
+	 * Si il y a déjà une séance pour ce créneau l'insertion échoue
 	 * @param seance
 	 */
 	public void setSeance(Seance seance) {
