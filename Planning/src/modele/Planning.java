@@ -41,7 +41,12 @@ public class Planning {
 		throw new UnsupportedOperationException();
 		
 	}
-
+	
+	/**
+	 * Permet de supprimer une séance dans le planning
+	 * @param jour
+	 * @param creneau
+	 */
 	public void deleteSeance(GregorianCalendar jour, Creneau creneau) {
 		throw new UnsupportedOperationException();
 		
@@ -51,11 +56,19 @@ public class Planning {
 		throw new UnsupportedOperationException();
 	}
 
-	public GregorianCalendar getPremierJour() {
+	/**
+	 * Donne le premier jour de la session
+	 * @return
+	 */
+	public GregorianCalendar getPremierJour(Session session) {
 		throw new UnsupportedOperationException();
 	}
 
-	public GregorianCalendar getDernierJour() {
+	/**
+	 * Donne le dernier jour de la session
+	 * @return
+	 */
+	public GregorianCalendar getDernierJour(Session session) {
 		throw new UnsupportedOperationException();
 	}
 
