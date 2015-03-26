@@ -27,12 +27,16 @@ public class PlanningTest {
 
 		GregorianCalendar jour = new GregorianCalendar(2015, 06, 02);
 		Seance seance = new Seance(1, 1, 4, jour, Seance.Creneau.MATIN, 1, null);
+		GregorianCalendar premierJour = new GregorianCalendar(2015, 05, 07);
+		GregorianCalendar dernierJour = new GregorianCalendar(2016, 05, 12);
 
 		Seance.Creneau creneauMatin = Seance.Creneau.MATIN;
 		Seance.Creneau creneauApresMidi = Seance.Creneau.APRES_MIDI;
 
 		assertEquals(seance, p.getSeance(jour, creneauMatin));
 		assertNull(p.getSeance(jour, creneauApresMidi));
+		assertEquals(premierJour, p.getPremierJour());
+		assertEquals(dernierJour, p.getDernierJour());
 	}
 
 	@Test
@@ -51,18 +55,14 @@ public class PlanningTest {
 
 	}
 
-	@Test
+	@Test(expected = AssertionError.class)
 	public void testSetSeanceInterdit() throws SQLException {
 		Planning p = Planning.get(1);
 		GregorianCalendar jour = new GregorianCalendar(2015, 06, 02);
 		Seance seance = new Seance(1, 1, 4, jour, Seance.Creneau.MATIN, 1, null);
-		
-		try {
-			p.setSeance(seance);
-			fail("Exception xxx non levée.");
-		} catch (Exception e) {
-			assertEquals(Exception exception, e);
-		}
+
+		p.setSeance(seance);
+
 	}
 
 	@Test

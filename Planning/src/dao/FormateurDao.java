@@ -81,7 +81,7 @@ public class FormateurDao {
 	public Formateur findByIdModule(Module module) {
 		Formateur formateur = new Formateur();
 		try {
-			pfindByIdPersonne.setInt(1, module.getId_module());
+			pfindByIdPersonne.setInt(1, module.getIdModule());
 			ResultSet resultat = pfindByIdPersonne.executeQuery();
 			if (resultat.next()) {
 				formateur.setIdPersonne(resultat.getInt("id_personne"));

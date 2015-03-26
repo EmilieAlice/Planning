@@ -1,6 +1,5 @@
 package modele;
 
-import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class Seance {
@@ -56,7 +55,7 @@ public class Seance {
 		this.idFormateur = idFormateur;
 	}
 
-	public Calendar getJour() {
+	public GregorianCalendar getJour() {
 		return jour;
 	}
 

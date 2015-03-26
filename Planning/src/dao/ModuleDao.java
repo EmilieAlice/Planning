@@ -36,11 +36,11 @@ public class ModuleDao {
 			pfindModule.setString(1, nom);
 			ResultSet resultat = pfindModule.executeQuery();
 			if (resultat.next()) {
-				module.setId_module(resultat.getInt("id_module"));
+				module.setIdModule(resultat.getInt("id_module"));
 				module.setNom(resultat.getString("nom"));
 				module.setObjectif(resultat.getString("objectif"));
 				module.setContenu(resultat.getString("contenu"));
-				module.setNb_heures_annuelles(resultat
+				module.setNbHeuresAnnuelles(resultat
 						.getInt("nb_heures_annuel"));
 				module.setPrerequis(resultat.getString("prerequis"));
 				return module;
@@ -93,11 +93,11 @@ public class ModuleDao {
 			if (resultat != null) {
 				while (resultat.next()) {
 					Module unModule = new Module();
-					unModule.setId_module(resultat.getInt("id_module"));
+					unModule.setIdModule(resultat.getInt("id_module"));
 					unModule.setNom(resultat.getString("nom"));
 					unModule.setObjectif(resultat.getString("objectif"));
 					unModule.setContenu(resultat.getString("contenu"));
-					unModule.setNb_heures_annuelles(resultat
+					unModule.setNbHeuresAnnuelles(resultat
 							.getInt("nb_heures_annuel"));
 					unModule.setPrerequis(resultat.getString("prerequis"));
 					listeModule.add(unModule);

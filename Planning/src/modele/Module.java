@@ -1,5 +1,7 @@
 package modele;
 
+import java.time.Duration;
+
 /**
  * Objet Module(matière)
  * 
@@ -9,34 +11,34 @@ package modele;
 
 public class Module {
 
-	private int id_module;
+	private int idModule;
 	private String nom;
 	private String objectif;
 	private String contenu;
-	private int nb_heures_annuelles;
+	private int nbHeuresAnnuelles;
 	private String prerequis;
 
 	public Module() {
 
 	}
 
-	public Module(int id_module, String nom, String objectif, String contenu,
-			int nb_heures_annuelles, String prerequis) {
+	public Module(int idModule, String nom, String objectif, String contenu,
+			int nbHeuresAnnuelles, String prerequis) {
 		super();
-		this.id_module = id_module;
+		this.idModule = idModule;
 		this.nom = nom;
 		this.objectif = objectif;
 		this.contenu = contenu;
-		this.nb_heures_annuelles = nb_heures_annuelles;
+		this.nbHeuresAnnuelles = nbHeuresAnnuelles;
 		this.prerequis = prerequis;
 	}
 
-	public int getId_module() {
-		return id_module;
+	public int getIdModule() {
+		return idModule;
 	}
 
-	public void setId_module(int id_module) {
-		this.id_module = id_module;
+	public void setIdModule(int idModule) {
+		this.idModule = idModule;
 	}
 
 	public String getNom() {
@@ -63,12 +65,12 @@ public class Module {
 		this.contenu = contenu;
 	}
 
-	public int getNb_heures_annuelles() {
-		return nb_heures_annuelles;
+	public int getNbHeuresAnnuelles() {
+		return nbHeuresAnnuelles;
 	}
 
-	public void setNb_heures_annuelles(int nb_heures_annuelles) {
-		this.nb_heures_annuelles = nb_heures_annuelles;
+	public void setNbHeuresAnnuelles(int nbHeuresAnnuelles) {
+		this.nbHeuresAnnuelles = nbHeuresAnnuelles;
 	}
 
 	public String getPrerequis() {
@@ -81,9 +83,13 @@ public class Module {
 
 	@Override
 	public String toString() {
-		return "Module [id_module=" + id_module + ", nom=" + nom
+		return "Module [id_module=" + idModule + ", nom=" + nom
 				+ ", objectif=" + objectif + ", contenu=" + contenu
-				+ ", nb_heures_annuelles=" + nb_heures_annuelles
+				+ ", nb_heures_annuelles=" + nbHeuresAnnuelles
 				+ ", prerequis=" + prerequis + "]";
+	}
+
+	public Duration getDureeDisponible() {
+		throw new UnsupportedOperationException();
 	}
 }

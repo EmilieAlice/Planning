@@ -40,7 +40,7 @@ public class HeuresSessionModuleDao {
 		HeuresSessionModule heuresSessionModule = new HeuresSessionModule();
 		try {
 			pfindHeuresSessionModule.setInt(1, session.getId_session());
-			pfindHeuresSessionModule.setInt(2, module.getId_module());
+			pfindHeuresSessionModule.setInt(2, module.getIdModule());
 			ResultSet resultat = pfindHeuresSessionModule.executeQuery();
 			if (resultat.next()) {
 				heuresSessionModule.setId_module(resultat.getInt("id_module"));

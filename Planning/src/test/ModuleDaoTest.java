@@ -20,7 +20,7 @@ public class ModuleDaoTest {
 
 		test = dao.findModule("SI2");
 
-		assertEquals(1, test.getId_module());
+		assertEquals(1, test.getIdModule());
 
 	}
 
@@ -52,7 +52,7 @@ public class ModuleDaoTest {
 		Module expected = listeModuleUn.get(1);
 		Module test = listeModuleDeux.get(1);
 
-		assertEquals(expected.getId_module(), test.getId_module());
+		assertEquals(expected.getIdModule(), test.getIdModule());
 
 	}
 
