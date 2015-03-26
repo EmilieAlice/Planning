@@ -15,7 +15,7 @@ public class PlanningDao {
 	 */
 	static {
 		try {
-			pDeleteSeance = ConnexionBase.getConnection().prepareStatement(
+			pfindByIdSession = ConnexionBase.getConnection().prepareStatement(
 					"SELECT * FROM lagarenne2015.session "
 							+ "WHERE session.id_session = ?;");
 		} catch (Exception e) {
@@ -34,8 +34,8 @@ public class PlanningDao {
 	public Session findByIdSession(int idSession) {
 		Session session = new Session();
 		try {
-			pDeleteSeance.setInt(1, idSession);
-			ResultSet resultat = pDeleteSeance.executeQuery();
+			pfindByIdSession.setInt(1, idSession);
+			ResultSet resultat = pfindByIdSession.executeQuery();
 			if (resultat.next()) {
 				// Conversion de la date SQL en date Gregorian
 				GregorianCalendar dateDebut = new GregorianCalendar();
@@ -64,7 +64,7 @@ public class PlanningDao {
 	 */
 	static {
 		try {
-			pDeleteSeance = ConnexionBase
+			pInsertSeance = ConnexionBase
 					.getConnection()
 					.prepareStatement(
 							"INSERT INTO lagarenne2015.seance (id_module, id_session, id_personne, debut, fin, id_salle,contenu)"
@@ -88,14 +88,14 @@ public class PlanningDao {
 			// Conversion de la date Gregorian en date SQL
 			Date dateSQL = new Date(seance.getJour().getTimeInMillis());
 
-			pDeleteSeance.setInt(1, seance.getIdModule());
-			pDeleteSeance.setInt(2, seance.getIdSession());
-			pDeleteSeance.setInt(3, seance.getIdFormateur());
-			pDeleteSeance.setDate(4, dateSQL);
-			pDeleteSeance.setInt(5, seance.getIdModule());
-			pDeleteSeance.setInt(6, seance.getIdModule());
-			pDeleteSeance.setInt(7, seance.getIdModule());
-			int resultat = pDeleteSeance.executeUpdate();
+			pInsertSeance.setInt(1, seance.getIdModule());
+			pInsertSeance.setInt(2, seance.getIdSession());
+			pInsertSeance.setInt(3, seance.getIdFormateur());
+			pInsertSeance.setDate(4, dateSQL);
+			pInsertSeance.setInt(5, seance.getIdModule());
+			pInsertSeance.setInt(6, seance.getIdModule());
+			pInsertSeance.setInt(7, seance.getIdModule());
+			int resultat = pInsertSeance.executeUpdate();
 			if (resultat != 0)
 				etat = true;
 			else {
