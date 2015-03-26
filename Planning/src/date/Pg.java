@@ -3,11 +3,11 @@ package date;
 import java.util.Calendar;
 
 import fenetre.MoisAnnee;
-import fenetre.PlanningFenetre;
+import fenetre.Planning;
 
 public class Pg {
 	public static void main(String[] args) {
-		PlanningFenetre p = new PlanningFenetre();
+		Planning p = new Planning();
 		
 	}
 	
