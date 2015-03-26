@@ -61,7 +61,7 @@ import com.toedter.calendar.JCalendar;
 import com.toedter.calendar.JDateChooser;
 import com.toedter.calendar.JDayChooser;
 
-public class Planning {
+public class PlanningFenetre {
 
 	/*
 	 * Objet de la fenetre
@@ -150,7 +150,7 @@ public class Planning {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Planning window = new Planning();
+					PlanningFenetre window = new PlanningFenetre();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -162,7 +162,7 @@ public class Planning {
 	/**
 	 * Constructeur comprenant la methode d'initialisation
 	 */
-	public Planning() {
+	public PlanningFenetre() {
 		initialize();
 	}
 
@@ -389,7 +389,6 @@ public class Planning {
 
 
 
-
 		/*
 		 * On ajoute la liste des modules avec un nombre d'heures supérieures à
 		 * 0
@@ -422,7 +421,9 @@ public class Planning {
 			jLabel.addMouseListener(selectionnePlage);
 		}
 	}
-
+	
+	
+	
 	/**
 	 * Classe SelectionnePlage, qui recupere la plage dans laquelle on se trouve
 	 * @author Alice
@@ -497,6 +498,7 @@ public class Planning {
 			for (Module ceModule : lesModules) {
 				nomModule.removeAllItems();
 				nomModule.addItem(" " + ceModule.getNom() + " (" + heureDispoHashMap.get(ceModule) + " heures disponible)");
+
 			}
 			
 			
