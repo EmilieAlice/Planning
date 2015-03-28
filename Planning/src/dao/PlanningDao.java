@@ -46,11 +46,6 @@ public class PlanningDao {
 				dateDebut.setTime(resultat.getDate("date_fin"));
 				
 				//Set du planning
-				session.setIdSession(resultat.getInt("id_session"));
-				session.setNom(resultat.getString("nom"));
-				session.setDateDebut(dateDebut);
-				session.setDateFin(dateFin);
-				session.setIdFormation(resultat.getInt("id_formation"));
 			} else {
 				planning = null;
 			}
@@ -78,11 +73,9 @@ public class PlanningDao {
 	}
 
 	/**
-	 * Méthode qui récupère dans la base données un objet Personne qui est un
-	 * formateur
-	 * 
-	 * @param nomModule
-	 * @return personne
+	 * Méthode qui insère une séance dans la base de données
+	 * @param seance (un objet Seance)
+	 * @return un booléen
 	 */
 	public Boolean insertSeance(Seance seance) {
 		Boolean etat = new Boolean(false);
@@ -111,7 +104,7 @@ public class PlanningDao {
 
 	private static java.sql.PreparedStatement pDeleteSeance = null;
 	/**
-	 * Requete pour récupérer une session grâce à son id
+	 * Requete pour supprimer une séance
 	 */
 	static {
 		try {
@@ -124,11 +117,9 @@ public class PlanningDao {
 	}
 
 	/**
-	 * Méthode qui récupère dans la base données un objet Personne qui est un
-	 * formateur
-	 * 
-	 * @param nomModule
-	 * @return personne
+	 * Méthode qui supprime une séance 
+	 * @param seance (un objet Seance)
+	 * @return booléen
 	 */
 	public Boolean deleteSeance(Seance seance) {
 		Boolean etat = new Boolean(false);
