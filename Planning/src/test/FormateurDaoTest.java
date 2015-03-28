@@ -22,7 +22,7 @@ public class FormateurDaoTest {
 		moduleTest.setIdModule(1);
 		FormateurDao formateurDao = new FormateurDao();
 		Formateur formateur = new Formateur();
-		formateur = formateurDao.findByIdModule(moduleTest);
+		formateur = formateurDao.findFormateurByIdModule(moduleTest);
 		
 		assertEquals(4, formateur.getIdPersonne());
 		

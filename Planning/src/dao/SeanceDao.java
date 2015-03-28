@@ -9,13 +9,13 @@ import modele.Session;
 
 public class SeanceDao {
 
-	private static java.sql.PreparedStatement pfindSeanceByIdSession = null;
+	private static java.sql.PreparedStatement pFindSeanceByIdSession = null;
 	/**
-	 * Requete pour récupérer séance grâce à l'id d'une session
+	 * Requete pour récupérer une une séance grâce à l'id d'une session
 	 */
 	static {
 		try {
-			pfindSeanceByIdSession = ConnexionBase.getConnection()
+			pFindSeanceByIdSession = ConnexionBase.getConnection()
 					.prepareStatement(
 							"SELECT * FROM lagarenne2015.seance "
 									+ "WHERE id_session=?; ");
@@ -36,8 +36,8 @@ public class SeanceDao {
 	public ArrayList<Seance> findSeanceByIdSession(int idSession) {
 		ArrayList<Seance> listeSeance = new ArrayList<Seance>();
 		try {
-			pfindSeanceByIdSession.setInt(1, idSession);
-			ResultSet resultat = pfindSeanceByIdSession.executeQuery();
+			pFindSeanceByIdSession.setInt(1, idSession);
+			ResultSet resultat = pFindSeanceByIdSession.executeQuery();
 
 			while (resultat.next()) {
 				Seance seance = new Seance();
@@ -53,7 +53,7 @@ public class SeanceDao {
 				GregorianCalendar jour = new GregorianCalendar();
 				jour.setTime(resultat.getDate("jour"));
 				seance.setJour(jour);
-				
+
 				listeSeance.add(seance);
 			}
 

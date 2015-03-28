@@ -18,7 +18,7 @@ public class ModuleDaoTest {
 		Module test = new Module();
 		ModuleDao dao = new ModuleDao();
 
-		test = dao.findModule("SI2");
+		test = dao.findModuleByNom("SI2");
 
 		assertEquals(1, test.getIdModule());
 

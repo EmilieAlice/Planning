@@ -8,13 +8,13 @@ import modele.Personne;
 
 public class FormateurDao {
 
-	private static java.sql.PreparedStatement pfindByIdPersonne = null;
+	private static java.sql.PreparedStatement pFindFormateurByIdPersonne = null;
 	/**
 	 * Requete pour récupérer un formateur grâce à l'id de la personne
 	 */
 	static {
 		try {
-			pfindByIdPersonne = ConnexionBase
+			pFindFormateurByIdPersonne = ConnexionBase
 					.getConnection()
 					.prepareStatement(
 							"SELECT * FROM lagarenne2015.formateur "
@@ -22,7 +22,7 @@ public class FormateurDao {
 									+ "WHERE formateur.id_personne = ?;");
 		} catch (Exception e) {
 			e.getMessage();
-			System.out.println("Requete findByIdPersonne échouée.");
+			System.out.println("Requete findFormateurByIdPersonne échouée.");
 		}
 	}
 
@@ -33,11 +33,11 @@ public class FormateurDao {
 	 *            objet Personne
 	 * @return un objet Formateur
 	 */
-	public Formateur findByIdPersonne(Personne personne) {
+	public Formateur findFormateurByIdPersonne(Personne personne) {
 		Formateur formateur = new Formateur();
 		try {
-			pfindByIdPersonne.setInt(1, personne.getIdPersonne());
-			ResultSet resultat = pfindByIdPersonne.executeQuery();
+			pFindFormateurByIdPersonne.setInt(1, personne.getIdPersonne());
+			ResultSet resultat = pFindFormateurByIdPersonne.executeQuery();
 			if (resultat.next()) {
 				formateur.setIdPersonne(resultat.getInt("id_personne"));
 				formateur.setDateEntree(resultat.getDate("date_entree"));
@@ -53,13 +53,13 @@ public class FormateurDao {
 		return null;
 	}
 
-	private static java.sql.PreparedStatement pfindByIdModule = null;
+	private static java.sql.PreparedStatement pFindFormateurByIdModule = null;
 	/**
 	 * Requete pour récupérer un formateur grâce à l'id de la personne
 	 */
 	static {
 		try {
-			pfindByIdPersonne = ConnexionBase
+			pFindFormateurByIdModule = ConnexionBase
 					.getConnection()
 					.prepareStatement(
 							"SELECT * FROM lagarenne2015.formateur "
@@ -67,7 +67,7 @@ public class FormateurDao {
 									+ "WHERE formateur.id_module = ?;");
 		} catch (Exception e) {
 			e.getMessage();
-			System.out.println("Requete findByIdPersonne échouée.");
+			System.out.println("Requete findByIdModule échouée.");
 		}
 	}
 
@@ -78,11 +78,11 @@ public class FormateurDao {
 	 *            objet Module
 	 * @return un objet Formateur
 	 */
-	public Formateur findByIdModule(Module module) {
+	public Formateur findFormateurByIdModule(Module module) {
 		Formateur formateur = new Formateur();
 		try {
-			pfindByIdPersonne.setInt(1, module.getIdModule());
-			ResultSet resultat = pfindByIdPersonne.executeQuery();
+			pFindFormateurByIdModule.setInt(1, module.getIdModule());
+			ResultSet resultat = pFindFormateurByIdPersonne.executeQuery();
 			if (resultat.next()) {
 				formateur.setIdPersonne(resultat.getInt("id_personne"));
 				formateur.setDateEntree(resultat.getDate("date_entree"));
@@ -96,14 +96,13 @@ public class FormateurDao {
 				formateur.setVille(resultat.getString("ville"));
 				formateur.setTelephone(resultat.getString("telephone"));
 				formateur.setEmail(resultat.getString("email"));
-				return formateur;
 			} else {
-				return formateur = null;
+				formateur = null;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return null;
+		return formateur;
 	}
 
 }

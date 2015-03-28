@@ -14,7 +14,7 @@ public class PersonneDaoTest {
 
 		Personne personne = new Personne();
 		PersonneDao dao = new PersonneDao();
-		personne = dao.findByNomModule("Maths");
+		personne = dao.findPersonneByNomModule("Maths");
 
 		int idPersonne = personne.getIdPersonne();
 

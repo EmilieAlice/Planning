@@ -10,57 +10,55 @@ import com.mysql.jdbc.PreparedStatement;
 
 public class ModuleDao {
 
-	private static java.sql.PreparedStatement pfindModule = null;
+	private static java.sql.PreparedStatement pFindModuleByNom = null;
 	/**
 	 * Requete pour récupérer un module grâce à son nom
 	 */
 	static {
 		try {
-			pfindModule = ConnexionBase.getConnection().prepareStatement(
+			pFindModuleByNom = ConnexionBase.getConnection().prepareStatement(
 					"SELECT * FROM lagarenne2015.module " + "WHERE nom=?; ");
 		} catch (Exception e) {
 			e.getMessage();
-			System.out.println("Requete findSession échouée.");
+			System.out.println("Requete findModuleByNom échouée.");
 		}
 	}
 
 	/**
-	 * Méthode qui récupère dans la base données un objet Module
+	 * Méthode qui récupère dans la base données un objet Module grâce à son nom
 	 * 
 	 * @param nom
 	 * @return Module
 	 */
-	public Module findModule(String nom) {
+	public Module findModuleByNom(String nom) {
 		Module module = new Module();
 		try {
-			pfindModule.setString(1, nom);
-			ResultSet resultat = pfindModule.executeQuery();
+			pFindModuleByNom.setString(1, nom);
+			ResultSet resultat = pFindModuleByNom.executeQuery();
 			if (resultat.next()) {
 				module.setIdModule(resultat.getInt("id_module"));
 				module.setNom(resultat.getString("nom"));
 				module.setObjectif(resultat.getString("objectif"));
 				module.setContenu(resultat.getString("contenu"));
-				module.setNbHeuresAnnuelles(resultat
-						.getInt("nb_heures_annuel"));
+				module.setNbHeuresAnnuelles(resultat.getInt("nb_heures_annuel"));
 				module.setPrerequis(resultat.getString("prerequis"));
-				return module;
 			} else {
-				return module = null;
+				module = null;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return null;
+		return module;
 	}
 
-	private static java.sql.PreparedStatement pfindModuleAvecHeures = null;
+	private static java.sql.PreparedStatement pFindModuleAvecHeures = null;
 	/**
 	 * Requete pour récupérer une collection de modules dont le nombre d'heures
 	 * restantes est supérieur à 0
 	 */
 	static {
 		try {
-			pfindModuleAvecHeures = ConnexionBase
+			pFindModuleAvecHeures = ConnexionBase
 					.getConnection()
 					.prepareStatement(
 							"SELECT * FROM lagarenne2015.heures_session_module "
@@ -71,13 +69,13 @@ public class ModuleDao {
 									+ "AND session.nom=?;");
 		} catch (Exception e) {
 			e.getMessage();
-			System.out.println("Requete findMatiereAvecHeures échouée.");
+			System.out.println("Requete findModuleAvecHeures échouée.");
 		}
 	}
 
 	/**
 	 * Méthode qui récupère dans la base données une collection de modules qui
-	 * ont encore des heures d'enseignement.
+	 * ont encore des heures disponibles.
 	 * 
 	 * @param annee
 	 * @param session
@@ -86,10 +84,10 @@ public class ModuleDao {
 	public ArrayList<Module> findModuleAvecHeures(int annee, Session session) {
 		ArrayList<Module> listeModule = new ArrayList<Module>();
 		try {
-			pfindModuleAvecHeures.setInt(1, 0);
-			pfindModuleAvecHeures.setInt(2, annee);
-			pfindModuleAvecHeures.setString(3, session.getNom());
-			ResultSet resultat = pfindModuleAvecHeures.executeQuery();
+			pFindModuleAvecHeures.setInt(1, 0);
+			pFindModuleAvecHeures.setInt(2, annee);
+			pFindModuleAvecHeures.setString(3, session.getNom());
+			ResultSet resultat = pFindModuleAvecHeures.executeQuery();
 			if (resultat != null) {
 				while (resultat.next()) {
 					Module unModule = new Module();
@@ -102,14 +100,13 @@ public class ModuleDao {
 					unModule.setPrerequis(resultat.getString("prerequis"));
 					listeModule.add(unModule);
 				}
-				return listeModule;
 			} else {
-				return listeModule = null;
+				listeModule = null;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return null;
+		return listeModule;
 	}
 
 }

@@ -10,15 +10,16 @@ import modele.Session;
 
 public class PlanningDao {
 
-	private static java.sql.PreparedStatement pfindByIdSession = null;
+	private static java.sql.PreparedStatement pFindPlanningByIdSession = null;
 	/**
-	 * Requete pour récupérer une session grâce à son id
+	 * Requete pour récupérer un planning correspondant à l'id de la session
 	 */
 	static {
 		try {
-			pfindByIdSession = ConnexionBase.getConnection().prepareStatement(
-					"SELECT * FROM lagarenne2015.session "
-							+ "WHERE session.id_session = ?;");
+			pFindPlanningByIdSession = ConnexionBase.getConnection()
+					.prepareStatement(
+							"SELECT * FROM lagarenne2015.session "
+									+ "WHERE session.id_session = ?;");
 		} catch (Exception e) {
 			e.getMessage();
 			System.out.println("Requete findByIdSession échouée.");
@@ -26,27 +27,29 @@ public class PlanningDao {
 	}
 
 	/**
-	 * Méthode qui récupère dans la base données un objet Personne qui est un
-	 * formateur
+	 * Méthode qui récupère dans la base données un objet Planning avec l'id de
+	 * la session correspodant
 	 * 
-	 * @param nomModule
-	 * @return personne
+	 * @param idSession
+	 *            entier
+	 * @return planning un objet Planning
 	 */
 	public Planning findByIdSession(int idSession) {
 		Planning planning = new Planning();
 		try {
-			pfindByIdSession.setInt(1, idSession);
-			ResultSet resultat = pfindByIdSession.executeQuery();
+			pFindPlanningByIdSession.setInt(1, idSession);
+			ResultSet resultat = pFindPlanningByIdSession.executeQuery();
 			if (resultat.next()) {
 				/*
-				// Conversion de la date SQL en date Gregorian
-				GregorianCalendar dateDebut = new GregorianCalendar();
-				dateDebut.setTime(resultat.getDate("date_debut"));
+				 * // Conversion de la date SQL en date Gregorian
+				 * GregorianCalendar dateDebut = new GregorianCalendar();
+				 * dateDebut.setTime(resultat.getDate("date_debut"));
+				 * 
+				 * GregorianCalendar dateFin = new GregorianCalendar();
+				 * dateDebut.setTime(resultat.getDate("date_fin"));
+				 */
 
-				GregorianCalendar dateFin = new GregorianCalendar();
-				dateDebut.setTime(resultat.getDate("date_fin"));*/
-				
-				//Set du planning
+				// Set du planning
 				planning.setIdSession(resultat.getInt("id_session"));
 			} else {
 				planning = null;
@@ -59,7 +62,7 @@ public class PlanningDao {
 
 	private static java.sql.PreparedStatement pInsertSeance = null;
 	/**
-	 * Requete pour récupérer une session grâce à son id
+	 * Requete pour insérer une séance
 	 */
 	static {
 		try {
@@ -76,7 +79,9 @@ public class PlanningDao {
 
 	/**
 	 * Méthode qui insère une séance dans la base de données
-	 * @param seance (un objet Seance)
+	 * 
+	 * @param seance
+	 *            (un objet Seance)
 	 * @return un booléen
 	 */
 	public Boolean insertSeance(Seance seance) {
@@ -92,12 +97,10 @@ public class PlanningDao {
 			pInsertSeance.setInt(5, seance.getIdModule());
 			pInsertSeance.setInt(6, seance.getIdModule());
 			pInsertSeance.setInt(7, seance.getIdModule());
+
 			int resultat = pInsertSeance.executeUpdate();
 			if (resultat != 0)
 				etat = true;
-			else {
-
-			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -119,8 +122,10 @@ public class PlanningDao {
 	}
 
 	/**
-	 * Méthode qui supprime une séance 
-	 * @param seance (un objet Seance)
+	 * Méthode qui supprime une séance
+	 * 
+	 * @param seance
+	 *            (un objet Seance)
 	 * @return booléen
 	 */
 	public Boolean deleteSeance(Seance seance) {

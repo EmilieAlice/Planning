@@ -7,13 +7,13 @@ import modele.Session;
 
 public class PersonneDao {
 
-	private static java.sql.PreparedStatement pfindByNomModule = null;
+	private static java.sql.PreparedStatement pFindPersonneByNomModule = null;
 	/**
-	 * Requete pour récupérer une session grâce à son nom
+	 * Requete pour récupérer une personne grâce à son nom de module
 	 */
 	static {
 		try {
-			pfindByNomModule = ConnexionBase
+			pFindPersonneByNomModule = ConnexionBase
 					.getConnection()
 					.prepareStatement(
 							"SELECT * FROM lagarenne2015.formateur "
@@ -22,7 +22,7 @@ public class PersonneDao {
 									+ "WHERE module.nom = ?;");
 		} catch (Exception e) {
 			e.getMessage();
-			System.out.println("Requete findByNomModule échouée.");
+			System.out.println("Requete findPersonneByNomModule échouée.");
 		}
 	}
 
@@ -33,11 +33,11 @@ public class PersonneDao {
 	 * @param nomModule
 	 * @return personne
 	 */
-	public Personne findByNomModule(String nomModule) {
+	public Personne findPersonneByNomModule(String nomModule) {
 		Personne personne = new Personne();
 		try {
-			pfindByNomModule.setString(1, nomModule);
-			ResultSet resultat = pfindByNomModule.executeQuery();
+			pFindPersonneByNomModule.setString(1, nomModule);
+			ResultSet resultat = pFindPersonneByNomModule.executeQuery();
 			if (resultat.next()) {
 				personne.setIdPersonne(resultat.getInt("id_personne"));
 				personne.setCivilite(resultat.getString("civilite"));
@@ -49,14 +49,13 @@ public class PersonneDao {
 				personne.setTelephone(resultat.getString("telephone"));
 				personne.setTelephone2(resultat.getString("telephone"));
 				personne.setEmail(resultat.getString("email"));
-				return personne;
 			} else {
-				return personne = null;
+				personne = null;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return null;
+		return personne;
 	}
 
 }
