@@ -15,7 +15,7 @@ public class SessionDao {
 	 */
 	static {
 		try {
-			pfindSessionById = ConnexionBase.getConnection().prepareStatement(
+			pfindSessionByNom = ConnexionBase.getConnection().prepareStatement(
 					"SELECT * FROM lagarenne2015.session " + "WHERE nom=?; ");
 		} catch (Exception e) {
 			e.getMessage();
@@ -33,8 +33,8 @@ public class SessionDao {
 	public Session findSessionByNom(String nomSession) {
 		Session session = new Session();
 		try {
-			pfindSessionById.setString(1, nomSession);
-			ResultSet resultat = pfindSessionById.executeQuery();
+			pfindSessionByNom.setString(1, nomSession);
+			ResultSet resultat = pfindSessionByNom.executeQuery();
 
 			if (resultat.next()) {
 				session.setIdSession(resultat.getInt("id_session"));
