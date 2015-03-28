@@ -1,6 +1,5 @@
 package modele;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
@@ -137,11 +136,11 @@ public class Planning {
 		long nbreJours;
 		int milliSecondesParJour = (1000 * 60 * 60 * 24);
 
-		GregorianCalendar premierJour = planning.getPremierJour(1);
-		GregorianCalendar dernierJour = planning.getDernierJour(1);
+		GregorianCalendar premierJour = planning.getPremierJour(planning.getIdSession());
+		GregorianCalendar dernierJour = planning.getDernierJour(planning.getIdSession());
 
 		nbreJours = (dernierJour.getTimeInMillis() - premierJour
-				.getTimeInMillis()) * milliSecondesParJour;
+				.getTimeInMillis()) / milliSecondesParJour;
 
 		return nbreJours;
 
