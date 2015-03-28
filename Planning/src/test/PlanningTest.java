@@ -12,6 +12,8 @@ import modele.Seance;
 
 import org.junit.Test;
 
+import dao.PlanningDao;
+
 /**
  * Hérite de AgrioteTestCase qui appelle la procédure stockée RefreshBase pour
  * remettre la base à zéro avant chaque test
@@ -23,7 +25,9 @@ public class PlanningTest {
 
 	@Test
 	public void testDuGet() throws SQLException {
-		Planning p = Planning.get(1);
+		Planning planning = new Planning();
+		PlanningDao planningDao = new PlanningDao();
+		planning = planningDao.findByIdSession(1);
 
 		GregorianCalendar jour = new GregorianCalendar(2015, 06, 02);
 		Seance seance = new Seance(1, 1, 4, jour, Seance.Creneau.MATIN, 1, null);
@@ -33,10 +37,10 @@ public class PlanningTest {
 		Seance.Creneau creneauMatin = Seance.Creneau.MATIN;
 		Seance.Creneau creneauApresMidi = Seance.Creneau.APRES_MIDI;
 
-		assertEquals(seance, p.getSeance(jour, creneauMatin));
-		assertNull(p.getSeance(jour, creneauApresMidi));
-		assertEquals(premierJour, p.getPremierJour(1));
-		assertEquals(dernierJour, p.getDernierJour(1));
+		assertEquals(seance, planning.getSeance(jour, creneauMatin));
+		assertNull(planning.getSeance(jour, creneauApresMidi));
+		assertEquals(premierJour, planning.getPremierJour(1));
+		assertEquals(dernierJour, planning.getDernierJour(1));
 	}
 
 	@Test

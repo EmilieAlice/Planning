@@ -1,11 +1,16 @@
 package modele;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 import modele.Seance.Creneau;
 
 public class Planning {
+	
+	private int idPlanning;
+	private Session session;
+	private ArrayList<Seance> listeSeance;
 	
 	public void set() {
 		
@@ -58,18 +63,24 @@ public class Planning {
 
 	/**
 	 * Donne le premier jour de la session
-	 * @return
+	 * @return une date GregorianCalendar
 	 */
 	public GregorianCalendar getPremierJour(int idSession) {
-		throw new UnsupportedOperationException();
+		//throw new UnsupportedOperationException();
+		GregorianCalendar dateDebut;
+		dateDebut = session.getDateDebut();
+		return dateDebut;
 	}
 
 	/**
 	 * Donne le dernier jour de la session
-	 * @return
+	 * @return une date GregorianCalendar
 	 */
 	public GregorianCalendar getDernierJour(int idSession) {
-		throw new UnsupportedOperationException();
+		//throw new UnsupportedOperationException();
+		GregorianCalendar dateFin;
+		dateFin = session.getDateFin();
+		return dateFin;
 	}
 
 }

@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.util.GregorianCalendar;
 
+import modele.Planning;
 import modele.Seance;
 import modele.Session;
 
@@ -31,8 +32,8 @@ public class PlanningDao {
 	 * @param nomModule
 	 * @return personne
 	 */
-	public Session findByIdSession(int idSession) {
-		Session session = new Session();
+	public Planning findByIdSession(int idSession) {
+		Planning planning = new Planning();
 		try {
 			pfindByIdSession.setInt(1, idSession);
 			ResultSet resultat = pfindByIdSession.executeQuery();
@@ -43,19 +44,20 @@ public class PlanningDao {
 
 				GregorianCalendar dateFin = new GregorianCalendar();
 				dateDebut.setTime(resultat.getDate("date_fin"));
-
+				
+				//Set du planning
 				session.setIdSession(resultat.getInt("id_session"));
 				session.setNom(resultat.getString("nom"));
 				session.setDateDebut(dateDebut);
 				session.setDateFin(dateFin);
 				session.setIdFormation(resultat.getInt("id_formation"));
 			} else {
-				session = null;
+				planning = null;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return session;
+		return planning;
 	}
 
 	private static java.sql.PreparedStatement pInsertSeance = null;
