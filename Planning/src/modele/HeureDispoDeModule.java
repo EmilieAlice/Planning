@@ -31,7 +31,7 @@ public class HeureDispoDeModule {
 	 * Permet d'ajouter dans la HashMap les modules comprenant encore des heures pour une session donnée
 	 */
 	public void ajoute(String nomSession, int anneeDeSession) {
-		session = sessionDao.findSession(nomSession);
+		session = sessionDao.findSessionByNom(nomSession);
 		listeModuleDispo = moduleDao.findModuleAvecHeures(anneeDeSession, session);
 		
 		for(Module unModule  : listeModuleDispo){
@@ -45,7 +45,7 @@ public class HeureDispoDeModule {
 	 * @return 
 	 */
 	public void actualiser(String nomSession, int anneeDeSession, Module unModule){
-		session = sessionDao.findSession(nomSession);
+		session = sessionDao.findSessionByNom(nomSession);
 		listeModuleDispo = moduleDao.findModuleAvecHeures(anneeDeSession, session);
 		
 		for (Module leModule : listeModuleDispo) {

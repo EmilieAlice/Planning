@@ -10,11 +10,37 @@ import modele.Seance.Creneau;
 public class Planning {
 
 	private int idPlanning;
-	private Session session;
+	private int idSession;
 	private ArrayList<Seance> listeSeance;
 
-	public void set() {
+	/*
+	 * public void set() {
+	 * 
+	 * }
+	 */
 
+	public int getIdPlanning() {
+		return idPlanning;
+	}
+
+	public void setIdPlanning(int idPlanning) {
+		this.idPlanning = idPlanning;
+	}
+
+	public int getIdSession() {
+		return idSession;
+	}
+
+	public void setIdSession(int idSession) {
+		this.idSession = idSession;
+	}
+
+	public ArrayList<Seance> getListeSeance() {
+		return listeSeance;
+	}
+
+	public void setListeSeance(ArrayList<Seance> listeSeance) {
+		this.listeSeance = listeSeance;
 	}
 
 	/**
@@ -23,10 +49,11 @@ public class Planning {
 	 * @param idSession
 	 * @return
 	 */
-	public static Planning get(int idSession) throws SQLException {
-
-		throw new UnsupportedOperationException();
-	}
+	/*
+	 * public static Planning get(int idSession) throws SQLException {
+	 * 
+	 * throw new UnsupportedOperationException(); }
+	 */
 
 	public Seance getSeance(GregorianCalendar jour, Creneau creneau) {
 		throw new UnsupportedOperationException();
@@ -71,15 +98,15 @@ public class Planning {
 	 * 
 	 * @param idSession
 	 *            un entier
-	 * @return la date de début au format GregorianCalendar
+	 * @return le premier jour au format GregorianCalendar
 	 */
 	public GregorianCalendar getPremierJour(int idSession) {
 		SessionDao sessionDao = new SessionDao();
 		Session session = sessionDao.findSessionById(idSession);
-		GregorianCalendar dateDebut;
+		GregorianCalendar dernierJour;
 
-		dateDebut = session.getDateDebut();
-		return dateDebut;
+		dernierJour = session.getDateDebut();
+		return dernierJour;
 	}
 
 	/**
@@ -87,15 +114,37 @@ public class Planning {
 	 * 
 	 * @param idSession
 	 *            un entier
-	 * @return une date de fin au format GregorianCalendar
+	 * @return le dernier jour au format GregorianCalendar
 	 */
 	public GregorianCalendar getDernierJour(int idSession) {
 		SessionDao sessionDao = new SessionDao();
 		Session session = sessionDao.findSessionById(idSession);
-		GregorianCalendar dateFin;
+		GregorianCalendar dernierJour;
 
-		dateFin = session.getDateFin();
-		return dateFin;
+		dernierJour = session.getDateFin();
+		return dernierJour;
+	}
+
+	/**
+	 * Méthode qui récupère le nombre de jours entre la date de fin et la date
+	 * de début du planning
+	 * 
+	 * @param planning
+	 *            (l'objet planning concerné)
+	 * @return le nombre de jours
+	 */
+	public long nbreJours(Planning planning) {
+		long nbreJours;
+		int milliSecondesParJour = (1000 * 60 * 60 * 24);
+
+		GregorianCalendar premierJour = planning.getPremierJour(1);
+		GregorianCalendar dernierJour = planning.getDernierJour(1);
+
+		nbreJours = (dernierJour.getTimeInMillis() - premierJour
+				.getTimeInMillis()) * milliSecondesParJour;
+
+		return nbreJours;
+
 	}
 
 }

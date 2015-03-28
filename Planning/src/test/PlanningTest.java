@@ -4,7 +4,6 @@ import static org.junit.Assert.*;
 
 import java.sql.SQLException;
 import java.time.Duration;
-import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import modele.Planning;
@@ -45,43 +44,57 @@ public class PlanningTest {
 
 	@Test
 	public void testSetSeance() throws SQLException {
-		Planning p = Planning.get(1);
+		Planning planning = new Planning();
+		PlanningDao planningDao = new PlanningDao();
+		planning = planningDao.findByIdSession(1);
+		
 		GregorianCalendar jour = new GregorianCalendar(2015, 06, 02);
 		Seance seance = new Seance(1, 1, 4, jour, Seance.Creneau.MATIN, 1, null);
 
 		Duration dureeSeance = Duration.parse("PT3H30M");
-		Duration dureeAvant = p.getModule(seance).getDureeDisponible();
-		p.setSeance(seance);
-		Duration dureeApres = p.getModule(seance).getDureeDisponible();
+		Duration dureeAvant = planning.getModule(seance).getDureeDisponible();
+		planning.setSeance(seance);
+		Duration dureeApres = planning.getModule(seance).getDureeDisponible();
 
-		assertEquals(seance, p.getSeance(jour, Seance.Creneau.MATIN));
+		assertEquals(seance, planning.getSeance(jour, Seance.Creneau.MATIN));
 		assertEquals(dureeApres, dureeAvant.minus(dureeSeance));
 
 	}
 
 	@Test(expected = AssertionError.class)
 	public void testSetSeanceInterdit() throws SQLException {
-		Planning p = Planning.get(1);
+		Planning planning = new Planning();
+		PlanningDao planningDao = new PlanningDao();
+		planning = planningDao.findByIdSession(1);
+		
 		GregorianCalendar jour = new GregorianCalendar(2015, 06, 02);
 		Seance seance = new Seance(1, 1, 4, jour, Seance.Creneau.MATIN, 1, null);
 
-		p.setSeance(seance);
+		planning.setSeance(seance);
 
 	}
 
 	@Test
 	public void testDeleteSeance() throws SQLException {
-		Planning p = Planning.get(1);
+		Planning planning = new Planning();
+		PlanningDao planningDao = new PlanningDao();
+		planning = planningDao.findByIdSession(1);
+		
 		GregorianCalendar jour = new GregorianCalendar(2015, 06, 02);
 		Seance seance = new Seance(1, 1, 4, jour, Seance.Creneau.MATIN, 1, null);
 
 		Duration dureeSeance = Duration.parse("PT3H30M");
-		Duration dureeAvant = p.getModule(seance).getDureeDisponible();
-		p.deleteSeance(jour, Seance.Creneau.MATIN);
-		Duration dureeApres = p.getModule(seance).getDureeDisponible();
+		Duration dureeAvant = planning.getModule(seance).getDureeDisponible();
+		planning.deleteSeance(jour, Seance.Creneau.MATIN);
+		Duration dureeApres = planning.getModule(seance).getDureeDisponible();
 
 		assertEquals(dureeApres, dureeAvant.plus(dureeSeance));
-		assertNull(p.getSeance(jour, Seance.Creneau.MATIN));
+		assertNull(planning.getSeance(jour, Seance.Creneau.MATIN));
+
+	}
+	
+	@Test
+	private void getNbreJours() {
 
 	}
 

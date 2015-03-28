@@ -38,14 +38,16 @@ public class PlanningDao {
 			pfindByIdSession.setInt(1, idSession);
 			ResultSet resultat = pfindByIdSession.executeQuery();
 			if (resultat.next()) {
+				/*
 				// Conversion de la date SQL en date Gregorian
 				GregorianCalendar dateDebut = new GregorianCalendar();
 				dateDebut.setTime(resultat.getDate("date_debut"));
 
 				GregorianCalendar dateFin = new GregorianCalendar();
-				dateDebut.setTime(resultat.getDate("date_fin"));
+				dateDebut.setTime(resultat.getDate("date_fin"));*/
 				
 				//Set du planning
+				planning.setIdSession(resultat.getInt("id_session"));
 			} else {
 				planning = null;
 			}
