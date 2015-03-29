@@ -115,3 +115,26 @@ ADD UNIQUE INDEX `id_module_UNIQUE` (`id_module` ASC);
 UPDATE `lagarenne2015`.`formateur` SET `id_module`='1' WHERE `id_personne`='4';
 UPDATE `lagarenne2015`.`formateur` SET `id_module`='2' WHERE `id_personne`='5';
 UPDATE `lagarenne2015`.`formateur` SET `id_module`='3' WHERE `id_personne`='6';
+
+-- MAJ de la table creneau
+
+UPDATE `lagarenne2015`.`creneau` SET `id_creneau`='0', `nom`='MATIN' WHERE `id_creneau`='0';
+UPDATE `lagarenne2015`.`creneau` SET `id_creneau`='1', `nom`='APRES_MIDI' WHERE `id_creneau`='1';
+
+
+-- MAJ de la table seance
+
+ALTER TABLE `lagarenne2015`.`seance` 
+ADD COLUMN `id_creneau` INT NOT NULL AFTER `fin`,
+DROP PRIMARY KEY,
+ADD PRIMARY KEY (`id_module`, `id_session`, `id_personne`, `debut`, `fin`, `id_salle`, `id_creneau`),
+ADD INDEX `fk_seance_creneau1_idx` (`id_creneau` ASC);
+ALTER TABLE `lagarenne2015`.`seance` 
+ADD CONSTRAINT `fk_seance_creneau1`
+  FOREIGN KEY (`id_creneau`)
+  REFERENCES `lagarenne2015`.`creneau` (`id_creneau`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+  
+UPDATE `lagarenne2015`.`seance` SET `id_creneau`='1' WHERE `id_module`='2' and`id_session`='2' and`id_personne`='5' and`debut`='2015-07-02 13:00:00' and`fin`='2015-07-02 16:00:00' and`id_salle`='1' and`id_creneau`='0';
+UPDATE `lagarenne2015`.`seance` SET `id_creneau`='1' WHERE `id_module`='3' and`id_session`='3' and`id_personne`='6' and`debut`='2015-09-12 13:00:00' and`fin`='2015-09-12 17:00:00' and`id_salle`='1' and`id_creneau`='0';

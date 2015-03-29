@@ -47,7 +47,9 @@ public class SeanceDao {
 				seance.setIdFormateur(resultat.getInt("id_formateur"));
 				seance.setIdSalle(resultat.getInt("id_salle"));
 				seance.setContenu(resultat.getString("contenu"));
-				seance.setCreneau(resultat.getInt("id_creneau"));
+				//
+				creneau.setValeur(resultat.getInt("id_creneau"));
+				seance.setCreneau(creneau);
 
 				// Conversion de la date format SQL en format Gregorion Calendar
 				GregorianCalendar jour = new GregorianCalendar();

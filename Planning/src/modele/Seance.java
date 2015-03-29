@@ -95,6 +95,9 @@ public class Seance {
 		private Creneau(int valeur){
 			this.valeur = valeur;
 		}
+		public void setValeur(int valeur){
+			this.valeur = valeur;
+		}
 		
 		public int getValeur(){
 			return valeur;

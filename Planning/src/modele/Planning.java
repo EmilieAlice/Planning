@@ -59,9 +59,9 @@ public class Planning {
 	}
 
 	/**
-	 * Permet d'insérer une séance dans le planning Si la séance est null
-	 * l'insertion échoue Si il y a déjà une séance pour ce créneau l'insertion
-	 * échoue
+	 * Permet d'insérer une séance dans le planning
+	 * Si la séance est null l'insertion échoue
+	 * Si il y a déjà une séance pour ce créneau l'insertion échoue
 	 * 
 	 * @param seance
 	 */
@@ -88,6 +88,12 @@ public class Planning {
 
 	}
 
+	/**
+	 * Permet de retourner un module à une seance donnée
+	 * 
+	 * @param seance
+	 * @return
+	 */
 	public Module getModule(Seance seance) {
 		throw new UnsupportedOperationException();
 	}
