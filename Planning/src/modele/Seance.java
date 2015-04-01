@@ -3,7 +3,7 @@ package modele;
 import java.util.GregorianCalendar;
 
 public class Seance {
-	
+
 	private int idModule;
 	private int idSession;
 	private int idFormateur;
@@ -11,16 +11,16 @@ public class Seance {
 	private int idSalle;
 	private String contenu;
 	private Creneau creneau;
-	
+
 	/**
 	 * Le jour et le contenu sont null
 	 */
-	public Seance(){
-		
+	public Seance() {
+
 	}
-	
-	public Seance(int idModule, int idSession, int idFormateur, GregorianCalendar jour,
-			Creneau creneau, int idSalle, String contenu) {
+
+	public Seance(int idModule, int idSession, int idFormateur,
+			GregorianCalendar jour, Creneau creneau, int idSalle, String contenu) {
 		super();
 		this.idModule = idModule;
 		this.idSession = idSession;
@@ -78,7 +78,7 @@ public class Seance {
 	public void setContenu(String contenu) {
 		this.contenu = contenu;
 	}
-	
+
 	public Creneau getCreneau() {
 		return creneau;
 	}
@@ -87,22 +87,30 @@ public class Seance {
 		this.creneau = creneau;
 	}
 
-	public enum Creneau{
+	public enum Creneau {
 		MATIN(0), APRES_MIDI(1);
-		
+
 		private int valeur;
 
-		private Creneau(int valeur){
+		private Creneau(int valeur) {
 			this.valeur = valeur;
 		}
-		public void setValeur(int valeur){
+
+		public void setValeur(int valeur) {
 			this.valeur = valeur;
 		}
-		
-		public int getValeur(){
+
+		public int getValeur() {
 			return valeur;
 		}
 	}
 
+	@Override
+	public String toString() {
+		return "Seance [idModule=" + idModule + ", idSession=" + idSession
+				+ ", idFormateur=" + idFormateur + ", jour=" + jour
+				+ ", idSalle=" + idSalle + ", contenu=" + contenu
+				+ ", creneau=" + creneau + "]";
+	}
 
 }

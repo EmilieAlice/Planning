@@ -1,6 +1,10 @@
 package test;
 
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
+
+import dao.SeanceDao;
+import modele.Seance;
 
 public class MainTest {
 
@@ -15,6 +19,14 @@ public class MainTest {
 				.getTimeInMillis()) / milliSecondesParJour;
 		
 		System.out.println(nbreJours);
+		
+		ArrayList<Seance> listeSeance = new ArrayList<Seance>();
+		SeanceDao seanceDao = new SeanceDao();
+		listeSeance = seanceDao.findSeanceByIdSession(1);
+		
+		for (Seance seance : listeSeance) {
+			System.out.println(seance);
+		}
 
 	}
 
