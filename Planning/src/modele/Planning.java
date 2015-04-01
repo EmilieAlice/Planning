@@ -129,7 +129,7 @@ public class Planning {
 		dernierJour = session.getDateFin();
 		return dernierJour;
 	}
-
+	
 	/**
 	 * Méthode qui récupère le nombre de jours entre la date de fin et la date
 	 * de début du planning
@@ -149,7 +149,13 @@ public class Planning {
 				.getTimeInMillis()) / milliSecondesParJour;
 
 		return nbreJours;
-
 	}
 
+	@Override
+	public String toString() {
+		return "Planning [idPlanning=" + idPlanning + ", idSession="
+				+ idSession + ", listeSeance=" + listeSeance + "]";
+	}
+
+	
 }

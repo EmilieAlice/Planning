@@ -48,6 +48,7 @@ public class SeanceDao {
 				seance.setIdSalle(resultat.getInt("id_salle"));
 				seance.setContenu(resultat.getString("contenu"));
 				//
+				Seance.Creneau creneau = Seance.Creneau.;
 				creneau.setValeur(resultat.getInt("id_creneau"));
 				seance.setCreneau(creneau);
 

@@ -109,22 +109,17 @@ public class PlanningTest {
 	}
 	
 	@Test
-	private void getNbreJours() {		
-		Session session = new Session();
-		SessionDao sessionDao = new SessionDao();
-		session = sessionDao.findSessionById(1);
-		int milliSecondesParJour = (1000 * 60 * 60 * 24);
+	public void getNbreJours() {		
+		Planning planning = new Planning();
+		PlanningDao planningDao = new PlanningDao();
+		planning = planningDao.findByIdSession(1);
 		
 		// On recupere les premier et dernier jour de la session
-		GregorianCalendar premierJour = session.getDateDebut();
-		GregorianCalendar dernierJour = session.getDateFin();
-		
-		// On créé le nombre de jour (connu) de la formation
-		Duration nbreJourSession = Duration.parse("PT300D");
-		
+		long nbJours = planning.nbreJours(planning);
+				
 		// Pour la comparer avec la soustraction du 1er et du dernier jour
-		assertEquals((dernierJour.getTimeInMillis() - premierJour.getTimeInMillis()) / milliSecondesParJour, nbreJourSession);		
-
+		assertEquals(371, nbJours);		
+		
 	}
 
 }
