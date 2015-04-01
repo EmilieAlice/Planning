@@ -60,7 +60,8 @@ public class SeanceDao {
 
 				// Conversion de la date format SQL en format Gregorian Calendar
 				Timestamp dateSql = resultat.getTimestamp("debut");
-				GregorianCalendar jour = new GregorianCalendar(dateSql.getYear(), dateSql.getMonth(), dateSql.getDay());
+				GregorianCalendar jour = new GregorianCalendar();
+				jour.setTime(dateSql);
 				seance.setJour(jour);
 
 				listeSeance.add(seance);
