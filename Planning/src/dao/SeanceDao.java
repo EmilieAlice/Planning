@@ -42,27 +42,27 @@ public class SeanceDao {
 			ResultSet resultat = pFindSeanceByIdSession.executeQuery();
 
 			while (resultat.next()) {
-				Seance seance = new Seance();
-
-				seance.setIdModule(resultat.getInt("id_module"));
-				seance.setIdSession(idSession);
-				seance.setIdFormateur(resultat.getInt("id_formateur"));
-				seance.setIdSalle(resultat.getInt("id_salle"));
-				seance.setContenu(resultat.getString("contenu"));
-				
-				// On determine si le creneau est matin ou apres-midi et on l'insere à la seance
+				// On determine si le creneau est matin ou apres-midi pour l'inserer à la seance
 				int idCreneau = resultat.getInt("id_creneau");
 				Seance.Creneau creneau = Seance.Creneau.MATIN;
 				if (idCreneau == 1){
 					creneau = Seance.Creneau.APRES_MIDI;
 				}
-				seance.setCreneau(creneau);
-
+				
 				// Conversion de la date format SQL en format Gregorian Calendar
 				Timestamp dateSql = resultat.getTimestamp("debut");
 				GregorianCalendar jour = new GregorianCalendar();
 				jour.setTime(dateSql);
+				
+				Seance seance = new Seance();
+
+				seance.setIdModule(resultat.getInt("id_module"));
+				seance.setIdSession(idSession);
+				seance.setIdFormateur(resultat.getInt("id_formateur"));
 				seance.setJour(jour);
+				seance.setCreneau(creneau);
+				seance.setIdSalle(resultat.getInt("id_salle"));
+				seance.setContenu(resultat.getString("contenu"));
 
 				listeSeance.add(seance);
 			}
@@ -72,4 +72,5 @@ public class SeanceDao {
 		}
 		return listeSeance;
 	}
+
 }

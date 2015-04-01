@@ -2,11 +2,13 @@ package dao;
 
 import java.sql.Date;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
 import java.util.GregorianCalendar;
 
 import modele.Planning;
 import modele.Seance;
 import modele.Session;
+import modele.Seance.Creneau;
 
 public class PlanningDao {
 
@@ -69,8 +71,9 @@ public class PlanningDao {
 			pInsertSeance = ConnexionBase
 					.getConnection()
 					.prepareStatement(
-							"INSERT INTO lagarenne2015.seance (id_module, id_session, id_formateur, debut, fin, id_creneau, id_salle, contenu)"
-									+ "VALUES(?,?,?,?,?,?,?·);");
+							"INSERT INTO lagarenne2015.seance (id_module, id_session, "
+							+ "id_formateur, debut, fin, id_creneau, id_salle, contenu) "
+							+ "VALUES(?,?,?,?,?,?,?,?);");
 		} catch (Exception e) {
 			e.getMessage();
 			System.out.println("Requete insertSeance échouée.");
@@ -88,19 +91,32 @@ public class PlanningDao {
 		Boolean etat = new Boolean(false);
 		try {
 			// Conversion de la date Gregorian en date SQL
-			Date dateSQL = new Date(seance.getJour().getTimeInMillis());
+			Timestamp dateSQLDebut = new Timestamp(seance.getJour().getTimeInMillis());
 			
-			pInsertSeance.setInt(1, seance.getIdModule());
-			pInsertSeance.setInt(2, seance.getIdSession());
-			pInsertSeance.setInt(3, seance.getIdFormateur());
+			// On ajoute l'heure d'une seance pour avoir la date de fin
+			long journee = seance.getJour().getTimeInMillis();
+			long millis = (3600000);
+			long heureCreneau = 0;
+			if (seance.getCreneau().equals(Seance.Creneau.APRES_MIDI)){
+				heureCreneau = 3 * millis;
+			}
+			else {
+				heureCreneau = 4 * millis;
+			}
+			journee = journee + heureCreneau;
+			Timestamp dateSQLFin = new Timestamp(journee);
 			
-			pInsertSeance.setDate(4, dateSQL);
-			pInsertSeance.setDate(5, dateSQL);
 			// On insere le creneau grace à l'enum
 			int idCreneau = 0;
 			if (seance.getCreneau().equals(Seance.Creneau.APRES_MIDI)){
 				idCreneau = 1;
-			}
+				}
+			
+			pInsertSeance.setInt(1, seance.getIdModule());
+			pInsertSeance.setInt(2, seance.getIdSession());
+			pInsertSeance.setInt(3, seance.getIdFormateur());
+			pInsertSeance.setTimestamp(4, dateSQLDebut);
+			pInsertSeance.setTimestamp(5, dateSQLFin);
 			pInsertSeance.setInt(6, idCreneau);
 			pInsertSeance.setInt(7, seance.getIdSalle());
 			pInsertSeance.setString(8, seance.getContenu());
