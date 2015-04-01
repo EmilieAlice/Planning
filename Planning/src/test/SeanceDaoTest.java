@@ -1,4 +1,4 @@
-package dao;
+package test;
 
 import static org.junit.Assert.*;
 
@@ -9,6 +9,8 @@ import modele.Seance;
 import modele.Session;
 
 import org.junit.Test;
+
+import dao.SeanceDao;
 
 public class SeanceDaoTest {
 
