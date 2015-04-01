@@ -155,9 +155,9 @@ public class PlanningDao {
 		Boolean etat = new Boolean(false);
 		try {
 			GregorianCalendar dateDebut = seance.getJour();
-			Date dateSQL = new Date(dateDebut.getTimeInMillis());
+			Timestamp dateSQL = new Timestamp(dateDebut.getTimeInMillis());
 
-			pDeleteSeance.setDate(1, dateSQL);
+			pDeleteSeance.setTimestamp(1, dateSQL);
 			int resultat = pDeleteSeance.executeUpdate();
 			if (resultat != 0)
 				etat = true;

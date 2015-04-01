@@ -22,7 +22,7 @@ public class PlanningDaoTest {
 	@Test
 	public void testInsertSeance() {
 		GregorianCalendar jour = new GregorianCalendar(2017, 02, 31);
-		Seance.Creneau creneau = Seance.Creneau.APRES_MIDI;
+		Seance.Creneau creneau = Seance.Creneau.MATIN;
 		Seance seance = new Seance(1, 1, 4, jour, creneau, 1, "Cour du jour");
 		System.out.println(seance);
 		
@@ -40,8 +40,6 @@ public class PlanningDaoTest {
 		PlanningDao planningDao = new PlanningDao();
 		
 		assertTrue(planningDao.deleteSeance(seance));
-		
-		
 	}
 
 }
