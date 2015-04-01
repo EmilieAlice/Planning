@@ -1,6 +1,8 @@
 package dao;
 
+import java.sql.Date;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
@@ -47,14 +49,18 @@ public class SeanceDao {
 				seance.setIdFormateur(resultat.getInt("id_formateur"));
 				seance.setIdSalle(resultat.getInt("id_salle"));
 				seance.setContenu(resultat.getString("contenu"));
-				//
-				Seance.Creneau creneau = Seance.Creneau.;
-				creneau.setValeur(resultat.getInt("id_creneau"));
+				
+				// On determine si le creneau est matin ou apres-midi et on l'insere à la seance
+				int idCreneau = resultat.getInt("id_creneau");
+				Seance.Creneau creneau = Seance.Creneau.MATIN;
+				if (idCreneau == 1){
+					creneau = Seance.Creneau.APRES_MIDI;
+				}
 				seance.setCreneau(creneau);
 
-				// Conversion de la date format SQL en format Gregorion Calendar
-				GregorianCalendar jour = new GregorianCalendar();
-				jour.setTime(resultat.getDate("jour"));
+				// Conversion de la date format SQL en format Gregorian Calendar
+				Timestamp dateSql = resultat.getTimestamp("debut");
+				GregorianCalendar jour = new GregorianCalendar(dateSql.getYear(), dateSql.getMonth(), dateSql.getDay());
 				seance.setJour(jour);
 
 				listeSeance.add(seance);
