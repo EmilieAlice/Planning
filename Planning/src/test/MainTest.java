@@ -25,9 +25,6 @@ public class MainTest {
 		SeanceDao seanceDao = new SeanceDao();
 		listeSeance = seanceDao.findSeanceByIdSession(1);
 		
-		for (Seance seance : listeSeance) {
-			System.out.println(seance);
-		}
 
 	}
 
