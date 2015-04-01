@@ -66,6 +66,10 @@ public class Planning {
 	 * @param seance
 	 */
 	public void setSeance(Seance seance) {
+		int debutSeance = 9;
+		if (seance.getCreneau().equals(Seance.Creneau.APRES_MIDI)){
+			debutSeance = 14;
+		}
 		if (seance == null) {
 			throw new IllegalArgumentException("La seance ne peut etre null");
 		}

@@ -69,7 +69,7 @@ public class PlanningDao {
 			pInsertSeance = ConnexionBase
 					.getConnection()
 					.prepareStatement(
-							"INSERT INTO lagarenne2015.seance (id_module, id_session, id_personne, debut, fin, id_salle,contenu)"
+							"INSERT INTO lagarenne2015.seance (id_module, id_session, id_formateur, debut, fin, id_creneau, id_salle, contenu)"
 									+ "VALUES(?,?,?,?,?,?,?·);");
 		} catch (Exception e) {
 			e.getMessage();
@@ -89,14 +89,21 @@ public class PlanningDao {
 		try {
 			// Conversion de la date Gregorian en date SQL
 			Date dateSQL = new Date(seance.getJour().getTimeInMillis());
-
+			
 			pInsertSeance.setInt(1, seance.getIdModule());
 			pInsertSeance.setInt(2, seance.getIdSession());
 			pInsertSeance.setInt(3, seance.getIdFormateur());
+			
 			pInsertSeance.setDate(4, dateSQL);
-			pInsertSeance.setInt(5, seance.getIdModule());
-			pInsertSeance.setInt(6, seance.getIdModule());
-			pInsertSeance.setInt(7, seance.getIdModule());
+			pInsertSeance.setDate(5, dateSQL);
+			// On insere le creneau grace à l'enum
+			int idCreneau = 0;
+			if (seance.getCreneau().equals(Seance.Creneau.APRES_MIDI)){
+				idCreneau = 1;
+			}
+			pInsertSeance.setInt(6, idCreneau);
+			pInsertSeance.setInt(7, seance.getIdSalle());
+			pInsertSeance.setString(8, seance.getContenu());
 
 			int resultat = pInsertSeance.executeUpdate();
 			if (resultat != 0)

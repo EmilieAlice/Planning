@@ -24,8 +24,13 @@ public class MainTest {
 		ArrayList<Seance> listeSeance = new ArrayList<Seance>();
 		SeanceDao seanceDao = new SeanceDao();
 		listeSeance = seanceDao.findSeanceByIdSession(1);
+		GregorianCalendar jour = new GregorianCalendar(2015, 0, 12);
+		Seance.Creneau creneau = Seance.Creneau.MATIN;
 		
-
+		Seance seance = new Seance(1, 1, 1, jour, creneau, 4, "coucou");
+		
+		System.out.println(seance);
 	}
+	
 
 }

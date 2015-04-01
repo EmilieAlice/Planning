@@ -70,19 +70,6 @@ public class PlanningTest {
 
 	}
 
-	/* Suppression? c'est verifié dans SetSeance
-	 * @Test(expected = AssertionError.class)
-	public void testSetSeanceInterdit() throws SQLException {
-		Planning planning = new Planning();
-		PlanningDao planningDao = new PlanningDao();
-		planning = planningDao.findByIdSession(1);
-		
-		GregorianCalendar jour = new GregorianCalendar(2015, 06, 02);
-		Seance seance = new Seance(1, 1, 4, jour, Seance.Creneau.MATIN, 1, null);
-
-		planning.setSeance(seance);
-
-	}*/
 
 	@Test
 	public void testDeleteSeance() throws SQLException {

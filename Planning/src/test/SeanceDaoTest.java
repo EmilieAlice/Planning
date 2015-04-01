@@ -21,7 +21,7 @@ public class SeanceDaoTest {
 		listeSeance = seanceDao.findSeanceByIdSession(1);
 
 		// ArrayList<Seance> listeSeanceAttendue = new ArrayList<Seance>();
-		GregorianCalendar jour = new GregorianCalendar(2015, 06, 02);
+		GregorianCalendar jour = new GregorianCalendar(2015, 05, 02, 9, 00);
 		Seance.Creneau creneau = Seance.Creneau.MATIN;
 		// Seance seance = new Seance(1, 1, 4, jour, creneau, 1,
 		// "Première séance de SI2 avec découverte du fonctionnement d'internet");

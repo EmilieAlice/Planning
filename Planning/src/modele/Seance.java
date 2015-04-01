@@ -1,5 +1,7 @@
 package modele;
 
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.GregorianCalendar;
 
 public class Seance {
@@ -26,9 +28,21 @@ public class Seance {
 		this.idSession = idSession;
 		this.idFormateur = idFormateur;
 		this.jour = jour;
+		this.creneau = creneau;
 		this.idSalle = idSalle;
 		this.contenu = contenu;
-		this.creneau = creneau;
+		
+		long journee = jour.getTimeInMillis();
+		long millis = (3600000);
+		long debutSeance = 0;
+		if (getCreneau() == Creneau.APRES_MIDI){
+			debutSeance = 14 * millis;
+		}
+		else {
+			debutSeance = 9 * millis;
+		}
+		journee = journee + debutSeance;
+		jour.setTimeInMillis(journee);
 	}
 
 	public int getIdModule() {
@@ -61,6 +75,25 @@ public class Seance {
 
 	public void setJour(GregorianCalendar jour) {
 		this.jour = jour;
+		long journee = jour.getTimeInMillis();
+		long millis = (3600000);
+		long debutSeance = 0;
+		if (getCreneau() == Creneau.APRES_MIDI){
+			debutSeance = 14 * millis;
+		}
+		else {
+			debutSeance = 9 * millis;
+		}
+		journee = journee + debutSeance;
+		jour.setTimeInMillis(journee);
+	}
+	
+	public Creneau getCreneau() {
+		return creneau;
+	}
+
+	public void setCreneau(Creneau creneau) {
+		this.creneau = creneau;
 	}
 
 	public int getIdSalle() {
@@ -77,14 +110,6 @@ public class Seance {
 
 	public void setContenu(String contenu) {
 		this.contenu = contenu;
-	}
-
-	public Creneau getCreneau() {
-		return creneau;
-	}
-
-	public void setCreneau(Creneau creneau) {
-		this.creneau = creneau;
 	}
 
 	public enum Creneau {
@@ -107,10 +132,10 @@ public class Seance {
 
 	@Override
 	public String toString() {
-		return "Seance [idModule=" + idModule + ", idSession=" + idSession
-				+ ", idFormateur=" + idFormateur + ", jour=" + jour
-				+ ", idSalle=" + idSalle + ", contenu=" + contenu
-				+ ", creneau=" + creneau + "]";
+		return "Seance [idModule= " + idModule + ", idSession= " + idSession
+				+ ", idFormateur = " + idFormateur + ", jour = " + jour.getTime()
+				+ ", creneau = " + creneau + ", idSalle = " + idSalle 
+				+ ", contenu = " + contenu + "]";
 	}
 
 }
