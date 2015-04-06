@@ -1,9 +1,10 @@
 package test;
 
-import java.sql.Date;
-import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 import dao.SeanceDao;
@@ -34,10 +35,15 @@ public class MainTest {
 
 		System.out.println(seance);
 		
+		Date d = premierJour.getTime();
+		SimpleDateFormat format = new SimpleDateFormat("dd/MM");
+		System.out.println(format.format(d));
+		
 		System.out.println(premierJour.getTime());
+		System.out.println(d);
 		System.out.println(premierJour.get(Calendar.DAY_OF_WEEK));
 		System.out.println(premierJour.get(Calendar.WEEK_OF_YEAR));
-
+		System.out.println(premierJour.get(Calendar.DATE));
 	}
 
 }
