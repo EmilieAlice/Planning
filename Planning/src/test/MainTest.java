@@ -16,8 +16,7 @@ public class MainTest {
 
 		int milliSecondesParJour = (1000 * 60 * 60 * 24);
 
-		GregorianCalendar premierJour = new GregorianCalendar(2015, 05, 8, 9,
-				0);
+		GregorianCalendar premierJour = new GregorianCalendar(2015, 05, 8, 9, 0);
 		GregorianCalendar dernierJour = new GregorianCalendar(2016, 05, 12);
 
 		long nbreJours = (dernierJour.getTimeInMillis() - premierJour
@@ -34,13 +33,42 @@ public class MainTest {
 		Seance seance = new Seance(1, 1, 1, jour, creneau, 4, "coucou");
 
 		System.out.println(seance);
-		
-		Date d = premierJour.getTime();
+
 		SimpleDateFormat format = new SimpleDateFormat("dd/MM");
-		System.out.println(format.format(d));
-		
-		System.out.println(premierJour.getTime());
-		System.out.println(d);
+
+		int i = 0;
+		while (i < nbreJours) {
+			Date d = premierJour.getTime();
+			String affiche = format.format(d);
+			int jourSemaine = premierJour.get(Calendar.DAY_OF_WEEK);
+			if (jourSemaine != 1 || jourSemaine != 7) {
+				switch (jourSemaine) {
+				case 2:
+					System.out.println("Lundi " + affiche);
+					break;
+				case 3:
+					System.out.println("Mardi " + affiche);
+					break;
+				case 4:
+					System.out.println("Mercredi " + affiche);
+					break;
+				case 5:
+					System.out.println("Jeudi " + affiche);
+					break;
+				case 6:
+					System.out.println("Vendredi " + affiche);
+					break;
+				default:
+					break;
+				}
+			}
+
+			premierJour
+					.setTimeInMillis(premierJour.getTimeInMillis() + 86400000);
+			i++;
+		}
+
+		System.out.println();
 		System.out.println(premierJour.get(Calendar.DAY_OF_WEEK));
 		System.out.println(premierJour.get(Calendar.WEEK_OF_YEAR));
 		System.out.println(premierJour.get(Calendar.DATE));
