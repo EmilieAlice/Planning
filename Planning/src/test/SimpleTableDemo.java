@@ -34,15 +34,15 @@ public class SimpleTableDemo extends JPanel {
 
 		SimpleDateFormat format = new SimpleDateFormat("dd/MM");
 
-		String[] columnNames = { "LUNDI", "MARDI", "MERCREDI", "JEUDI",
+		String[] columnNames = {"Semaine", "LUNDI", "MARDI", "MERCREDI", "JEUDI",
 				"VENDREDI" };
-		int nbreSemaines = (int) (nbreJours / 7) + 1;
+		int nbreSemaines = (int) (nbreJours / 7) +1;
 
-		Object[][] data = new Object[nbreSemaines][5];
+		Object[][] data = new Object[nbreSemaines][6];
 
 		int i = 0;
 		int j = 0;
-		int x = 0;
+		int x = 1;
 		while (i < nbreJours) {
 			Date d = premierJour.getTime();
 			String affiche = format.format(d);
@@ -52,9 +52,10 @@ public class SimpleTableDemo extends JPanel {
 				j++;
 			}
 			System.out.println(j);
-			if (x != 0 & x % 5 == 0) {
-				x = 0;
+			if (x != 1 & x % 6 == 0) {
+				x = 1;
 			}
+			data[j][0] = premierJour.get(Calendar.WEEK_OF_YEAR);
 			if (jourSemaine != 1 || jourSemaine != 7) {
 				
 				switch (jourSemaine) {
