@@ -3,6 +3,7 @@ package test;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import dao.SeanceDao;
@@ -14,7 +15,7 @@ public class MainTest {
 
 		int milliSecondesParJour = (1000 * 60 * 60 * 24);
 
-		GregorianCalendar premierJour = new GregorianCalendar(2015, 05, 07, 9,
+		GregorianCalendar premierJour = new GregorianCalendar(2015, 05, 8, 9,
 				0);
 		GregorianCalendar dernierJour = new GregorianCalendar(2016, 05, 12);
 
@@ -32,6 +33,10 @@ public class MainTest {
 		Seance seance = new Seance(1, 1, 1, jour, creneau, 4, "coucou");
 
 		System.out.println(seance);
+		
+		System.out.println(premierJour.getTime());
+		System.out.println(premierJour.get(Calendar.DAY_OF_WEEK));
+		System.out.println(premierJour.get(Calendar.WEEK_OF_YEAR));
 
 	}
 
