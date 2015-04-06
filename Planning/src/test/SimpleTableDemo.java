@@ -27,7 +27,7 @@ public class SimpleTableDemo extends JPanel {
 		int milliSecondesParJour = (1000 * 60 * 60 * 24);
 
 		GregorianCalendar premierJour = new GregorianCalendar(2015, 05, 8, 9, 0);
-		GregorianCalendar dernierJour = new GregorianCalendar(2016, 05, 12);
+		GregorianCalendar dernierJour = new GregorianCalendar(2016, 02, 12);
 
 		long nbreJours = (dernierJour.getTimeInMillis() - premierJour
 				.getTimeInMillis()) / milliSecondesParJour;
@@ -36,22 +36,20 @@ public class SimpleTableDemo extends JPanel {
 
 		String[] columnNames = {"Semaine", "LUNDI", "MARDI", "MERCREDI", "JEUDI",
 				"VENDREDI" };
-		int nbreSemaines = (int) (nbreJours / 7) +1;
+		int nbreSemaines = (int) (nbreJours / 7) + 1;
 
 		Object[][] data = new Object[nbreSemaines][6];
 
 		int i = 0;
 		int j = 0;
 		int x = 1;
-		while (i < nbreJours) {
+		while (i <= nbreJours) {
 			Date d = premierJour.getTime();
 			String affiche = format.format(d);
 			int jourSemaine = premierJour.get(Calendar.DAY_OF_WEEK);
-			System.out.println(i);
 			if (i != 0 & i % 7 == 0) {
 				j++;
 			}
-			System.out.println(j);
 			if (x != 1 & x % 6 == 0) {
 				x = 1;
 			}
