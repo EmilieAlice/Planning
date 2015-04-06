@@ -32,7 +32,7 @@ public class SimpleTableDemo extends JPanel {
 		long nbreJours = (dernierJour.getTimeInMillis() - premierJour
 				.getTimeInMillis()) / milliSecondesParJour;
 
-		SimpleDateFormat format = new SimpleDateFormat("dd/MM");
+		SimpleDateFormat format = new SimpleDateFormat("dd/MM/YY");
 
 		String[] columnNames = {"Semaine", "LUNDI", "MARDI", "MERCREDI", "JEUDI",
 				"VENDREDI" };
