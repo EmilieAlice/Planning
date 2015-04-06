@@ -368,13 +368,13 @@ BEGIN
   (6, 'Mme', 'Sylvie', 'JOUANNE', '52 Avenue de la république', '75012', 'PARIS', '0137548652', null, 'jsylvie.@orange.fr', 'proust', '2015-01-23 11:29:18', 0);
 
   INSERT INTO formateur
-  (id_personne, date_entree) VALUES
+  (id_formateur, date_entree) VALUES
   (4, '2008-01-09'),
   (5, '2009-09-15'),
   (6, '2012-05-02');
 
   INSERT INTO module
-  (id_module, nom, objectif, contenu, nb_heures, prerequis) VALUES
+  (id_module, nom_module, objectif, contenu, nb_heures, prerequis) VALUES
   (1, 'SI2', 'Enseigner aux élèves les bases sur le fonctionnement du réseau internet', 'Des TP et des cours', 30, 'Les prérequis sont le module SI1 et le binaire'),
   (2, 'Maths', 'Enseigner aux élèves les notions de mathématiques nécessaires en informatique', 'Des cours théoriques et du python', 50, 'Les prérequis sont le BAC'),
   (3, 'Anglais', 'Enseigner la compréhension orale et de texte', 'Des cours et beaucoup de pratique orale', 50, 'Les prérequis sont le BAC et un peu d''attention');
@@ -392,7 +392,7 @@ BEGIN
   (3, 3);
 
   INSERT INTO formation
-  (id_formation, nom, description) VALUES
+  (id_formation, nom_formation, description_formation) VALUES
   (1, 'BTS SIO', 'Formation pour obtenie le BTS Services Informatiques aux Organisations options SISR ou SLAM'),
   (2, 'BTS CG', 'Formation pour obtenir le BTS Comptabilité et Gestion'),
   (3, 'BTS Audiovisuel', 'Formation pour obtenir le BTS Audiovisuel option Son, Image ou Montage');
@@ -404,13 +404,13 @@ BEGIN
   (3, 3);
 
   INSERT INTO session
-  (id_session, nom, date_debut, date_fin, description, id_formation, date_debut_inscription, date_fin_inscription) VALUES
+  (id_session, nom_session, date_debut, date_fin, description_session, id_formation, date_debut_inscription, date_fin_inscription) VALUES
   (1, 'BTS SIO 2016', '2015-05-07', '2016-05-12', '4ème session pour le BTS SIO', 1, '2015-03-07 09:00:00', '2015-04-07 18:00:00'),
   (2, 'BTS CG 2016', '2015-09-25', '2016-09-15', '2ème session pour le BTS CG', 2, '2015-07-25 09:00:00', '2015-08-25 18:00:00'),
   (3, 'BTS Audio 2016', '2015-11-15', '2016-11-05', '1ère session pour le BTS Audiovisuel option son', 2, '2015-09-15 09:00:00', '2015-10-25 18:00:00');
 
   INSERT INTO salle
-  (id_salle, nom) VALUES
+  (id_salle, nom_salle) VALUES
   (1, 'Salle 306'),
   (2, 'Salle 201'),
   (3, 'Salle 114');

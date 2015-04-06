@@ -17,7 +17,7 @@ public class SeanceDao {
 	 */
 	static {
 		try {
-			pFindSeanceByIdSession = ConnexionBase.getConnection()
+			pFindSeanceByIdSession = DataBase.getConnection()
 					.prepareStatement(
 							"SELECT * FROM lagarenne2015.seance "
 									+ "WHERE id_session=?; ");

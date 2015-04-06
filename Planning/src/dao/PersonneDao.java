@@ -13,7 +13,7 @@ public class PersonneDao {
 	 */
 	static {
 		try {
-			pFindPersonneByNomModule = ConnexionBase
+			pFindPersonneByNomModule = DataBase
 					.getConnection()
 					.prepareStatement(
 							"SELECT * FROM lagarenne2015.formateur "

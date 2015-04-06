@@ -16,7 +16,7 @@ public class ModuleDao {
 	 */
 	static {
 		try {
-			pFindModuleByNom = ConnexionBase.getConnection().prepareStatement(
+			pFindModuleByNom = DataBase.getConnection().prepareStatement(
 					"SELECT * FROM lagarenne2015.module " + "WHERE nom=?; ");
 		} catch (Exception e) {
 			e.getMessage();
@@ -58,7 +58,7 @@ public class ModuleDao {
 	 */
 	static {
 		try {
-			pFindModuleAvecHeures = ConnexionBase
+			pFindModuleAvecHeures = DataBase
 					.getConnection()
 					.prepareStatement(
 							"SELECT * FROM lagarenne2015.heures_session_module "

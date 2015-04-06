@@ -21,10 +21,9 @@ public class SeanceDaoTest {
 		listeSeance = seanceDao.findSeanceByIdSession(1);
 
 		// ArrayList<Seance> listeSeanceAttendue = new ArrayList<Seance>();
-		GregorianCalendar jour = new GregorianCalendar(2015, 05, 02, 9, 00);
+		GregorianCalendar jour = new GregorianCalendar(2015, 05, 02);
 		Seance.Creneau creneau = Seance.Creneau.MATIN;
-		// Seance seance = new Seance(1, 1, 4, jour, creneau, 1,
-		// "Première séance de SI2 avec découverte du fonctionnement d'internet");
+		// Seance seance = new Seance(1, 1, 4, jour, creneau, 1, "Première séance de SI2 avec découverte du fonctionnement d'internet");
 		String contenu = "Première séance de SI2 avec découverte du fonctionnement d'internet";
 		// listeSeanceAttendue.add(seance);
 
@@ -32,6 +31,7 @@ public class SeanceDaoTest {
 			assertEquals(1, seance.getIdModule());
 			assertEquals(1, seance.getIdSession());
 			assertEquals(4, seance.getIdFormateur());
+			System.out.println(jour.getTime() + "\n" + seance.getJour().getTime());
 			assertEquals(jour, seance.getJour());
 			assertEquals(creneau, seance.getCreneau());
 			assertEquals(1, seance.getIdSalle());

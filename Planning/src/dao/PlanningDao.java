@@ -18,7 +18,7 @@ public class PlanningDao {
 	 */
 	static {
 		try {
-			pFindPlanningByIdSession = ConnexionBase.getConnection()
+			pFindPlanningByIdSession = DataBase.getConnection()
 					.prepareStatement(
 							"SELECT * FROM lagarenne2015.session "
 									+ "WHERE session.id_session = ?;");
@@ -68,7 +68,7 @@ public class PlanningDao {
 	 */
 	static {
 		try {
-			pInsertSeance = ConnexionBase
+			pInsertSeance = DataBase
 					.getConnection()
 					.prepareStatement(
 							"INSERT INTO lagarenne2015.seance (id_module, id_session, "
@@ -136,7 +136,7 @@ public class PlanningDao {
 	 */
 	static {
 		try {
-			pDeleteSeance = ConnexionBase.getConnection().prepareStatement(
+			pDeleteSeance = DataBase.getConnection().prepareStatement(
 					"DELETE FROM lagarenne2015.seance WHERE debut=?;");
 		} catch (Exception e) {
 			e.getMessage();

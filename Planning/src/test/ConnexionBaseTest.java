@@ -6,14 +6,14 @@ import java.sql.SQLException;
 
 import org.junit.Test;
 
-import dao.ConnexionBase;
+import dao.DataBase;
 
 public class ConnexionBaseTest {
 
 	@Test
 	public void testConnectionBase() throws SQLException {
 
-		assertNotNull(ConnexionBase.getConnection());
+		assertNotNull(DataBase.getConnection());
 	}
 
 }

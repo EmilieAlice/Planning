@@ -14,7 +14,7 @@ public class HeuresSessionModuleDao {
 	 */
 	static {
 		try {
-			pfindHeuresSessionModule = ConnexionBase
+			pfindHeuresSessionModule = DataBase
 					.getConnection()
 					.prepareStatement(
 							"SELECT * FROM lagarenne2015.heures_session_module "
@@ -64,7 +64,7 @@ public class HeuresSessionModuleDao {
 	 */
 	static {
 		try {
-			pupdateModuleAvecHeures = ConnexionBase
+			pupdateModuleAvecHeures = DataBase
 					.getConnection()
 					.prepareStatement(
 							"UPDATE lagarenne2015.heures_session_module "

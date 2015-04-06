@@ -14,7 +14,7 @@ public class FormateurDao {
 	 */
 	static {
 		try {
-			pFindFormateurByIdPersonne = ConnexionBase
+			pFindFormateurByIdPersonne = DataBase
 					.getConnection()
 					.prepareStatement(
 							"SELECT * FROM lagarenne2015.formateur "
@@ -59,7 +59,7 @@ public class FormateurDao {
 	 */
 	static {
 		try {
-			pFindFormateurByIdModule = ConnexionBase
+			pFindFormateurByIdModule = DataBase
 					.getConnection()
 					.prepareStatement(
 							"SELECT * FROM lagarenne2015.formateur "

@@ -15,7 +15,7 @@ public class SessionDao {
 	 */
 	static {
 		try {
-			pfindSessionByNom = ConnexionBase.getConnection().prepareStatement(
+			pfindSessionByNom = DataBase.getConnection().prepareStatement(
 					"SELECT * FROM lagarenne2015.session " + "WHERE nom=?; ");
 		} catch (Exception e) {
 			e.getMessage();
@@ -82,7 +82,7 @@ public class SessionDao {
 	 */
 	static {
 		try {
-			pfindSessionById = ConnexionBase.getConnection().prepareStatement(
+			pfindSessionById = DataBase.getConnection().prepareStatement(
 					"SELECT * FROM lagarenne2015.session "
 							+ "WHERE id_session=?; ");
 		} catch (Exception e) {

@@ -33,27 +33,27 @@ INSERT INTO `lagarenne2015`.`heures_session_matiere`(`id_session`,`id_module`,`n
 
 CREATE TABLE `lagarenne2015`.`jour` (
   `id_jour` INT NOT NULL,
-  `nom` VARCHAR(45) NULL,
+  `nom_jour` VARCHAR(45) NULL,
   PRIMARY KEY (`id_jour`),
   UNIQUE INDEX `nom_UNIQUE` (`nom` ASC));
 
 
 -- Remplissage de la table
 
-INSERT INTO `lagarenne2015`.`jour` (`id_jour`,`nom`) 
+INSERT INTO `lagarenne2015`.`jour` (`id_jour`,`nom_jour`) 
 VALUES (1,'Lundi'),(2,'Mardi'),(3,'Mercredi'), (4,'Jeudi'),(5,'Vendredi');
 
 -- Creation de la table creneau
 
 CREATE TABLE `lagarenne2015`.`creneau` (
   `id_creneau` INT NOT NULL,
-  `nom` VARCHAR(45) NULL,
+  `nom_creneau` VARCHAR(45) NULL,
   PRIMARY KEY (`id_creneau`),
-  UNIQUE INDEX `nom_UNIQUE` (`nom` ASC));
+  UNIQUE INDEX `nom_UNIQUE` (`nom_creneau` ASC));
 
 -- Remplissage de la table créneau
 
-INSERT INTO `lagarenne2015`.`creneau` (`id_creneau`, `nom`) VALUES (1, 'Matin')(2, 'Après-midi');
+INSERT INTO `lagarenne2015`.`creneau` (`id_creneau`, `nom_creneau`) VALUES (1, 'Matin')(2, 'Après-midi');
 
 
 -- Creation table de contrainte
@@ -118,8 +118,8 @@ UPDATE `lagarenne2015`.`formateur` SET `id_module`='3' WHERE `id_personne`='6';
 
 -- MAJ de la table creneau
 
-UPDATE `lagarenne2015`.`creneau` SET `id_creneau`='0', `nom`='MATIN' WHERE `id_creneau`='0';
-UPDATE `lagarenne2015`.`creneau` SET `id_creneau`='1', `nom`='APRES_MIDI' WHERE `id_creneau`='1';
+UPDATE `lagarenne2015`.`creneau` SET `id_creneau`='0', `nom_creneau`='MATIN' WHERE `id_creneau`='0';
+UPDATE `lagarenne2015`.`creneau` SET `id_creneau`='1', `nom_creneau`='APRES_MIDI' WHERE `id_creneau`='1';
 
 
 -- MAJ de la table seance
