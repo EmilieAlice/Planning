@@ -41,6 +41,9 @@ public class MainTest {
 			Date d = premierJour.getTime();
 			String affiche = format.format(d);
 			int jourSemaine = premierJour.get(Calendar.DAY_OF_WEEK);
+			if(i%7 == 0){
+				System.out.println("Semaine "+ premierJour.get(Calendar.WEEK_OF_YEAR));
+			}
 			if (jourSemaine != 1 || jourSemaine != 7) {
 				switch (jourSemaine) {
 				case 2:
@@ -64,7 +67,7 @@ public class MainTest {
 			}
 
 			premierJour
-					.setTimeInMillis(premierJour.getTimeInMillis() + 86400000);
+					.setTimeInMillis(premierJour.getTimeInMillis() + milliSecondesParJour);
 			i++;
 		}
 
