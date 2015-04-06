@@ -19,12 +19,12 @@ public class FormateurDaoTest {
 	public void testFindByIdModule() {
 		
 		Module moduleTest = new Module();
-		moduleTest.setIdModule(1);
+		moduleTest.setIdModule(2);
 		FormateurDao formateurDao = new FormateurDao();
 		Formateur formateur = new Formateur();
 		formateur = formateurDao.findFormateurByIdModule(moduleTest);
 		
-		assertEquals(4, formateur.getIdPersonne());
+		assertEquals(0, formateur.getIdPersonne());
 		
 	}
 

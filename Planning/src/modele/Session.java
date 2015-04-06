@@ -12,10 +12,10 @@ import java.util.GregorianCalendar;
 public class Session {
 
 	private int idSession;
-	private String nom;
+	private String nomSession;
 	private GregorianCalendar dateDebut;
 	private GregorianCalendar dateFin;
-	private String description;
+	private String descriptionSession;
 	private int idFormation;
 	private GregorianCalendar dateDebutInscription;
 	private GregorianCalendar dateFinInscription;
@@ -24,15 +24,15 @@ public class Session {
 
 	}
 
-	public Session(int idSession, String nom, GregorianCalendar dateDebut, GregorianCalendar dateFin,
-			String description, int idFormation, GregorianCalendar dateDebutInscription,
+	public Session(int idSession, String nomSession, GregorianCalendar dateDebut, GregorianCalendar dateFin,
+			String descriptionSession, int idFormation, GregorianCalendar dateDebutInscription,
 			GregorianCalendar dateFinInscription) {
 		super();
 		this.idSession = idSession;
-		this.nom = nom;
+		this.nomSession = nomSession;
 		this.dateDebut = dateDebut;
 		this.dateFin = dateFin;
-		this.description = description;
+		this.descriptionSession = descriptionSession;
 		this.idFormation = idFormation;
 		this.dateDebutInscription = dateDebutInscription;
 		this.dateFinInscription = dateFinInscription;
@@ -46,12 +46,12 @@ public class Session {
 		this.idSession = idSession;
 	}
 
-	public String getNom() {
-		return nom;
+	public String getNomSession() {
+		return nomSession;
 	}
 
-	public void setNom(String nom) {
-		this.nom = nom;
+	public void setNomSession(String nomSession) {
+		this.nomSession = nomSession;
 	}
 
 	public GregorianCalendar getDateDebut() {
@@ -70,12 +70,12 @@ public class Session {
 		this.dateFin = dateFin;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getDescriptionSession() {
+		return descriptionSession;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setDescriptionSession(String descriptionSession) {
+		this.descriptionSession = descriptionSession;
 	}
 
 	public int getIdFormation() {
@@ -104,9 +104,9 @@ public class Session {
 
 	@Override
 	public String toString() {
-		return "Session [id_session=" + idSession + ", nom=" + nom
+		return "Session [id_session=" + idSession + ", nomSession=" + nomSession
 				+ ", dateDebut=" + dateDebut + ", dateFin=" + dateFin
-				+ ", description=" + description + ", id_formation="
+				+ ", descriptionSession=" + descriptionSession + ", id_formation="
 				+ idFormation + ", dateDebutInscription="
 				+ dateDebutInscription + ", dateFinInscription="
 				+ dateFinInscription + "]";

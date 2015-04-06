@@ -17,7 +17,7 @@ public class ModuleDao {
 	static {
 		try {
 			pFindModuleByNom = DataBase.getConnection().prepareStatement(
-					"SELECT * FROM lagarenne2015.module " + "WHERE nom=?; ");
+					"SELECT * FROM lagarenne2015.module " + "WHERE nom_module=?; ");
 		} catch (Exception e) {
 			e.getMessage();
 			System.out.println("Requete findModuleByNom échouée.");
@@ -37,7 +37,7 @@ public class ModuleDao {
 			ResultSet resultat = pFindModuleByNom.executeQuery();
 			if (resultat.next()) {
 				module.setIdModule(resultat.getInt("id_module"));
-				module.setNom(resultat.getString("nom"));
+				module.setNomModule(resultat.getString("nom_module"));
 				module.setObjectif(resultat.getString("objectif"));
 				module.setContenu(resultat.getString("contenu"));
 				module.setNbHeuresAnnuelles(resultat.getInt("nb_heures_annuel"));
@@ -66,7 +66,7 @@ public class ModuleDao {
 									+ "INNER JOIN session ON heures_session_module.id_session = session.id_session "
 									+ "HAVING nbre_heures_disponibles > ? "
 									+ "AND YEAR(session.date_debut)=? "
-									+ "AND session.nom=?;");
+									+ "AND session.nom_session=?;");
 		} catch (Exception e) {
 			e.getMessage();
 			System.out.println("Requete findModuleAvecHeures échouée.");
@@ -86,13 +86,13 @@ public class ModuleDao {
 		try {
 			pFindModuleAvecHeures.setInt(1, 0);
 			pFindModuleAvecHeures.setInt(2, annee);
-			pFindModuleAvecHeures.setString(3, session.getNom());
+			pFindModuleAvecHeures.setString(3, session.getNomSession());
 			ResultSet resultat = pFindModuleAvecHeures.executeQuery();
 			if (resultat != null) {
 				while (resultat.next()) {
 					Module unModule = new Module();
 					unModule.setIdModule(resultat.getInt("id_module"));
-					unModule.setNom(resultat.getString("nom"));
+					unModule.setNomModule(resultat.getString("nom_module"));
 					unModule.setObjectif(resultat.getString("objectif"));
 					unModule.setContenu(resultat.getString("contenu"));
 					unModule.setNbHeuresAnnuelles(resultat

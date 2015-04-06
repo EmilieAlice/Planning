@@ -16,7 +16,7 @@ public class SessionDao {
 	static {
 		try {
 			pfindSessionByNom = DataBase.getConnection().prepareStatement(
-					"SELECT * FROM lagarenne2015.session " + "WHERE nom=?; ");
+					"SELECT * FROM lagarenne2015.session " + "WHERE nom_session=?; ");
 		} catch (Exception e) {
 			e.getMessage();
 			System.out.println("Requete findSession échouée.");
@@ -38,7 +38,7 @@ public class SessionDao {
 
 			if (resultat.next()) {
 				session.setIdSession(resultat.getInt("id_session"));
-				session.setNom(resultat.getString("nom"));
+				session.setNomSession(resultat.getString("nom_session"));
 
 				// Conversion de la date de début SQL en GregorianCalendar
 				GregorianCalendar dateDebut = new GregorianCalendar();
@@ -50,7 +50,7 @@ public class SessionDao {
 				dateFin.setTime(resultat.getDate("date_fin"));
 				session.setDateFin(dateFin);
 
-				session.setDescription(resultat.getString("description"));
+				session.setDescriptionSession(resultat.getString("description_session"));
 				session.setIdFormation(resultat.getInt("id_formation"));
 
 				// Conversion de la date de début d'inscription SQL en
@@ -105,7 +105,7 @@ public class SessionDao {
 
 			if (resultat.next()) {
 				session.setIdSession(resultat.getInt("id_session"));
-				session.setNom(resultat.getString("nom"));
+				session.setNomSession(resultat.getString("nom_session"));
 
 				// Conversion de la date de début SQL en GregorianCalendar
 				GregorianCalendar dateDebut = new GregorianCalendar();
@@ -117,7 +117,7 @@ public class SessionDao {
 				dateFin.setTime(resultat.getDate("date_fin"));
 				session.setDateFin(dateFin);
 
-				session.setDescription(resultat.getString("description"));
+				session.setDescriptionSession(resultat.getString("description_session"));
 				session.setIdFormation(resultat.getInt("id_formation"));
 
 				// Conversion de la date de début d'inscription SQL en
