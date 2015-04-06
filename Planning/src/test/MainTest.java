@@ -35,7 +35,10 @@ public class MainTest {
 		System.out.println(seance);
 
 		SimpleDateFormat format = new SimpleDateFormat("dd/MM");
-
+		
+		long nombreSemaines = nbreJours / 7;
+		System.out.println(nombreSemaines);
+		
 		int i = 0;
 		while (i < nbreJours) {
 			Date d = premierJour.getTime();

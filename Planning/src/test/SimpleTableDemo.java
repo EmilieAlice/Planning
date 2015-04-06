@@ -1,39 +1,4 @@
-/*
- * Copyright (c) 1995, 2008, Oracle and/or its affiliates. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
- *
- *   - Redistributions of source code must retain the above copyright
- *     notice, this list of conditions and the following disclaimer.
- *
- *   - Redistributions in binary form must reproduce the above copyright
- *     notice, this list of conditions and the following disclaimer in the
- *     documentation and/or other materials provided with the distribution.
- *
- *   - Neither the name of Oracle or the names of its
- *     contributors may be used to endorse or promote products derived
- *     from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
- * IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
- * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
- * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
- * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */ 
-
 package test;
-
-/*
- * SimpleTableDemo.java requires no other files.
- */
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -50,141 +15,143 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class SimpleTableDemo extends JPanel {
-    private boolean DEBUG = false;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private boolean DEBUG = false;
 
-    public SimpleTableDemo() {
-        super(new GridLayout(1,0));
-        
-        int milliSecondesParJour = (1000 * 60 * 60 * 24);
-        
-        GregorianCalendar premierJour = new GregorianCalendar(2015, 05, 8, 9, 0);
+	public SimpleTableDemo() {
+		super(new GridLayout(1, 0));
+
+		int milliSecondesParJour = (1000 * 60 * 60 * 24);
+
+		GregorianCalendar premierJour = new GregorianCalendar(2015, 05, 8, 9, 0);
 		GregorianCalendar dernierJour = new GregorianCalendar(2016, 05, 12);
 
 		long nbreJours = (dernierJour.getTimeInMillis() - premierJour
 				.getTimeInMillis()) / milliSecondesParJour;
-        
-        String[] columnNames = {"LUNDI",
-                                "MARDI",
-                                "MERCREDI",
-                                "JEUDI",
-                                "VENDREDI"};
 
-        Object[][] data = 
-        	{
-	    {"08/06", "09/06",
-	     "10/06", "11/06", "12/06"},
-	    /*{"John", "Doe",
-	     "Rowing", new Integer(3), new Boolean(true)},
-	    {"Sue", "Black",
-	     "Knitting", new Integer(2), new Boolean(false)},
-	    {"Jane", "White",
-	     "Speed reading", new Integer(20), new Boolean(true)},
-	    {"Joe", "Brown",
-	     "Pool", new Integer(10), new Boolean(false)},
-	     {"Joe", "Brown",
-		     "Pool", new Integer(10), new Boolean(false)}*/
-        };
-        
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM");
-        int i = 0;
-        int j = 0;
+		SimpleDateFormat format = new SimpleDateFormat("dd/MM");
+
+		String[] columnNames = { "LUNDI", "MARDI", "MERCREDI", "JEUDI",
+				"VENDREDI" };
+		int nbreSemaines = (int) (nbreJours / 7) + 1;
+
+		Object[][] data = new Object[nbreSemaines][5];
+
+		int i = 0;
+		int j = 0;
+		int x = 0;
 		while (i < nbreJours) {
 			Date d = premierJour.getTime();
 			String affiche = format.format(d);
 			int jourSemaine = premierJour.get(Calendar.DAY_OF_WEEK);
-			if(i%7 == 0){
-				System.out.println("Semaine "+ premierJour.get(Calendar.WEEK_OF_YEAR));
+			System.out.println(i);
+			if (i != 0 & i % 7 == 0) {
+				j++;
+			}
+			System.out.println(j);
+			if (x != 0 & x % 5 == 0) {
+				x = 0;
 			}
 			if (jourSemaine != 1 || jourSemaine != 7) {
+				
 				switch (jourSemaine) {
 				case 2:
-					System.out.println("Lundi " + affiche);
+					data[j][x] = affiche;
+					x++;
 					break;
 				case 3:
-					System.out.println("Mardi " + affiche);
+					data[j][x] = affiche;
+					x++;
 					break;
 				case 4:
-					System.out.println("Mercredi " + affiche);
+					data[j][x] = affiche;
+					x++;
 					break;
 				case 5:
-					System.out.println("Jeudi " + affiche);
+					data[j][x] = affiche;
+					x++;
 					break;
 				case 6:
-					System.out.println("Vendredi " + affiche);
+					data[j][x] = affiche;
+					x++;
 					break;
 				default:
 					break;
 				}
+
 			}
 
-			premierJour
-					.setTimeInMillis(premierJour.getTimeInMillis() + milliSecondesParJour);
+			premierJour.setTimeInMillis(premierJour.getTimeInMillis()
+					+ milliSecondesParJour);
 			i++;
 		}
-        
 
-        final JTable table = new JTable(data, columnNames);
-        table.setPreferredScrollableViewportSize(new Dimension(500, 70));
-        table.setFillsViewportHeight(true);
+		;
 
-        if (DEBUG) {
-            table.addMouseListener(new MouseAdapter() {
-                public void mouseClicked(MouseEvent e) {
-                    printDebugData(table);
-                }
-            });
-        }
+		final JTable table = new JTable(data, columnNames);
+		table.setPreferredScrollableViewportSize(new Dimension(500, 70));
+		table.setFillsViewportHeight(true);
 
-        //Create the scroll pane and add the table to it.
-        JScrollPane scrollPane = new JScrollPane(table);
+		if (DEBUG) {
+			table.addMouseListener(new MouseAdapter() {
+				public void mouseClicked(MouseEvent e) {
+					printDebugData(table);
+				}
+			});
+		}
 
-        //Add the scroll pane to this panel.
-        add(scrollPane);
-    }
+		// Create the scroll pane and add the table to it.
+		JScrollPane scrollPane = new JScrollPane(table);
 
-    private void printDebugData(JTable table) {
-        int numRows = table.getRowCount();
-        int numCols = table.getColumnCount();
-        javax.swing.table.TableModel model = table.getModel();
+		// Add the scroll pane to this panel.
+		add(scrollPane);
+	}
 
-        System.out.println("Value of data: ");
-        for (int i=0; i < numRows; i++) {
-            System.out.print("    row " + i + ":");
-            for (int j=0; j < numCols; j++) {
-                System.out.print("  " + model.getValueAt(i, j));
-            }
-            System.out.println();
-        }
-        System.out.println("--------------------------");
-    }
+	private void printDebugData(JTable table) {
+		int numRows = table.getRowCount();
+		int numCols = table.getColumnCount();
+		javax.swing.table.TableModel model = table.getModel();
 
-    /**
-     * Create the GUI and show it.  For thread safety,
-     * this method should be invoked from the
-     * event-dispatching thread.
-     */
-    private static void createAndShowGUI() {
-        //Create and set up the window.
-        JFrame frame = new JFrame("SimpleTableDemo");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		System.out.println("Value of data: ");
+		for (int i = 0; i < numRows; i++) {
+			System.out.print("    row " + i + ":");
+			for (int j = 0; j < numCols; j++) {
+				System.out.print("  " + model.getValueAt(i, j));
+			}
+			System.out.println();
+		}
+		System.out.println("--------------------------");
+	}
 
-        //Create and set up the content pane.
-        SimpleTableDemo newContentPane = new SimpleTableDemo();
-        newContentPane.setOpaque(true); //content panes must be opaque
-        frame.setContentPane(newContentPane);
+	/**
+	 * Create the GUI and show it. For thread safety, this method should be
+	 * invoked from the event-dispatching thread.
+	 */
+	private static void createAndShowGUI() {
+		// Create and set up the window.
+		JFrame frame = new JFrame("SimpleTableDemo");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        //Display the window.
-        frame.pack();
-        frame.setVisible(true);
-    }
+		// Create and set up the content pane.
+		SimpleTableDemo newContentPane = new SimpleTableDemo();
+		newContentPane.setOpaque(true); // content panes must be opaque
+		frame.setContentPane(newContentPane);
 
-    public static void main(String[] args) {
-        //Schedule a job for the event-dispatching thread:
-        //creating and showing this application's GUI.
-        javax.swing.SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                createAndShowGUI();
-            }
-        });
-    }
+		// Display the window.
+		frame.pack();
+		frame.setVisible(true);
+	}
+
+	public static void main(String[] args) {
+		// Schedule a job for the event-dispatching thread:
+		// creating and showing this application's GUI.
+		javax.swing.SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				createAndShowGUI();
+			}
+		});
+	}
 }
