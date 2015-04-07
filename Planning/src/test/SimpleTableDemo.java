@@ -10,6 +10,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -21,11 +22,12 @@ public class SimpleTableDemo extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 	private boolean DEBUG = false;
-
+	final JTable table = new JTable(new DonneesTableau());
+	
 	public SimpleTableDemo() {
 		super(new GridLayout(1, 0));
 
-		final JTable table = new JTable(new DonneesTableau());
+		
 		table.setPreferredScrollableViewportSize(new Dimension(500, 70));
 		table.setFillsViewportHeight(true);
 
@@ -33,6 +35,7 @@ public class SimpleTableDemo extends JPanel {
 		// seulement une cellule
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.setCellSelectionEnabled(true);
+		table.addMouseListener(new ecouteur());
 
 		if (DEBUG) {
 			table.addMouseListener(new MouseAdapter() {
@@ -83,7 +86,41 @@ public class SimpleTableDemo extends JPanel {
 		frame.pack();
 		frame.setVisible(true);
 	}
+	
+	public class ecouteur implements MouseListener{
 
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			System.out.println(table.getValueAt(table.getSelectedRow(),table.getSelectedColumn() ));
+			
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+	}
+	
 	public static void main(String[] args) {
 		// Schedule a job for the event-dispatching thread:
 		// creating and showing this application's GUI.

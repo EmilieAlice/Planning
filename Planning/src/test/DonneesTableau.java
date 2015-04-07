@@ -26,8 +26,8 @@ public class DonneesTableau extends AbstractTableModel {
 	SimpleDateFormat format = new SimpleDateFormat("dd/MM/YY");
 
 	// On remplit le nom des colonnes de titre
-	private final String[] columnNames = { "Semaine", "LUNDI", "MARDI", "MERCREDI",
-			"JEUDI", "VENDREDI" };
+	private final String[] columnNames = { "Semaine", "LUNDI", "MARDI",
+			"MERCREDI", "JEUDI", "VENDREDI" };
 
 	// On récupère le nombre de semaines correspodant au nombre de jours
 	int nbreSemaines = (int) (nbreJours / 7) + 1;
@@ -37,7 +37,7 @@ public class DonneesTableau extends AbstractTableModel {
 	private final Object[][] data = new Object[nbreSemaines][columnNames.length];
 
 	public DonneesTableau() {
-		
+
 		int i = 0;
 		int numeroLigne = 0;
 		int numeroColonne = 1;
@@ -102,10 +102,10 @@ public class DonneesTableau extends AbstractTableModel {
 		;
 	}
 
-	 public String getColumnName(int columnIndex) {
-	        return columnNames[columnIndex];
-	    }
-	
+	public String getColumnName(int columnIndex) {
+		return columnNames[columnIndex];
+	}
+
 	@Override
 	public int getRowCount() {
 		return data.length;
@@ -120,5 +120,10 @@ public class DonneesTableau extends AbstractTableModel {
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		return data[rowIndex][columnIndex];
 	}
+
+	public boolean isCellEditable(int row, int col) {
+		return false;
+	}
+	
 
 }
