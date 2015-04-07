@@ -1,4 +1,4 @@
-package test;
+package modele;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

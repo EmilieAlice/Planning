@@ -16,6 +16,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import javax.swing.JButton;
+
+import modele.DonneesTableau;
+
 public class SimpleTableDemo extends JPanel {
 	/**
 	 * 
