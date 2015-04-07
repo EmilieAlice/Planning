@@ -7,8 +7,8 @@ import java.util.GregorianCalendar;
 
 import javax.swing.table.AbstractTableModel;
 
-public class DonneesTableau extends AbstractTableModel{
-	
+public class DonneesTableau extends AbstractTableModel {
+
 	/**
 	 * 
 	 */
@@ -35,10 +35,9 @@ public class DonneesTableau extends AbstractTableModel{
 	// On créé un tableau d'objet à deux dimensions pour remplir notre
 	// JTable
 	private final Object[][] data = new Object[nbreSemaines][columnNames.length];
-			
 
-	
-	public DonneesTableau(){
+	public DonneesTableau() {
+		
 		int i = 0;
 		int numeroLigne = 0;
 		int numeroColonne = 1;
@@ -103,22 +102,23 @@ public class DonneesTableau extends AbstractTableModel{
 		;
 	}
 
+	 public String getColumnName(int columnIndex) {
+	        return columnNames[columnIndex];
+	    }
+	
 	@Override
 	public int getRowCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return data.length;
 	}
 
 	@Override
 	public int getColumnCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return columnNames.length;
 	}
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		// TODO Auto-generated method stub
-		return null;
+		return data[rowIndex][columnIndex];
 	}
 
 }
