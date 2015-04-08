@@ -14,6 +14,7 @@ import javax.swing.JToggleButton;
 import javax.swing.ListSelectionModel;
 
 import modele.DonneesTableau;
+import modele.DonneesTableauDouble;
 import modele.Module;
 import modele.Session;
 import dao.HeuresSessionModuleDao;
@@ -84,7 +85,7 @@ public class TestBoutons {
 		panelTableau.setBounds(6, 6, 941, 666);
 		frame.getContentPane().add(panelTableau);
 
-		table = new JTable(new DonneesTableau());
+		table = new JTable(new DonneesTableauDouble());
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.setCellSelectionEnabled(true);
 		table.addMouseListener(new ecouteur());
@@ -114,14 +115,28 @@ public class TestBoutons {
 				+ dao.findHeuresSessionModule(maths, session)
 						.getNbreHeuresDisponibles() + " Heures");
 		group.add(mathsBouton);
+
+		JRadioButton rdbtnSupprimer = new JRadioButton("Supprimer");
+		group.add(rdbtnSupprimer);
+		panelBouttons.add(rdbtnSupprimer);
 	}
 
 	public class ecouteur implements MouseListener {
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			System.out.println(table.getValueAt(table.getSelectedRow(),
-					table.getSelectedColumn()));
+			if (table.getSelectedRow() % 2 != 0) {
+				if (table.getSelectedColumn() % 2 != 0) {
+					System.out.println(table.getValueAt(
+							table.getSelectedRow() - 1,
+							table.getSelectedColumn()));
+				} else {
+					System.out.println(table.getValueAt(
+							table.getSelectedRow() - 1,
+							table.getSelectedColumn() - 1));
+				}
+			}
+
 			String texte = "";
 			Component[] tableau = panelBouttons.getComponents();
 			ArrayList<JRadioButton> tableauBoutton = new ArrayList<JRadioButton>();
@@ -133,15 +148,25 @@ public class TestBoutons {
 			for (JRadioButton jRadioButton : tableauBoutton) {
 				if (jRadioButton.isSelected()) {
 					texte = jRadioButton.getText();
+					if (!texte.equals("Supprimer")) {
+						texte = texte.split(" ")[0];
+						table.setValueAt(texte, table.getSelectedRow(),
+								table.getSelectedColumn());
+						//on fait un insert dans la table
+					}else{
+						texte="";
+						table.setValueAt(texte, table.getSelectedRow(),
+								table.getSelectedColumn());
+						//on fait un delete dans la table en se basant sur l'heure de début 
+					}
+
 				}
 			}
 			texte = texte.split(" ")[0];
 			if (texte != "") {
 				ModuleDao moduleDao = new ModuleDao();
 				Module module = moduleDao.findModuleByNom(texte);
-				System.out.println(module.getIdModule());
 			}
-			System.out.println(texte);
 
 		}
 
