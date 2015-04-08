@@ -13,9 +13,25 @@ public class DonneesTableau extends AbstractTableModel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private Session session;
+
+	public DonneesTableau(Session session) {
+		super();
+		this.session = session;
+	}
+
+	public Session getSession() {
+		return session;
+	}
+
+	public void setSession(Session session) {
+		this.session = session;
+	}
 
 	int milliSecondesParJour = (1000 * 60 * 60 * 24);
-
+	/*GregorianCalendar premierJour = session.getDateDebut();
+	GregorianCalendar dernierJour = session.getDateFin();*/
+	
 	GregorianCalendar premierJour = new GregorianCalendar(2015, 05, 8, 9, 0);
 	GregorianCalendar dernierJour = new GregorianCalendar(2016, 02, 12);
 
