@@ -8,7 +8,7 @@ import java.util.GregorianCalendar;
 import javax.swing.JLabel;
 import javax.swing.table.AbstractTableModel;
 
-public class DonneesTableau extends AbstractTableModel {
+public class DonneesTableauDouble extends AbstractTableModel {
 
 	/**
 	 * 
@@ -16,7 +16,7 @@ public class DonneesTableau extends AbstractTableModel {
 	private static final long serialVersionUID = 1L;
 	private Session session;
 
-	public DonneesTableau(Session session) {
+	public DonneesTableauDouble(Session session) {
 		super();
 		this.session = session;
 	}
@@ -45,8 +45,10 @@ public class DonneesTableau extends AbstractTableModel {
 	SimpleDateFormat format = new SimpleDateFormat("dd/MM/YY");
 
 	// On remplit le nom des colonnes de titre
-	private final String[] columnNames = { "Semaine", "LUNDI", "MARDI",
-			"MERCREDI", "JEUDI", "VENDREDI" };
+	private final String[] columnNames = { "Semaine", "LUNDI Matin",
+			"Après-midi", "MARDI Matin", "Après-midi", "MERCREDI Matin",
+			"Après-midi", "JEUDI Matin", "Après-midi", "VENDREDI matin",
+			"Après-midi" };
 
 	// On récupère le nombre de semaines correspodant au nombre de jours
 	int nbreSemaines = (int) (nbreJours / 7) + 1;
@@ -54,9 +56,9 @@ public class DonneesTableau extends AbstractTableModel {
 
 	// On créé un tableau d'objet à deux dimensions pour remplir notre
 	// JTable
-	private final Object[][] data = new Object[nbreSemaines][columnNames.length];
+	private final Object[][] data = new Object[tailleTableau][columnNames.length];
 
-	public DonneesTableau() {
+	public DonneesTableauDouble() {
 
 		int i = 0;
 		int numeroLigne = 0;
@@ -73,7 +75,7 @@ public class DonneesTableau extends AbstractTableModel {
 			 */
 			// Si le numéro de la colonne est divisible par 6 alors on est à la
 			// ligne suivante donc on remet ce numéro à 1 pour écrire à Lundi
-			if (numeroColonne != 1 & numeroColonne % 6 == 0) {
+			if (numeroColonne != 1 & numeroColonne % 11 == 0) {
 				numeroColonne = 1;
 			}
 			// La première case de chaque ligne est toujours le numéro de la
@@ -82,52 +84,63 @@ public class DonneesTableau extends AbstractTableModel {
 
 			// Si le numéro correpondant au jour de la semaine n'est pas 1
 			// (dimanche) ou 7 (samedi) on ajoute des données au tableau
-			/*
-			 * if (numeroLigne != 0 & numeroLigne % 2 != 0) { JLabel label = new
-			 * JLabel("test"); data[numeroLigne][0] = ""; data[numeroLigne][1] =
-			 * label; data[numeroLigne][2] = "test"; data[numeroLigne][3] =
-			 * "test"; data[numeroLigne][4] = "test"; data[numeroLigne][5] =
-			 * "test"; numeroLigne++; } else {
-			 */
-			if (jourSemaine != 1 || jourSemaine != 7) {
 
-				// On étudie chaque jour de la semaine, on remplit le
-				// tableau et
-				// on avance la colonne de 1
-				switch (jourSemaine) {
-				case 2:
-					data[numeroLigne][numeroColonne] = affiche;
-					numeroColonne++;
-					break;
-				case 3:
-					data[numeroLigne][numeroColonne] = affiche;
-					numeroColonne++;
-					break;
-				case 4:
-					data[numeroLigne][numeroColonne] = affiche;
-					numeroColonne++;
-					break;
-				case 5:
-					data[numeroLigne][numeroColonne] = affiche;
-					numeroColonne++;
-					break;
-				case 6:
-					data[numeroLigne][numeroColonne] = affiche;
-					numeroColonne++;
-					numeroLigne++;
-					break;
-				default:
-					break;
+			if (numeroLigne != 0 & numeroLigne % 2 != 0) {
+				for (int y = 0; y < columnNames.length; y++) {
+					data[numeroLigne][y] = "";
 				}
+				numeroLigne++;
+			} else {
+				if (jourSemaine != 1 || jourSemaine != 7) {
 
+					// On étudie chaque jour de la semaine, on remplit le
+					// tableau et
+					// on avance la colonne de 1
+					switch (jourSemaine) {
+					case 2:
+						data[numeroLigne][numeroColonne] = affiche;
+						numeroColonne++;
+						data[numeroLigne][numeroColonne] = "";
+						numeroColonne++;
+						break;
+					case 3:
+						data[numeroLigne][numeroColonne] = affiche;
+						numeroColonne++;
+						data[numeroLigne][numeroColonne] = "";
+						numeroColonne++;
+						break;
+					case 4:
+						data[numeroLigne][numeroColonne] = affiche;
+						numeroColonne++;
+						data[numeroLigne][numeroColonne] = "";
+						numeroColonne++;
+						break;
+					case 5:
+						data[numeroLigne][numeroColonne] = affiche;
+						numeroColonne++;
+						data[numeroLigne][numeroColonne] = "";
+						numeroColonne++;
+						break;
+					case 6:
+						data[numeroLigne][numeroColonne] = affiche;
+						numeroColonne++;
+						data[numeroLigne][numeroColonne] = "";
+						numeroColonne++;
+						numeroLigne++;
+						break;
+					default:
+						break;
+					}
+
+				}
+				// On ajoute une journée en milliseconde pour passer au jour
+				// suivant
+				// et on ajoute 1 au parcoureur
+				premierJour.setTimeInMillis(premierJour.getTimeInMillis()
+						+ milliSecondesParJour);
+				i++;
 			}
-			// On ajoute une journée en milliseconde pour passer au jour
-			// suivant
-			// et on ajoute 1 au parcoureur
-			premierJour.setTimeInMillis(premierJour.getTimeInMillis()
-					+ milliSecondesParJour);
-			i++;
-		}// }
+		}
 
 		;
 	}
@@ -157,8 +170,10 @@ public class DonneesTableau extends AbstractTableModel {
 
 	@Override
 	public void setValueAt(Object value, int row, int col) {
-		data[row][col] = value;
-		fireTableCellUpdated(row, col);
+		if (row % 2 != 0) {
+			data[row][col] = value;
+			fireTableCellUpdated(row, col);
+		}
 	}
 
 }

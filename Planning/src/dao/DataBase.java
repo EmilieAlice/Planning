@@ -36,8 +36,8 @@ public class DataBase {
 	}
 
 	private static final String URL = "jdbc:mysql://localhost/lagarenne2015";
-	private static final String USER = "root";
-	private static final String PASSWORD = "1234";
+	private static final String USER = "lagarenne2015";
+	private static final String PASSWORD = "lagarenne2015";
 
 	public static Connection getConnection() throws SQLException {
 		return DriverManager.getConnection(URL, USER, PASSWORD);

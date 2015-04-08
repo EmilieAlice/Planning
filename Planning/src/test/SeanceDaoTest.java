@@ -31,7 +31,6 @@ public class SeanceDaoTest {
 			assertEquals(1, seance.getIdModule());
 			assertEquals(1, seance.getIdSession());
 			assertEquals(4, seance.getIdFormateur());
-			System.out.println(jour.getTime() + "\n" + seance.getJour().getTime());
 			assertEquals(jour, seance.getJour());
 			assertEquals(creneau, seance.getCreneau());
 			assertEquals(1, seance.getIdSalle());

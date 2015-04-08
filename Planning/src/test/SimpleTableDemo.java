@@ -18,7 +18,9 @@ import java.util.GregorianCalendar;
 
 import javax.swing.JButton;
 
+import dao.SessionDao;
 import modele.DonneesTableau;
+import modele.Session;
 
 public class SimpleTableDemo extends JPanel {
 	/**
@@ -71,7 +73,8 @@ public class SimpleTableDemo extends JPanel {
 		}
 		System.out.println("--------------------------");
 	}
-
+	
+	
 	/**
 	 * Create the GUI and show it. For thread safety, this method should be
 	 * invoked from the event-dispatching thread.

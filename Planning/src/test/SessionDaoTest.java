@@ -12,9 +12,9 @@ public class SessionDaoTest {
 	@Test
 	public void testSessionDao() {
 		Session session = new Session();
-		SessionDao dao = new SessionDao();
+		SessionDao sessionDao = new SessionDao();
 
-		session = dao.findSessionByNom("BTS Audio 2016");
+		session = sessionDao.findSessionByNom("BTS Audio 2016");
 
 		assertEquals(3, session.getIdSession());
 	}
