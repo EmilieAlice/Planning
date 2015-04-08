@@ -89,6 +89,8 @@ public class TestBoutons {
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.setCellSelectionEnabled(true);
 		table.addMouseListener(new ecouteur());
+		table.setRowHeight(25);
+		table.setRowMargin(5);
 		panelTableau.add(table);
 
 		panelBouttons = new JPanel();
