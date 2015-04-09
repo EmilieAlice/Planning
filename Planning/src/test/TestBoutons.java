@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.ButtonGroup;
 import javax.swing.ButtonModel;
@@ -127,6 +128,7 @@ public class TestBoutons {
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
+			
 			if (table.getSelectedRow() % 2 != 0) {
 				if (table.getSelectedColumn() % 2 != 0) {
 					System.out.println(table.getValueAt(
@@ -154,12 +156,24 @@ public class TestBoutons {
 						texte = texte.split(" ")[0];
 						table.setValueAt(texte, table.getSelectedRow(),
 								table.getSelectedColumn());
-						//on fait un insert dans la table
-					}else{
-						texte="";
+						// on fait un insert dans la table
+					} else {
+						texte = "";
+						if (table.getSelectedColumn() % 2 == 0) {
+							System.out.println(table.getValueAt(
+									table.getSelectedRow(),
+									table.getSelectedColumn())
+									+ " Après-midi");
+						}else{
+							System.out.println(table.getValueAt(
+									table.getSelectedRow(),
+									table.getSelectedColumn())
+									+ " Matin");
+						}
 						table.setValueAt(texte, table.getSelectedRow(),
 								table.getSelectedColumn());
-						//on fait un delete dans la table en se basant sur l'heure de début 
+						// on fait un delete dans la table en se basant sur
+						// l'heure de début
 					}
 
 				}
