@@ -38,7 +38,7 @@ public class DonneesTableauDouble extends AbstractTableModel {
 	 */
 
 	GregorianCalendar premierJour = new GregorianCalendar(2015, 05, 8, 9, 0);
-	GregorianCalendar dernierJour = new GregorianCalendar(2016, 02, 12);
+	GregorianCalendar dernierJour = new GregorianCalendar(2016, 01, 12);
 
 	long nbreJours = (dernierJour.getTimeInMillis() - premierJour
 			.getTimeInMillis()) / milliSecondesParJour;

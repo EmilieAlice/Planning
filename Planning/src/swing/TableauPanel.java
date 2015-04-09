@@ -1,5 +1,6 @@
 package swing;
 
+import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -47,7 +48,7 @@ public class TableauPanel extends JPanel {
 							tableau.getSelectedColumn() - 1));
 				}
 			}
-
+/*
 			String texte = "";
 			SelectionMatierePanel panelBouttons = new SelectionMatierePanel();
 			Component[] tableauComposants = panelBouttons.getComponents();
@@ -90,7 +91,7 @@ public class TableauPanel extends JPanel {
 			if (texte != "") {
 				ModuleDao moduleDao = new ModuleDao();
 				Module module = moduleDao.findModuleByNom(texte);
-			}
+			}*/
 
 		}
 

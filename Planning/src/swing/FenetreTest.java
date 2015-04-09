@@ -6,6 +6,8 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
+import modele.Bouton;
+
 public class FenetreTest extends JFrame {
 	
 	/**
@@ -14,6 +16,7 @@ public class FenetreTest extends JFrame {
 	private static final long serialVersionUID = 1L;
 	SelectionMatierePanel selectionMatierePanel;
 	TableauPanel tableauPanel;
+	Bouton bouton;
 	
 	public FenetreTest(){
 		// Composants

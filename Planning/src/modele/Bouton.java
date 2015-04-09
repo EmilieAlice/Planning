@@ -1,34 +1,39 @@
-package swing;
+package modele;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Observable;
-import java.util.Observer;
 
 import javax.swing.ButtonGroup;
-import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
-import modele.Module;
-import modele.Session;
 import dao.HeuresSessionModuleDao;
 import dao.ModuleDao;
 
-public class SelectionMatierePanel extends JPanel{
+public class Bouton {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+	private ArrayList<JRadioButton> boutonDesMatières;
+	private ButtonGroup groupeDeBoutons;
 
-	private final ArrayList<JRadioButton> boutonDesMatières;
-	private final ButtonGroup groupeDeBoutons;
+	public ArrayList<JRadioButton> getBoutonDesMatières() {
+		return boutonDesMatières;
+	}
 
-	public SelectionMatierePanel() {
+	public void setBoutonDesMatières(ArrayList<JRadioButton> boutonDesMatières) {
+		this.boutonDesMatières = boutonDesMatières;
+	}
 
+	public ButtonGroup getGroupeDeBoutons() {
+		return groupeDeBoutons;
+	}
+
+	public void setGroupeDeBoutons(ButtonGroup groupeDeBoutons) {
+		this.groupeDeBoutons = groupeDeBoutons;
+	}
+
+	public Bouton() {
 		boutonDesMatières = new ArrayList<JRadioButton>();
 		groupeDeBoutons = new ButtonGroup();
-		
+
 		ArrayList<Module> listeModule = new ArrayList<Module>();
 		ModuleDao moduleDao = new ModuleDao();
 		Session session = new Session();
@@ -54,12 +59,5 @@ public class SelectionMatierePanel extends JPanel{
 		JRadioButton boutonSupprimer = new JRadioButton("Supprimer");
 		boutonDesMatières.add(boutonSupprimer);
 		groupeDeBoutons.add(boutonSupprimer);
-
-		for (int i = 0; i < boutonDesMatières.size(); i++) {
-			add(boutonDesMatières.get(i));
-		}
-
 	}
-
-
 }
