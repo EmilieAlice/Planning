@@ -2,6 +2,8 @@ package swing;
 
 import java.awt.BorderLayout;
 
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 
 public class FenetreTest extends JFrame {
@@ -10,7 +12,8 @@ public class FenetreTest extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	SelectionMatierePanel panel;
+	SelectionMatierePanel selectionMatierePanel;
+	TableauPanel tableauPanel;
 	
 	public FenetreTest(){
 		// Composants
@@ -29,10 +32,13 @@ public class FenetreTest extends JFrame {
 	}
 
 	private void initComposants() {
-		panel = new SelectionMatierePanel();
-		add(panel, BorderLayout.CENTER);
+		selectionMatierePanel = new SelectionMatierePanel();
+		tableauPanel = new TableauPanel();
+		add(selectionMatierePanel, BorderLayout.NORTH);
+		add(tableauPanel, BorderLayout.SOUTH);
 		
 	}
+	
 	
 	public static void main(String[] args) {
 		new FenetreTest();
