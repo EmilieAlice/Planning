@@ -18,8 +18,8 @@ import java.util.GregorianCalendar;
 
 import javax.swing.JButton;
 
+import swing.DonneesTableau;
 import dao.SessionDao;
-import modele.DonneesTableau;
 import modele.Session;
 
 public class SimpleTableDemo extends JPanel {

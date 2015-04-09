@@ -1,4 +1,4 @@
-package modele;
+package swing;
 
 import java.awt.BorderLayout;
 

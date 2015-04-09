@@ -14,8 +14,6 @@ import javax.swing.JRadioButton;
 import javax.swing.JToggleButton;
 import javax.swing.ListSelectionModel;
 
-import modele.DonneesTableau;
-import modele.DonneesTableauDouble;
 import modele.Module;
 import modele.Session;
 import dao.HeuresSessionModuleDao;
@@ -25,6 +23,9 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JButton;
+
+import swing.DonneesTableau;
+import swing.DonneesTableauDouble;
 
 public class TestBoutons {
 
