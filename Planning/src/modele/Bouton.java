@@ -9,7 +9,7 @@ import javax.swing.JRadioButton;
 import dao.HeuresSessionModuleDao;
 import dao.ModuleDao;
 
-public class Bouton {
+public class Bouton extends JRadioButton{
 
 	private ArrayList<JRadioButton> boutonDesMatières;
 	private ButtonGroup groupeDeBoutons;
