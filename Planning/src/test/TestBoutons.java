@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import javax.swing.ButtonGroup;
 import javax.swing.ButtonModel;
@@ -15,9 +16,12 @@ import javax.swing.JToggleButton;
 import javax.swing.ListSelectionModel;
 
 import modele.Module;
+import modele.Seance;
+import modele.Seance.Creneau;
 import modele.Session;
 import dao.HeuresSessionModuleDao;
 import dao.ModuleDao;
+import dao.SeanceDao;
 
 import javax.swing.JPanel;
 import javax.swing.JTable;
@@ -142,9 +146,17 @@ public class TestBoutons {
 				}
 			}
 
-			String texte = "";
+			String texteDuBouton = "";
+			String nomModule;
+			String texteVide;
 			Component[] tableau = panelBouttons.getComponents();
 			ArrayList<JRadioButton> tableauBoutton = new ArrayList<JRadioButton>();
+			Seance seance = new Seance();
+			Seance.Creneau matin = Creneau.MATIN;
+			Seance.Creneau apresMidi = Creneau.APRES_MIDI;
+			SeanceDao seanceDao = new SeanceDao();
+			ModuleDao moduleDao = new ModuleDao();
+			GregorianCalendar jour;
 
 			for (int i = 0; i < tableau.length; i++) {
 				tableauBoutton.add((JRadioButton) tableau[i]);
@@ -152,37 +164,37 @@ public class TestBoutons {
 
 			for (JRadioButton jRadioButton : tableauBoutton) {
 				if (jRadioButton.isSelected()) {
-					texte = jRadioButton.getText();
-					if (!texte.equals("Supprimer")) {
-						texte = texte.split(" ")[0];
-						table.setValueAt(texte, table.getSelectedRow(),
+					texteDuBouton = jRadioButton.getText();
+					if (!texteDuBouton.equals("Supprimer")) {
+						nomModule = texteDuBouton.split(" ")[0];
+						seance.setIdModule(moduleDao.findModuleByNom(nomModule).getIdModule());
+						table.setValueAt(nomModule, table.getSelectedRow(),
 								table.getSelectedColumn());
 						// on fait un insert dans la table
-					} else {
-						texte = "";
 						if (table.getSelectedColumn() % 2 == 0) {
-							System.out.println(table.getValueAt(
-									table.getSelectedRow(),
-									table.getSelectedColumn())
-									+ " Après-midi");
-						}else{
-							System.out.println(table.getValueAt(
-									table.getSelectedRow(),
-									table.getSelectedColumn())
-									+ " Matin");
+							seance.setCreneau(apresMidi);
+							jour = (GregorianCalendar) table.getValueAt(table.getSelectedRow() - 1, table.getSelectedColumn());
 						}
-						table.setValueAt(texte, table.getSelectedRow(),
+						else{
+							seance.setCreneau(matin);
+							jour = (GregorianCalendar) table.getValueAt(table.getSelectedRow() - 1, table.getSelectedColumn() - 1);
+						}
+						seance.setJour(jour);
+						seance.setIdFormateur(moduleDao.);
+						seanceDao.insertSeance(seance);
+					} else {
+						texteVide = "";
+						if (table.getSelectedColumn() % 2 == 0) {
+						}else{
+						}
+						table.setValueAt(texteVide, table.getSelectedRow(),
 								table.getSelectedColumn());
 						// on fait un delete dans la table en se basant sur
 						// l'heure de début
+						seanceDao.deleteSeance(seance);
 					}
 
 				}
-			}
-			texte = texte.split(" ")[0];
-			if (texte != "") {
-				ModuleDao moduleDao = new ModuleDao();
-				Module module = moduleDao.findModuleByNom(texte);
 			}
 
 		}

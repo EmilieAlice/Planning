@@ -73,4 +73,110 @@ public class SeanceDao {
 		return listeSeance;
 	}
 
+	
+
+	private static java.sql.PreparedStatement pInsertSeance = null;
+	/**
+	 * Requete pour insérer une séance
+	 */
+	static {
+		try {
+			pInsertSeance = DataBase
+					.getConnection()
+					.prepareStatement(
+							"INSERT INTO lagarenne2015.seance (id_module, id_session, "
+							+ "id_formateur, debut, fin, id_creneau, id_salle, contenu) "
+							+ "VALUES(?,?,?,?,?,?,?,?);");
+		} catch (Exception e) {
+			e.getMessage();
+			System.out.println("Requete insertSeance échouée.");
+		}
+	}
+
+	/**
+	 * Méthode qui insère une séance dans la base de données
+	 * 
+	 * @param seance
+	 *            (un objet Seance)
+	 * @return un booléen
+	 */
+	public Boolean insertSeance(Seance seance) {
+		Boolean etat = new Boolean(false);
+		try {
+			// Conversion de la date Gregorian en date SQL
+			Timestamp dateSQLDebut = new Timestamp(seance.getJour().getTimeInMillis());
+			
+			// On ajoute l'heure d'une seance pour avoir la date de fin
+			long journee = seance.getJour().getTimeInMillis();
+			long millis = (3600000);
+			long heureCreneau = 0;
+			if (seance.getCreneau().equals(Seance.Creneau.APRES_MIDI)){
+				heureCreneau = 3 * millis;
+			}
+			else {
+				heureCreneau = 4 * millis;
+			}
+			journee = journee + heureCreneau;
+			Timestamp dateSQLFin = new Timestamp(journee);
+			
+			// On insere le creneau grace à l'enum
+			int idCreneau = 0;
+			if (seance.getCreneau().equals(Seance.Creneau.APRES_MIDI)){
+				idCreneau = 1;
+				}
+			
+			pInsertSeance.setInt(1, seance.getIdModule());
+			pInsertSeance.setInt(2, seance.getIdSession());
+			pInsertSeance.setInt(3, seance.getIdFormateur());
+			pInsertSeance.setTimestamp(4, dateSQLDebut);
+			pInsertSeance.setTimestamp(5, dateSQLFin);
+			pInsertSeance.setInt(6, idCreneau);
+			pInsertSeance.setInt(7, seance.getIdSalle());
+			pInsertSeance.setString(8, seance.getContenu());
+
+			int resultat = pInsertSeance.executeUpdate();
+			if (resultat != 0)
+				etat = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return etat;
+	}
+
+	private static java.sql.PreparedStatement pDeleteSeance = null;
+	/**
+	 * Requete pour supprimer une séance
+	 */
+	static {
+		try {
+			pDeleteSeance = DataBase.getConnection().prepareStatement(
+					"DELETE FROM lagarenne2015.seance WHERE debut=?;");
+		} catch (Exception e) {
+			e.getMessage();
+			System.out.println("Requete deleteSeance échouée.");
+		}
+	}
+
+	/**
+	 * Méthode qui supprime une séance
+	 * 
+	 * @param seance
+	 *            (un objet Seance)
+	 * @return booléen
+	 */
+	public Boolean deleteSeance(Seance seance) {
+		Boolean etat = new Boolean(false);
+		try {
+			GregorianCalendar dateDebut = seance.getJour();
+			Timestamp dateSQL = new Timestamp(dateDebut.getTimeInMillis());
+
+			pDeleteSeance.setTimestamp(1, dateSQL);
+			int resultat = pDeleteSeance.executeUpdate();
+			if (resultat != 0)
+				etat = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return etat;
+	}
 }
