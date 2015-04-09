@@ -2,6 +2,7 @@ package modele;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Observable;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JRadioButton;
@@ -9,7 +10,7 @@ import javax.swing.JRadioButton;
 import dao.HeuresSessionModuleDao;
 import dao.ModuleDao;
 
-public class Bouton extends JRadioButton{
+public class Bouton extends Observable{
 
 	private ArrayList<JRadioButton> boutonDesMatières;
 	private ButtonGroup groupeDeBoutons;
@@ -30,10 +31,10 @@ public class Bouton extends JRadioButton{
 		this.groupeDeBoutons = groupeDeBoutons;
 	}
 
-	public Bouton() {
+	public void remplir(){
 		boutonDesMatières = new ArrayList<JRadioButton>();
 		groupeDeBoutons = new ButtonGroup();
-
+		
 		ArrayList<Module> listeModule = new ArrayList<Module>();
 		ModuleDao moduleDao = new ModuleDao();
 		Session session = new Session();
@@ -59,5 +60,7 @@ public class Bouton extends JRadioButton{
 		JRadioButton boutonSupprimer = new JRadioButton("Supprimer");
 		boutonDesMatières.add(boutonSupprimer);
 		groupeDeBoutons.add(boutonSupprimer);
+
+
 	}
 }

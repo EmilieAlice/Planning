@@ -16,7 +16,6 @@ public class FenetreTest extends JFrame {
 	private static final long serialVersionUID = 1L;
 	SelectionMatierePanel selectionMatierePanel;
 	TableauPanel tableauPanel;
-	Bouton bouton;
 	
 	public FenetreTest(){
 		// Composants

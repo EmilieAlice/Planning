@@ -9,6 +9,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
+import modele.Bouton;
 import modele.Module;
 import modele.Session;
 import dao.HeuresSessionModuleDao;
@@ -21,12 +22,13 @@ public class SelectionMatierePanel extends JPanel{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private final ArrayList<JRadioButton> boutonDesMatières;
-	private final ButtonGroup groupeDeBoutons;
+	//private final ArrayList<JRadioButton> boutonDesMatières;
+	//private final ButtonGroup groupeDeBoutons;
+	private final Bouton bouton;
 
 	public SelectionMatierePanel() {
 
-		boutonDesMatières = new ArrayList<JRadioButton>();
+		/*boutonDesMatières = new ArrayList<JRadioButton>();
 		groupeDeBoutons = new ButtonGroup();
 		
 		ArrayList<Module> listeModule = new ArrayList<Module>();
@@ -57,8 +59,13 @@ public class SelectionMatierePanel extends JPanel{
 
 		for (int i = 0; i < boutonDesMatières.size(); i++) {
 			add(boutonDesMatières.get(i));
+		}*/
+		
+		bouton = new Bouton();
+		bouton.remplir();
+		for (int i = 0; i < bouton.getBoutonDesMatières().size(); i++) {
+			add( bouton.getBoutonDesMatières().get(i));
 		}
-
 	}
 
 
