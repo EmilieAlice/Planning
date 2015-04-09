@@ -73,7 +73,7 @@ public class Planning {
 		if (seance == null) {
 			throw new IllegalArgumentException("La seance ne peut etre null");
 		}
-		if (getSeance(seance.getJour(), seance.getCreneau()) == null) {
+		if (getSeance(seance.getDebut(), seance.getCreneau()) == null) {
 			throw new IllegalStateException(
 					"Il y a déja une séance pour ce jour et ce créneau");
 		}

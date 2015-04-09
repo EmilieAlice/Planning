@@ -55,5 +55,10 @@ public class ModuleDaoTest {
 		assertEquals(expected.getIdModule(), test.getIdModule());
 
 	}
+	
+	@Test
+	public void testFindFormateurByNomModule(){
+		
+	}
 
 }

@@ -16,7 +16,7 @@ public class PersonneDaoTest {
 		PersonneDao dao = new PersonneDao();
 		personne = dao.findPersonneByNomModule("Maths");
 
-		int idPersonne = personne.getIdPersonne();
+		int idPersonne = personne.getIdFormateur();
 
 		assertEquals(5, idPersonne);
 

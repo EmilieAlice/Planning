@@ -39,7 +39,7 @@ public class PersonneDao {
 			pFindPersonneByNomModule.setString(1, nomModule);
 			ResultSet resultat = pFindPersonneByNomModule.executeQuery();
 			if (resultat.next()) {
-				personne.setIdPersonne(resultat.getInt("id_personne"));
+				personne.setIdFormateur(resultat.getInt("id_personne"));
 				personne.setCivilite(resultat.getString("civilite"));
 				personne.setPrenom(resultat.getString("prenom"));
 				personne.setNom(resultat.getString("nom"));

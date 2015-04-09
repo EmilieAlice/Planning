@@ -16,11 +16,13 @@ import javax.swing.JToggleButton;
 import javax.swing.ListSelectionModel;
 
 import modele.Module;
+import modele.Salle;
 import modele.Seance;
 import modele.Seance.Creneau;
 import modele.Session;
 import dao.HeuresSessionModuleDao;
 import dao.ModuleDao;
+import dao.SalleDao;
 import dao.SeanceDao;
 
 import javax.swing.JPanel;
@@ -37,8 +39,24 @@ public class TestBoutons {
 	private JTable table;
 	private JPanel panelBouttons;
 	private ButtonGroup group;
+	private HeuresSessionModuleDao heuresSessionModuleDao;
+	private Module maths;
+	private Module anglais;
+	private Module siDeux;
+	private Session session;
 	private JRadioButton mathsBouton;
-
+	private JPanel panelTableau;
+	private JRadioButton siDeuxBoutton;
+	private JRadioButton anglaisBoutton;
+	private JRadioButton rdbtnSupprimer;
+	private Component[] tableau;
+	private ArrayList<JRadioButton> tableauBoutton;
+	private Seance seance; 
+	private SeanceDao seanceDao;
+	private ModuleDao moduleDao;
+	private Salle salle;
+	private SalleDao salleDao;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -66,18 +84,18 @@ public class TestBoutons {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		HeuresSessionModuleDao dao = new HeuresSessionModuleDao();
+		heuresSessionModuleDao = new HeuresSessionModuleDao();
 
-		Module maths = new Module();
+		maths = new Module();
 		maths.setIdModule(2);
 
-		Module anglais = new Module();
+		anglais = new Module();
 		anglais.setIdModule(3);
 
-		Module siDeux = new Module();
+		siDeux = new Module();
 		siDeux.setIdModule(1);
 
-		Session session = new Session();
+		session = new Session();
 		session.setIdSession(1);
 
 		frame = new JFrame();
@@ -87,7 +105,7 @@ public class TestBoutons {
 
 		group = new ButtonGroup();
 
-		JPanel panelTableau = new JPanel();
+		panelTableau = new JPanel();
 		panelTableau.setBounds(6, 6, 941, 666);
 		frame.getContentPane().add(panelTableau);
 
@@ -103,28 +121,28 @@ public class TestBoutons {
 		panelBouttons.setBounds(973, 294, 195, 193);
 		frame.getContentPane().add(panelBouttons);
 
-		JRadioButton siDeuxBoutton = new JRadioButton();
+		siDeuxBoutton = new JRadioButton();
 		panelBouttons.add(siDeuxBoutton);
 		siDeuxBoutton.setText("SI2 : "
-				+ dao.findHeuresSessionModule(siDeux, session)
+				+ heuresSessionModuleDao.findHeuresSessionModule(siDeux, session)
 						.getNbreHeuresDisponibles() + " Heures");
 		group.add(siDeuxBoutton);
 
-		JRadioButton anglaisBoutton = new JRadioButton();
+		anglaisBoutton = new JRadioButton();
 		panelBouttons.add(anglaisBoutton);
 		anglaisBoutton.setText("Anglais : "
-				+ dao.findHeuresSessionModule(anglais, session)
+				+ heuresSessionModuleDao.findHeuresSessionModule(anglais, session)
 						.getNbreHeuresDisponibles() + " Heures");
 		group.add(anglaisBoutton);
 
 		mathsBouton = new JRadioButton();
 		panelBouttons.add(mathsBouton);
 		mathsBouton.setText("Maths : "
-				+ dao.findHeuresSessionModule(maths, session)
+				+ heuresSessionModuleDao.findHeuresSessionModule(maths, session)
 						.getNbreHeuresDisponibles() + " Heures");
 		group.add(mathsBouton);
 
-		JRadioButton rdbtnSupprimer = new JRadioButton("Supprimer");
+		rdbtnSupprimer = new JRadioButton("Supprimer");
 		group.add(rdbtnSupprimer);
 		panelBouttons.add(rdbtnSupprimer);
 	}
@@ -149,13 +167,17 @@ public class TestBoutons {
 			String texteDuBouton = "";
 			String nomModule;
 			String texteVide;
-			Component[] tableau = panelBouttons.getComponents();
-			ArrayList<JRadioButton> tableauBoutton = new ArrayList<JRadioButton>();
-			Seance seance = new Seance();
+			String contenu = "null";
+			
+			tableau = panelBouttons.getComponents();
+			tableauBoutton = new ArrayList<JRadioButton>();
+			seance = new Seance();
 			Seance.Creneau matin = Creneau.MATIN;
 			Seance.Creneau apresMidi = Creneau.APRES_MIDI;
-			SeanceDao seanceDao = new SeanceDao();
-			ModuleDao moduleDao = new ModuleDao();
+			seanceDao = new SeanceDao();
+			moduleDao = new ModuleDao();
+			salleDao = new SalleDao();
+			salle = salleDao.findModuleByNom(1);
 			GregorianCalendar jour;
 
 			for (int i = 0; i < tableau.length; i++) {
@@ -168,8 +190,9 @@ public class TestBoutons {
 					if (!texteDuBouton.equals("Supprimer")) {
 						nomModule = texteDuBouton.split(" ")[0];
 						seance.setIdModule(moduleDao.findModuleByNom(nomModule).getIdModule());
-						table.setValueAt(nomModule, table.getSelectedRow(),
-								table.getSelectedColumn());
+						table.setValueAt("<html><center> "/* + nomModule + "<br>avec " + moduleDao.findFormateurByNomModule(nomModule).getPrenom()
+								+ " " + moduleDao.findFormateurByNomModule(nomModule).getNom() + "<br>salle "
+								+ salle.getNomSalle() + "</center></html>"*/, table.getSelectedRow(), table.getSelectedColumn());
 						// on fait un insert dans la table
 						if (table.getSelectedColumn() % 2 == 0) {
 							seance.setCreneau(apresMidi);
@@ -179,8 +202,11 @@ public class TestBoutons {
 							seance.setCreneau(matin);
 							jour = (GregorianCalendar) table.getValueAt(table.getSelectedRow() - 1, table.getSelectedColumn() - 1);
 						}
-						seance.setJour(jour);
-						seance.setIdFormateur(moduleDao.);
+						seance.setDebut(jour);
+						seance.setIdFormateur(moduleDao.findFormateurByNomModule(nomModule).getIdFormateur());
+						seance.setIdSession(session.getIdSession());
+						seance.setContenu(contenu);
+						seance.setIdSalle(salle.getIdSalle());
 						seanceDao.insertSeance(seance);
 					} else {
 						texteVide = "";

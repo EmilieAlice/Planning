@@ -12,19 +12,19 @@ public class Formateur extends Personne {
 
 	}
 
-	public Formateur(int idPersonne, Date dateEntree, int idModule) {
+	public Formateur(int idFormateur, Date dateEntree, int idModule) {
 		super();
-		this.idFormateur = idPersonne;
+		this.idFormateur = idFormateur;
 		this.dateEntree = dateEntree;
 		this.idModule = idModule;
 	}
 
-	public int getIdPersonne() {
+	public int getIdFormateur() {
 		return idFormateur;
 	}
 
-	public void setIdPersonne(int idPersonne) {
-		this.idFormateur = idPersonne;
+	public void setIdFormateur(int idFormateur) {
+		this.idFormateur = idFormateur;
 	}
 
 	public Date getDateEntree() {

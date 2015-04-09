@@ -59,7 +59,7 @@ public class SeanceDao {
 				seance.setIdModule(resultat.getInt("id_module"));
 				seance.setIdSession(idSession);
 				seance.setIdFormateur(resultat.getInt("id_formateur"));
-				seance.setJour(jour);
+				seance.setDebut(jour);
 				seance.setCreneau(creneau);
 				seance.setIdSalle(resultat.getInt("id_salle"));
 				seance.setContenu(resultat.getString("contenu"));
@@ -104,10 +104,10 @@ public class SeanceDao {
 		Boolean etat = new Boolean(false);
 		try {
 			// Conversion de la date Gregorian en date SQL
-			Timestamp dateSQLDebut = new Timestamp(seance.getJour().getTimeInMillis());
+			Timestamp dateSQLDebut = new Timestamp(seance.getDebut().getTimeInMillis());
 			
 			// On ajoute l'heure d'une seance pour avoir la date de fin
-			long journee = seance.getJour().getTimeInMillis();
+			long journee = seance.getDebut().getTimeInMillis();
 			long millis = (3600000);
 			long heureCreneau = 0;
 			if (seance.getCreneau().equals(Seance.Creneau.APRES_MIDI)){
@@ -167,7 +167,7 @@ public class SeanceDao {
 	public Boolean deleteSeance(Seance seance) {
 		Boolean etat = new Boolean(false);
 		try {
-			GregorianCalendar dateDebut = seance.getJour();
+			GregorianCalendar dateDebut = seance.getDebut();
 			Timestamp dateSQL = new Timestamp(dateDebut.getTimeInMillis());
 
 			pDeleteSeance.setTimestamp(1, dateSQL);

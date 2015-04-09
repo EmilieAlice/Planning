@@ -9,7 +9,8 @@ public class Seance {
 	private int idModule;
 	private int idSession;
 	private int idFormateur;
-	private GregorianCalendar jour;
+	private GregorianCalendar debut;
+	private GregorianCalendar fin;
 	private int idSalle;
 	private String contenu;
 	private Creneau creneau;
@@ -22,17 +23,18 @@ public class Seance {
 	}
 
 	public Seance(int idModule, int idSession, int idFormateur,
-			GregorianCalendar jour, Creneau creneau, int idSalle, String contenu) {
+			GregorianCalendar debut, GregorianCalendar fin, Creneau creneau, int idSalle, String contenu) {
 		super();
 		this.idModule = idModule;
 		this.idSession = idSession;
 		this.idFormateur = idFormateur;
-		this.jour = jour;
+		this.debut = debut;
+		this.fin = fin;
 		this.creneau = creneau;
 		this.idSalle = idSalle;
 		this.contenu = contenu;
 		
-		long journee = jour.getTimeInMillis();
+		/*long journee = debut.getTimeInMillis();
 		long millis = (3600000);
 		long debutSeance = 0;
 		if (getCreneau() == Creneau.APRES_MIDI){
@@ -41,8 +43,7 @@ public class Seance {
 		else {
 			debutSeance = 9 * millis;
 		}
-		journee = journee + debutSeance;
-		jour.setTimeInMillis(journee);
+		journee = journee + debutSeance;*/
 	}
 
 	public int getIdModule() {
@@ -69,13 +70,14 @@ public class Seance {
 		this.idFormateur = idFormateur;
 	}
 
-	public GregorianCalendar getJour() {
-		return jour;
+	public GregorianCalendar getDebut() {
+		return debut;
 	}
 
-	public void setJour(GregorianCalendar jour) {
-		this.jour = jour;
-		long journee = jour.getTimeInMillis();
+	public void setDebut(GregorianCalendar debut) {
+		this.debut = debut;
+		//pour le moment pas utile la suite mais je ne supprime pas au cas ou on en aurait besoin
+		/*long journee = debut.getTimeInMillis();
 		long millis = (3600000);
 		long debutSeance = 0;
 		if (getCreneau() == Creneau.APRES_MIDI){
@@ -85,7 +87,14 @@ public class Seance {
 			debutSeance = 9 * millis;
 		}
 		journee = journee + debutSeance;
-		jour.setTimeInMillis(journee);
+		debut.setTimeInMillis(journee);*/
+	}
+	public GregorianCalendar getFin() {
+		return fin;
+	}
+
+	public void setFin(GregorianCalendar fin) {
+		this.fin = fin;
 	}
 	
 	public Creneau getCreneau() {
@@ -113,7 +122,7 @@ public class Seance {
 	}
 
 	public enum Creneau {
-		MATIN(0), APRES_MIDI(1);
+		MATIN(1), APRES_MIDI(2);
 
 		private int valeur;
 
@@ -133,9 +142,9 @@ public class Seance {
 	@Override
 	public String toString() {
 		return "Seance [idModule= " + idModule + ", idSession= " + idSession
-				+ ", idFormateur = " + idFormateur + ", jour = " + jour.getTime()
-				+ ", creneau = " + creneau + ", idSalle = " + idSalle 
-				+ ", contenu = " + contenu + "]";
+				+ ", idFormateur = " + idFormateur + ", debut = " + debut.getTime() 
+				+ ", fin = " + fin.getTime() + ", creneau = " + creneau 
+				+ ", idSalle = " + idSalle + ", contenu = " + contenu + "]";
 	}
 
 }

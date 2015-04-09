@@ -18,7 +18,7 @@ public class FormateurDao {
 					.getConnection()
 					.prepareStatement(
 							"SELECT * FROM lagarenne2015.formateur "
-									+ "INNER JOIN personne on personne.id_personne = formateur.id_personne "
+									+ "INNER JOIN personne on personne.id_personne = formateur.id_formateur "
 									+ "WHERE formateur.id_personne = ?;");
 		} catch (Exception e) {
 			e.getMessage();
@@ -36,10 +36,10 @@ public class FormateurDao {
 	public Formateur findFormateurByIdPersonne(Personne personne) {
 		Formateur formateur = new Formateur();
 		try {
-			pFindFormateurByIdPersonne.setInt(1, personne.getIdPersonne());
+			pFindFormateurByIdPersonne.setInt(1, personne.getIdFormateur());
 			ResultSet resultat = pFindFormateurByIdPersonne.executeQuery();
 			if (resultat.next()) {
-				formateur.setIdPersonne(resultat.getInt("id_personne"));
+				formateur.setIdFormateur(resultat.getInt("id_formateur"));
 				formateur.setDateEntree(resultat.getDate("date_entree"));
 				formateur.setIdModule(resultat.getInt("id_module"));
 				// Ajoutez les attributs de la personne
@@ -63,7 +63,7 @@ public class FormateurDao {
 					.getConnection()
 					.prepareStatement(
 							"SELECT * FROM lagarenne2015.formateur "
-									+ "INNER JOIN personne on personne.id_personne = formateur.id_personne "
+									+ "INNER JOIN personne on personne.id_personne = formateur.id_formateur "
 									+ "WHERE formateur.id_module = ?;");
 		} catch (Exception e) {
 			e.getMessage();
@@ -84,7 +84,7 @@ public class FormateurDao {
 			pFindFormateurByIdModule.setInt(1, module.getIdModule());
 			ResultSet resultat = pFindFormateurByIdPersonne.executeQuery();
 			if (resultat.next()) {
-				formateur.setIdPersonne(resultat.getInt("id_personne"));
+				formateur.setIdFormateur(resultat.getInt("id_formateur"));
 				formateur.setDateEntree(resultat.getDate("date_entree"));
 				formateur.setIdModule(resultat.getInt("id_module"));
 				formateur.setCivilite(resultat.getString("civilite"));

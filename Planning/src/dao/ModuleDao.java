@@ -3,6 +3,7 @@ package dao;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import modele.Formateur;
 import modele.Module;
 import modele.Session;
 
@@ -107,6 +108,59 @@ public class ModuleDao {
 			e.printStackTrace();
 		}
 		return listeModule;
+	}
+
+
+	private static java.sql.PreparedStatement pFindFormateurByNomModule = null;
+	/**
+	 * Requete pour récupérer un formateur grâce au nom du module
+	 */
+	static {
+		try {
+			pFindFormateurByNomModule = DataBase
+					.getConnection()
+					.prepareStatement(
+							"SELECT * FROM lagarenne2015.formateur "
+							+ "INNER JOIN lagarenne2015.module on module.id_module = formateur.id_module"
+							+ "INNER JOIN lagarenne2015.personne on personne.id_personne = formateur.id_formateur"
+							+ "WHERE module.nom_module = ?;");
+		} catch (Exception e) {
+			e.getMessage();
+			System.out.println("Requete findFormateurByNomModule échouée.");
+		}
+	}
+	/**
+	 * Méthode qui récupère dans la base données un objet Formateur
+	 * 
+	 * @param nomModule
+	 * @return
+	 */
+
+	public Formateur findFormateurByNomModule(String nomModule) {
+		Formateur formateur = new Formateur();
+		try {
+			pFindFormateurByNomModule.setString(1, nomModule);
+			ResultSet resultat = pFindFormateurByNomModule.executeQuery();
+			if (resultat.next()) {
+				formateur.setIdFormateur(resultat.getInt("id_formateur"));
+				formateur.setDateEntree(resultat.getDate("date_entree"));
+				formateur.setIdModule(resultat.getInt("id_module"));
+				formateur.setCivilite(resultat.getString("civilite"));
+				formateur.setNom(resultat.getString("nom"));
+				formateur.setPrenom(resultat.getString("prenom"));
+				formateur.setAdresse(resultat.getString("adresse"));
+				formateur.setAdresse(resultat.getString("adresse"));
+				formateur.setCodePostal(resultat.getString("code_postal"));
+				formateur.setVille(resultat.getString("ville"));
+				formateur.setTelephone(resultat.getString("telephone"));
+				formateur.setEmail(resultat.getString("email"));
+			} else {
+				formateur = null;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return formateur;
 	}
 
 }

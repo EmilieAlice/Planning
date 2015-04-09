@@ -24,7 +24,7 @@ public class FormateurDaoTest {
 		Formateur formateur = new Formateur();
 		formateur = formateurDao.findFormateurByIdModule(moduleTest);
 		
-		assertEquals(0, formateur.getIdPersonne());
+		assertEquals(0, formateur.getIdFormateur());
 		
 	}
 

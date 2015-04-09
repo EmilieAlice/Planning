@@ -23,11 +23,11 @@ public class Personne {
 	private Timestamp dateInscription;
 	private boolean estInscrite;
 
-	public int getIdPersonne() {
+	public int getIdFormateur() {
 		return idPersonne;
 	}
 
-	public void setIdPersonne(int idPersonne) {
+	public void setIdFormateur(int idPersonne) {
 		this.idPersonne = idPersonne;
 	}
 
