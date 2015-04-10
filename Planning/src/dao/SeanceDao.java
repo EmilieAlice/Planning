@@ -133,6 +133,7 @@ public class SeanceDao {
 			pInsertSeance.setInt(6, idCreneau);
 			pInsertSeance.setInt(7, seance.getIdSalle());
 			pInsertSeance.setString(8, seance.getContenu());
+			System.out.println(pInsertSeance);
 
 			int resultat = pInsertSeance.executeUpdate();
 			if (resultat != 0)
@@ -164,11 +165,10 @@ public class SeanceDao {
 	 *            (un objet Seance)
 	 * @return booléen
 	 */
-	public Boolean deleteSeance(Seance seance) {
+	public Boolean deleteSeance(GregorianCalendar debut) {
 		Boolean etat = new Boolean(false);
 		try {
-			GregorianCalendar dateDebut = seance.getDebut();
-			Timestamp dateSQL = new Timestamp(dateDebut.getTimeInMillis());
+			Timestamp dateSQL = new Timestamp(debut.getTimeInMillis());
 
 			pDeleteSeance.setTimestamp(1, dateSQL);
 			int resultat = pDeleteSeance.executeUpdate();

@@ -154,13 +154,13 @@ public class TestBoutons {
 			
 			if (table.getSelectedRow() % 2 != 0) {
 				if (table.getSelectedColumn() % 2 != 0) {
-					System.out.println(table.getValueAt(
+					/*System.out.println(table.getValueAt(
 							table.getSelectedRow() - 1,
-							table.getSelectedColumn()));
+							table.getSelectedColumn()));*/
 				} else {
-					System.out.println(table.getValueAt(
+					/*System.out.println(table.getValueAt(
 							table.getSelectedRow() - 1,
-							table.getSelectedColumn() - 1));
+							table.getSelectedColumn() - 1));*/
 				}
 			}
 
@@ -177,8 +177,12 @@ public class TestBoutons {
 			seanceDao = new SeanceDao();
 			moduleDao = new ModuleDao();
 			salleDao = new SalleDao();
-			salle = salleDao.findModuleByNom(1);
-			GregorianCalendar jour;
+			//salle = salleDao.findModuleByNom(1);
+			String recupDate;
+			int year;
+			int month;
+			int day;
+			GregorianCalendar gregJour;
 
 			for (int i = 0; i < tableau.length; i++) {
 				tableauBoutton.add((JRadioButton) tableau[i]);
@@ -196,17 +200,28 @@ public class TestBoutons {
 						// on fait un insert dans la table
 						if (table.getSelectedColumn() % 2 == 0) {
 							seance.setCreneau(apresMidi);
-							jour = (GregorianCalendar) table.getValueAt(table.getSelectedRow() - 1, table.getSelectedColumn());
+							System.out.println(table.getValueAt(table.getSelectedRow() - 1, table.getSelectedColumn()));
+							//recupDate = (String) table.getValueAt(table.getSelectedRow() - 1, table.getSelectedColumn());
+							//System.out.println(recupDate);
+							//System.out.println(recupDate.split("/")[0]);
+							/*year = Integer.parseInt(recupDate.split("/")[2]);
+							month = Integer.parseInt(recupDate.split("/")[1]);
+							day= Integer.parseInt(recupDate.split("/")[0]);
+							gregJour = new GregorianCalendar(year, month, day);*/
 						}
 						else{
 							seance.setCreneau(matin);
-							jour = (GregorianCalendar) table.getValueAt(table.getSelectedRow() - 1, table.getSelectedColumn() - 1);
+							recupDate = (String) table.getValueAt(table.getSelectedRow() - 1, table.getSelectedColumn() - 1);
+							year = Integer.parseInt(recupDate.split("/")[2]);
+							month = Integer.parseInt(recupDate.split("/")[1]);
+							day= Integer.parseInt(recupDate.split("/")[0]);
+							gregJour = new GregorianCalendar(year, month, day);
 						}
-						seance.setDebut(jour);
+						//seance.setDebut(gregJour);
 						seance.setIdFormateur(moduleDao.findFormateurByNomModule(nomModule).getIdFormateur());
 						seance.setIdSession(session.getIdSession());
 						seance.setContenu(contenu);
-						seance.setIdSalle(salle.getIdSalle());
+						seance.setIdSalle(1);
 						seanceDao.insertSeance(seance);
 					} else {
 						texteVide = "";
@@ -217,7 +232,7 @@ public class TestBoutons {
 								table.getSelectedColumn());
 						// on fait un delete dans la table en se basant sur
 						// l'heure de début
-						seanceDao.deleteSeance(seance);
+						seanceDao.deleteSeance(seance.getDebut());
 					}
 
 				}

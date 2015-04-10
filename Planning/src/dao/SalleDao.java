@@ -31,6 +31,7 @@ public class SalleDao {
 		try {
 			pFindSalleById.setInt(1, idSalle);
 			ResultSet resultat = pFindSalleById.executeQuery();
+			System.out.println(pFindSalleById);
 			if (resultat.next()) {
 				salle.setIdSalle(resultat.getInt("id_salle"));
 				salle.setNomSalle(resultat.getString("nom_salle"));
