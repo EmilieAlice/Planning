@@ -44,7 +44,7 @@ public class DonneesTableauDouble extends AbstractTableModel {
 			.getTimeInMillis()) / milliSecondesParJour;
 
 	// Pour formater une date au format désiré
-	SimpleDateFormat format = new SimpleDateFormat("dd/MM/YY");
+	SimpleDateFormat format = new SimpleDateFormat("dd/MM/YYYY");
 
 	// On remplit le nom des colonnes de titre
 	private final String[] columnNames = { "Semaine", "LUNDI Matin",

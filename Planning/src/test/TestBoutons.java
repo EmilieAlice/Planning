@@ -152,18 +152,6 @@ public class TestBoutons {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 
-			if (table.getSelectedRow() % 2 != 0) {
-				if (table.getSelectedColumn() % 2 != 0) {
-					/*System.out.println(table.getValueAt(
-							table.getSelectedRow() - 1,
-							table.getSelectedColumn()));*/
-				} else {
-					/*System.out.println(table.getValueAt(
-							table.getSelectedRow() - 1,
-							table.getSelectedColumn() - 1));*/
-				}
-			}
-
 			String texteDuBouton = "";
 			String nomModule;
 			String texteVide;
@@ -193,6 +181,7 @@ public class TestBoutons {
 					texteDuBouton = jRadioButton.getText();
 					if (!texteDuBouton.equals("Supprimer")) {
 						nomModule = texteDuBouton.split(" ")[0];
+						System.out.println(nomModule);
 						seance.setIdModule(moduleDao.findModuleByNom(nomModule).getIdModule());
 						table.setValueAt(/*"<html><center> " +*/ nomModule /*+ "<br>avec " + moduleDao.findFormateurByNomModule(nomModule).getPrenom()
 								+ " " + moduleDao.findFormateurByNomModule(nomModule).getNom() + "<br>salle "
@@ -200,12 +189,9 @@ public class TestBoutons {
 						// on fait un insert dans la table
 						if (table.getSelectedColumn() % 2 == 0) {
 							seance.setCreneau(apresMidi);
-							System.out.println(table.getValueAt(table.getSelectedRow() - 1, table.getSelectedColumn() - 1));
 							recupDate = (String) table.getValueAt(table.getSelectedRow() - 1, table.getSelectedColumn() -1);
-							System.out.println(recupDate);
-							System.out.println(recupDate.split("/")[0]);
 							year = Integer.parseInt(recupDate.split("/")[2]);
-							month = Integer.parseInt(recupDate.split("/")[1]);
+							month = Integer.parseInt(recupDate.split("/")[1])-1;
 							day= Integer.parseInt(recupDate.split("/")[0]);
 							gregJour = new GregorianCalendar(year, month, day);
 						}
@@ -213,11 +199,11 @@ public class TestBoutons {
 							seance.setCreneau(matin);
 							recupDate = (String) table.getValueAt(table.getSelectedRow() - 1, table.getSelectedColumn());
 							year = Integer.parseInt(recupDate.split("/")[2]);
-							month = Integer.parseInt(recupDate.split("/")[1]);
+							month = Integer.parseInt(recupDate.split("/")[1])-1;
 							day= Integer.parseInt(recupDate.split("/")[0]);
 							gregJour = new GregorianCalendar(year, month, day);
 						}
-						//seance.setDebut(gregJour);
+						seance.setDebut(gregJour);
 						seance.setIdFormateur(moduleDao.findFormateurByNomModule(nomModule).getIdFormateur());
 						seance.setIdSession(session.getIdSession());
 						seance.setContenu(contenu);

@@ -18,7 +18,7 @@ public class ModuleDao {
 	static {
 		try {
 			pFindModuleByNom = DataBase.getConnection().prepareStatement(
-					"SELECT * FROM lagarenne2015.module " + "WHERE nom_module=?; ");
+					"SELECT * FROM lagarenne2015.module WHERE module.nom_module = ?;");
 		} catch (Exception e) {
 			e.getMessage();
 			System.out.println("Requete findModuleByNom échouée.");
@@ -122,8 +122,8 @@ public class ModuleDao {
 					.getConnection()
 					.prepareStatement(
 							"SELECT * FROM lagarenne2015.formateur "
-							+ "INNER JOIN lagarenne2015.module on module.id_module = formateur.id_module"
-							+ "INNER JOIN lagarenne2015.personne on personne.id_personne = formateur.id_formateur"
+							+ "INNER JOIN lagarenne2015.module on module.id_module = formateur.id_module "
+							+ "INNER JOIN lagarenne2015.personne on personne.id_personne = formateur.id_formateur "
 							+ "WHERE module.nom_module = ?;");
 		} catch (Exception e) {
 			e.getMessage();
