@@ -56,7 +56,7 @@ public class TestBoutons {
 	private ModuleDao moduleDao;
 	private Salle salle;
 	private SalleDao salleDao;
-	
+
 	/**
 	 * Launch the application.
 	 */
@@ -125,21 +125,21 @@ public class TestBoutons {
 		panelBouttons.add(siDeuxBoutton);
 		siDeuxBoutton.setText("SI2 : "
 				+ heuresSessionModuleDao.findHeuresSessionModule(siDeux, session)
-						.getNbreHeuresDisponibles() + " Heures");
+				.getNbreHeuresDisponibles() + " Heures");
 		group.add(siDeuxBoutton);
 
 		anglaisBoutton = new JRadioButton();
 		panelBouttons.add(anglaisBoutton);
 		anglaisBoutton.setText("Anglais : "
 				+ heuresSessionModuleDao.findHeuresSessionModule(anglais, session)
-						.getNbreHeuresDisponibles() + " Heures");
+				.getNbreHeuresDisponibles() + " Heures");
 		group.add(anglaisBoutton);
 
 		mathsBouton = new JRadioButton();
 		panelBouttons.add(mathsBouton);
 		mathsBouton.setText("Maths : "
 				+ heuresSessionModuleDao.findHeuresSessionModule(maths, session)
-						.getNbreHeuresDisponibles() + " Heures");
+				.getNbreHeuresDisponibles() + " Heures");
 		group.add(mathsBouton);
 
 		rdbtnSupprimer = new JRadioButton("Supprimer");
@@ -151,7 +151,7 @@ public class TestBoutons {
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			
+
 			if (table.getSelectedRow() % 2 != 0) {
 				if (table.getSelectedColumn() % 2 != 0) {
 					/*System.out.println(table.getValueAt(
@@ -168,7 +168,7 @@ public class TestBoutons {
 			String nomModule;
 			String texteVide;
 			String contenu = "null";
-			
+
 			tableau = panelBouttons.getComponents();
 			tableauBoutton = new ArrayList<JRadioButton>();
 			seance = new Seance();
@@ -194,24 +194,24 @@ public class TestBoutons {
 					if (!texteDuBouton.equals("Supprimer")) {
 						nomModule = texteDuBouton.split(" ")[0];
 						seance.setIdModule(moduleDao.findModuleByNom(nomModule).getIdModule());
-						table.setValueAt("<html><center> "/* + nomModule + "<br>avec " + moduleDao.findFormateurByNomModule(nomModule).getPrenom()
+						table.setValueAt(/*"<html><center> " +*/ nomModule /*+ "<br>avec " + moduleDao.findFormateurByNomModule(nomModule).getPrenom()
 								+ " " + moduleDao.findFormateurByNomModule(nomModule).getNom() + "<br>salle "
 								+ salle.getNomSalle() + "</center></html>"*/, table.getSelectedRow(), table.getSelectedColumn());
 						// on fait un insert dans la table
 						if (table.getSelectedColumn() % 2 == 0) {
 							seance.setCreneau(apresMidi);
-							System.out.println(table.getValueAt(table.getSelectedRow() - 1, table.getSelectedColumn()));
-							//recupDate = (String) table.getValueAt(table.getSelectedRow() - 1, table.getSelectedColumn());
-							//System.out.println(recupDate);
-							//System.out.println(recupDate.split("/")[0]);
-							/*year = Integer.parseInt(recupDate.split("/")[2]);
+							System.out.println(table.getValueAt(table.getSelectedRow() - 1, table.getSelectedColumn() - 1));
+							recupDate = (String) table.getValueAt(table.getSelectedRow() - 1, table.getSelectedColumn() -1);
+							System.out.println(recupDate);
+							System.out.println(recupDate.split("/")[0]);
+							year = Integer.parseInt(recupDate.split("/")[2]);
 							month = Integer.parseInt(recupDate.split("/")[1]);
 							day= Integer.parseInt(recupDate.split("/")[0]);
-							gregJour = new GregorianCalendar(year, month, day);*/
+							gregJour = new GregorianCalendar(year, month, day);
 						}
 						else{
 							seance.setCreneau(matin);
-							recupDate = (String) table.getValueAt(table.getSelectedRow() - 1, table.getSelectedColumn() - 1);
+							recupDate = (String) table.getValueAt(table.getSelectedRow() - 1, table.getSelectedColumn());
 							year = Integer.parseInt(recupDate.split("/")[2]);
 							month = Integer.parseInt(recupDate.split("/")[1]);
 							day= Integer.parseInt(recupDate.split("/")[0]);
