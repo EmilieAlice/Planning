@@ -34,7 +34,7 @@ public class Seance {
 		this.idSalle = idSalle;
 		this.contenu = contenu;
 		
-		/*long journee = debut.getTimeInMillis();
+		long journee = debut.getTimeInMillis();
 		long millis = (3600000);
 		long debutSeance = 0;
 		if (getCreneau() == Creneau.APRES_MIDI){
@@ -43,7 +43,8 @@ public class Seance {
 		else {
 			debutSeance = 9 * millis;
 		}
-		journee = journee + debutSeance;*/
+		journee = journee + debutSeance;
+		debut.setTimeInMillis(journee);
 	}
 
 	public int getIdModule() {
@@ -77,7 +78,7 @@ public class Seance {
 	public void setDebut(GregorianCalendar debut) {
 		this.debut = debut;
 		//pour le moment pas utile la suite mais je ne supprime pas au cas ou on en aurait besoin
-		/*long journee = debut.getTimeInMillis();
+		long journee = debut.getTimeInMillis();
 		long millis = (3600000);
 		long debutSeance = 0;
 		if (getCreneau() == Creneau.APRES_MIDI){
@@ -87,7 +88,7 @@ public class Seance {
 			debutSeance = 9 * millis;
 		}
 		journee = journee + debutSeance;
-		debut.setTimeInMillis(journee);*/
+		debut.setTimeInMillis(journee);
 	}
 	public GregorianCalendar getFin() {
 		return fin;

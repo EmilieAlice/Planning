@@ -120,9 +120,9 @@ public class SeanceDao {
 			Timestamp dateSQLFin = new Timestamp(journee);
 			
 			// On insere le creneau grace à l'enum
-			int idCreneau = 0;
+			int idCreneau = 1;
 			if (seance.getCreneau().equals(Seance.Creneau.APRES_MIDI)){
-				idCreneau = 1;
+				idCreneau = 2;
 				}
 			
 			pInsertSeance.setInt(1, seance.getIdModule());

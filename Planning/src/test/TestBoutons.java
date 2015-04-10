@@ -181,7 +181,6 @@ public class TestBoutons {
 					texteDuBouton = jRadioButton.getText();
 					if (!texteDuBouton.equals("Supprimer")) {
 						nomModule = texteDuBouton.split(" ")[0];
-						System.out.println(nomModule);
 						seance.setIdModule(moduleDao.findModuleByNom(nomModule).getIdModule());
 						table.setValueAt(/*"<html><center> " +*/ nomModule /*+ "<br>avec " + moduleDao.findFormateurByNomModule(nomModule).getPrenom()
 								+ " " + moduleDao.findFormateurByNomModule(nomModule).getNom() + "<br>salle "
@@ -211,14 +210,28 @@ public class TestBoutons {
 						seanceDao.insertSeance(seance);
 					} else {
 						texteVide = "";
-						if (table.getSelectedColumn() % 2 == 0) {
-						}else{
-						}
-						table.setValueAt(texteVide, table.getSelectedRow(),
-								table.getSelectedColumn());
 						// on fait un delete dans la table en se basant sur
 						// l'heure de début
+						if (table.getSelectedColumn() % 2 == 0) {
+							seance.setCreneau(apresMidi);
+							recupDate = (String) table.getValueAt(table.getSelectedRow() - 1, table.getSelectedColumn() -1);
+							year = Integer.parseInt(recupDate.split("/")[2]);
+							month = Integer.parseInt(recupDate.split("/")[1])-1;
+							day= Integer.parseInt(recupDate.split("/")[0]);
+							gregJour = new GregorianCalendar(year, month, day);
+						}
+						else{
+							seance.setCreneau(matin);
+							recupDate = (String) table.getValueAt(table.getSelectedRow() - 1, table.getSelectedColumn());
+							year = Integer.parseInt(recupDate.split("/")[2]);
+							month = Integer.parseInt(recupDate.split("/")[1])-1;
+							day= Integer.parseInt(recupDate.split("/")[0]);
+							gregJour = new GregorianCalendar(year, month, day);
+						}
+						seance.setDebut(gregJour);
 						seanceDao.deleteSeance(seance.getDebut());
+						table.setValueAt(texteVide, table.getSelectedRow(),
+								table.getSelectedColumn());
 					}
 
 				}
