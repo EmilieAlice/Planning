@@ -60,7 +60,19 @@ public class Bouton extends Observable{
 		JRadioButton boutonSupprimer = new JRadioButton("Supprimer");
 		boutonDesMatières.add(boutonSupprimer);
 		groupeDeBoutons.add(boutonSupprimer);
+		
+		setChanged();
+		notifyObservers();
 
-
+	}
+	
+	public JRadioButton boutonSelectionne(ArrayList<JRadioButton> boutonDesMatières){
+		JRadioButton boutonSelec = new JRadioButton();
+		for (JRadioButton jRadioButton : boutonDesMatières) {
+			if(jRadioButton.isSelected()){
+				boutonSelec = jRadioButton;
+			}
+		}
+		return boutonSelec;
 	}
 }
