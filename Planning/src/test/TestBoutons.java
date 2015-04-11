@@ -15,6 +15,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JToggleButton;
 import javax.swing.ListSelectionModel;
 
+import modele.Bouton;
 import modele.Module;
 import modele.Salle;
 import modele.Seance;
@@ -51,11 +52,12 @@ public class TestBoutons {
 	private JRadioButton rdbtnSupprimer;
 	private Component[] tableau;
 	private ArrayList<JRadioButton> tableauBoutton;
-	private Seance seance; 
+	private Seance seance;
 	private SeanceDao seanceDao;
 	private ModuleDao moduleDao;
 	private Salle salle;
 	private SalleDao salleDao;
+	private Bouton groupeDeBoutons;
 
 	/**
 	 * Launch the application.
@@ -84,19 +86,6 @@ public class TestBoutons {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		heuresSessionModuleDao = new HeuresSessionModuleDao();
-
-		maths = new Module();
-		maths.setIdModule(2);
-
-		anglais = new Module();
-		anglais.setIdModule(3);
-
-		siDeux = new Module();
-		siDeux.setIdModule(1);
-
-		session = new Session();
-		session.setIdSession(1);
 
 		frame = new JFrame();
 		frame.setBounds(100, 100, 1200, 800);
@@ -118,33 +107,21 @@ public class TestBoutons {
 		panelTableau.add(table);
 
 		panelBouttons = new JPanel();
-		panelBouttons.setBounds(973, 294, 195, 193);
+		panelBouttons.setBounds(959, 172, 235, 315);
 		frame.getContentPane().add(panelBouttons);
 
-		siDeuxBoutton = new JRadioButton();
-		panelBouttons.add(siDeuxBoutton);
-		siDeuxBoutton.setText("SI2 : "
-				+ heuresSessionModuleDao.findHeuresSessionModule(siDeux, session)
-				.getNbreHeuresDisponibles() + " Heures");
-		group.add(siDeuxBoutton);
+		groupeDeBoutons = new Bouton();
+		groupeDeBoutons.remplir();
+		ArrayList<JRadioButton> listeDesBoutons = groupeDeBoutons
+				.getBoutonDesMatières();
 
-		anglaisBoutton = new JRadioButton();
-		panelBouttons.add(anglaisBoutton);
-		anglaisBoutton.setText("Anglais : "
-				+ heuresSessionModuleDao.findHeuresSessionModule(anglais, session)
-				.getNbreHeuresDisponibles() + " Heures");
-		group.add(anglaisBoutton);
+		for (JRadioButton jRadioButton : listeDesBoutons) {
+			panelBouttons.add(jRadioButton);
+			group.add(jRadioButton);
+		}
+		session = new Session();
+		session.setIdSession(1);
 
-		mathsBouton = new JRadioButton();
-		panelBouttons.add(mathsBouton);
-		mathsBouton.setText("Maths : "
-				+ heuresSessionModuleDao.findHeuresSessionModule(maths, session)
-				.getNbreHeuresDisponibles() + " Heures");
-		group.add(mathsBouton);
-
-		rdbtnSupprimer = new JRadioButton("Supprimer");
-		group.add(rdbtnSupprimer);
-		panelBouttons.add(rdbtnSupprimer);
 	}
 
 	public class ecouteur implements MouseListener {
@@ -165,7 +142,7 @@ public class TestBoutons {
 			seanceDao = new SeanceDao();
 			moduleDao = new ModuleDao();
 			salleDao = new SalleDao();
-			//salle = salleDao.findModuleByNom(1);
+			// salle = salleDao.findModuleByNom(1);
 			String recupDate;
 			int year;
 			int month;
@@ -175,6 +152,7 @@ public class TestBoutons {
 			for (int i = 0; i < tableau.length; i++) {
 				tableauBoutton.add((JRadioButton) tableau[i]);
 			}
+
 			if(table.getSelectedRow() % 2 != 0){
 				for (JRadioButton jRadioButton : tableauBoutton) {
 					if (jRadioButton.isSelected()) {
@@ -183,9 +161,10 @@ public class TestBoutons {
 							nomModule = texteDuBouton.split(" ")[0];
 							seance.setIdModule(moduleDao.findModuleByNom(nomModule).getIdModule());
 							// on fait un insert dans la table
-							if (table.getValueAt(table.getSelectedRow(), table.getSelectedColumn()).equals(null)){
+							if (table.getValueAt(table.getSelectedRow(), table.getSelectedColumn()) == ""){
 								if (table.getSelectedColumn() % 2 == 0) {
 									seance.setCreneau(apresMidi);
+									System.out.println(seance.getIdModule());
 									recupDate = (String) table.getValueAt(table.getSelectedRow() - 1, table.getSelectedColumn() -1);
 									year = Integer.parseInt(recupDate.split("/")[2]);
 									month = Integer.parseInt(recupDate.split("/")[1])-1;
@@ -216,9 +195,9 @@ public class TestBoutons {
 								}
 							}
 							else{
-								seanceDao.updateSeance(seance.setIdModule(moduleDao.findModuleByNom(nomModule).getIdModule()), 
+								/*seanceDao.updateSeance(seance.setIdModule(moduleDao.findModuleByNom(nomModule).getIdModule()), 
 										seance.setIdFormateur(moduleDao.findFormateurByNomModule(nomModule).getIdFormateur()), 
-										seance.setIdSalle(2), seance.setContenu(contenu), gregJour);
+										seance.setIdSalle(2), seance.setContenu(contenu), gregJour);*/
 							}
 						} else {
 							texteVide = "";
