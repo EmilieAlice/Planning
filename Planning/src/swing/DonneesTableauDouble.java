@@ -17,26 +17,8 @@ public class DonneesTableauDouble extends AbstractTableModel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	//private Session session;
-
-	/*public DonneesTableauDouble(Session session) {
-		super();
-		this.session = session;
-	}
-
-	public Session getSession() {
-		return session;
-	}
-
-	public void setSession(Session session) {
-		this.session = session;
-	}*/
 
 	private int milliSecondesParJour = (1000 * 60 * 60 * 24);
-	/*
-	 * GregorianCalendar premierJour = session.getDateDebut(); GregorianCalendar
-	 * dernierJour = session.getDateFin();
-	 */
 
 	// Pour formater une date au format désiré
 	SimpleDateFormat format = new SimpleDateFormat("dd/MM/YYYY");
@@ -46,9 +28,6 @@ public class DonneesTableauDouble extends AbstractTableModel {
 			"Après-midi", "MARDI Matin", "Après-midi", "MERCREDI Matin",
 			"Après-midi", "JEUDI Matin", "Après-midi", "VENDREDI matin",
 			"Après-midi" };
-
-	// On récupère le nombre de semaines correspodant au nombre de jours
-
 
 	// On créé un tableau d'objet à deux dimensions pour remplir notre
 	// JTable
@@ -65,6 +44,7 @@ public class DonneesTableauDouble extends AbstractTableModel {
 		long nbreJours = (dernierJour.getTimeInMillis() - premierJour
 				.getTimeInMillis()) / milliSecondesParJour;
 		
+		// On récupère le nombre de semaines correspodant au nombre de jours
 		int nbreSemaines = (int) (nbreJours / 7) + 1;
 		int tailleTableau = nbreSemaines * 2 +1;
 		
@@ -78,12 +58,7 @@ public class DonneesTableauDouble extends AbstractTableModel {
 			String affiche = format.format(date);
 			int jourSemaine = premierJour.get(Calendar.DAY_OF_WEEK);
 
-			// Si le parcoureur de jours est divisible par 7 alors on passe à la
-			// semaine suivante
-			/*
-			 * if (i != 0 & i % 7 == 0) { numeroLigne++; }
-			 */
-			// Si le numéro de la colonne est divisible par 6 alors on est à la
+			// Si le numéro de la colonne est divisible par 11 alors on est à la
 			// ligne suivante donc on remet ce numéro à 1 pour écrire à Lundi
 			if (numeroColonne != 1 & numeroColonne % 11 == 0) {
 				numeroColonne = 1;

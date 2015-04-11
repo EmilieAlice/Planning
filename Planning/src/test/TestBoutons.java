@@ -87,7 +87,7 @@ public class TestBoutons {
 		panelTableau.setBounds(6, 6, 941, 666);
 		frame.getContentPane().add(panelTableau);
 
-		table = new JTable(new DonneesTableauDouble(1));
+		table = new JTable(new DonneesTableauDouble(2));
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.setCellSelectionEnabled(true);
 		table.addMouseListener(new ecouteur());
