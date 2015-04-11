@@ -48,7 +48,6 @@ public class TestBoutons {
 	private SeanceDao seanceDao;
 	private ModuleDao moduleDao;
 	private Bouton groupeDeBoutons;
-	private ArrayList<Seance> listeSeance;
 
 	/**
 	 * Launch the application.
@@ -110,11 +109,8 @@ public class TestBoutons {
 			group.add(jRadioButton);
 		}
 		session = new Session();
-		session.setIdSession(1);
-		
-		listeSeance = new ArrayList<Seance>();
-		seanceDao = new SeanceDao();
-		listeSeance = seanceDao.findSeanceByIdSession(1);
+		session.setIdSession(2);
+
 
 	}
 

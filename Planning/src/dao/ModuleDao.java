@@ -163,4 +163,45 @@ public class ModuleDao {
 		return formateur;
 	}
 
+	private static java.sql.PreparedStatement pFindModuleById = null;
+	/**
+	 * Requete pour récupérer un module grâce à son nom
+	 */
+	static {
+		try {
+			pFindModuleById = DataBase.getConnection().prepareStatement(
+					"SELECT * FROM lagarenne2015.module WHERE module.id_module = ?;");
+		} catch (Exception e) {
+			e.getMessage();
+			System.out.println("Requete findModuleByNom échouée.");
+		}
+	}
+
+	/**
+	 * Méthode qui récupère dans la base données un objet Module grâce à son nom
+	 * 
+	 * @param nom
+	 * @return Module
+	 */
+	public Module findModuleById(int idModule) {
+		Module module = new Module();
+		try {
+			pFindModuleById.setInt(1, idModule);
+			ResultSet resultat = pFindModuleById.executeQuery();
+			if (resultat.next()) {
+				module.setIdModule(resultat.getInt("id_module"));
+				module.setNomModule(resultat.getString("nom_module"));
+				module.setObjectif(resultat.getString("objectif"));
+				module.setContenu(resultat.getString("contenu"));
+				module.setNbHeuresAnnuelles(resultat.getInt("nb_heures_annuel"));
+				module.setPrerequis(resultat.getString("prerequis"));
+			} else {
+				module = null;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return module;
+	}
+	
 }

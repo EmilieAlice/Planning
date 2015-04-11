@@ -57,7 +57,21 @@ public class ModuleDaoTest {
 	}
 	
 	@Test
-	public void testFindFormateurByNomModule(){
+	public void testFindModuleById(){
+		Module moduleAttendu = new Module(
+				1,
+				"SI2",
+				"Enseigner aux élèves les bases sur le fonctionnement du réseau internet",
+				"Des TP et des cours", 30,
+				"Les prérequis sont le module SI1 et le binaire");
+		
+		Module test = new Module();
+		ModuleDao moduleDao = new ModuleDao();
+		test = moduleDao.findModuleById(1);
+		System.out.println(moduleAttendu);
+		System.out.println(test);
+		
+		assertEquals(moduleAttendu.getIdModule(), test.getIdModule());
 		
 		
 	}
