@@ -5,34 +5,25 @@ import java.awt.EventQueue;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.GregorianCalendar;
 
 import javax.swing.ButtonGroup;
-import javax.swing.ButtonModel;
 import javax.swing.JFrame;
 import javax.swing.JRadioButton;
-import javax.swing.JToggleButton;
 import javax.swing.ListSelectionModel;
 
 import modele.Bouton;
-import modele.Module;
-import modele.Salle;
 import modele.Seance;
 import modele.Seance.Creneau;
 import modele.Session;
-import dao.HeuresSessionModuleDao;
 import dao.ModuleDao;
 import dao.SalleDao;
 import dao.SeanceDao;
 
 import javax.swing.JPanel;
 import javax.swing.JTable;
-import javax.swing.JRadioButtonMenuItem;
-import javax.swing.JButton;
-
-import swing.DonneesTableau;
 import swing.DonneesTableauDouble;
+
 import javax.swing.JScrollPane;
 
 public class TestBoutons {
@@ -50,6 +41,11 @@ public class TestBoutons {
 	private ModuleDao moduleDao;
 	private Bouton groupeDeBoutons;
 	private JScrollPane scrollPane;
+	private DonneesTableauDouble donneesTableauDouble = new DonneesTableauDouble(2);
+	/*private String[] entetes = { "Semaine", "LUNDI Matin",
+			"Après-midi", "MARDI Matin", "Après-midi", "MERCREDI Matin",
+			"Après-midi", "JEUDI Matin", "Après-midi", "VENDREDI matin",
+			"Après-midi" };*/
 
 	/**
 	 * Launch the application.
@@ -89,16 +85,19 @@ public class TestBoutons {
 		frame.getContentPane().add(scrollPane);
 
 		panelTableau = new JPanel();
-		panelTableau.setBounds(5, 5, 935, 680);
-		scrollPane.setViewportView(panelTableau);
+		panelTableau.setBounds(6, 6, 930, 675);
 		
-		table = new JTable(new DonneesTableauDouble(2));
+		table = new JTable(donneesTableauDouble);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.setCellSelectionEnabled(true);
 		table.addMouseListener(new ecouteur());
 		table.setRowHeight(25);
 		table.setRowMargin(5);
 		panelTableau.add(table);
+		
+
+		scrollPane.setViewportView(panelTableau);
+		//scrollPane.setColumnHeaderView(entetes);
 
 		panelBouttons = new JPanel();
 		panelBouttons.setBounds(959, 172, 235, 315);
@@ -190,9 +189,12 @@ public class TestBoutons {
 								}
 							}
 							else{
-								/*seanceDao.updateSeance(seance.setIdModule(moduleDao.findModuleByNom(nomModule).getIdModule()), 
-										seance.setIdFormateur(moduleDao.findFormateurByNomModule(nomModule).getIdFormateur()), 
-										seance.setIdSalle(2), seance.setContenu(contenu), gregJour);*/
+								seance.setIdModule(moduleDao.findModuleByNom(nomModule).getIdModule());
+								seance.setIdFormateur(moduleDao.findFormateurByNomModule(nomModule).getIdFormateur());
+								seance.setIdSalle(2);
+								seanceDao.updateSeance(seance.getIdModule(), 
+										seance.getIdFormateur(), seance.getIdSalle(), 
+										contenu, gregJour, session.getIdSession());
 							}
 						} else {
 							texteVide = "";
@@ -216,7 +218,7 @@ public class TestBoutons {
 							}
 							seance.setDebut(gregJour);
 							try{
-								seanceDao.deleteSeance(seance.getDebut());
+								seanceDao.deleteSeance(seance.getDebut(), session.getIdSession());
 								table.setValueAt(texteVide, table.getSelectedRow(),
 										table.getSelectedColumn());
 							}catch (Exception exc){
@@ -233,26 +235,20 @@ public class TestBoutons {
 
 		@Override
 		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
 
 		}
 
 		@Override
 		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
 
 		}
 
 		@Override
 		public void mouseEntered(MouseEvent e) {
-			// TODO Auto-generated method stub
-
 		}
 
 		@Override
 		public void mouseExited(MouseEvent e) {
-			// TODO Auto-generated method stub
-
 		}
 
 	}

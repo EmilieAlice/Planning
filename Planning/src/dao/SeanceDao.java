@@ -1,13 +1,11 @@
 package dao;
 
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 import modele.Seance;
-import modele.Session;
 
 public class SeanceDao {
 
@@ -150,7 +148,7 @@ public class SeanceDao {
 	static {
 		try {
 			pDeleteSeance = DataBase.getConnection().prepareStatement(
-					"DELETE FROM lagarenne2015.seance WHERE debut=?;");
+					"DELETE FROM lagarenne2015.seance WHERE debut=? AND id_session=?;");
 		} catch (Exception e) {
 			e.getMessage();
 			System.out.println("Requete deleteSeance échouée.");
@@ -164,12 +162,13 @@ public class SeanceDao {
 	 *            (un objet Seance)
 	 * @return booléen
 	 */
-	public Boolean deleteSeance(GregorianCalendar debut) {
+	public Boolean deleteSeance(GregorianCalendar debut, int idSession) {
 		Boolean etat = new Boolean(false);
 		try {
 			Timestamp dateSQL = new Timestamp(debut.getTimeInMillis());
 
 			pDeleteSeance.setTimestamp(1, dateSQL);
+			pDeleteSeance.setInt(2, idSession);
 			int resultat = pDeleteSeance.executeUpdate();
 			if (resultat != 0)
 				etat = true;
@@ -188,7 +187,7 @@ public class SeanceDao {
 			pUpdateSeance = DataBase.getConnection().prepareStatement(
 					"UPDATE lagarenne2015.seance SET "
 					+ "id_module = ?, id_formateur = ?, id_salle = ?, contenu = ? "
-					+ "WHERE debut = ? ;");
+					+ "WHERE debut = ? AND id_session = ?;");
 		} catch (Exception e) {
 			e.getMessage();
 			System.out.println("Requete updateSeance échouée.");
@@ -202,7 +201,7 @@ public class SeanceDao {
 	 *            (un objet Seance)
 	 * @return un booléen
 	 */
-	public Boolean updateSeance(int idModule, int idFormateur, int idSalle, String contenu, GregorianCalendar debut) {
+	public Boolean updateSeance(int idModule, int idFormateur, int idSalle, String contenu, GregorianCalendar debut, int idSession) {
 		Boolean etat = new Boolean(false);
 		try {
 			// Conversion de la date Gregorian en date SQL
@@ -213,6 +212,7 @@ public class SeanceDao {
 			pUpdateSeance.setInt(3, idSalle);
 			pUpdateSeance.setString(4, contenu);
 			pUpdateSeance.setTimestamp(5, dateSQLDebut);
+			pUpdateSeance.setInt(5, idSession);
 
 			int resultat = pInsertSeance.executeUpdate();
 			if (resultat != 0)
