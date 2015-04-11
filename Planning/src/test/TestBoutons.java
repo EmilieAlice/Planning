@@ -40,23 +40,13 @@ public class TestBoutons {
 	private JTable table;
 	private JPanel panelBouttons;
 	private ButtonGroup group;
-	private HeuresSessionModuleDao heuresSessionModuleDao;
-	private Module maths;
-	private Module anglais;
-	private Module siDeux;
 	private Session session;
-	private JRadioButton mathsBouton;
 	private JPanel panelTableau;
-	private JRadioButton siDeuxBoutton;
-	private JRadioButton anglaisBoutton;
-	private JRadioButton rdbtnSupprimer;
 	private Component[] tableau;
 	private ArrayList<JRadioButton> tableauBoutton;
 	private Seance seance;
 	private SeanceDao seanceDao;
 	private ModuleDao moduleDao;
-	private Salle salle;
-	private SalleDao salleDao;
 	private Bouton groupeDeBoutons;
 
 	/**
@@ -92,8 +82,6 @@ public class TestBoutons {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
-		group = new ButtonGroup();
-
 		panelTableau = new JPanel();
 		panelTableau.setBounds(6, 6, 941, 666);
 		frame.getContentPane().add(panelTableau);
@@ -109,7 +97,8 @@ public class TestBoutons {
 		panelBouttons = new JPanel();
 		panelBouttons.setBounds(959, 172, 235, 315);
 		frame.getContentPane().add(panelBouttons);
-
+		
+		group = new ButtonGroup();
 		groupeDeBoutons = new Bouton();
 		groupeDeBoutons.remplir();
 		ArrayList<JRadioButton> listeDesBoutons = groupeDeBoutons
@@ -141,7 +130,7 @@ public class TestBoutons {
 			Seance.Creneau apresMidi = Creneau.APRES_MIDI;
 			seanceDao = new SeanceDao();
 			moduleDao = new ModuleDao();
-			salleDao = new SalleDao();
+			new SalleDao();
 			// salle = salleDao.findModuleByNom(1);
 			String recupDate;
 			int year;
@@ -153,7 +142,7 @@ public class TestBoutons {
 				tableauBoutton.add((JRadioButton) tableau[i]);
 			}
 
-			if(table.getSelectedRow() % 2 != 0){
+			if(table.getSelectedRow() % 2 != 0 && table.getSelectedColumn() !=0){
 				for (JRadioButton jRadioButton : tableauBoutton) {
 					if (jRadioButton.isSelected()) {
 						texteDuBouton = jRadioButton.getText();
@@ -164,7 +153,6 @@ public class TestBoutons {
 							if (table.getValueAt(table.getSelectedRow(), table.getSelectedColumn()) == ""){
 								if (table.getSelectedColumn() % 2 == 0) {
 									seance.setCreneau(apresMidi);
-									System.out.println(seance.getIdModule());
 									recupDate = (String) table.getValueAt(table.getSelectedRow() - 1, table.getSelectedColumn() -1);
 									year = Integer.parseInt(recupDate.split("/")[2]);
 									month = Integer.parseInt(recupDate.split("/")[1])-1;
