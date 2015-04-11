@@ -54,9 +54,9 @@ public class DonneesTableauDouble extends AbstractTableModel {
 		int tailleTableau = nbreSemaines * 2 + 1;
 
 		data = new Object[tailleTableau][columnNames.length];
-		
+
 		ArrayList<Integer> numeroSemaine = new ArrayList<Integer>();
-		
+
 		int i = 0;
 		int numeroLigne = 0;
 		int numeroColonne = 1;
@@ -74,11 +74,11 @@ public class DonneesTableauDouble extends AbstractTableModel {
 			// La première case de chaque ligne est toujours le numéro de la
 			// semaine
 			data[numeroLigne][0] = premierJour.get(Calendar.WEEK_OF_YEAR);
-			
-			if(numeroColonne == 1 && numeroLigne%2 == 0){
+
+			if (numeroColonne == 1 && numeroLigne % 2 == 0) {
 				numeroSemaine.add(premierJour.get(Calendar.WEEK_OF_YEAR));
 			}
-			
+
 			// Si le numéro correpondant au jour de la semaine n'est pas 1
 			// (dimanche) ou 7 (samedi) on ajoute des données au tableau
 
@@ -145,49 +145,52 @@ public class DonneesTableauDouble extends AbstractTableModel {
 
 		ArrayList<Seance> listeSeance = new ArrayList<Seance>();
 		listeSeance = seanceDao.findSeanceByIdSession(idSession);
-		
+
 		for (Seance seance : listeSeance) {
 			int ligneSemaine = 0;
 			int colonneJour = 0;
 			String nomModule;
-			
+
 			nomModule = moduleDao.findModuleById(seance.getIdModule())
 					.getNomModule();
-			
-			for(Integer numero : numeroSemaine){
-				if(seance.getDebut().get(Calendar.WEEK_OF_YEAR) == numero){
-					System.out.println(numeroSemaine.indexOf(numero));
-					ligneSemaine = numeroSemaine.indexOf(numero)*2+1;
+
+			for (Integer numero : numeroSemaine) {
+				if (seance.getDebut().get(Calendar.WEEK_OF_YEAR) == numero) {
+					ligneSemaine = numeroSemaine.indexOf(numero) * 2 + 1;
 				}
 			}
-			
 			if (seance.getDebut().get(Calendar.DAY_OF_WEEK) == 2) {
-				if (seance.getCreneau() == Creneau.APRES_MIDI) {
+				if (seance.getCreneau().equals(Creneau.APRES_MIDI)) {
 					colonneJour = 2;
+				} else {
+					colonneJour = 1;
 				}
-				colonneJour = 1;
-			}else if (seance.getDebut().get(Calendar.DAY_OF_WEEK) == 3) {
-				if (seance.getCreneau() == Creneau.APRES_MIDI) {
+			} else if (seance.getDebut().get(Calendar.DAY_OF_WEEK) == 3) {
+				if (seance.getCreneau().equals(Creneau.APRES_MIDI)) {
 					colonneJour = 4;
+				} else {
+					colonneJour = 3;
 				}
-				colonneJour = 3;
-			}else if (seance.getDebut().get(Calendar.DAY_OF_WEEK) == 4) {
-				if (seance.getCreneau() == Creneau.APRES_MIDI) {
+			} else if (seance.getDebut().get(Calendar.DAY_OF_WEEK) == 4) {
+				if (seance.getCreneau().equals(Creneau.APRES_MIDI)) {
 					colonneJour = 6;
+				} else {
+					colonneJour = 5;
 				}
-				colonneJour = 5;
-			}else if (seance.getDebut().get(Calendar.DAY_OF_WEEK) == 5) {
-				if (seance.getCreneau() == Creneau.APRES_MIDI) {
+			} else if (seance.getDebut().get(Calendar.DAY_OF_WEEK) == 5) {
+				if (seance.getCreneau().equals(Creneau.APRES_MIDI)) {
 					colonneJour = 8;
+				} else {
+					colonneJour = 7;
 				}
-				colonneJour = 7;
-			}else if (seance.getDebut().get(Calendar.DAY_OF_WEEK) == 6) {
-				if (seance.getCreneau() == Creneau.APRES_MIDI) {
+			} else if (seance.getDebut().get(Calendar.DAY_OF_WEEK) == 6) {
+				if (seance.getCreneau().equals(Creneau.APRES_MIDI)) {
 					colonneJour = 10;
+				} else {
+					colonneJour = 9;
 				}
-				colonneJour = 9;
 			}
-			
+
 			if (ligneSemaine != 0 && colonneJour != 0) {
 				this.setValueAt(nomModule, ligneSemaine, colonneJour);
 			}

@@ -45,7 +45,7 @@ public class SeanceDao {
 				// On determine si le creneau est matin ou apres-midi pour l'inserer à la seance
 				int idCreneau = resultat.getInt("id_creneau");
 				Seance.Creneau creneau = Seance.Creneau.MATIN;
-				if (idCreneau == 1){
+				if (idCreneau == 2){
 					creneau = Seance.Creneau.APRES_MIDI;
 				}
 				
