@@ -48,6 +48,7 @@ public class TestBoutons {
 	private SeanceDao seanceDao;
 	private ModuleDao moduleDao;
 	private Bouton groupeDeBoutons;
+	private ArrayList<Seance> listeSeance;
 
 	/**
 	 * Launch the application.
@@ -86,7 +87,7 @@ public class TestBoutons {
 		panelTableau.setBounds(6, 6, 941, 666);
 		frame.getContentPane().add(panelTableau);
 
-		table = new JTable(new DonneesTableauDouble());
+		table = new JTable(new DonneesTableauDouble(1));
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.setCellSelectionEnabled(true);
 		table.addMouseListener(new ecouteur());
@@ -110,6 +111,10 @@ public class TestBoutons {
 		}
 		session = new Session();
 		session.setIdSession(1);
+		
+		listeSeance = new ArrayList<Seance>();
+		seanceDao = new SeanceDao();
+		listeSeance = seanceDao.findSeanceByIdSession(1);
 
 	}
 

@@ -142,10 +142,11 @@ public class Seance {
 
 	@Override
 	public String toString() {
-		return "Seance [idModule= " + idModule + ", idSession= " + idSession
-				+ ", idFormateur = " + idFormateur + ", debut = " + debut.getTime() 
-				+ ", fin = " + fin.getTime() + ", creneau = " + creneau 
-				+ ", idSalle = " + idSalle + ", contenu = " + contenu + "]";
+		return "Seance [idModule=" + idModule + ", idSession=" + idSession
+				+ ", idFormateur=" + idFormateur + ", debut=" + debut
+				+ ", fin=" + fin + ", idSalle=" + idSalle + ", contenu="
+				+ contenu + ", creneau=" + creneau + "]";
 	}
+
 
 }

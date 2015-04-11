@@ -30,9 +30,11 @@ public class MainTest {
 		GregorianCalendar jour = new GregorianCalendar(2015, 0, 12);
 		Seance.Creneau creneau = Seance.Creneau.MATIN;
 
-		Seance seance = new Seance(1, 1, 1, jour, creneau, 4, "coucou");
-
-		System.out.println(seance);
+		for (Seance seance : listeSeance) {
+			System.out.println(seance.getDebut().get(Calendar.WEEK_OF_YEAR));
+			System.out.println(seance.getDebut().get(Calendar.DAY_OF_WEEK));
+			System.out.println(seance.getCreneau());
+		}
 
 		SimpleDateFormat format = new SimpleDateFormat("dd/MM");
 		
@@ -78,6 +80,7 @@ public class MainTest {
 		System.out.println(premierJour.get(Calendar.DAY_OF_WEEK));
 		System.out.println(premierJour.get(Calendar.WEEK_OF_YEAR));
 		System.out.println(premierJour.get(Calendar.DATE));
+	
 	}
 
 }

@@ -25,7 +25,7 @@ public class TableauPanel extends JPanel {
 	private final JTable tableau;
 
 	public TableauPanel() {
-		tableau = new JTable(new DonneesTableauDouble());
+		tableau = new JTable(new DonneesTableauDouble(1));
 		tableau.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tableau.setCellSelectionEnabled(true);
 		tableau.addMouseListener(new ecouteur());
