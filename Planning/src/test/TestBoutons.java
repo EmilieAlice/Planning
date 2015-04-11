@@ -33,6 +33,7 @@ import javax.swing.JButton;
 
 import swing.DonneesTableau;
 import swing.DonneesTableauDouble;
+import javax.swing.JScrollPane;
 
 public class TestBoutons {
 
@@ -48,6 +49,7 @@ public class TestBoutons {
 	private SeanceDao seanceDao;
 	private ModuleDao moduleDao;
 	private Bouton groupeDeBoutons;
+	private JScrollPane scrollPane;
 
 	/**
 	 * Launch the application.
@@ -81,11 +83,15 @@ public class TestBoutons {
 		frame.setBounds(100, 100, 1200, 800);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(20, 20, 940, 685);
+		frame.getContentPane().add(scrollPane);
 
 		panelTableau = new JPanel();
-		panelTableau.setBounds(6, 6, 941, 666);
-		frame.getContentPane().add(panelTableau);
-
+		panelTableau.setBounds(5, 5, 935, 680);
+		scrollPane.setViewportView(panelTableau);
+		
 		table = new JTable(new DonneesTableauDouble(2));
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.setCellSelectionEnabled(true);
