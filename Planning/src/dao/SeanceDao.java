@@ -133,7 +133,6 @@ public class SeanceDao {
 			pInsertSeance.setInt(6, idCreneau);
 			pInsertSeance.setInt(7, seance.getIdSalle());
 			pInsertSeance.setString(8, seance.getContenu());
-			System.out.println(pInsertSeance);
 
 			int resultat = pInsertSeance.executeUpdate();
 			if (resultat != 0)
@@ -179,4 +178,49 @@ public class SeanceDao {
 		}
 		return etat;
 	}
+	
+	private static java.sql.PreparedStatement pUpdateSeance = null;
+	/**
+	 * Requete pour supprimer une séance
+	 */
+	static {
+		try {
+			pUpdateSeance = DataBase.getConnection().prepareStatement(
+					"UPDATE lagarenne2015.seance SET "
+					+ "id_module = ?, id_formateur = ?, id_salle = ?, contenu = ? "
+					+ "WHERE debut = ? ;");
+		} catch (Exception e) {
+			e.getMessage();
+			System.out.println("Requete updateSeance échouée.");
+		}
+	}
+	
+	/**
+	 * Méthode qui insère une séance dans la base de données
+	 * 
+	 * @param seance
+	 *            (un objet Seance)
+	 * @return un booléen
+	 */
+	public Boolean updateSeance(int idModule, int idFormateur, int idSalle, String contenu, GregorianCalendar debut) {
+		Boolean etat = new Boolean(false);
+		try {
+			// Conversion de la date Gregorian en date SQL
+			Timestamp dateSQLDebut = new Timestamp(debut.getTimeInMillis());
+			
+			pUpdateSeance.setInt(1, idModule);
+			pUpdateSeance.setInt(2, idFormateur);
+			pUpdateSeance.setInt(3, idSalle);
+			pUpdateSeance.setString(4, contenu);
+			pUpdateSeance.setTimestamp(5, dateSQLDebut);
+
+			int resultat = pInsertSeance.executeUpdate();
+			if (resultat != 0)
+				etat = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return etat;
+	}
+	
 }

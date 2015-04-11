@@ -36,7 +36,6 @@ public class ModuleDao {
 		try {
 			pFindModuleByNom.setString(1, nom);
 			ResultSet resultat = pFindModuleByNom.executeQuery();
-			System.out.println(pFindModuleByNom);
 			if (resultat.next()) {
 				module.setIdModule(resultat.getInt("id_module"));
 				module.setNomModule(resultat.getString("nom_module"));
