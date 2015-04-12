@@ -17,9 +17,6 @@ import modele.Session;
 
 public class DonneesTableauDouble extends AbstractTableModel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	private int milliSecondesParJour = (1000 * 60 * 60 * 24);
@@ -31,10 +28,9 @@ public class DonneesTableauDouble extends AbstractTableModel {
 	private final String[] columnNames = { "Semaine", "LUNDI Matin",
 			"Après-midi", "MARDI Matin", "Après-midi", "MERCREDI Matin",
 			"Après-midi", "JEUDI Matin", "Après-midi", "VENDREDI matin",
-			"Après-midi" };
+	"Après-midi" };
 
-	// On créé un tableau d'objet à deux dimensions pour remplir notre
-	// JTable
+	// On créé un tableau d'objet à deux dimensions pour remplir notre JTable
 	private final Object[][] data;
 
 	public DonneesTableauDouble(int idSession) {
@@ -65,22 +61,24 @@ public class DonneesTableauDouble extends AbstractTableModel {
 			String affiche = format.format(date);
 			int jourSemaine = premierJour.get(Calendar.DAY_OF_WEEK);
 
-			// Si le numéro de la colonne est divisible par 11 alors on est à la
-			// ligne suivante donc on remet ce numéro à 1 pour écrire à Lundi
+			/*
+			 * Si le numéro de la colonne est divisible par 11 alors on est à la
+			 * ligne suivante, donc on remet ce numéro à 1 pour écrire à Lundi
+			 */
 			if (numeroColonne != 1 & numeroColonne % 11 == 0) {
 				numeroColonne = 1;
 			}
-			// La première case de chaque ligne est toujours le numéro de la
-			// semaine
+			// La première case de chaque ligne est toujours le numéro de la semaine
 			data[numeroLigne][0] = premierJour.get(Calendar.WEEK_OF_YEAR);
 
 			if (numeroColonne == 1 && numeroLigne % 2 == 0) {
 				numeroSemaine.add(premierJour.get(Calendar.WEEK_OF_YEAR));
 			}
 
-			// Si le numéro correpondant au jour de la semaine n'est pas 1
-			// (dimanche) ou 7 (samedi) on ajoute des données au tableau
-
+			/*
+			 * Si le numéro correpondant au jour de la semaine n'est pas 1
+			 * (dimanche) ou 7 (samedi), on ajoute des données au tableau
+			 */
 			if (numeroLigne != 0 & numeroLigne % 2 != 0) {
 				for (int y = 0; y < columnNames.length; y++) {
 					data[numeroLigne][y] = "";
@@ -88,10 +86,10 @@ public class DonneesTableauDouble extends AbstractTableModel {
 				numeroLigne++;
 			} else {
 				if (jourSemaine != 1 || jourSemaine != 7) {
-
-					// On étudie chaque jour de la semaine, on remplit le
-					// tableau et
-					// on avance la colonne de 1
+					/*
+					 * On étudie chaque jour de la semaine, on remplit le
+					 * tableau et on avance la colonne de 1
+					 */
 					switch (jourSemaine) {
 					case 2:
 						data[numeroLigne][1] = affiche;
@@ -129,16 +127,17 @@ public class DonneesTableauDouble extends AbstractTableModel {
 					}
 
 				}
-				// On ajoute une journée en milliseconde pour passer au jour
-				// suivant
-				// et on ajoute 1 au parcoureur
+				/*
+				 * On ajoute une journée en milliseconde pour passer au jour suivant, 
+				 * et on ajoute 1 au parcoureur
+				 */
 				premierJour.setTimeInMillis(premierJour.getTimeInMillis()
 						+ milliSecondesParJour);
 				i++;
 			}
 		}
-
 		;
+
 		ModuleDao moduleDao = new ModuleDao();
 		SeanceDao seanceDao = new SeanceDao();
 
@@ -193,7 +192,6 @@ public class DonneesTableauDouble extends AbstractTableModel {
 			if (ligneSemaine != 0 && colonneJour != 0) {
 				this.setValueAt(nomModule, ligneSemaine, colonneJour);
 			}
-
 		}
 	}
 
@@ -227,5 +225,4 @@ public class DonneesTableauDouble extends AbstractTableModel {
 			fireTableCellUpdated(row, col);
 		}
 	}
-
 }

@@ -18,17 +18,12 @@ public class DataBase {
 			Class.forName(DRIVER_NAME).newInstance();
 			System.out.println("*** Driver loaded.");
 		} catch (ClassNotFoundException e) {
-			System.err.println("*** ERROR: Driver " + DRIVER_NAME
-					+ " not found");
+			System.err.println("*** ERROR: Driver " + DRIVER_NAME + " not found");
 		} catch (InstantiationException e) {
-			System.err
-			.println("*** ERROR: Impossible de se connecter à "
-					+ DRIVER_NAME);
+			System.err.println("*** ERROR: Impossible de se connecter à " + DRIVER_NAME);
 			System.err.println(e.getMessage());
 		} catch (IllegalAccessException e) {
-			System.err
-			.println("*** ERROR: Impossible de se connecter à "
-					+ DRIVER_NAME);
+			System.err.println("*** ERROR: Impossible de se connecter à " + DRIVER_NAME);
 			System.err.println(e.getMessage());
 		}
 	}

@@ -192,9 +192,9 @@ public class TestBoutons {
 								seance.setIdModule(moduleDao.findModuleByNom(nomModule).getIdModule());
 								seance.setIdFormateur(moduleDao.findFormateurByNomModule(nomModule).getIdFormateur());
 								seance.setIdSalle(2);
-								seanceDao.updateSeance(seance.getIdModule(), 
+								/*seanceDao.updateSeance(seance.getIdModule(), 
 										seance.getIdFormateur(), seance.getIdSalle(), 
-										contenu, gregJour, session.getIdSession());
+										contenu, gregJour, session.getIdSession());*/
 							}
 						} else {
 							texteVide = "";

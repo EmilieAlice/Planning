@@ -1,25 +1,14 @@
 package swing;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
 
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 
-import modele.Module;
-import dao.ModuleDao;
-
 public class TableauPanel extends JPanel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	private final JTable tableau;
@@ -48,7 +37,7 @@ public class TableauPanel extends JPanel {
 							tableau.getSelectedColumn() - 1));
 				}
 			}
-/*
+			/*
 			String texte = "";
 			SelectionMatierePanel panelBouttons = new SelectionMatierePanel();
 			Component[] tableauComposants = panelBouttons.getComponents();
@@ -97,25 +86,21 @@ public class TableauPanel extends JPanel {
 
 		@Override
 		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
 
 		}
 
 		@Override
 		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
 
 		}
 
 		@Override
 		public void mouseEntered(MouseEvent e) {
-			// TODO Auto-generated method stub
 
 		}
 
 		@Override
 		public void mouseExited(MouseEvent e) {
-			// TODO Auto-generated method stub
 
 		}
 

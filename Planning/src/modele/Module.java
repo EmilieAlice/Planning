@@ -2,13 +2,6 @@ package modele;
 
 import java.time.Duration;
 
-/**
- * Objet Module(matière)
- * 
- * @author Jerome
- *
- */
-
 public class Module {
 
 	private int idModule;
@@ -89,6 +82,11 @@ public class Module {
 				+ ", prerequis=" + prerequis + "]";
 	}
 
+	/**
+	 * A COMPLETER
+	 * 
+	 * @return
+	 */
 	public Duration getDureeDisponible() {
 		throw new UnsupportedOperationException();
 	}

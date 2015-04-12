@@ -14,12 +14,10 @@ public class FormateurDao {
 	 */
 	static {
 		try {
-			pFindFormateurByIdPersonne = DataBase
-					.getConnection()
-					.prepareStatement(
-							"SELECT * FROM lagarenne2015.formateur "
-									+ "INNER JOIN personne on personne.id_personne = formateur.id_formateur "
-									+ "WHERE formateur.id_personne = ?;");
+			pFindFormateurByIdPersonne = DataBase.getConnection().prepareStatement(
+					"SELECT * FROM lagarenne2015.formateur "
+							+ "INNER JOIN personne on personne.id_personne = formateur.id_formateur "
+							+ "WHERE formateur.id_personne = ?;");
 		} catch (Exception e) {
 			e.getMessage();
 			System.out.println("Requete findFormateurByIdPersonne échouée.");
@@ -58,12 +56,10 @@ public class FormateurDao {
 	 */
 	static {
 		try {
-			pFindFormateurByIdModule = DataBase
-					.getConnection()
-					.prepareStatement(
-							"SELECT * FROM lagarenne2015.formateur "
-									+ "INNER JOIN personne on personne.id_personne = formateur.id_formateur "
-									+ "WHERE formateur.id_module = ?;");
+			pFindFormateurByIdModule = DataBase.getConnection().prepareStatement(
+					"SELECT * FROM lagarenne2015.formateur "
+							+ "INNER JOIN personne on personne.id_personne = formateur.id_formateur "
+							+ "WHERE formateur.id_module = ?;");
 		} catch (Exception e) {
 			e.getMessage();
 			System.out.println("Requete findByIdModule échouée.");

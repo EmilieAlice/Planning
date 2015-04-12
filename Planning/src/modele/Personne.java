@@ -152,23 +152,17 @@ public class Personne {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((adresse == null) ? 0 : adresse.hashCode());
-		result = prime * result
-				+ ((civilite == null) ? 0 : civilite.hashCode());
-		result = prime * result
-				+ ((codePostal == null) ? 0 : codePostal.hashCode());
-		result = prime * result
-				+ ((dateInscription == null) ? 0 : dateInscription.hashCode());
+		result = prime * result + ((civilite == null) ? 0 : civilite.hashCode());
+		result = prime * result + ((codePostal == null) ? 0 : codePostal.hashCode());
+		result = prime * result + ((dateInscription == null) ? 0 : dateInscription.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + (estInscrite ? 1231 : 1237);
 		result = prime * result + idPersonne;
-		result = prime * result
-				+ ((motPasse == null) ? 0 : motPasse.hashCode());
+		result = prime * result + ((motPasse == null) ? 0 : motPasse.hashCode());
 		result = prime * result + ((nom == null) ? 0 : nom.hashCode());
 		result = prime * result + ((prenom == null) ? 0 : prenom.hashCode());
-		result = prime * result
-				+ ((telephone == null) ? 0 : telephone.hashCode());
-		result = prime * result
-				+ ((telephone2 == null) ? 0 : telephone2.hashCode());
+		result = prime * result + ((telephone == null) ? 0 : telephone.hashCode());
+		result = prime * result + ((telephone2 == null) ? 0 : telephone2.hashCode());
 		result = prime * result + ((ville == null) ? 0 : ville.hashCode());
 		return result;
 	}
@@ -176,51 +170,36 @@ public class Personne {
 	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
-			return false;
-		}
+			return false;}
 		if (getClass() != obj.getClass()) {
-			return false;
-		}
+			return false;}
 		final Personne other = (Personne) obj;
 		if (this.idPersonne != other.idPersonne) {
-			return false;
-		}
+			return false;}
 		if (!Objects.equals(this.civilite, other.civilite)) {
-			return false;
-		}
+			return false;}
 		if (!Objects.equals(this.prenom, other.prenom)) {
-			return false;
-		}
+			return false;}
 		if (!Objects.equals(this.nom, other.nom)) {
-			return false;
-		}
+			return false;}
 		if (!Objects.equals(this.adresse, other.adresse)) {
-			return false;
-		}
+			return false;}
 		if (!Objects.equals(this.codePostal, other.codePostal)) {
-			return false;
-		}
+			return false;}
 		if (!Objects.equals(this.ville, other.ville)) {
-			return false;
-		}
+			return false;}
 		if (!Objects.equals(this.telephone, other.telephone)) {
-			return false;
-		}
+			return false;}
 		if (!Objects.equals(this.telephone2, other.telephone2)) {
-			return false;
-		}
+			return false;}
 		if (!Objects.equals(this.email, other.email)) {
-			return false;
-		}
+			return false;}
 		if (!Objects.equals(this.motPasse, other.motPasse)) {
-			return false;
-		}
+			return false;}
 		if (!Objects.equals(this.dateInscription, other.dateInscription)) {
-			return false;
-		}
+			return false;}
 		if (this.estInscrite != other.estInscrite) {
-			return false;
-		}
+			return false;}
 		return true;
 	}
 

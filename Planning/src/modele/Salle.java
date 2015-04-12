@@ -4,7 +4,7 @@ public class Salle {
 
 	private int idSalle;
 	private String nomSalle;
-	
+
 	public Salle(int idSalle, String nomSalle) {
 		super();
 		this.idSalle = idSalle;
@@ -34,6 +34,5 @@ public class Salle {
 	public String toString() {
 		return "Salle [idSalle=" + idSalle + ", nomSalle=" + nomSalle + "]";
 	}
-	
-	
+
 }

@@ -14,14 +14,12 @@ public class HeuresSessionModuleDao {
 	 */
 	static {
 		try {
-			pfindHeuresSessionModule = DataBase
-					.getConnection()
-					.prepareStatement(
-							"SELECT * FROM lagarenne2015.heures_session_module "
-									+ "INNER JOIN module ON heures_session_module.id_module = module.id_module "
-									+ "INNER JOIN session ON heures_session_module.id_session = session.id_session "
-									+ "HAVING heures_session_module.id_session = ? "
-									+ "AND heures_session_module.id_module=?;");
+			pfindHeuresSessionModule = DataBase.getConnection().prepareStatement(
+					"SELECT * FROM lagarenne2015.heures_session_module "
+							+ "INNER JOIN module ON heures_session_module.id_module = module.id_module "
+							+ "INNER JOIN session ON heures_session_module.id_session = session.id_session "
+							+ "HAVING heures_session_module.id_session = ? "
+							+ "AND heures_session_module.id_module=?;");
 		} catch (Exception e) {
 			e.getMessage();
 			System.out.println("Requete findHeuresSessionModule échouée.");
@@ -64,12 +62,10 @@ public class HeuresSessionModuleDao {
 	 */
 	static {
 		try {
-			pUpdateModuleAvecHeures = DataBase
-					.getConnection()
-					.prepareStatement(
-							"UPDATE lagarenne2015.heures_session_module "
-									+ "SET nbre_heures_disponibles = ? "
-									+ "WHERE id_session = ? AND id_module = ?; ");
+			pUpdateModuleAvecHeures = DataBase.getConnection().prepareStatement(
+					"UPDATE lagarenne2015.heures_session_module "
+							+ "SET nbre_heures_disponibles = ? "
+							+ "WHERE id_session = ? AND id_module = ?; ");
 		} catch (Exception e) {
 			e.getMessage();
 			System.out.println("Requete updateModuleAvecHeures échouée.");

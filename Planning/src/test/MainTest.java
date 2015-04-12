@@ -1,6 +1,5 @@
 package test;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -27,8 +26,6 @@ public class MainTest {
 		ArrayList<Seance> listeSeance = new ArrayList<Seance>();
 		SeanceDao seanceDao = new SeanceDao();
 		listeSeance = seanceDao.findSeanceByIdSession(1);
-		GregorianCalendar jour = new GregorianCalendar(2015, 0, 12);
-		Seance.Creneau creneau = Seance.Creneau.MATIN;
 
 		for (Seance seance : listeSeance) {
 			System.out.println(seance.getDebut().get(Calendar.WEEK_OF_YEAR));
@@ -37,10 +34,10 @@ public class MainTest {
 		}
 
 		SimpleDateFormat format = new SimpleDateFormat("dd/MM");
-		
+
 		long nombreSemaines = nbreJours / 7;
 		System.out.println(nombreSemaines);
-		
+
 		int i = 0;
 		while (i < nbreJours) {
 			Date d = premierJour.getTime();
@@ -72,7 +69,7 @@ public class MainTest {
 			}
 
 			premierJour
-					.setTimeInMillis(premierJour.getTimeInMillis() + milliSecondesParJour);
+			.setTimeInMillis(premierJour.getTimeInMillis() + milliSecondesParJour);
 			i++;
 		}
 
@@ -80,7 +77,7 @@ public class MainTest {
 		System.out.println(premierJour.get(Calendar.DAY_OF_WEEK));
 		System.out.println(premierJour.get(Calendar.WEEK_OF_YEAR));
 		System.out.println(premierJour.get(Calendar.DATE));
-	
+
 	}
 
 }

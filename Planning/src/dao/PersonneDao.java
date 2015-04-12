@@ -12,13 +12,11 @@ public class PersonneDao {
 	 */
 	static {
 		try {
-			pFindPersonneByNomModule = DataBase
-					.getConnection()
-					.prepareStatement(
-							"SELECT * FROM lagarenne2015.formateur "
-									+ "INNER JOIN personne on personne.id_personne = formateur.id_formateur "
-									+ "INNER JOIN module on module.id_module = formateur.id_module "
-									+ "WHERE module.nom = ?;");
+			pFindPersonneByNomModule = DataBase.getConnection().prepareStatement(
+					"SELECT * FROM lagarenne2015.formateur "
+							+ "INNER JOIN personne on personne.id_personne = formateur.id_formateur "
+							+ "INNER JOIN module on module.id_module = formateur.id_module "
+							+ "WHERE module.nom = ?;");
 		} catch (Exception e) {
 			e.getMessage();
 			System.out.println("Requete findPersonneByNomModule échouée.");

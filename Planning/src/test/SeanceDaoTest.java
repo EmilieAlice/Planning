@@ -3,17 +3,13 @@ package test;
 import static org.junit.Assert.*;
 
 import java.sql.SQLException;
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
-import modele.Planning;
 import modele.Seance;
-import modele.Session;
 
 import org.junit.Test;
 
-import dao.PlanningDao;
 import dao.SeanceDao;
 
 public class SeanceDaoTest {
@@ -40,17 +36,16 @@ public class SeanceDaoTest {
 			assertEquals(1, seance.getIdSalle());
 			assertEquals(contenu, seance.getContenu());
 		}
-
 	}
-	
+
 
 	@Test
 	public void testDeleteSeance() throws SQLException {
 		GregorianCalendar debut = new GregorianCalendar(2015, 05, 02, 14, 00, 00);
 		SeanceDao seanceDao = new SeanceDao();
-		
-		
-		assertTrue(seanceDao.deleteSeance(debut));
+
+
+		assertTrue(seanceDao.deleteSeance(debut, 0));
 	}
 
 	@Test
@@ -60,11 +55,13 @@ public class SeanceDaoTest {
 		GregorianCalendar fin = new GregorianCalendar(2015, 05, 02, 17, 00, 00);
 		Seance seance = new Seance(1, 1, 4, debut, fin, Seance.Creneau.APRES_MIDI, 1, null);
 		SeanceDao seanceDao = new SeanceDao();
-		
+
 		assertTrue(seanceDao.insertSeance(seance));
+	}
+
+	@Test
+	public void testUpdateSeance(){
 
 	}
-	
-
 
 }

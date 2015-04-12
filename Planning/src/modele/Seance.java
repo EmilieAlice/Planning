@@ -1,7 +1,5 @@
 package modele;
 
-import java.sql.Date;
-import java.sql.Timestamp;
 import java.util.GregorianCalendar;
 
 public class Seance {
@@ -19,11 +17,11 @@ public class Seance {
 	 * Le jour et le contenu sont null
 	 */
 	public Seance() {
-
 	}
 
 	public Seance(int idModule, int idSession, int idFormateur,
-			GregorianCalendar debut, GregorianCalendar fin, Creneau creneau, int idSalle, String contenu) {
+			GregorianCalendar debut, GregorianCalendar fin, Creneau creneau,
+			int idSalle, String contenu) {
 		super();
 		this.idModule = idModule;
 		this.idSession = idSession;
@@ -33,14 +31,13 @@ public class Seance {
 		this.creneau = creneau;
 		this.idSalle = idSalle;
 		this.contenu = contenu;
-		
+
 		long journee = debut.getTimeInMillis();
 		long millis = (3600000);
 		long debutSeance = 0;
-		if (getCreneau() == Creneau.APRES_MIDI){
+		if (getCreneau() == Creneau.APRES_MIDI) {
 			debutSeance = 14 * millis;
-		}
-		else {
+		} else {
 			debutSeance = 9 * millis;
 		}
 		journee = journee + debutSeance;
@@ -77,19 +74,20 @@ public class Seance {
 
 	public void setDebut(GregorianCalendar debut) {
 		this.debut = debut;
-		//pour le moment pas utile la suite mais je ne supprime pas au cas ou on en aurait besoin
+		// pour le moment pas utile la suite mais je ne supprime pas au cas ou
+		// on en aurait besoin
 		long journee = debut.getTimeInMillis();
 		long millis = (3600000);
 		long debutSeance = 0;
-		if (getCreneau() == Creneau.APRES_MIDI){
+		if (getCreneau() == Creneau.APRES_MIDI) {
 			debutSeance = 14 * millis;
-		}
-		else {
+		} else {
 			debutSeance = 9 * millis;
 		}
 		journee = journee + debutSeance;
 		debut.setTimeInMillis(journee);
 	}
+
 	public GregorianCalendar getFin() {
 		return fin;
 	}
@@ -97,7 +95,7 @@ public class Seance {
 	public void setFin(GregorianCalendar fin) {
 		this.fin = fin;
 	}
-	
+
 	public Creneau getCreneau() {
 		return creneau;
 	}
@@ -122,6 +120,11 @@ public class Seance {
 		this.contenu = contenu;
 	}
 
+	/**
+	 * Permet de creer une enumeration pour le creneau
+	 * 
+	 * @author Alice
+	 */
 	public enum Creneau {
 		MATIN(1), APRES_MIDI(2);
 
@@ -143,10 +146,9 @@ public class Seance {
 	@Override
 	public String toString() {
 		return "Seance [idModule=" + idModule + ", idSession=" + idSession
-				+ ", idFormateur=" + idFormateur + ", debut=" + debut
-				+ ", fin=" + fin + ", idSalle=" + idSalle + ", contenu="
-				+ contenu + ", creneau=" + creneau + "]";
+				+ ", idFormateur=" + idFormateur + ", debut=" + debut.getTime()
+				+ ", fin=" + fin.getTime() + ", idSalle=" + idSalle
+				+ ", contenu=" + contenu + ", creneau=" + creneau + "]";
 	}
-
 
 }

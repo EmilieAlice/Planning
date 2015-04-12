@@ -12,11 +12,6 @@ public class Planning {
 	private int idSession;
 	private ArrayList<Seance> listeSeance;
 
-	/*
-	 * public void set() {
-	 * 
-	 * }
-	 */
 
 	public int getIdPlanning() {
 		return idPlanning;
@@ -42,63 +37,8 @@ public class Planning {
 		this.listeSeance = listeSeance;
 	}
 
-	/**
-	 * Planning de la session dont l'id est passé en paramètre
-	 * 
-	 * @param idSession
-	 * @return
-	 */
-	/*
-	 * public static Planning get(int idSession) throws SQLException {
-	 * 
-	 * throw new UnsupportedOperationException(); }
-	 */
 
 	public Seance getSeance(GregorianCalendar jour, Creneau creneau) {
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * Permet d'insérer une séance dans le planning
-	 * Si la séance est null l'insertion échoue
-	 * Si il y a déjà une séance pour ce créneau l'insertion échoue
-	 * 
-	 * @param seance
-	 */
-	public void setSeance(Seance seance) {
-		int debutSeance = 9;
-		if (seance.getCreneau().equals(Seance.Creneau.APRES_MIDI)){
-			debutSeance = 14;
-		}
-		if (seance == null) {
-			throw new IllegalArgumentException("La seance ne peut etre null");
-		}
-		if (getSeance(seance.getDebut(), seance.getCreneau()) == null) {
-			throw new IllegalStateException(
-					"Il y a déja une séance pour ce jour et ce créneau");
-		}
-		throw new UnsupportedOperationException();
-
-	}
-
-	/**
-	 * Permet de supprimer une séance dans le planning
-	 * 
-	 * @param jour
-	 * @param creneau
-	 */
-	public void deleteSeance(GregorianCalendar jour, Creneau creneau) {
-		throw new UnsupportedOperationException();
-
-	}
-
-	/**
-	 * Permet de retourner un module à une seance donnée
-	 * 
-	 * @param seance
-	 * @return
-	 */
-	public Module getModule(Seance seance) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -133,7 +73,7 @@ public class Planning {
 		dernierJour = session.getDateFin();
 		return dernierJour;
 	}
-	
+
 	/**
 	 * Méthode qui récupère le nombre de jours entre la date de fin et la date
 	 * de début du planning
@@ -161,5 +101,5 @@ public class Planning {
 				+ idSession + ", listeSeance=" + listeSeance + "]";
 	}
 
-	
+
 }

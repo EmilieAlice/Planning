@@ -7,7 +7,7 @@ public class ContrainteFormateur {
 	private String nomCreneau;
 	private int idJour;
 	private String nomJour;
-	
+
 	public ContrainteFormateur() {
 	}
 
@@ -60,5 +60,5 @@ public class ContrainteFormateur {
 	public void setNomJour(String nomJour) {
 		this.nomJour = nomJour;
 	}
-	
+
 }

@@ -27,29 +27,19 @@ public class HeuresSessionModuleDaoTest {
 	}
 
 	@Test
-	public void testVerificationUpdateHeuresSessionModule() {
-
-		HeuresSessionModule heureSessionModule = new HeuresSessionModule(1, 1,
-				30);
+	public void testUpdateModuleAvecHeures(){
+		HeuresSessionModule heureSessionModule = new HeuresSessionModule(1, 1,30);
 		HeuresSessionModuleDao dao = new HeuresSessionModuleDao();
-
-		Boolean test = dao
-				.updateModuleAvecHeures(heureSessionModule, 10, false);
+		Boolean test = dao.updateModuleAvecHeures(heureSessionModule, 10, false);
 
 		assertTrue(test);
-
 	}
 
 	@Test
 	public void testNombresHeuresMisesAJourApresUpdateHeuresSessionModule() {
-
-		HeuresSessionModule heureSessionModule = new HeuresSessionModule(1, 1,
-				30);
-
+		HeuresSessionModule heureSessionModule = new HeuresSessionModule(1, 1,30);
 		HeuresSessionModuleDao heureSessionModuleDao = new HeuresSessionModuleDao();
-
-		heureSessionModuleDao.updateModuleAvecHeures(heureSessionModule, 10,
-				true);
+		heureSessionModuleDao.updateModuleAvecHeures(heureSessionModule, 10,true);
 
 		Session session = new Session();
 		session.setIdSession(1);

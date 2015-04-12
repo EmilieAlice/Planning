@@ -10,7 +10,7 @@ import dao.SessionDao;
 public class SessionDaoTest {
 
 	@Test
-	public void testSessionDao() {
+	public void testFindSessionByNom() {
 		Session session = new Session();
 		SessionDao sessionDao = new SessionDao();
 
@@ -19,4 +19,8 @@ public class SessionDaoTest {
 		assertEquals(3, session.getIdSession());
 	}
 
+	@Test
+	public void testFindSessionById(){
+
+	}
 }

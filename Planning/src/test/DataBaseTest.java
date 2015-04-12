@@ -12,7 +12,6 @@ public class DataBaseTest {
 
 	@Test
 	public void testConnectionBase() throws SQLException {
-
 		assertNotNull(DataBase.getConnection());
 	}
 

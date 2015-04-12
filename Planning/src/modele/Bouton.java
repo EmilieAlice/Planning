@@ -31,10 +31,13 @@ public class Bouton extends Observable{
 		this.groupeDeBoutons = groupeDeBoutons;
 	}
 
+	/**
+	 * A COMPLETER
+	 */
 	public void remplir(){
 		boutonDesMatières = new ArrayList<JRadioButton>();
 		groupeDeBoutons = new ButtonGroup();
-		
+
 		ArrayList<Module> listeModule = new ArrayList<Module>();
 		ModuleDao moduleDao = new ModuleDao();
 		Session session = new Session();
@@ -60,12 +63,18 @@ public class Bouton extends Observable{
 		JRadioButton boutonSupprimer = new JRadioButton("Supprimer");
 		boutonDesMatières.add(boutonSupprimer);
 		groupeDeBoutons.add(boutonSupprimer);
-		
+
 		setChanged();
 		notifyObservers();
 
 	}
-	
+
+	/**
+	 * A COMPLETER
+	 * 
+	 * @param boutonDesMatières
+	 * @return
+	 */
 	public JRadioButton boutonSelectionne(ArrayList<JRadioButton> boutonDesMatières){
 		JRadioButton boutonSelec = new JRadioButton();
 		for (JRadioButton jRadioButton : boutonDesMatières) {

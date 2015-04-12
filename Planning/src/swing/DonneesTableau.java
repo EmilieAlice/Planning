@@ -5,16 +5,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-import javax.swing.JLabel;
 import javax.swing.table.AbstractTableModel;
 
 import modele.Session;
 
 public class DonneesTableau extends AbstractTableModel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private Session session;
 

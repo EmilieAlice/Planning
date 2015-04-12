@@ -1,29 +1,18 @@
 package swing;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Observable;
 import java.util.Observer;
 
-import javax.swing.ButtonGroup;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 
 import modele.Bouton;
-import modele.Module;
-import modele.Session;
-import dao.HeuresSessionModuleDao;
-import dao.ModuleDao;
 
 public class SelectionMatierePanel extends JPanel implements Observer{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	//private final ArrayList<JRadioButton> boutonDesMatières;
-	// private final ButtonGroup groupeDeBoutons;
+	//private final ButtonGroup groupeDeBoutons;
 	private final Bouton bouton;
 
 	public SelectionMatierePanel() {
@@ -70,7 +59,7 @@ public class SelectionMatierePanel extends JPanel implements Observer{
 	@Override
 	public void update(Observable o, Object arg) {
 		this.updateUI();
-		
+
 
 	}
 

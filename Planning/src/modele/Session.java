@@ -1,14 +1,7 @@
 package modele;
 
-import java.sql.Date;
 import java.util.GregorianCalendar;
 
-/**
- * Objet Session
- * 
- * @author Jerome
- *
- */
 public class Session {
 
 	private int idSession;
@@ -24,8 +17,10 @@ public class Session {
 
 	}
 
-	public Session(int idSession, String nomSession, GregorianCalendar dateDebut, GregorianCalendar dateFin,
-			String descriptionSession, int idFormation, GregorianCalendar dateDebutInscription,
+	public Session(int idSession, String nomSession,
+			GregorianCalendar dateDebut, GregorianCalendar dateFin,
+			String descriptionSession, int idFormation,
+			GregorianCalendar dateDebutInscription,
 			GregorianCalendar dateFinInscription) {
 		super();
 		this.idSession = idSession;
@@ -104,12 +99,11 @@ public class Session {
 
 	@Override
 	public String toString() {
-		return "Session [id_session=" + idSession + ", nomSession=" + nomSession
-				+ ", dateDebut=" + dateDebut + ", dateFin=" + dateFin
-				+ ", descriptionSession=" + descriptionSession + ", id_formation="
-				+ idFormation + ", dateDebutInscription="
-				+ dateDebutInscription + ", dateFinInscription="
-				+ dateFinInscription + "]";
+		return "Session [id_session=" + idSession + ", nomSession="
+				+ nomSession + ", dateDebut=" + dateDebut.getTime()
+				+ ", dateFin=" + dateFin.getTime() + ", descriptionSession="
+				+ descriptionSession + ", id_formation=" + idFormation
+				+ ", dateDebutInscription=" + dateDebutInscription.getTime()
+				+ ", dateFinInscription=" + dateFinInscription.getTime() + "]";
 	}
-
 }
