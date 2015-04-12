@@ -3,8 +3,6 @@ package dao;
 import java.sql.ResultSet;
 import java.util.GregorianCalendar;
 
-import modele.HeuresSessionModule;
-import modele.Module;
 import modele.Session;
 
 public class SessionDao {
@@ -28,7 +26,7 @@ public class SessionDao {
 	 * de la session
 	 * 
 	 * @param nomSession
-	 * @return session
+	 * @return
 	 */
 	public Session findSessionByNom(String nomSession) {
 		Session session = new Session();
@@ -94,8 +92,8 @@ public class SessionDao {
 	/**
 	 * Méthode qui récupère dans la base données un objet Session grâce à son id
 	 * 
-	 * @param un entier idSession
-	 * @return une session
+	 * @param idSession
+	 * @return 
 	 */
 	public Session findSessionById(int idSession) {
 		Session session = new Session();

@@ -3,7 +3,6 @@ package dao;
 import java.sql.ResultSet;
 
 import modele.Personne;
-import modele.Session;
 
 public class PersonneDao {
 
@@ -28,10 +27,10 @@ public class PersonneDao {
 
 	/**
 	 * Méthode qui récupère dans la base données un objet Personne qui est un
-	 * formateur
+	 * formateur grace au module qu'elle enseigne
 	 * 
 	 * @param nomModule
-	 * @return personne
+	 * @return
 	 */
 	public Personne findPersonneByNomModule(String nomModule) {
 		Personne personne = new Personne();

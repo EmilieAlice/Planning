@@ -3,19 +3,17 @@ package dao;
 import java.sql.ResultSet;
 
 import modele.ContrainteFormateur;
-import modele.Formateur;
-import modele.Personne;
 
 public class ContrainteFormateurDao {
-	
+
 	private static java.sql.PreparedStatement pDonneJourCreneauIndispo = null;
 	/**
-	 * Requete pour récupérer un formateur grâce à l'id de la personne
+	 * Requete pour récuperer les contraintes d'un formateur
 	 */
 	static {
 		try {
 			pDonneJourCreneauIndispo = DataBase.getConnection().prepareStatement(
-							"SELECT contrainte_formateur.id_jour, nom_jour, contrainte_formateur.id_creneau, nom_creneau "
+					"SELECT contrainte_formateur.id_jour, nom_jour, contrainte_formateur.id_creneau, nom_creneau "
 							+ "FROM lagarenne2015.contrainte_formateur "
 							+ "inner join jour on jour.id_jour = contrainte_formateur.id_jour "
 							+ "inner join creneau on creneau.id_creneau = contrainte_formateur.id_creneau "
@@ -27,11 +25,10 @@ public class ContrainteFormateurDao {
 	}
 
 	/**
-	 * Méthode qui récupère dans la base données un objet Formateur
+	 * Méthode qui récupère dans la base données un objet ContrainteFormateur
 	 * 
-	 * @param un
-	 *            objet Personne
-	 * @return un objet Formateur
+	 * @param idFormateur
+	 * @return
 	 */
 	public ContrainteFormateur donneJourCreneauIndispo(int idFormateur) {
 		ContrainteFormateur contrainteFormateur = new ContrainteFormateur();

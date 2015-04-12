@@ -27,11 +27,10 @@ public class FormateurDao {
 	}
 
 	/**
-	 * Méthode qui récupère dans la base données un objet Formateur
+	 * Méthode qui récupère dans la base de données un objet Formateur
 	 * 
-	 * @param un
-	 *            objet Personne
-	 * @return un objet Formateur
+	 * @param personne
+	 * @return
 	 */
 	public Formateur findFormateurByIdPersonne(Personne personne) {
 		Formateur formateur = new Formateur();
@@ -55,7 +54,7 @@ public class FormateurDao {
 
 	private static java.sql.PreparedStatement pFindFormateurByIdModule = null;
 	/**
-	 * Requete pour récupérer un formateur grâce à l'id de la personne
+	 * Requete pour récupérer un formateur grâce à l'id du module
 	 */
 	static {
 		try {
@@ -74,9 +73,8 @@ public class FormateurDao {
 	/**
 	 * Méthode qui récupère dans la base données un objet Formateur
 	 * 
-	 * @param un
-	 *            objet Module
-	 * @return un objet Formateur
+	 * @param module
+	 * @return
 	 */
 	public Formateur findFormateurByIdModule(Module module) {
 		Formateur formateur = new Formateur();

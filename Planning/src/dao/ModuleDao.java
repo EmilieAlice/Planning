@@ -7,8 +7,6 @@ import modele.Formateur;
 import modele.Module;
 import modele.Session;
 
-import com.mysql.jdbc.PreparedStatement;
-
 public class ModuleDao {
 
 	private static java.sql.PreparedStatement pFindModuleByNom = null;
@@ -29,7 +27,7 @@ public class ModuleDao {
 	 * Méthode qui récupère dans la base données un objet Module grâce à son nom
 	 * 
 	 * @param nom
-	 * @return Module
+	 * @return
 	 */
 	public Module findModuleByNom(String nom) {
 		Module module = new Module();
@@ -80,7 +78,7 @@ public class ModuleDao {
 	 * 
 	 * @param annee
 	 * @param session
-	 * @return Collection de Module
+	 * @return
 	 */
 	public ArrayList<Module> findModuleAvecHeures(int annee, Session session) {
 		ArrayList<Module> listeModule = new ArrayList<Module>();
@@ -121,16 +119,16 @@ public class ModuleDao {
 					.getConnection()
 					.prepareStatement(
 							"SELECT * FROM lagarenne2015.formateur "
-							+ "INNER JOIN lagarenne2015.module on module.id_module = formateur.id_module "
-							+ "INNER JOIN lagarenne2015.personne on personne.id_personne = formateur.id_formateur "
-							+ "WHERE module.nom_module = ?;");
+									+ "INNER JOIN lagarenne2015.module on module.id_module = formateur.id_module "
+									+ "INNER JOIN lagarenne2015.personne on personne.id_personne = formateur.id_formateur "
+									+ "WHERE module.nom_module = ?;");
 		} catch (Exception e) {
 			e.getMessage();
 			System.out.println("Requete findFormateurByNomModule échouée.");
 		}
 	}
 	/**
-	 * Méthode qui récupère dans la base données un objet Formateur
+	 * Méthode qui récupère dans la base données un objet Formateur grace au nomModule
 	 * 
 	 * @param nomModule
 	 * @return
@@ -165,7 +163,7 @@ public class ModuleDao {
 
 	private static java.sql.PreparedStatement pFindModuleById = null;
 	/**
-	 * Requete pour récupérer un module grâce à son nom
+	 * Requete pour récupérer un module grâce à son id
 	 */
 	static {
 		try {
@@ -178,10 +176,10 @@ public class ModuleDao {
 	}
 
 	/**
-	 * Méthode qui récupère dans la base données un objet Module grâce à son nom
-	 * 
-	 * @param nom
-	 * @return Module
+	 * Méthode qui récupère dans la base données un objet Module grâce à son id
+	 *  
+	 * @param idModule
+	 * @return
 	 */
 	public Module findModuleById(int idModule) {
 		Module module = new Module();
@@ -203,5 +201,5 @@ public class ModuleDao {
 		}
 		return module;
 	}
-	
+
 }

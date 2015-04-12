@@ -2,7 +2,6 @@ package dao;
 
 import java.sql.ResultSet;
 
-import modele.Module;
 import modele.Salle;
 
 public class SalleDao {
@@ -24,7 +23,7 @@ public class SalleDao {
 	 * Méthode qui récupère dans la base données un objet Salle grace à son id
 	 * 
 	 * @param idSalle
-	 * @return Module
+	 * @return
 	 */
 	public Salle findModuleByNom(int idSalle) {
 		Salle salle = new Salle();

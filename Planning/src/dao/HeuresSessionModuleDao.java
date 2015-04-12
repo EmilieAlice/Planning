@@ -31,7 +31,7 @@ public class HeuresSessionModuleDao {
 	/**
 	 * Méthode qui récupère dans la base données un objet HeuresSessionModule
 	 * 
-	 * @param annee
+	 * @param module
 	 * @param session
 	 * @return
 	 */
@@ -45,7 +45,7 @@ public class HeuresSessionModuleDao {
 			if (resultat.next()) {
 				heuresSessionModule.setId_module(resultat.getInt("id_module"));
 				heuresSessionModule
-						.setId_session(resultat.getInt("id_session"));
+				.setId_session(resultat.getInt("id_session"));
 				heuresSessionModule.setNbreHeuresDisponibles(resultat
 						.getInt("nbre_heures_disponibles"));
 				return heuresSessionModule;
@@ -58,13 +58,13 @@ public class HeuresSessionModuleDao {
 		return null;
 	}
 
-	private static java.sql.PreparedStatement pupdateModuleAvecHeures = null;
+	private static java.sql.PreparedStatement pUpdateModuleAvecHeures = null;
 	/**
 	 * Requete pour mettre à jour le nombre d'heures restantes dans le module
 	 */
 	static {
 		try {
-			pupdateModuleAvecHeures = DataBase
+			pUpdateModuleAvecHeures = DataBase
 					.getConnection()
 					.prepareStatement(
 							"UPDATE lagarenne2015.heures_session_module "
@@ -80,29 +80,22 @@ public class HeuresSessionModuleDao {
 	 * Méthode qui met à jour dans la base données le nombre d'heures disponible
 	 * pour un module pour le module sélectionné
 	 * 
-	 * @param annee
-	 * @param session
+	 * @param heureSessionModule
+	 * @param heuresRetirees
+	 * @param action
 	 * @return
 	 */
-	public boolean updateModuleAvecHeures(
-			HeuresSessionModule heureSessionModule, int heuresRetirees,
-			Boolean action) {
+	public boolean updateModuleAvecHeures(HeuresSessionModule heureSessionModule, int heuresRetirees, Boolean action) {
 		Boolean etat = new Boolean(false);
 		try {
 			if (action) {
-				pupdateModuleAvecHeures
-						.setInt(1,
-								(heureSessionModule.getNbreHeuresDisponibles() + heuresRetirees));
+				pUpdateModuleAvecHeures.setInt(1,(heureSessionModule.getNbreHeuresDisponibles() + heuresRetirees));
 			} else {
-				pupdateModuleAvecHeures
-						.setInt(1,
-								((heureSessionModule.getNbreHeuresDisponibles()) - heuresRetirees));
+				pUpdateModuleAvecHeures.setInt(1,((heureSessionModule.getNbreHeuresDisponibles()) - heuresRetirees));
 			}
-			pupdateModuleAvecHeures.setInt(2,
-					heureSessionModule.getId_session());
-			pupdateModuleAvecHeures
-					.setInt(3, heureSessionModule.getId_module());
-			int resultat = pupdateModuleAvecHeures.executeUpdate();
+			pUpdateModuleAvecHeures.setInt(2,heureSessionModule.getId_session());
+			pUpdateModuleAvecHeures.setInt(3, heureSessionModule.getId_module());
+			int resultat = pUpdateModuleAvecHeures.executeUpdate();
 			if (resultat != 0)
 				etat = true;
 		} catch (Exception e) {

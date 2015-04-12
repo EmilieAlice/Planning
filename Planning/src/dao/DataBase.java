@@ -9,9 +9,7 @@ import java.sql.SQLException;
  * données lagarenne2015
  * 
  * @author Jerome
- *
  */
-
 public class DataBase {
 
 	private static final String DRIVER_NAME = "com.mysql.jdbc.Driver";
@@ -24,13 +22,13 @@ public class DataBase {
 					+ " not found");
 		} catch (InstantiationException e) {
 			System.err
-					.println("*** ERROR: Impossible to create an instance of "
-							+ DRIVER_NAME);
+			.println("*** ERROR: Impossible de se connecter à "
+					+ DRIVER_NAME);
 			System.err.println(e.getMessage());
 		} catch (IllegalAccessException e) {
 			System.err
-					.println("*** ERROR: Impossible to create an instance of "
-							+ DRIVER_NAME);
+			.println("*** ERROR: Impossible de se connecter à "
+					+ DRIVER_NAME);
 			System.err.println(e.getMessage());
 		}
 	}
