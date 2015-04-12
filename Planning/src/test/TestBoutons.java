@@ -118,6 +118,35 @@ public class TestBoutons {
 
 
 	}
+	
+	/**
+	 * Methode qui recupere la date de la case dans laquel on à cliquer
+	 * @return
+	 */
+	public GregorianCalendar recupereDateDeLaCaseSelectionnee() {
+		String recupDate;
+		int year;
+		int month;
+		int day;
+		GregorianCalendar gregJour;
+
+		if (table.getSelectedColumn() % 2 == 0) {
+			recupDate = (String) table.getValueAt(table.getSelectedRow() - 1, table.getSelectedColumn() -1);
+			year = Integer.parseInt(recupDate.split("/")[2]);
+			month = Integer.parseInt(recupDate.split("/")[1])-1;
+			day= Integer.parseInt(recupDate.split("/")[0]);
+			gregJour = new GregorianCalendar(year, month, day);
+		}
+		else{
+			recupDate = (String) table.getValueAt(table.getSelectedRow() - 1, table.getSelectedColumn());
+			year = Integer.parseInt(recupDate.split("/")[2]);
+			month = Integer.parseInt(recupDate.split("/")[1])-1;
+			day= Integer.parseInt(recupDate.split("/")[0]);
+			gregJour = new GregorianCalendar(year, month, day);
+		}
+		return gregJour;
+		
+	}
 
 	public class ecouteur implements MouseListener {
 
@@ -138,42 +167,30 @@ public class TestBoutons {
 			moduleDao = new ModuleDao();
 			new SalleDao();
 			// salle = salleDao.findModuleByNom(1);
-			String recupDate;
-			int year;
-			int month;
-			int day;
-			GregorianCalendar gregJour;
 
 			for (int i = 0; i < tableau.length; i++) {
 				tableauBoutton.add((JRadioButton) tableau[i]);
 			}
 
+			// si la ligne selectionnée est impaire et la colonne  different de 0
 			if(table.getSelectedRow() % 2 != 0 && table.getSelectedColumn() !=0){
 				for (JRadioButton jRadioButton : tableauBoutton) {
 					if (jRadioButton.isSelected()) {
 						texteDuBouton = jRadioButton.getText();
+						// si le texte du bouton selectionné n'est pas Supprimer
 						if (!texteDuBouton.equals("Supprimer")) {
 							nomModule = texteDuBouton.split(" ")[0];
 							seance.setIdModule(moduleDao.findModuleByNom(nomModule).getIdModule());
-							// on fait un insert dans la table
+							// si il n'y a rien dans la case selectionnée
 							if (table.getValueAt(table.getSelectedRow(), table.getSelectedColumn()) == ""){
+								// si la colonne est paire
 								if (table.getSelectedColumn() % 2 == 0) {
 									seance.setCreneau(apresMidi);
-									recupDate = (String) table.getValueAt(table.getSelectedRow() - 1, table.getSelectedColumn() -1);
-									year = Integer.parseInt(recupDate.split("/")[2]);
-									month = Integer.parseInt(recupDate.split("/")[1])-1;
-									day= Integer.parseInt(recupDate.split("/")[0]);
-									gregJour = new GregorianCalendar(year, month, day);
 								}
 								else{
 									seance.setCreneau(matin);
-									recupDate = (String) table.getValueAt(table.getSelectedRow() - 1, table.getSelectedColumn());
-									year = Integer.parseInt(recupDate.split("/")[2]);
-									month = Integer.parseInt(recupDate.split("/")[1])-1;
-									day= Integer.parseInt(recupDate.split("/")[0]);
-									gregJour = new GregorianCalendar(year, month, day);
 								}
-								seance.setDebut(gregJour);
+								seance.setDebut(recupereDateDeLaCaseSelectionnee());
 								seance.setIdFormateur(moduleDao.findFormateurByNomModule(nomModule).getIdFormateur());
 								seance.setIdSession(session.getIdSession());
 								seance.setContenu(contenu);
@@ -185,16 +202,16 @@ public class TestBoutons {
 										+ salle.getNomSalle() + "</center></html>"*/, table.getSelectedRow(), table.getSelectedColumn());
 								}catch (Exception ex){
 									ex.getMessage();
-									System.out.println("InserSeance échoué");
+									System.out.println("InserySeance échoué");
 								}
 							}
 							else{
 								seance.setIdModule(moduleDao.findModuleByNom(nomModule).getIdModule());
 								seance.setIdFormateur(moduleDao.findFormateurByNomModule(nomModule).getIdFormateur());
 								seance.setIdSalle(2);
-								/*seanceDao.updateSeance(seance.getIdModule(), 
+								seanceDao.updateSeance(seance.getIdModule(), 
 										seance.getIdFormateur(), seance.getIdSalle(), 
-										contenu, gregJour, session.getIdSession());*/
+										contenu, recupereDateDeLaCaseSelectionnee(), session.getIdSession());
 							}
 						} else {
 							texteVide = "";
@@ -202,21 +219,11 @@ public class TestBoutons {
 							// l'heure de début
 							if (table.getSelectedColumn() % 2 == 0) {
 								seance.setCreneau(apresMidi);
-								recupDate = (String) table.getValueAt(table.getSelectedRow() - 1, table.getSelectedColumn() -1);
-								year = Integer.parseInt(recupDate.split("/")[2]);
-								month = Integer.parseInt(recupDate.split("/")[1])-1;
-								day= Integer.parseInt(recupDate.split("/")[0]);
-								gregJour = new GregorianCalendar(year, month, day);
 							}
 							else{
 								seance.setCreneau(matin);
-								recupDate = (String) table.getValueAt(table.getSelectedRow() - 1, table.getSelectedColumn());
-								year = Integer.parseInt(recupDate.split("/")[2]);
-								month = Integer.parseInt(recupDate.split("/")[1])-1;
-								day= Integer.parseInt(recupDate.split("/")[0]);
-								gregJour = new GregorianCalendar(year, month, day);
 							}
-							seance.setDebut(gregJour);
+							seance.setDebut(recupereDateDeLaCaseSelectionnee());
 							try{
 								seanceDao.deleteSeance(seance.getDebut(), session.getIdSession());
 								table.setValueAt(texteVide, table.getSelectedRow(),
