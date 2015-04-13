@@ -13,12 +13,12 @@ public class SelectionMatierePanel extends JPanel implements Observer {
 
 	private final Bouton bouton;
 
-	public SelectionMatierePanel() {
+	public SelectionMatierePanel(int idSession) {
 
 		bouton = new Bouton();
 		bouton.addObserver(this);
 		update(bouton, null);
-		bouton.remplir();
+		bouton.remplir(idSession);
 		for (int i = 0; i < bouton.getBoutonDesMatières().size(); i++) {
 			add(bouton.getBoutonDesMatières().get(i));
 		}

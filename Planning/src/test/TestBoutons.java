@@ -81,7 +81,7 @@ public class TestBoutons {
 
 		scrollPane.setViewportView(panelTableau);
 
-		panelBouttons = new SelectionMatierePanel();
+		panelBouttons = new SelectionMatierePanel(1);
 		panelBouttons.setBounds(959, 172, 235, 315);
 		frame.getContentPane().add(panelBouttons);
 

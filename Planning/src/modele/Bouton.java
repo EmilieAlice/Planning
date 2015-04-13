@@ -10,7 +10,7 @@ import javax.swing.JRadioButton;
 import dao.HeuresSessionModuleDao;
 import dao.ModuleDao;
 
-public class Bouton extends Observable{
+public class Bouton extends Observable {
 
 	private ArrayList<JRadioButton> boutonDesMatières;
 	private ButtonGroup groupeDeBoutons;
@@ -32,9 +32,10 @@ public class Bouton extends Observable{
 	}
 
 	/**
-	 * A COMPLETER
+	 * Méthode qui remplit une liste de Bouton avec les matières et leur nombre
+	 * d'heures si ils ont encore des heures de disponibles
 	 */
-	public void remplir(){
+	public void remplir(int idSession) {
 		boutonDesMatières = new ArrayList<JRadioButton>();
 		groupeDeBoutons = new ButtonGroup();
 
@@ -42,7 +43,7 @@ public class Bouton extends Observable{
 		ModuleDao moduleDao = new ModuleDao();
 		Session session = new Session();
 		session.setNomSession("BTS SIO 2016");
-		session.setIdSession(1);
+		session.setIdSession(idSession);
 		listeModule = moduleDao.findModuleAvecHeures(2015, session);
 
 		HashMap<Module, Integer> liste = new HashMap<>();
@@ -67,21 +68,5 @@ public class Bouton extends Observable{
 		setChanged();
 		notifyObservers();
 
-	}
-
-	/**
-	 * A COMPLETER
-	 * 
-	 * @param boutonDesMatières
-	 * @return
-	 */
-	public JRadioButton boutonSelectionne(ArrayList<JRadioButton> boutonDesMatières){
-		JRadioButton boutonSelec = new JRadioButton();
-		for (JRadioButton jRadioButton : boutonDesMatières) {
-			if(jRadioButton.isSelected()){
-				boutonSelec = jRadioButton;
-			}
-		}
-		return boutonSelec;
 	}
 }
