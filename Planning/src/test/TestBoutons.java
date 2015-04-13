@@ -184,7 +184,7 @@ public class TestBoutons {
 											contenu, seance.getIdSession(), seance.getDebut());
 									// On recupere le nom du nouveau Module
 									String nouveauModule = jRadioButton.getText().split(" ")[0];
-									
+									// On parcourt les boutons
 									for (JRadioButton jRadioButtonSuppr : tableauBoutton) {
 										// Si le nom du bouton est egale à l'ancien
 										if(jRadioButtonSuppr.getText().split(" ")[0].equals(ancienModule)){
@@ -251,10 +251,14 @@ public class TestBoutons {
 								table.setValueAt(texteVide, table.getSelectedRow(),
 										table.getSelectedColumn());
 								heureDispoDao.updateModuleAvecHeures(heureDispo, seance.getCreneau(), true);
+								// On recupere le nombre d'heure dispo
 								heureDispo = heureDispoDao.findHeuresSessionModule(seance.getIdSession(), seance.getIdModule());
+								// On va parcourir les boutons
 								for (JRadioButton jRadioButtonSuppr : tableauBoutton) {
+									// Pour trouver celui du module selectionner
 									if(jRadioButtonSuppr.getText().split(" ")[0].equals(nomModule)){
-										jRadioButtonSuppr.setText(nomModule + " : " 	+ heureDispo.getNbreHeuresDisponibles() + " heures disponibles");
+										// Et mettre à jour son nombre d'heure
+										jRadioButtonSuppr.setText(nomModule + " : " + heureDispo.getNbreHeuresDisponibles() + " heures disponibles");
 									}
 								}
 							}catch (Exception exc){
