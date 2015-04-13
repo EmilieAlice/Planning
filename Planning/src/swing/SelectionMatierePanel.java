@@ -3,6 +3,7 @@ package swing;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
 import modele.Bouton;
@@ -55,7 +56,7 @@ public class SelectionMatierePanel extends JPanel implements Observer{
 			add(bouton.getBoutonDesMatières().get(i));
 		}
 	}
-
+	
 	@Override
 	public void update(Observable o, Object arg) {
 		this.updateUI();

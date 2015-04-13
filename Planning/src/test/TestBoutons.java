@@ -24,6 +24,7 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 
 import swing.DonneesTableauDouble;
+import swing.SelectionMatierePanel;
 
 import javax.swing.JScrollPane;
 
@@ -80,14 +81,14 @@ public class TestBoutons {
 		frame.setBounds(100, 100, 1200, 800);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
+
 		scrollPane = new JScrollPane();
 		scrollPane.setBounds(20, 20, 940, 685);
 		frame.getContentPane().add(scrollPane);
 
 		panelTableau = new JPanel();
 		panelTableau.setBounds(6, 6, 930, 675);
-		
+
 		table = new JTable(donneesTableauDouble);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.setCellSelectionEnabled(true);
@@ -95,31 +96,31 @@ public class TestBoutons {
 		table.setRowHeight(25);
 		table.setRowMargin(5);
 		panelTableau.add(table);
-		
 
 		scrollPane.setViewportView(panelTableau);
 		//scrollPane.setColumnHeaderView(entetes);
 
-		panelBouttons = new JPanel();
+		//panelBouttons = new JPanel();
+		panelBouttons = new SelectionMatierePanel();
 		panelBouttons.setBounds(959, 172, 235, 315);
 		frame.getContentPane().add(panelBouttons);
-		
-		group = new ButtonGroup();
-		groupeDeBoutons = new Bouton();
-		groupeDeBoutons.remplir();
-		ArrayList<JRadioButton> listeDesBoutons = groupeDeBoutons
-				.getBoutonDesMatières();
 
-		for (JRadioButton jRadioButton : listeDesBoutons) {
-			panelBouttons.add(jRadioButton);
-			group.add(jRadioButton);
-		}
+		/*group = new ButtonGroup();
+				groupeDeBoutons = new Bouton();
+				groupeDeBoutons.remplir();
+				ArrayList<JRadioButton> listeDesBoutons = groupeDeBoutons
+						.getBoutonDesMatières();
+
+				for (JRadioButton jRadioButton : listeDesBoutons) {
+					panelBouttons.add(jRadioButton);
+					group.add(jRadioButton);
+				}*/
 		session = new Session();
 		session.setIdSession(2);
 
 
 	}
-	
+
 	/**
 	 * Methode qui recupere la date de la case dans laquel on à cliquer
 	 * @return
@@ -146,7 +147,7 @@ public class TestBoutons {
 			gregJour = new GregorianCalendar(year, month, day);
 		}
 		return gregJour;
-		
+
 	}
 
 	public class ecouteur implements MouseListener {
@@ -183,36 +184,36 @@ public class TestBoutons {
 							nomModule = texteDuBouton.split(" ")[0];
 							seance.setIdModule(moduleDao.findModuleByNom(nomModule).getIdModule());
 							// si il n'y a rien dans la case selectionnée
-								// si la colonne est paire
-								if (table.getSelectedColumn() % 2 == 0) {
-									seance.setCreneau(apresMidi);
+							// si la colonne est paire
+							if (table.getSelectedColumn() % 2 == 0) {
+								seance.setCreneau(apresMidi);
+							}
+							else{
+								seance.setCreneau(matin);
+							}
+							seance.setDebut(recupereDateDeLaCaseSelectionnee());
+							seance.setIdFormateur(moduleDao.findFormateurByNomModule(nomModule).getIdFormateur());
+							seance.setIdSession(session.getIdSession());
+							seance.setContenu(contenu);
+							seance.setIdSalle(1);
+							try{
+								if (table.getValueAt(table.getSelectedRow(), table.getSelectedColumn()) != ""){
+									seanceDao.updateSeance(seance.getIdModule(), 
+											seance.getIdFormateur(), seance.getIdSalle(), 
+											contenu,  session.getIdSession(),recupereDateDeLaCaseSelectionnee());
 								}
 								else{
-									seance.setCreneau(matin);
+									seanceDao.insertSeance(seance);
 								}
-								seance.setDebut(recupereDateDeLaCaseSelectionnee());
-								seance.setIdFormateur(moduleDao.findFormateurByNomModule(nomModule).getIdFormateur());
-								seance.setIdSession(session.getIdSession());
-								seance.setContenu(contenu);
-								seance.setIdSalle(1);
-								try{
-									if (table.getValueAt(table.getSelectedRow(), table.getSelectedColumn()) != ""){
-										seanceDao.updateSeance(seance.getIdModule(), 
-												seance.getIdFormateur(), seance.getIdSalle(), 
-												contenu,  session.getIdSession(),recupereDateDeLaCaseSelectionnee());
-									}
-									else{
-										seanceDao.insertSeance(seance);
-									}
-									table.setValueAt(/*"<html><center> " +*/ nomModule 
-											/*+ "<br>avec " + moduleDao.findFormateurByNomModule(nomModule).getPrenom()
+								table.setValueAt(/*"<html><center> " +*/ nomModule 
+										/*+ "<br>avec " + moduleDao.findFormateurByNomModule(nomModule).getPrenom()
 											+ " " + moduleDao.findFormateurByNomModule(nomModule).getNom() + "<br>salle "
 											+ salle.getNomSalle() + "</center></html>"*/, 
 											table.getSelectedRow(), table.getSelectedColumn());
-								}catch (Exception ex){
-									ex.getMessage();
-									System.out.println("Insert Seance échoué");
-								}
+							}catch (Exception ex){
+								ex.getMessage();
+								System.out.println("Insert Seance échoué");
+							}
 							//}
 							/*else{
 								seance.setIdModule(moduleDao.findModuleByNom(nomModule).getIdModule());
