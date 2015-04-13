@@ -7,12 +7,8 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
-import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
 import javax.swing.JRadioButton;
-import javax.swing.ListSelectionModel;
-
-import modele.Bouton;
 import modele.Seance;
 import modele.Seance.Creneau;
 import modele.Session;
@@ -23,8 +19,8 @@ import dao.SeanceDao;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 
-import swing.DonneesTableauDouble;
 import swing.SelectionMatierePanel;
+import swing.TableauPanel;
 
 import javax.swing.JScrollPane;
 
@@ -33,21 +29,14 @@ public class TestBoutons {
 	private JFrame frame;
 	private JTable table;
 	private JPanel panelBouttons;
-	private ButtonGroup group;
 	private Session session;
-	private JPanel panelTableau;
+	private TableauPanel panelTableau;
 	private Component[] tableau;
 	private ArrayList<JRadioButton> tableauBoutton;
 	private Seance seance;
 	private SeanceDao seanceDao;
 	private ModuleDao moduleDao;
-	private Bouton groupeDeBoutons;
 	private JScrollPane scrollPane;
-	private DonneesTableauDouble donneesTableauDouble = new DonneesTableauDouble(2);
-	/*private String[] entetes = { "Semaine", "LUNDI Matin",
-			"Après-midi", "MARDI Matin", "Après-midi", "MERCREDI Matin",
-			"Après-midi", "JEUDI Matin", "Après-midi", "VENDREDI matin",
-			"Après-midi" };*/
 
 	/**
 	 * Launch the application.
@@ -86,35 +75,16 @@ public class TestBoutons {
 		scrollPane.setBounds(20, 20, 940, 685);
 		frame.getContentPane().add(scrollPane);
 
-		panelTableau = new JPanel();
-		panelTableau.setBounds(6, 6, 930, 675);
-
-		table = new JTable(donneesTableauDouble);
-		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		table.setCellSelectionEnabled(true);
+		panelTableau = new TableauPanel(1);
+		table = panelTableau.getTable();
 		table.addMouseListener(new ecouteur());
-		table.setRowHeight(25);
-		table.setRowMargin(5);
-		panelTableau.add(table);
 
 		scrollPane.setViewportView(panelTableau);
-		//scrollPane.setColumnHeaderView(entetes);
 
-		//panelBouttons = new JPanel();
 		panelBouttons = new SelectionMatierePanel();
 		panelBouttons.setBounds(959, 172, 235, 315);
 		frame.getContentPane().add(panelBouttons);
 
-		/*group = new ButtonGroup();
-				groupeDeBoutons = new Bouton();
-				groupeDeBoutons.remplir();
-				ArrayList<JRadioButton> listeDesBoutons = groupeDeBoutons
-						.getBoutonDesMatières();
-
-				for (JRadioButton jRadioButton : listeDesBoutons) {
-					panelBouttons.add(jRadioButton);
-					group.add(jRadioButton);
-				}*/
 		session = new Session();
 		session.setIdSession(2);
 
@@ -205,24 +175,12 @@ public class TestBoutons {
 								else{
 									seanceDao.insertSeance(seance);
 								}
-								table.setValueAt(/*"<html><center> " +*/ nomModule 
-										/*+ "<br>avec " + moduleDao.findFormateurByNomModule(nomModule).getPrenom()
-											+ " " + moduleDao.findFormateurByNomModule(nomModule).getNom() + "<br>salle "
-											+ salle.getNomSalle() + "</center></html>"*/, 
+								table.setValueAt(nomModule, 
 											table.getSelectedRow(), table.getSelectedColumn());
 							}catch (Exception ex){
 								ex.getMessage();
 								System.out.println("Insert Seance échoué");
 							}
-							//}
-							/*else{
-								seance.setIdModule(moduleDao.findModuleByNom(nomModule).getIdModule());
-								seance.setIdFormateur(moduleDao.findFormateurByNomModule(nomModule).getIdFormateur());
-								seance.setIdSalle(2);
-								seanceDao.updateSeance(seance.getIdModule(), 
-										seance.getIdFormateur(), seance.getIdSalle(), 
-										contenu, recupereDateDeLaCaseSelectionnee(), session.getIdSession());
-							}*/
 						} else {
 							texteVide = "";
 							// on fait un delete dans la table en se basant sur

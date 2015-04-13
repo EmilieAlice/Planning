@@ -33,7 +33,7 @@ public class FenetreTest extends JFrame {
 	 */
 	private void initComposants() {
 		selectionMatierePanel = new SelectionMatierePanel();
-		tableauPanel = new TableauPanel();
+		tableauPanel = new TableauPanel(1);
 		add(selectionMatierePanel, BorderLayout.NORTH);
 		add(tableauPanel, BorderLayout.SOUTH);
 		

@@ -46,7 +46,7 @@ public class DonneesTableauDouble extends AbstractTableModel {
 
 		// On récupère le nombre de semaines correspodant au nombre de jours
 		int nbreSemaines = (int) (nbreJours / 7) + 1;
-		int tailleTableau = nbreSemaines * 2 + 1;
+		int tailleTableau = nbreSemaines * 2 + 2;
 
 		data = new Object[tailleTableau][columnNames.length];
 
