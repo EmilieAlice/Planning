@@ -129,7 +129,7 @@ public class TestBoutons {
 
 			String texteDuBouton = "";
 			String nomModule;
-			String texteVide;
+			String texteVide = "";
 			String contenu = "null";
 
 			tableau = panelBouttons.getComponents();
@@ -166,25 +166,61 @@ public class TestBoutons {
 							else{
 								seance.setCreneau(matin);
 							}
+							
 							seance.setDebut(recupereDateDeLaCaseSelectionnee());
 							seance.setIdFormateur(moduleDao.findFormateurByNomModule(nomModule).getIdFormateur());
 							seance.setIdSession(session.getIdSession());
 							seance.setContenu(contenu);
 							seance.setIdSalle(1);
+							// On recupere le nombre d'heure dispo pour le module
 							heureDispo = heureDispoDao.findHeuresSessionModule(seance.getIdSession(), seance.getIdModule());
+							
 							try{
+								// Si il y a un module dans la case selectionnée
 								if (table.getValueAt(table.getSelectedRow(), table.getSelectedColumn()) != ""){
-									seanceDao.updateSeance(seance.getIdModule(), 
-											seance.getIdFormateur(), seance.getIdSalle(), 
-											contenu,  session.getIdSession(),recupereDateDeLaCaseSelectionnee());
-									heureDispoDao.updateModuleAvecHeures(heureDispo, seance.getCreneau(), false);
+									// On recupere le nom de l'ancien Module
+									String ancienModule = (String) table.getValueAt(table.getSelectedRow(), table.getSelectedColumn());
+									seanceDao.updateSeance(seance.getIdModule(), seance.getIdFormateur(), seance.getIdSalle(), 
+											contenu, seance.getIdSession(), seance.getDebut());
+									// On recupere le nom du nouveau Module
+									String nouveauModule = jRadioButton.getText().split(" ")[0];
+									
+									for (JRadioButton jRadioButtonSuppr : tableauBoutton) {
+										// Si le nom du bouton est egale à l'ancien
+										if(jRadioButtonSuppr.getText().split(" ")[0].equals(ancienModule)){
+											// On recupere le nombre d'heure avant l'update
+											heureDispo = heureDispoDao.findHeuresSessionModule(seance.getIdSession(), 
+													moduleDao.findModuleByNom(ancienModule).getIdModule());
+											heureDispoDao.updateModuleAvecHeures(heureDispo, seance.getCreneau(), true);
+											// On recupere le nombre d'heure apres l'update
+											heureDispo = heureDispoDao.findHeuresSessionModule(seance.getIdSession(), 
+													moduleDao.findModuleByNom(ancienModule).getIdModule());
+											// On met à jour le texte du bouton pour afficher la bonne heure
+											jRadioButtonSuppr.setText(ancienModule + " : " 	+ heureDispo.getNbreHeuresDisponibles() + " heures disponibles");
+										}
+										if(jRadioButtonSuppr.getText().split(" ")[0].equals(nouveauModule)){
+											// On recupere le nombre d'heure avant l'update
+											heureDispo = heureDispoDao.findHeuresSessionModule(seance.getIdSession(), 
+													moduleDao.findModuleByNom(nouveauModule).getIdModule());
+											heureDispoDao.updateModuleAvecHeures(heureDispo, seance.getCreneau(), false);
+											// On recupere le nombre d'heure apres l'update
+											heureDispo = heureDispoDao.findHeuresSessionModule(seance.getIdSession(), 
+													moduleDao.findModuleByNom(nouveauModule).getIdModule());
+											// On met à jour le texte du bouton pour afficher la bonne heure
+											jRadioButtonSuppr.setText(nouveauModule + " : " 	+ heureDispo.getNbreHeuresDisponibles() + " heures disponibles");
+										}
+									}
 								}
 								else{
+									// On insere la nouvelle seance
 									seanceDao.insertSeance(seance);
 									heureDispoDao.updateModuleAvecHeures(heureDispo, seance.getCreneau(), false);
+									// On recupere le nombre d'heure apres le update
 									heureDispo = heureDispoDao.findHeuresSessionModule(seance.getIdSession(), seance.getIdModule());
+									// On met à jour le texte du bouton pour afficher la bonne heure
 									jRadioButton.setText(nomModule + " : " 	+ heureDispo.getNbreHeuresDisponibles() + " heures disponibles");
 								}
+								// On affiche le nom du module dans le planning
 								table.setValueAt(nomModule, 
 										table.getSelectedRow(), table.getSelectedColumn());
 							}catch (Exception ex){
@@ -192,22 +228,26 @@ public class TestBoutons {
 								System.out.println("Insert Seance échoué");
 							}
 						} else {
-							texteVide = "";
-							// on fait un delete dans la table en se basant sur
-							// l'heure de début et l'idSession
+							// On recupere a nouveau le nom du module
 							nomModule = (String) table.getValueAt(table.getSelectedRow(), table.getSelectedColumn());
+							// On recupe le creneau en fonction de la colonne choisie
 							if (table.getSelectedColumn() % 2 == 0) {
 								seance.setCreneau(apresMidi);
 							}
 							else{
 								seance.setCreneau(matin);
 							}
+							
 							seance.setDebut(recupereDateDeLaCaseSelectionnee());
 							seance.setIdModule(moduleDao.findModuleByNom(nomModule).getIdModule());
 							seance.setIdSession(session.getIdSession());
+							// On recupere le nombre d'heure du module
 							heureDispo = heureDispoDao.findHeuresSessionModule(seance.getIdSession(), seance.getIdModule());
+							
 							try{
+								// On supprime la seance
 								seanceDao.deleteSeance(seance.getDebut(), session.getIdSession());
+								// On vide la case du planning
 								table.setValueAt(texteVide, table.getSelectedRow(),
 										table.getSelectedColumn());
 								heureDispoDao.updateModuleAvecHeures(heureDispo, seance.getCreneau(), true);

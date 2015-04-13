@@ -213,7 +213,7 @@ public class SeanceDao {
 			pUpdateSeance.setInt(3, idSalle);
 			pUpdateSeance.setString(4, contenu);
 			pUpdateSeance.setInt(5, idSession);
-			pUpdateSeance.setTimestamp(5, dateSQLDebut);
+			pUpdateSeance.setTimestamp(6, dateSQLDebut);
 
 			int resultat = pUpdateSeance.executeUpdate();
 			if (resultat != 0)
