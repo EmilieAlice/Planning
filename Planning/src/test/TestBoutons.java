@@ -62,13 +62,13 @@ public class TestBoutons {
 	 * Create the application.
 	 */
 	public TestBoutons() {
-		initialize();
+		initialize(1);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(int idSession) {
 
 		frame = new JFrame();
 		frame.setBounds(100, 100, 1200, 800);
@@ -79,7 +79,7 @@ public class TestBoutons {
 		scrollPane.setBounds(20, 20, 940, 685);
 		frame.getContentPane().add(scrollPane);
 
-		panelTableau = new TableauPanel(1);
+		panelTableau = new TableauPanel(idSession);
 		table = panelTableau.getTable();
 		table.addMouseListener(new ecouteur());
 
@@ -90,7 +90,7 @@ public class TestBoutons {
 		frame.getContentPane().add(panelBouttons);
 
 		session = new Session();
-		session.setIdSession(2);
+		session.setIdSession(idSession);
 
 
 	}
@@ -141,6 +141,8 @@ public class TestBoutons {
 			Seance.Creneau apresMidi = Creneau.APRES_MIDI;
 			seanceDao = new SeanceDao();
 			moduleDao = new ModuleDao();
+			heureDispo = new HeuresSessionModule();
+			heureDispoDao = new HeuresSessionModuleDao();
 			
 			
 
@@ -170,17 +172,17 @@ public class TestBoutons {
 							seance.setIdSession(session.getIdSession());
 							seance.setContenu(contenu);
 							seance.setIdSalle(1);
-							heureDispo = heureDispoDao.findHeuresSessionModule(session, moduleDao.findModuleByNom(nomModule).getIdModule());
+							heureDispo = heureDispoDao.findHeuresSessionModule(seance.getIdSession(), seance.getIdModule());
 							try{
 								if (table.getValueAt(table.getSelectedRow(), table.getSelectedColumn()) != ""){
 									seanceDao.updateSeance(seance.getIdModule(), 
 											seance.getIdFormateur(), seance.getIdSalle(), 
 											contenu,  session.getIdSession(),recupereDateDeLaCaseSelectionnee());
-									heureDispoDao.updateModuleAvecHeures(heureDispo, seance.getCreneau(), true);
+									heureDispoDao.updateModuleAvecHeures(heureDispo, seance.getCreneau(), false);
 								}
 								else{
 									seanceDao.insertSeance(seance);
-									heureDispoDao.updateModuleAvecHeures(heureDispo, seance.getCreneau(), true);
+									heureDispoDao.updateModuleAvecHeures(heureDispo, seance.getCreneau(), false);
 								}
 								table.setValueAt(nomModule, 
 											table.getSelectedRow(), table.getSelectedColumn());
@@ -199,12 +201,12 @@ public class TestBoutons {
 								seance.setCreneau(matin);
 							}
 							seance.setDebut(recupereDateDeLaCaseSelectionnee());
+							heureDispo = heureDispoDao.findHeuresSessionModule(seance.getIdSession(), seance.getIdModule());
 							try{
 								seanceDao.deleteSeance(seance.getDebut(), session.getIdSession());
 								table.setValueAt(texteVide, table.getSelectedRow(),
 										table.getSelectedColumn());
-
-								heureDispoDao.updateModuleAvecHeures(heureDispo, seance.getCreneau(), false);
+								heureDispoDao.updateModuleAvecHeures(heureDispo, seance.getCreneau(), true);
 							}catch (Exception exc){
 								exc.getMessage();
 								System.out.println("DeleteSeance échoué");

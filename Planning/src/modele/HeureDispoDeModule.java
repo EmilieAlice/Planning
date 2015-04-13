@@ -37,7 +37,7 @@ public class HeureDispoDeModule {
 		listeModuleDispo = moduleDao.findModuleAvecHeures(anneeDeSession, session);
 
 		for(Module unModule  : listeModuleDispo){
-			int heureDispo = heureDispoDao.findHeuresSessionModule(session, unModule.getIdModule()).getNbreHeuresDisponibles();
+			int heureDispo = heureDispoDao.findHeuresSessionModule(session.getIdSession(), unModule.getIdModule()).getNbreHeuresDisponibles();
 			if (heureDispo > 3)
 				heureDispoDeModule.put(unModule, heureDispo);
 		}
@@ -54,7 +54,7 @@ public class HeureDispoDeModule {
 		listeModuleDispo = moduleDao.findModuleAvecHeures(anneeDeSession, session);
 
 		for (Module leModule : listeModuleDispo) {
-			int heureDispo = heureDispoDao.findHeuresSessionModule(session, leModule.getIdModule()).getNbreHeuresDisponibles();
+			int heureDispo = heureDispoDao.findHeuresSessionModule(session.getIdSession(), leModule.getIdModule()).getNbreHeuresDisponibles();
 			if (leModule.equals(unModule) && heureDispo > 3)
 				heureDispoDeModule.put(leModule, heureDispo);
 		}

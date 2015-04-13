@@ -4,7 +4,6 @@ import java.sql.ResultSet;
 
 import modele.HeuresSessionModule;
 import modele.Seance;
-import modele.Session;
 import modele.Seance.Creneau;
 
 public class HeuresSessionModuleDao {
@@ -30,14 +29,14 @@ public class HeuresSessionModuleDao {
 	/**
 	 * Méthode qui récupère dans la base données un objet HeuresSessionModule
 	 * 
-	 * @param session
+	 * @param idSession
 	 * @param idModule
 	 * @return
 	 */
-	public HeuresSessionModule findHeuresSessionModule(Session session, int idModule) {
+	public HeuresSessionModule findHeuresSessionModule(int idSession, int idModule) {
 		HeuresSessionModule heuresSessionModule = new HeuresSessionModule();
 		try {
-			pfindHeuresSessionModule.setInt(1, session.getIdSession());
+			pfindHeuresSessionModule.setInt(1, idSession);
 			pfindHeuresSessionModule.setInt(2, idModule);
 			ResultSet resultat = pfindHeuresSessionModule.executeQuery();
 			if (resultat.next()) {
@@ -95,7 +94,7 @@ public class HeuresSessionModuleDao {
 			if (action) {
 				pUpdateModuleAvecHeures.setInt(1,(heureSessionModule.getNbreHeuresDisponibles() + heuresRetirees));
 			} else {
-				pUpdateModuleAvecHeures.setInt(1,((heureSessionModule.getNbreHeuresDisponibles()) - heuresRetirees));
+				pUpdateModuleAvecHeures.setInt(1,(heureSessionModule.getNbreHeuresDisponibles() - heuresRetirees));
 			}
 			pUpdateModuleAvecHeures.setInt(2,heureSessionModule.getId_session());
 			pUpdateModuleAvecHeures.setInt(3, heureSessionModule.getId_module());

@@ -23,7 +23,7 @@ public class HeuresSessionModuleDaoTest {
 
 		HeuresSessionModule test = new HeuresSessionModule();
 		HeuresSessionModuleDao dao = new HeuresSessionModuleDao();
-		test = dao.findHeuresSessionModule(session, module.getIdModule());
+		test = dao.findHeuresSessionModule(session.getIdSession(), module.getIdModule());
 
 		assertNotNull(test);
 	}
@@ -31,7 +31,7 @@ public class HeuresSessionModuleDaoTest {
 	@Test
 	public void testUpdateModuleAvecHeures(){
 		Seance.Creneau matin = Creneau.MATIN;
-		HeuresSessionModule heureSessionModule = new HeuresSessionModule(1, 1,30);
+		HeuresSessionModule heureSessionModule = new HeuresSessionModule(1, 1, 30);
 		HeuresSessionModuleDao dao = new HeuresSessionModuleDao();
 		Boolean test = dao.updateModuleAvecHeures(heureSessionModule, matin, false);
 
@@ -51,7 +51,7 @@ public class HeuresSessionModuleDaoTest {
 		module.setIdModule(1);
 
 		HeuresSessionModule test = new HeuresSessionModule();
-		test = heureSessionModuleDao.findHeuresSessionModule(session, module.getIdModule());
+		test = heureSessionModuleDao.findHeuresSessionModule(session.getIdSession(), module.getIdModule());
 
 		assertEquals(40, test.getNbreHeuresDisponibles());
 	}
