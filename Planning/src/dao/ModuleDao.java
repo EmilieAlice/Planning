@@ -60,7 +60,7 @@ public class ModuleDao {
 					"SELECT * FROM lagarenne2015.heures_session_module "
 							+ "INNER JOIN module ON heures_session_module.id_module = module.id_module "
 							+ "INNER JOIN session ON heures_session_module.id_session = session.id_session "
-							+ "HAVING nbre_heures_disponibles > ? "
+							+ "HAVING nbre_heures_disponibles >= ? "
 							+ "AND session.id_session = ?");
 		} catch (Exception e) {
 			e.getMessage();

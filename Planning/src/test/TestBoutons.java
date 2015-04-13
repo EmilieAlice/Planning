@@ -154,9 +154,11 @@ public class TestBoutons {
 						texteDuBouton = jRadioButton.getText();
 						// si le texte du bouton selectionné n'est pas Supprimer
 						if (!texteDuBouton.equals("Supprimer")) {
+							if (jRadioButton.getText().split(" ")[2].equals("0")) {
+								break;
+							}
 							nomModule = texteDuBouton.split(" ")[0];
 							seance.setIdModule(moduleDao.findModuleByNom(nomModule).getIdModule());
-							// si il n'y a rien dans la case selectionnée
 							// si la colonne est paire
 							if (table.getSelectedColumn() % 2 == 0) {
 								seance.setCreneau(apresMidi);
@@ -180,9 +182,11 @@ public class TestBoutons {
 								else{
 									seanceDao.insertSeance(seance);
 									heureDispoDao.updateModuleAvecHeures(heureDispo, seance.getCreneau(), false);
+									heureDispo = heureDispoDao.findHeuresSessionModule(seance.getIdSession(), seance.getIdModule());
+									jRadioButton.setText(nomModule + " : " 	+ heureDispo.getNbreHeuresDisponibles() + " heures disponibles");
 								}
 								table.setValueAt(nomModule, 
-											table.getSelectedRow(), table.getSelectedColumn());
+										table.getSelectedRow(), table.getSelectedColumn());
 							}catch (Exception ex){
 								ex.getMessage();
 								System.out.println("Insert Seance échoué");
@@ -190,7 +194,7 @@ public class TestBoutons {
 						} else {
 							texteVide = "";
 							// on fait un delete dans la table en se basant sur
-							// l'heure de début
+							// l'heure de début et l'idSession
 							nomModule = (String) table.getValueAt(table.getSelectedRow(), table.getSelectedColumn());
 							if (table.getSelectedColumn() % 2 == 0) {
 								seance.setCreneau(apresMidi);
@@ -207,6 +211,12 @@ public class TestBoutons {
 								table.setValueAt(texteVide, table.getSelectedRow(),
 										table.getSelectedColumn());
 								heureDispoDao.updateModuleAvecHeures(heureDispo, seance.getCreneau(), true);
+								heureDispo = heureDispoDao.findHeuresSessionModule(seance.getIdSession(), seance.getIdModule());
+								for (JRadioButton jRadioButtonSuppr : tableauBoutton) {
+									if(jRadioButtonSuppr.getText().split(" ")[0].equals(nomModule)){
+										jRadioButtonSuppr.setText(nomModule + " : " 	+ heureDispo.getNbreHeuresDisponibles() + " heures disponibles");
+									}
+								}
 							}catch (Exception exc){
 								exc.getMessage();
 								System.out.println("DeleteSeance échoué");
