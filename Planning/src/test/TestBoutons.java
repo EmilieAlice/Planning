@@ -9,9 +9,12 @@ import java.util.GregorianCalendar;
 
 import javax.swing.JFrame;
 import javax.swing.JRadioButton;
+
+import modele.HeuresSessionModule;
 import modele.Seance;
 import modele.Seance.Creneau;
 import modele.Session;
+import dao.HeuresSessionModuleDao;
 import dao.ModuleDao;
 import dao.SalleDao;
 import dao.SeanceDao;
@@ -37,6 +40,8 @@ public class TestBoutons {
 	private SeanceDao seanceDao;
 	private ModuleDao moduleDao;
 	private JScrollPane scrollPane;
+	private HeuresSessionModule heureDispo;
+	private HeuresSessionModuleDao heureDispoDao;
 
 	/**
 	 * Launch the application.
@@ -137,8 +142,8 @@ public class TestBoutons {
 			Seance.Creneau apresMidi = Creneau.APRES_MIDI;
 			seanceDao = new SeanceDao();
 			moduleDao = new ModuleDao();
-			new SalleDao();
-			// salle = salleDao.findModuleByNom(1);
+			
+			
 
 			for (int i = 0; i < tableau.length; i++) {
 				tableauBoutton.add((JRadioButton) tableau[i]);
@@ -166,14 +171,17 @@ public class TestBoutons {
 							seance.setIdSession(session.getIdSession());
 							seance.setContenu(contenu);
 							seance.setIdSalle(1);
+							heureDispo = heureDispoDao.findHeuresSessionModule(session, moduleDao.findModuleByNom(nomModule).getIdModule());
 							try{
 								if (table.getValueAt(table.getSelectedRow(), table.getSelectedColumn()) != ""){
 									seanceDao.updateSeance(seance.getIdModule(), 
 											seance.getIdFormateur(), seance.getIdSalle(), 
 											contenu,  session.getIdSession(),recupereDateDeLaCaseSelectionnee());
+									heureDispoDao.updateModuleAvecHeures(heureDispo, seance.getCreneau(), true);
 								}
 								else{
 									seanceDao.insertSeance(seance);
+									heureDispoDao.updateModuleAvecHeures(heureDispo, seance.getCreneau(), true);
 								}
 								table.setValueAt(nomModule, 
 											table.getSelectedRow(), table.getSelectedColumn());
@@ -196,6 +204,8 @@ public class TestBoutons {
 								seanceDao.deleteSeance(seance.getDebut(), session.getIdSession());
 								table.setValueAt(texteVide, table.getSelectedRow(),
 										table.getSelectedColumn());
+
+								heureDispoDao.updateModuleAvecHeures(heureDispo, seance.getCreneau(), false);
 							}catch (Exception exc){
 								exc.getMessage();
 								System.out.println("DeleteSeance échoué");

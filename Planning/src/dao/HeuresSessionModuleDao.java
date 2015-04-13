@@ -3,8 +3,9 @@ package dao;
 import java.sql.ResultSet;
 
 import modele.HeuresSessionModule;
-import modele.Module;
+import modele.Seance;
 import modele.Session;
+import modele.Seance.Creneau;
 
 public class HeuresSessionModuleDao {
 
@@ -29,16 +30,15 @@ public class HeuresSessionModuleDao {
 	/**
 	 * Méthode qui récupère dans la base données un objet HeuresSessionModule
 	 * 
-	 * @param module
 	 * @param session
+	 * @param idModule
 	 * @return
 	 */
-	public HeuresSessionModule findHeuresSessionModule(Module module,
-			Session session) {
+	public HeuresSessionModule findHeuresSessionModule(Session session, int idModule) {
 		HeuresSessionModule heuresSessionModule = new HeuresSessionModule();
 		try {
 			pfindHeuresSessionModule.setInt(1, session.getIdSession());
-			pfindHeuresSessionModule.setInt(2, module.getIdModule());
+			pfindHeuresSessionModule.setInt(2, idModule);
 			ResultSet resultat = pfindHeuresSessionModule.executeQuery();
 			if (resultat.next()) {
 				heuresSessionModule.setId_module(resultat.getInt("id_module"));
@@ -81,9 +81,17 @@ public class HeuresSessionModuleDao {
 	 * @param action
 	 * @return
 	 */
-	public boolean updateModuleAvecHeures(HeuresSessionModule heureSessionModule, int heuresRetirees, Boolean action) {
+	public boolean updateModuleAvecHeures(HeuresSessionModule heureSessionModule, Creneau creneau, Boolean action) {
 		Boolean etat = new Boolean(false);
+		int heuresRetirees = 0;
+		Seance.Creneau matin = Creneau.MATIN;
 		try {
+			if (creneau == matin) {
+				heuresRetirees = 4;
+			}
+			else{
+				heuresRetirees = 3;
+			}
 			if (action) {
 				pUpdateModuleAvecHeures.setInt(1,(heureSessionModule.getNbreHeuresDisponibles() + heuresRetirees));
 			} else {

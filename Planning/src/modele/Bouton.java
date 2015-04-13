@@ -49,7 +49,7 @@ public class Bouton extends Observable {
 		HashMap<Module, Integer> liste = new HashMap<>();
 		HeuresSessionModuleDao dao = new HeuresSessionModuleDao();
 		for (Module module : listeModule) {
-			liste.put(module, dao.findHeuresSessionModule(module, session)
+			liste.put(module, dao.findHeuresSessionModule(session, module.getIdModule())
 					.getNbreHeuresDisponibles());
 
 		}
