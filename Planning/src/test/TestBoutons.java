@@ -16,7 +16,6 @@ import modele.Seance.Creneau;
 import modele.Session;
 import dao.HeuresSessionModuleDao;
 import dao.ModuleDao;
-import dao.SalleDao;
 import dao.SeanceDao;
 
 import javax.swing.JPanel;
