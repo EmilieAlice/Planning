@@ -17,11 +17,11 @@ public class SelectionMatierePanel extends JPanel implements Observer {
 
 		bouton = new Bouton();
 		bouton.addObserver(this);
-		update(bouton, idSession);
 		bouton.remplir(idSession);
 		for (int i = 0; i < bouton.getBoutonDesMatières().size(); i++) {
 			add(bouton.getBoutonDesMatières().get(i));
 		}
+		update(bouton, idSession);
 	}
 
 	public void update(Observable o, int idSession) {

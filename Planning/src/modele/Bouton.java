@@ -46,9 +46,9 @@ public class Bouton extends Observable {
 		listeModule = moduleDao.findModuleAvecHeures(idSession);
 
 		HashMap<Module, Integer> liste = new HashMap<>();
-		HeuresSessionModuleDao dao = new HeuresSessionModuleDao();
+		HeuresSessionModuleDao heureSessionModuleDao = new HeuresSessionModuleDao();
 		for (Module module : listeModule) {
-			liste.put(module, dao.findHeuresSessionModule(session.getIdSession(), module.getIdModule())
+			liste.put(module, heureSessionModuleDao.findHeuresSessionModule(session.getIdSession(), module.getIdModule())
 					.getNbreHeuresDisponibles());
 
 		}
@@ -63,7 +63,7 @@ public class Bouton extends Observable {
 		JRadioButton boutonSupprimer = new JRadioButton("Supprimer");
 		boutonDesMatières.add(boutonSupprimer);
 		groupeDeBoutons.add(boutonSupprimer);
-
+		
 		setChanged();
 		notifyObservers();
 

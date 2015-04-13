@@ -29,33 +29,35 @@ public class HeureDispoDeModule {
 	/**
 	 * Permet d'ajouter dans la HashMap les modules comprenant encore des heures pour une session donnée
 	 * 
-	 * @param nomSession
-	 * @param anneeDeSession
+	 * @param idSession
 	 */
-	public void ajoute(String nomSession, int anneeDeSession) {
-		session = sessionDao.findSessionByNom(nomSession);
+	public void ajoute(int idSession) {
+		session = sessionDao.findSessionById(idSession);
 		listeModuleDispo = moduleDao.findModuleAvecHeures(session.getIdSession());
 
 		for(Module unModule  : listeModuleDispo){
 			int heureDispo = heureDispoDao.findHeuresSessionModule(session.getIdSession(), unModule.getIdModule()).getNbreHeuresDisponibles();
-			if (heureDispo > 3)
+			if (heureDispo > 3){
 				heureDispoDeModule.put(unModule, heureDispo);
+			}
 		}
 	}
+	
+	
 	/**
 	 * Permet d'actualiser les heures dispo d'un module à une session donnée
 	 * 
-	 * @param nomSession
-	 * @param anneeDeSession
+	 * @param idSession
 	 * @param unModule
 	 */
-	public void actualiser(String nomSession, int anneeDeSession, Module unModule){
-		session = sessionDao.findSessionByNom(nomSession);
+	public void actualiser(int idSession, int idModule){
+		session = sessionDao.findSessionById(idSession);
 		listeModuleDispo = moduleDao.findModuleAvecHeures(session.getIdSession());
 
 		for (Module leModule : listeModuleDispo) {
+			int idModuleDuModule = leModule.getIdModule();
 			int heureDispo = heureDispoDao.findHeuresSessionModule(session.getIdSession(), leModule.getIdModule()).getNbreHeuresDisponibles();
-			if (leModule.equals(unModule) && heureDispo > 3)
+			if (idModuleDuModule == idModule && heureDispo > 3)
 				heureDispoDeModule.put(leModule, heureDispo);
 		}
 	}	
