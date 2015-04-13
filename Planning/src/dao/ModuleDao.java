@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 import modele.Formateur;
 import modele.Module;
-import modele.Session;
 
 public class ModuleDao {
 
@@ -62,8 +61,7 @@ public class ModuleDao {
 							+ "INNER JOIN module ON heures_session_module.id_module = module.id_module "
 							+ "INNER JOIN session ON heures_session_module.id_session = session.id_session "
 							+ "HAVING nbre_heures_disponibles > ? "
-							+ "AND YEAR(session.date_debut)=? "
-							+ "AND session.nom_session=?;");
+							+ "AND session.id_session = ?");
 		} catch (Exception e) {
 			e.getMessage();
 			System.out.println("Requete findModuleAvecHeures échouée.");
@@ -78,12 +76,11 @@ public class ModuleDao {
 	 * @param session
 	 * @return
 	 */
-	public ArrayList<Module> findModuleAvecHeures(int annee, Session session) {
+	public ArrayList<Module> findModuleAvecHeures(int idSession) {
 		ArrayList<Module> listeModule = new ArrayList<Module>();
 		try {
 			pFindModuleAvecHeures.setInt(1, 0);
-			pFindModuleAvecHeures.setInt(2, annee);
-			pFindModuleAvecHeures.setString(3, session.getNomSession());
+			pFindModuleAvecHeures.setInt(2, idSession);
 			ResultSet resultat = pFindModuleAvecHeures.executeQuery();
 			if (resultat != null) {
 				while (resultat.next()) {

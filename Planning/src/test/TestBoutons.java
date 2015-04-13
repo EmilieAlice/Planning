@@ -91,8 +91,6 @@ public class TestBoutons {
 
 		session = new Session();
 		session.setIdSession(idSession);
-
-
 	}
 
 	/**

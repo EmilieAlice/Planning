@@ -42,9 +42,8 @@ public class Bouton extends Observable {
 		ArrayList<Module> listeModule = new ArrayList<Module>();
 		ModuleDao moduleDao = new ModuleDao();
 		Session session = new Session();
-		session.setNomSession("BTS SIO 2016");
 		session.setIdSession(idSession);
-		listeModule = moduleDao.findModuleAvecHeures(2015, session);
+		listeModule = moduleDao.findModuleAvecHeures(idSession);
 
 		HashMap<Module, Integer> liste = new HashMap<>();
 		HeuresSessionModuleDao dao = new HeuresSessionModuleDao();

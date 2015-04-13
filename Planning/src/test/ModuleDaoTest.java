@@ -44,9 +44,9 @@ public class ModuleDaoTest {
 
 		ArrayList<Module> listeModuleDeux = new ArrayList<Module>();
 		Session session = new Session();
-		session.setNomSession("BTS SIO 2016");
+		session.setIdSession(1);
 		ModuleDao moduleDao = new ModuleDao();
-		listeModuleDeux = moduleDao.findModuleAvecHeures(2015, session);
+		listeModuleDeux = moduleDao.findModuleAvecHeures(session.getIdSession());
 		System.out.println(listeModuleDeux);
 
 		Module expected = listeModuleUn.get(1);

@@ -34,7 +34,7 @@ public class HeureDispoDeModule {
 	 */
 	public void ajoute(String nomSession, int anneeDeSession) {
 		session = sessionDao.findSessionByNom(nomSession);
-		listeModuleDispo = moduleDao.findModuleAvecHeures(anneeDeSession, session);
+		listeModuleDispo = moduleDao.findModuleAvecHeures(session.getIdSession());
 
 		for(Module unModule  : listeModuleDispo){
 			int heureDispo = heureDispoDao.findHeuresSessionModule(session.getIdSession(), unModule.getIdModule()).getNbreHeuresDisponibles();
@@ -51,7 +51,7 @@ public class HeureDispoDeModule {
 	 */
 	public void actualiser(String nomSession, int anneeDeSession, Module unModule){
 		session = sessionDao.findSessionByNom(nomSession);
-		listeModuleDispo = moduleDao.findModuleAvecHeures(anneeDeSession, session);
+		listeModuleDispo = moduleDao.findModuleAvecHeures(session.getIdSession());
 
 		for (Module leModule : listeModuleDispo) {
 			int heureDispo = heureDispoDao.findHeuresSessionModule(session.getIdSession(), leModule.getIdModule()).getNbreHeuresDisponibles();
