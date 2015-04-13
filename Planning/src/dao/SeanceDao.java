@@ -183,8 +183,8 @@ public class SeanceDao {
 		try {
 			pUpdateSeance = DataBase.getConnection().prepareStatement(
 					"UPDATE lagarenne2015.seance SET "
-							+ "id_module = ?, id_formateur = ?, id_salle = ?, contenu = ? "
-							+ "WHERE debut = ? AND id_session = ?;");
+					+ "id_module = ?, id_formateur = ?, id_salle = ?, contenu = ? "
+					+ "WHERE id_session = ? AND debut = ?;");
 		} catch (Exception e) {
 			e.getMessage();
 			System.out.println("Requete updateSeance échouée.");
@@ -198,11 +198,11 @@ public class SeanceDao {
 	 * @param idFormateur
 	 * @param idSalle
 	 * @param contenu
-	 * @param debut
 	 * @param idSession
+	 * @param debut
 	 * @return
 	 */
-	public Boolean updateSeance(int idModule, int idFormateur, int idSalle, String contenu, GregorianCalendar debut, int idSession) {
+	public Boolean updateSeance(int idModule, int idFormateur, int idSalle, String contenu, int idSession, GregorianCalendar debut) {
 		Boolean etat = new Boolean(false);
 		try {
 			// Conversion de la date Gregorian en date SQL
@@ -212,10 +212,10 @@ public class SeanceDao {
 			pUpdateSeance.setInt(2, idFormateur);
 			pUpdateSeance.setInt(3, idSalle);
 			pUpdateSeance.setString(4, contenu);
-			pUpdateSeance.setTimestamp(5, dateSQLDebut);
 			pUpdateSeance.setInt(5, idSession);
+			pUpdateSeance.setTimestamp(5, dateSQLDebut);
 
-			int resultat = pInsertSeance.executeUpdate();
+			int resultat = pUpdateSeance.executeUpdate();
 			if (resultat != 0)
 				etat = true;
 		} catch (Exception e) {

@@ -22,6 +22,7 @@ import dao.SeanceDao;
 
 import javax.swing.JPanel;
 import javax.swing.JTable;
+
 import swing.DonneesTableauDouble;
 
 import javax.swing.JScrollPane;
@@ -182,7 +183,6 @@ public class TestBoutons {
 							nomModule = texteDuBouton.split(" ")[0];
 							seance.setIdModule(moduleDao.findModuleByNom(nomModule).getIdModule());
 							// si il n'y a rien dans la case selectionnée
-							if (table.getValueAt(table.getSelectedRow(), table.getSelectedColumn()) == ""){
 								// si la colonne est paire
 								if (table.getSelectedColumn() % 2 == 0) {
 									seance.setCreneau(apresMidi);
@@ -196,23 +196,32 @@ public class TestBoutons {
 								seance.setContenu(contenu);
 								seance.setIdSalle(1);
 								try{
-									seanceDao.insertSeance(seance);
-									table.setValueAt(/*"<html><center> " +*/ nomModule /*+ "<br>avec " + moduleDao.findFormateurByNomModule(nomModule).getPrenom()
-										+ " " + moduleDao.findFormateurByNomModule(nomModule).getNom() + "<br>salle "
-										+ salle.getNomSalle() + "</center></html>"*/, table.getSelectedRow(), table.getSelectedColumn());
+									if (table.getValueAt(table.getSelectedRow(), table.getSelectedColumn()) != ""){
+										seanceDao.updateSeance(seance.getIdModule(), 
+												seance.getIdFormateur(), seance.getIdSalle(), 
+												contenu,  session.getIdSession(),recupereDateDeLaCaseSelectionnee());
+									}
+									else{
+										seanceDao.insertSeance(seance);
+									}
+									table.setValueAt(/*"<html><center> " +*/ nomModule 
+											/*+ "<br>avec " + moduleDao.findFormateurByNomModule(nomModule).getPrenom()
+											+ " " + moduleDao.findFormateurByNomModule(nomModule).getNom() + "<br>salle "
+											+ salle.getNomSalle() + "</center></html>"*/, 
+											table.getSelectedRow(), table.getSelectedColumn());
 								}catch (Exception ex){
 									ex.getMessage();
-									System.out.println("InserySeance échoué");
+									System.out.println("Insert Seance échoué");
 								}
-							}
-							else{
+							//}
+							/*else{
 								seance.setIdModule(moduleDao.findModuleByNom(nomModule).getIdModule());
 								seance.setIdFormateur(moduleDao.findFormateurByNomModule(nomModule).getIdFormateur());
 								seance.setIdSalle(2);
 								seanceDao.updateSeance(seance.getIdModule(), 
 										seance.getIdFormateur(), seance.getIdSalle(), 
 										contenu, recupereDateDeLaCaseSelectionnee(), session.getIdSession());
-							}
+							}*/
 						} else {
 							texteVide = "";
 							// on fait un delete dans la table en se basant sur
