@@ -85,7 +85,7 @@ public class TestBoutons {
 
 		scrollPane.setViewportView(panelTableau);
 
-		panelBouttons = new SelectionMatierePanel(1);
+		panelBouttons = new SelectionMatierePanel(idSession);
 		panelBouttons.setBounds(959, 172, 235, 315);
 		frame.getContentPane().add(panelBouttons);
 
@@ -143,8 +143,7 @@ public class TestBoutons {
 			moduleDao = new ModuleDao();
 			heureDispo = new HeuresSessionModule();
 			heureDispoDao = new HeuresSessionModuleDao();
-			
-			
+
 
 			for (int i = 0; i < tableau.length; i++) {
 				tableauBoutton.add((JRadioButton) tableau[i]);
@@ -194,6 +193,7 @@ public class TestBoutons {
 							texteVide = "";
 							// on fait un delete dans la table en se basant sur
 							// l'heure de début
+							nomModule = (String) table.getValueAt(table.getSelectedRow(), table.getSelectedColumn());
 							if (table.getSelectedColumn() % 2 == 0) {
 								seance.setCreneau(apresMidi);
 							}
@@ -201,6 +201,8 @@ public class TestBoutons {
 								seance.setCreneau(matin);
 							}
 							seance.setDebut(recupereDateDeLaCaseSelectionnee());
+							seance.setIdModule(moduleDao.findModuleByNom(nomModule).getIdModule());
+							seance.setIdSession(session.getIdSession());
 							heureDispo = heureDispoDao.findHeuresSessionModule(seance.getIdSession(), seance.getIdModule());
 							try{
 								seanceDao.deleteSeance(seance.getDebut(), session.getIdSession());

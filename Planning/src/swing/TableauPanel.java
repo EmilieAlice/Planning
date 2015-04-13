@@ -22,7 +22,7 @@ public class TableauPanel extends JPanel {
 
 		this.setBounds(6, 6, 930, 675);
 
-		table = new JTable(new DonneesTableauDouble(2));
+		table = new JTable(new DonneesTableauDouble(idSession));
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.setCellSelectionEnabled(true);
 
