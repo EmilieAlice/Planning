@@ -55,7 +55,7 @@ public class Bouton extends Observable {
 
 		for (Module clefs : liste.keySet()) {
 			JRadioButton bouton = new JRadioButton(clefs.getNomModule() + " : "
-					+ liste.get(clefs) + " heures disponibles");
+					+ liste.get(clefs) + "/" + clefs.getNbHeuresAnnuelles() + " heures disponibles");
 			boutonDesMatières.add(bouton);
 			groupeDeBoutons.add(bouton);
 		}
