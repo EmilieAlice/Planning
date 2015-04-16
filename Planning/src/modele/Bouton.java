@@ -34,6 +34,8 @@ public class Bouton extends Observable {
 	/**
 	 * Méthode qui remplit une liste de Bouton avec les matières et leur nombre
 	 * d'heures si ils ont encore des heures de disponibles
+	 * 
+	 * @param idSession
 	 */
 	public void remplir(int idSession) {
 		boutonDesModules = new ArrayList<JRadioButton>();

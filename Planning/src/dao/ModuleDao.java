@@ -14,8 +14,10 @@ public class ModuleDao {
 	 */
 	static {
 		try {
-			pFindModuleByNom = DataBase.getConnection().prepareStatement(
-					"SELECT * FROM lagarenne2015.module WHERE module.nom_module = ?;");
+			pFindModuleByNom = DataBase
+					.getConnection()
+					.prepareStatement(
+							"SELECT * FROM lagarenne2015.module WHERE module.nom_module = ?;");
 		} catch (Exception e) {
 			e.getMessage();
 			System.out.println("Requete findModuleByNom échouée.");
@@ -56,12 +58,14 @@ public class ModuleDao {
 	 */
 	static {
 		try {
-			pFindModuleAvecHeures = DataBase.getConnection().prepareStatement(
-					"SELECT * FROM lagarenne2015.heures_session_module "
-							+ "INNER JOIN module ON heures_session_module.id_module = module.id_module "
-							+ "INNER JOIN session ON heures_session_module.id_session = session.id_session "
-							+ "HAVING nbre_heures_disponibles >= ? "
-							+ "AND session.id_session = ?");
+			pFindModuleAvecHeures = DataBase
+					.getConnection()
+					.prepareStatement(
+							"SELECT * FROM lagarenne2015.heures_session_module "
+									+ "INNER JOIN module ON heures_session_module.id_module = module.id_module "
+									+ "INNER JOIN session ON heures_session_module.id_session = session.id_session "
+									+ "HAVING nbre_heures_disponibles >= ? "
+									+ "AND session.id_session = ?");
 		} catch (Exception e) {
 			e.getMessage();
 			System.out.println("Requete findModuleAvecHeures échouée.");
@@ -72,8 +76,7 @@ public class ModuleDao {
 	 * Méthode qui récupère dans la base données une collection de modules qui
 	 * ont encore des heures disponibles.
 	 * 
-	 * @param annee
-	 * @param session
+	 * @param idSession
 	 * @return
 	 */
 	public ArrayList<Module> findModuleAvecHeures(int idSession) {
@@ -103,25 +106,28 @@ public class ModuleDao {
 		return listeModule;
 	}
 
-
 	private static java.sql.PreparedStatement pFindFormateurByNomModule = null;
 	/**
 	 * Requete pour récupérer un formateur grâce au nom du module
 	 */
 	static {
 		try {
-			pFindFormateurByNomModule = DataBase.getConnection().prepareStatement(
-					"SELECT * FROM lagarenne2015.formateur "
-							+ "INNER JOIN lagarenne2015.module on module.id_module = formateur.id_module "
-							+ "INNER JOIN lagarenne2015.personne on personne.id_personne = formateur.id_formateur "
-							+ "WHERE module.nom_module = ?;");
+			pFindFormateurByNomModule = DataBase
+					.getConnection()
+					.prepareStatement(
+							"SELECT * FROM lagarenne2015.formateur "
+									+ "INNER JOIN lagarenne2015.module on module.id_module = formateur.id_module "
+									+ "INNER JOIN lagarenne2015.personne on personne.id_personne = formateur.id_formateur "
+									+ "WHERE module.nom_module = ?;");
 		} catch (Exception e) {
 			e.getMessage();
 			System.out.println("Requete findFormateurByNomModule échouée.");
 		}
 	}
+
 	/**
-	 * Méthode qui récupère dans la base données un objet Formateur grace au nomModule
+	 * Méthode qui récupère dans la base données un objet Formateur grace au
+	 * nomModule
 	 * 
 	 * @param nomModule
 	 * @return
@@ -160,8 +166,10 @@ public class ModuleDao {
 	 */
 	static {
 		try {
-			pFindModuleById = DataBase.getConnection().prepareStatement(
-					"SELECT * FROM lagarenne2015.module WHERE module.id_module = ?;");
+			pFindModuleById = DataBase
+					.getConnection()
+					.prepareStatement(
+							"SELECT * FROM lagarenne2015.module WHERE module.id_module = ?;");
 		} catch (Exception e) {
 			e.getMessage();
 			System.out.println("Requete findModuleByNom échouée.");
@@ -170,7 +178,7 @@ public class ModuleDao {
 
 	/**
 	 * Méthode qui récupère dans la base données un objet Module grâce à son id
-	 *  
+	 * 
 	 * @param idModule
 	 * @return
 	 */

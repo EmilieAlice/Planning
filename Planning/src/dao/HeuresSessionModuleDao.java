@@ -14,12 +14,14 @@ public class HeuresSessionModuleDao {
 	 */
 	static {
 		try {
-			pfindHeuresSessionModule = DataBase.getConnection().prepareStatement(
-					"SELECT * FROM lagarenne2015.heures_session_module "
-							+ "INNER JOIN module ON heures_session_module.id_module = module.id_module "
-							+ "INNER JOIN session ON heures_session_module.id_session = session.id_session "
-							+ "HAVING heures_session_module.id_session = ? "
-							+ "AND heures_session_module.id_module=?;");
+			pfindHeuresSessionModule = DataBase
+					.getConnection()
+					.prepareStatement(
+							"SELECT * FROM lagarenne2015.heures_session_module "
+									+ "INNER JOIN module ON heures_session_module.id_module = module.id_module "
+									+ "INNER JOIN session ON heures_session_module.id_session = session.id_session "
+									+ "HAVING heures_session_module.id_session = ? "
+									+ "AND heures_session_module.id_module=?;");
 		} catch (Exception e) {
 			e.getMessage();
 			System.out.println("Requete findHeuresSessionModule échouée.");
@@ -33,7 +35,8 @@ public class HeuresSessionModuleDao {
 	 * @param idModule
 	 * @return
 	 */
-	public HeuresSessionModule findHeuresSessionModule(int idSession, int idModule) {
+	public HeuresSessionModule findHeuresSessionModule(int idSession,
+			int idModule) {
 		HeuresSessionModule heuresSessionModule = new HeuresSessionModule();
 		try {
 			pfindHeuresSessionModule.setInt(1, idSession);
@@ -42,7 +45,7 @@ public class HeuresSessionModuleDao {
 			if (resultat.next()) {
 				heuresSessionModule.setId_module(resultat.getInt("id_module"));
 				heuresSessionModule
-				.setId_session(resultat.getInt("id_session"));
+						.setId_session(resultat.getInt("id_session"));
 				heuresSessionModule.setNbreHeuresDisponibles(resultat
 						.getInt("nbre_heures_disponibles"));
 				return heuresSessionModule;
@@ -61,10 +64,12 @@ public class HeuresSessionModuleDao {
 	 */
 	static {
 		try {
-			pUpdateModuleAvecHeures = DataBase.getConnection().prepareStatement(
-					"UPDATE lagarenne2015.heures_session_module "
-							+ "SET nbre_heures_disponibles = ? "
-							+ "WHERE id_session = ? AND id_module = ?; ");
+			pUpdateModuleAvecHeures = DataBase
+					.getConnection()
+					.prepareStatement(
+							"UPDATE lagarenne2015.heures_session_module "
+									+ "SET nbre_heures_disponibles = ? "
+									+ "WHERE id_session = ? AND id_module = ?; ");
 		} catch (Exception e) {
 			e.getMessage();
 			System.out.println("Requete updateModuleAvecHeures échouée.");
@@ -76,28 +81,35 @@ public class HeuresSessionModuleDao {
 	 * pour un module pour le module sélectionné
 	 * 
 	 * @param heureSessionModule
-	 * @param heuresRetirees
+	 * @param creneau
 	 * @param action
 	 * @return
 	 */
-	public boolean updateModuleAvecHeures(HeuresSessionModule heureSessionModule, Creneau creneau, Boolean action) {
+	public boolean updateModuleAvecHeures(
+			HeuresSessionModule heureSessionModule, Creneau creneau,
+			Boolean action) {
 		Boolean etat = new Boolean(false);
 		int heuresRetirees = 0;
 		Seance.Creneau matin = Creneau.MATIN;
 		try {
 			if (creneau == matin) {
 				heuresRetirees = 4;
-			}
-			else{
+			} else {
 				heuresRetirees = 3;
 			}
 			if (action) {
-				pUpdateModuleAvecHeures.setInt(1,(heureSessionModule.getNbreHeuresDisponibles() + heuresRetirees));
+				pUpdateModuleAvecHeures
+						.setInt(1,
+								(heureSessionModule.getNbreHeuresDisponibles() + heuresRetirees));
 			} else {
-				pUpdateModuleAvecHeures.setInt(1,(heureSessionModule.getNbreHeuresDisponibles() - heuresRetirees));
+				pUpdateModuleAvecHeures
+						.setInt(1,
+								(heureSessionModule.getNbreHeuresDisponibles() - heuresRetirees));
 			}
-			pUpdateModuleAvecHeures.setInt(2,heureSessionModule.getId_session());
-			pUpdateModuleAvecHeures.setInt(3, heureSessionModule.getId_module());
+			pUpdateModuleAvecHeures.setInt(2,
+					heureSessionModule.getId_session());
+			pUpdateModuleAvecHeures
+					.setInt(3, heureSessionModule.getId_module());
 			int resultat = pUpdateModuleAvecHeures.executeUpdate();
 			if (resultat != 0)
 				etat = true;

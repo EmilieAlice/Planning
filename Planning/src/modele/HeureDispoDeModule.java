@@ -48,7 +48,7 @@ public class HeureDispoDeModule {
 	 * Permet d'actualiser les heures dispo d'un module à une session donnée
 	 * 
 	 * @param idSession
-	 * @param unModule
+	 * @param idModule
 	 */
 	public void actualiser(int idSession, int idModule){
 		session = sessionDao.findSessionById(idSession);

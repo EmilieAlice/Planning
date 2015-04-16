@@ -25,8 +25,8 @@ public class ContrainteFormateurDao {
 	}
 
 	/**
-	 * Méthode qui récupère dans la base données un objet ContrainteFormateur
-	 * 
+	 * Méthode qui récupère dans la base données un objet ContrainteFormateur 
+	 * grace à l'id formateur
 	 * @param idFormateur
 	 * @return
 	 */

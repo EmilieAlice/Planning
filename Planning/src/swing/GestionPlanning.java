@@ -39,7 +39,8 @@ public class GestionPlanning {
 	private HeuresSessionModuleDao heureDispoDao;
 
 	/**
-	 * Launch the application.
+	 * Permet de lancer la fenetre
+	 * @param args
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -55,14 +56,15 @@ public class GestionPlanning {
 	}
 
 	/**
-	 * Create the application.
+	 * Initialise la fenetre
 	 */
 	public GestionPlanning() {
 		initialize(1);
 	}
 
 	/**
-	 * Initialize the contents of the frame.
+	 * Methode qui initialise la fenetre grace à un id session
+	 * @param idSession
 	 */
 	private void initialize(int idSession) {
 
@@ -92,7 +94,7 @@ public class GestionPlanning {
 	/**
 	 * Methode qui recupere la date de la case dans laquel on à cliquer
 	 * 
-	 * @return
+	 * @return GregorianCalendar
 	 */
 	public GregorianCalendar recupereDateDeLaCaseSelectionnee() {
 		String recupDate;
