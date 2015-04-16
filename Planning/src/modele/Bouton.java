@@ -12,15 +12,15 @@ import dao.ModuleDao;
 
 public class Bouton extends Observable {
 
-	private ArrayList<JRadioButton> boutonDesMatières;
+	private ArrayList<JRadioButton> boutonDesModules;
 	private ButtonGroup groupeDeBoutons;
 
-	public ArrayList<JRadioButton> getBoutonDesMatières() {
-		return boutonDesMatières;
+	public ArrayList<JRadioButton> getBoutonDesModules() {
+		return boutonDesModules;
 	}
 
-	public void setBoutonDesMatières(ArrayList<JRadioButton> boutonDesMatières) {
-		this.boutonDesMatières = boutonDesMatières;
+	public void setBoutonDesModules(ArrayList<JRadioButton> boutonDesModules) {
+		this.boutonDesModules = boutonDesModules;
 	}
 
 	public ButtonGroup getGroupeDeBoutons() {
@@ -36,7 +36,7 @@ public class Bouton extends Observable {
 	 * d'heures si ils ont encore des heures de disponibles
 	 */
 	public void remplir(int idSession) {
-		boutonDesMatières = new ArrayList<JRadioButton>();
+		boutonDesModules = new ArrayList<JRadioButton>();
 		groupeDeBoutons = new ButtonGroup();
 
 		ArrayList<Module> listeModule = new ArrayList<Module>();
@@ -56,12 +56,12 @@ public class Bouton extends Observable {
 		for (Module clefs : liste.keySet()) {
 			JRadioButton bouton = new JRadioButton(clefs.getNomModule() + " : "
 					+ liste.get(clefs) + "/" + clefs.getNbHeuresAnnuelles() + " heures disponibles");
-			boutonDesMatières.add(bouton);
+			boutonDesModules.add(bouton);
 			groupeDeBoutons.add(bouton);
 		}
 
 		JRadioButton boutonSupprimer = new JRadioButton("Supprimer");
-		boutonDesMatières.add(boutonSupprimer);
+		boutonDesModules.add(boutonSupprimer);
 		groupeDeBoutons.add(boutonSupprimer);
 		
 		setChanged();

@@ -18,8 +18,8 @@ public class SelectionMatierePanel extends JPanel implements Observer {
 		bouton = new Bouton();
 		bouton.addObserver(this);
 		bouton.remplir(idSession);
-		for (int i = 0; i < bouton.getBoutonDesMatières().size(); i++) {
-			add(bouton.getBoutonDesMatières().get(i));
+		for (int i = 0; i < bouton.getBoutonDesModules().size(); i++) {
+			add(bouton.getBoutonDesModules().get(i));
 		}
 		update(bouton, idSession);
 	}
