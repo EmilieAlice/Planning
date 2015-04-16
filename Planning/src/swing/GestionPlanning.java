@@ -1,4 +1,4 @@
-package test;
+package swing;
 
 import java.awt.Component;
 import java.awt.EventQueue;
@@ -20,13 +20,9 @@ import dao.SeanceDao;
 
 import javax.swing.JPanel;
 import javax.swing.JTable;
-
-import swing.SelectionMatierePanel;
-import swing.TableauPanel;
-
 import javax.swing.JScrollPane;
 
-public class TestBoutons {
+public class GestionPlanning {
 
 	private JFrame frame;
 	private JTable table;
@@ -49,7 +45,7 @@ public class TestBoutons {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TestBoutons window = new TestBoutons();
+					GestionPlanning window = new GestionPlanning();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -61,7 +57,7 @@ public class TestBoutons {
 	/**
 	 * Create the application.
 	 */
-	public TestBoutons() {
+	public GestionPlanning() {
 		initialize(1);
 	}
 
