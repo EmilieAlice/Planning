@@ -11,9 +11,18 @@ import modele.Seance;
 import org.junit.Test;
 
 import dao.SeanceDao;
-
+/**
+ * Classe de test permettant de tester toutes les methodes
+ * de la classe SeanceDao
+ *
+ */
 public class SeanceDaoTest {
 
+	/**
+	 * test JUnit de la methode findSeanceByIdSession :
+	 * permet de verifier si la methode retourne la liste des
+	 * seances grace à l'id de la session
+	 */
 	@Test
 	public void testFindSeanceByIdSession() {
 		ArrayList<Seance> listeSeance = new ArrayList<Seance>();
@@ -39,6 +48,11 @@ public class SeanceDaoTest {
 	}
 
 
+	/**
+	 * test JUnit de la methode deleteSeance :
+	 * permet de verifier si la methode supprime bien la seance
+	 * grace à un id_session et une date de debut donnée
+	 */
 	@Test
 	public void testDeleteSeance() throws SQLException {
 		GregorianCalendar debut = new GregorianCalendar(2015, 05, 02, 14, 00, 00);
@@ -48,6 +62,10 @@ public class SeanceDaoTest {
 		assertTrue(seanceDao.deleteSeance(debut, 0));
 	}
 
+	/**
+	 * test JUnit de la methode insertSeance :
+	 * permet de verifier si la methode insert bien la seance dans la table
+	 */
 	@Test
 	public void testInsertSeance() throws SQLException {
 		// On créé une seance
@@ -59,6 +77,11 @@ public class SeanceDaoTest {
 		assertTrue(seanceDao.insertSeance(seance));
 	}
 
+	/**
+	 * test JUnit de la methode updateSeance :
+	 * permet de verifier si la methode met bien à jour la seance
+	 * grace à un id_session et une date de debut donnée
+	 */
 	@Test
 	public void testUpdateSeance(){
 

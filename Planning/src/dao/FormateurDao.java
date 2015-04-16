@@ -3,8 +3,6 @@ package dao;
 import java.sql.ResultSet;
 
 import modele.Formateur;
-import modele.Module;
-import modele.Personne;
 
 public class FormateurDao {
 
@@ -17,7 +15,7 @@ public class FormateurDao {
 			pFindFormateurByIdPersonne = DataBase.getConnection().prepareStatement(
 					"SELECT * FROM lagarenne2015.formateur "
 							+ "INNER JOIN personne on personne.id_personne = formateur.id_formateur "
-							+ "WHERE formateur.id_personne = ?;");
+							+ "WHERE formateur.id_formateur = ?;");
 		} catch (Exception e) {
 			e.getMessage();
 			System.out.println("Requete findFormateurByIdPersonne échouée.");
@@ -30,15 +28,24 @@ public class FormateurDao {
 	 * @param personne
 	 * @return
 	 */
-	public Formateur findFormateurByIdPersonne(Personne personne) {
+	public Formateur findFormateurByIdPersonne(int idPersonne) {
 		Formateur formateur = new Formateur();
 		try {
-			pFindFormateurByIdPersonne.setInt(1, personne.getIdFormateur());
+			pFindFormateurByIdPersonne.setInt(1, idPersonne);
 			ResultSet resultat = pFindFormateurByIdPersonne.executeQuery();
 			if (resultat.next()) {
 				formateur.setIdFormateur(resultat.getInt("id_formateur"));
 				formateur.setDateEntree(resultat.getDate("date_entree"));
 				formateur.setIdModule(resultat.getInt("id_module"));
+				formateur.setCivilite(resultat.getString("civilite"));
+				formateur.setNom(resultat.getString("nom"));
+				formateur.setPrenom(resultat.getString("prenom"));
+				formateur.setAdresse(resultat.getString("adresse"));
+				formateur.setAdresse(resultat.getString("adresse"));
+				formateur.setCodePostal(resultat.getString("code_postal"));
+				formateur.setVille(resultat.getString("ville"));
+				formateur.setTelephone(resultat.getString("telephone"));
+				formateur.setEmail(resultat.getString("email"));
 				// Ajoutez les attributs de la personne
 				return formateur;
 			} else {
@@ -72,11 +79,11 @@ public class FormateurDao {
 	 * @param module
 	 * @return
 	 */
-	public Formateur findFormateurByIdModule(Module module) {
+	public Formateur findFormateurByIdModule(int idModule) {
 		Formateur formateur = new Formateur();
 		try {
-			pFindFormateurByIdModule.setInt(1, module.getIdModule());
-			ResultSet resultat = pFindFormateurByIdPersonne.executeQuery();
+			pFindFormateurByIdModule.setInt(1, idModule);
+			ResultSet resultat = pFindFormateurByIdModule.executeQuery();
 			if (resultat.next()) {
 				formateur.setIdFormateur(resultat.getInt("id_formateur"));
 				formateur.setDateEntree(resultat.getDate("date_entree"));

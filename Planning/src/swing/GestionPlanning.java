@@ -139,11 +139,9 @@ public class GestionPlanning {
 			moduleDao = new ModuleDao();
 			heureDispo = new HeuresSessionModule();
 			heureDispoDao = new HeuresSessionModuleDao();
-
 			for (int i = 0; i < tableau.length; i++) {
 				tableauBoutton.add((JRadioButton) tableau[i]);
 			}
-
 			/* si la ligne selectionnée est impaire et la colonne different de 0 */
 			if (table.getSelectedRow() % 2 != 0
 					&& table.getSelectedColumn() != 0) {
@@ -319,9 +317,8 @@ public class GestionPlanning {
 											+ heureDispo
 													.getNbreHeuresDisponibles()
 											+ "/"
-											+ moduleDao
-													.findModuleByNom(
-																nomModule)
+											+ moduleDao.findModuleByNom(
+													nomModule)
 													.getNbHeuresAnnuelles()
 											+ " heures disponibles");
 								}
@@ -347,7 +344,6 @@ public class GestionPlanning {
 							} else {
 								seance.setCreneau(matin);
 							}
-
 							seance.setDebut(recupereDateDeLaCaseSelectionnee());
 							seance.setIdModule(moduleDao.findModuleByNom(
 									nomModule).getIdModule());
@@ -384,7 +380,7 @@ public class GestionPlanning {
 														+ " : "
 														+ heureDispo
 																.getNbreHeuresDisponibles()
-																+ "/"
+														+ "/"
 														+ moduleDao
 																.findModuleByNom(
 																		nomModule)
@@ -397,11 +393,9 @@ public class GestionPlanning {
 								System.out.println("DeleteSeance échoué");
 							}
 						}
-
 					}
 				}
 			}
-
 		}
 
 		@Override

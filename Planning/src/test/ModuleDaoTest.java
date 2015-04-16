@@ -10,9 +10,18 @@ import modele.Session;
 import org.junit.Test;
 
 import dao.ModuleDao;
-
+/**
+ * Classe de test permettant de tester toutes les methodes
+ * de la classe ModuleDao
+ *
+ */
 public class ModuleDaoTest {
 
+	/**
+	 * test JUnit de la methode findModuleByNom :
+	 * permet de verifier si la methode retourne bien le module
+	 * grace au nom
+	 */
 	@Test
 	public void testFindModuleByNom() {
 		Module test = new Module();
@@ -24,8 +33,13 @@ public class ModuleDaoTest {
 
 	}
 
+	/**
+	 * test JUnit de la methode findModuleAvecHeures :
+	 * permet de verifier si la methode retourne bien le module
+	 * avec ses heures
+	 */
 	@Test
-	public void findModuleAvecHeures() {
+	public void testFindModuleAvecHeures() {
 		ArrayList<Module> listeModuleUn = new ArrayList<Module>();
 		Module moduleUn = new Module(
 				1,
@@ -56,11 +70,21 @@ public class ModuleDaoTest {
 
 	}
 
+	/**
+	 * test JUnit de la methode findFormateurByNomModule :
+	 * permet de verifier si la methode retourne bien le formateur
+	 * qui enseigne ce module grace au nom du module
+	 */
 	@Test
 	public void testFindFormateurByNomModule(){
 
 	}
 
+	/**
+	 * test JUnit de la methode findModuleById :
+	 * permet de verifier si la methode retourne bien le module
+	 * grace à son id
+	 */
 	@Test
 	public void testFindModuleById(){
 		Module moduleAttendu = new Module(
@@ -77,8 +101,6 @@ public class ModuleDaoTest {
 		System.out.println(test);
 
 		assertEquals(moduleAttendu.getIdModule(), test.getIdModule());
-
-
 	}
 
 }

@@ -11,8 +11,18 @@ import org.junit.Test;
 
 import dao.HeuresSessionModuleDao;
 
+/**
+ * Classe de test permettant de tester toutes les methodes
+ * de la classe HeuresSessionModuleDao
+ *
+ */
 public class HeuresSessionModuleDaoTest {
 
+	/**
+	 * test JUnit de la methode findHeuresSessionModule :
+	 * permet de verifier si la methode retourne bien le nombre d'heure restant
+	 * d'un module d'une session
+	 */
 	@Test
 	public void testFindHeuresSessionModule() {
 
@@ -28,6 +38,11 @@ public class HeuresSessionModuleDaoTest {
 		assertNotNull(test);
 	}
 
+	/**
+	 * test JUnit de la methode updateModuleAvecHeures :
+	 * permet de verifier si la methode actualise bien 
+	 * le nombre d'heure d'un module
+	 */
 	@Test
 	public void testUpdateModuleAvecHeures(){
 		Seance.Creneau matin = Creneau.MATIN;
@@ -38,6 +53,10 @@ public class HeuresSessionModuleDaoTest {
 		assertTrue(test);
 	}
 
+	/**
+	 * test JUnit de la methode findHeuresSessionModule :
+	 * permet de verifier si la methode update a bien fontionné
+	 */
 	@Test
 	public void testNombresHeuresMisesAJourApresUpdateHeuresSessionModule() {
 		Seance.Creneau matin = Creneau.MATIN;
