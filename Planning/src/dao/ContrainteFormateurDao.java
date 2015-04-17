@@ -28,7 +28,7 @@ public class ContrainteFormateurDao {
 	 * Méthode qui récupère dans la base données un objet ContrainteFormateur 
 	 * grace à l'id formateur
 	 * @param idFormateur
-	 * @return
+	 * @return null
 	 */
 	public ContrainteFormateur donneJourCreneauIndispo(int idFormateur) {
 		ContrainteFormateur contrainteFormateur = new ContrainteFormateur();

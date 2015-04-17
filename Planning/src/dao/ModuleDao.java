@@ -28,7 +28,7 @@ public class ModuleDao {
 	 * Méthode qui récupère dans la base données un objet Module grâce à son nom
 	 * 
 	 * @param nom
-	 * @return
+	 * @return module
 	 */
 	public Module findModuleByNom(String nom) {
 		Module module = new Module();
@@ -77,7 +77,7 @@ public class ModuleDao {
 	 * ont encore des heures disponibles.
 	 * 
 	 * @param idSession
-	 * @return
+	 * @return liste de module
 	 */
 	public ArrayList<Module> findModuleAvecHeures(int idSession) {
 		ArrayList<Module> listeModule = new ArrayList<Module>();
@@ -130,7 +130,7 @@ public class ModuleDao {
 	 * nomModule
 	 * 
 	 * @param nomModule
-	 * @return
+	 * @return formateur
 	 */
 
 	public Formateur findFormateurByNomModule(String nomModule) {
@@ -180,7 +180,7 @@ public class ModuleDao {
 	 * Méthode qui récupère dans la base données un objet Module grâce à son id
 	 * 
 	 * @param idModule
-	 * @return
+	 * @return module
 	 */
 	public Module findModuleById(int idModule) {
 		Module module = new Module();

@@ -32,6 +32,11 @@ public class DataBase {
 	private static final String USER = "lagarenne2015";
 	private static final String PASSWORD = "lagarenne2015";
 
+	/**
+	 * Methode qui permet la connexion à la base de données
+	 * @return la connexion
+	 * @throws SQLException
+	 */
 	public static Connection getConnection() throws SQLException {
 		return DriverManager.getConnection(URL, USER, PASSWORD);
 	}

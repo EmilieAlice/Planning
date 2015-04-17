@@ -28,7 +28,7 @@ public class FormateurDao {
 	 * Méthode qui récupère dans la base de données un objet Formateur
 	 * 
 	 * @param idPersonne
-	 * @return
+	 * @return formateur
 	 */
 	public Formateur findFormateurByIdPersonne(int idPersonne) {
 		Formateur formateur = new Formateur();

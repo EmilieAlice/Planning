@@ -33,7 +33,7 @@ public class HeuresSessionModuleDao {
 	 * 
 	 * @param idSession
 	 * @param idModule
-	 * @return
+	 * @return null
 	 */
 	public HeuresSessionModule findHeuresSessionModule(int idSession,
 			int idModule) {
@@ -83,7 +83,7 @@ public class HeuresSessionModuleDao {
 	 * @param heureSessionModule
 	 * @param creneau
 	 * @param action
-	 * @return
+	 * @return boolean
 	 */
 	public boolean updateModuleAvecHeures(
 			HeuresSessionModule heureSessionModule, Creneau creneau,
