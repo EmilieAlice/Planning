@@ -18,6 +18,11 @@ public class TableauPanel extends JPanel {
 		this.table = table;
 	}
 
+	/*
+	 * Constructeur du panel du tableau qui ajoute un tableau qui contient les
+	 * données de la classe DonneesTableauDouble. Ajout aussi de la méthode pour
+	 * sélectionner une seule case
+	 */
 	public TableauPanel(int idSession) {
 
 		this.setBounds(6, 6, 930, 675);

@@ -13,6 +13,10 @@ public class SelectionMatierePanel extends JPanel implements Observer {
 
 	private final Bouton bouton;
 
+	/*
+	 * Constructeur qui remplit le panneau des boutons grace à la méthode
+	 * remplir de la classe bouton
+	 */
 	public SelectionMatierePanel(int idSession) {
 
 		bouton = new Bouton();
@@ -32,7 +36,7 @@ public class SelectionMatierePanel extends JPanel implements Observer {
 	}
 
 	@Override
-	public void update(Observable arg0, Object arg1) {		
+	public void update(Observable arg0, Object arg1) {
 	}
 
 }

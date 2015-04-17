@@ -10,6 +10,12 @@ import javax.swing.JRadioButton;
 import dao.HeuresSessionModuleDao;
 import dao.ModuleDao;
 
+/**
+ * Objet qui contient la liste des boutons reliés aux matières de la session
+ * 
+ * @author Jerome
+ *
+ */
 public class Bouton extends Observable {
 
 	private ArrayList<JRadioButton> boutonDesModules;
@@ -50,14 +56,18 @@ public class Bouton extends Observable {
 		HashMap<Module, Integer> liste = new HashMap<>();
 		HeuresSessionModuleDao heureSessionModuleDao = new HeuresSessionModuleDao();
 		for (Module module : listeModule) {
-			liste.put(module, heureSessionModuleDao.findHeuresSessionModule(session.getIdSession(), module.getIdModule())
-					.getNbreHeuresDisponibles());
+			liste.put(
+					module,
+					heureSessionModuleDao.findHeuresSessionModule(
+							session.getIdSession(), module.getIdModule())
+							.getNbreHeuresDisponibles());
 
 		}
 
 		for (Module clefs : liste.keySet()) {
 			JRadioButton bouton = new JRadioButton(clefs.getNomModule() + " : "
-					+ liste.get(clefs) + "/" + clefs.getNbHeuresAnnuelles() + " heures disponibles");
+					+ liste.get(clefs) + "/" + clefs.getNbHeuresAnnuelles()
+					+ " heures disponibles");
 			boutonDesModules.add(bouton);
 			groupeDeBoutons.add(bouton);
 		}
@@ -65,7 +75,7 @@ public class Bouton extends Observable {
 		JRadioButton boutonSupprimer = new JRadioButton("Supprimer");
 		boutonDesModules.add(boutonSupprimer);
 		groupeDeBoutons.add(boutonSupprimer);
-		
+
 		setChanged();
 		notifyObservers();
 

@@ -40,6 +40,7 @@ public class GestionPlanning {
 
 	/**
 	 * Permet de lancer la fenetre
+	 * 
 	 * @param args
 	 */
 	public static void main(String[] args) {
@@ -64,12 +65,13 @@ public class GestionPlanning {
 
 	/**
 	 * Methode qui initialise la fenetre grace à un id session
+	 * 
 	 * @param idSession
 	 */
 	private void initialize(int idSession) {
 
 		frame = new JFrame();
-		frame.setBounds(100, 100, 1200, 800);
+		frame.setBounds(100, 100, 1300, 800);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
@@ -84,7 +86,7 @@ public class GestionPlanning {
 		scrollPane.setViewportView(panelTableau);
 
 		panelBouttons = new SelectionMatierePanel(idSession);
-		panelBouttons.setBounds(959, 172, 235, 315);
+		panelBouttons.setBounds(1001, 172, 293, 315);
 		frame.getContentPane().add(panelBouttons);
 
 		session = new Session();
@@ -103,6 +105,10 @@ public class GestionPlanning {
 		int day;
 		GregorianCalendar gregJour;
 
+		/*
+		 * Si le numéro de colonne est paire alors la date est située juste au
+		 * dessus
+		 */
 		if (table.getSelectedColumn() % 2 == 0) {
 			recupDate = (String) table.getValueAt(table.getSelectedRow() - 1,
 					table.getSelectedColumn() - 1);
@@ -132,8 +138,17 @@ public class GestionPlanning {
 			String texteVide = "";
 			String contenu = "null";
 
+			/*
+			 * On récupère les boutons du panel des boutons et on remplit un
+			 * tableau avec
+			 */
 			tableau = panelBouttons.getComponents();
 			tableauBoutton = new ArrayList<JRadioButton>();
+			for (int i = 0; i < tableau.length; i++) {
+				tableauBoutton.add((JRadioButton) tableau[i]);
+			}
+			
+			/* On initialise les objets */
 			seance = new Seance();
 			Seance.Creneau matin = Creneau.MATIN;
 			Seance.Creneau apresMidi = Creneau.APRES_MIDI;
@@ -141,13 +156,15 @@ public class GestionPlanning {
 			moduleDao = new ModuleDao();
 			heureDispo = new HeuresSessionModule();
 			heureDispoDao = new HeuresSessionModuleDao();
-			for (int i = 0; i < tableau.length; i++) {
-				tableauBoutton.add((JRadioButton) tableau[i]);
-			}
-			/* si la ligne selectionnée est impaire et la colonne different de 0 */
+
+			/*
+			 * si la ligne selectionnée est impaire et la colonne differente de
+			 * 0
+			 */
 			if (table.getSelectedRow() % 2 != 0
 					&& table.getSelectedColumn() != 0) {
 				for (JRadioButton jRadioButton : tableauBoutton) {
+					/* Si un bouton est selectione */
 					if (jRadioButton.isSelected()) {
 						texteDuBouton = jRadioButton.getText();
 						/* si le texte du bouton selectionné n'est pas Supprimer */
@@ -165,7 +182,7 @@ public class GestionPlanning {
 							} else {
 								seance.setCreneau(matin);
 							}
-
+							/* On remplit l'objet séance */
 							seance.setDebut(recupereDateDeLaCaseSelectionnee());
 							seance.setIdFormateur(moduleDao
 									.findFormateurByNomModule(nomModule)
@@ -297,7 +314,11 @@ public class GestionPlanning {
 										}
 									}
 								} else {
-									/* On insere la nouvelle seance */
+									/*
+									 * Si il n'y a pas de module dans la case
+									 * sélectionnées on insere la nouvelle
+									 * seance
+									 */
 									seanceDao.insertSeance(seance);
 									heureDispoDao.updateModuleAvecHeures(
 											heureDispo, seance.getCreneau(),
@@ -333,7 +354,10 @@ public class GestionPlanning {
 								System.out.println("Insert Seance échoué");
 							}
 						} else {
-							/* On recupere a nouveau le nom du module */
+							/*
+							 * Si le bouton sélectionné est supprimer on
+							 * recupere a nouveau le nom du module
+							 */
 							nomModule = (String) table.getValueAt(
 									table.getSelectedRow(),
 									table.getSelectedColumn());
@@ -373,7 +397,7 @@ public class GestionPlanning {
 												seance.getIdModule());
 								/* On va parcourir les boutons */
 								for (JRadioButton jRadioButtonSuppr : tableauBoutton) {
-									/* Pour trouver celui du module selectionner */
+									/* Pour trouver celui du module selectionné */
 									if (jRadioButtonSuppr.getText().split(" ")[0]
 											.equals(nomModule)) {
 										/* Et mettre à jour son nombre d'heure */
