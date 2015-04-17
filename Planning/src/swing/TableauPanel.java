@@ -1,5 +1,7 @@
 package swing;
 
+import java.awt.Font;
+
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
@@ -30,7 +32,7 @@ public class TableauPanel extends JPanel {
 		table = new JTable(new DonneesTableauDouble(idSession));
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.setCellSelectionEnabled(true);
-
+		table.setFont(new Font("Arial", Font.PLAIN, 12));
 		table.setRowHeight(25);
 		table.setRowMargin(5);
 		this.add(table);
