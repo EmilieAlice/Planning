@@ -29,7 +29,7 @@ public class SeanceDao {
 	 * l'id de la session
 	 * 
 	 * @param idSession
-	 * @return
+	 * @return collection de séances
 	 */
 	public ArrayList<Seance> findSeanceByIdSession(int idSession) {
 		ArrayList<Seance> listeSeance = new ArrayList<Seance>();
@@ -38,10 +38,11 @@ public class SeanceDao {
 			ResultSet resultat = pFindSeanceByIdSession.executeQuery();
 
 			while (resultat.next()) {
-				// On determine si le creneau est matin ou apres-midi pour l'inserer à la seance
+				// On determine si le creneau est matin ou apres-midi pour
+				// l'inserer à la seance
 				int idCreneau = resultat.getInt("id_creneau");
 				Seance.Creneau creneau = Seance.Creneau.MATIN;
-				if (idCreneau == 2){
+				if (idCreneau == 2) {
 					creneau = Seance.Creneau.APRES_MIDI;
 				}
 
@@ -69,18 +70,18 @@ public class SeanceDao {
 		return listeSeance;
 	}
 
-
-
 	private static java.sql.PreparedStatement pInsertSeance = null;
 	/**
 	 * Requete pour insérer une séance
 	 */
 	static {
 		try {
-			pInsertSeance = DataBase.getConnection().prepareStatement(
-					"INSERT INTO lagarenne2015.seance (id_module, id_session, "
-							+ "id_formateur, debut, fin, id_creneau, id_salle, contenu) "
-							+ "VALUES(?,?,?,?,?,?,?,?);");
+			pInsertSeance = DataBase
+					.getConnection()
+					.prepareStatement(
+							"INSERT INTO lagarenne2015.seance (id_module, id_session, "
+									+ "id_formateur, debut, fin, id_creneau, id_salle, contenu) "
+									+ "VALUES(?,?,?,?,?,?,?,?);");
 		} catch (Exception e) {
 			e.getMessage();
 			System.out.println("Requete insertSeance échouée.");
@@ -91,22 +92,22 @@ public class SeanceDao {
 	 * Méthode qui insère une séance dans la base de données
 	 * 
 	 * @param seance
-	 * @return
+	 * @return booleen
 	 */
 	public Boolean insertSeance(Seance seance) {
 		Boolean etat = new Boolean(false);
 		try {
 			// Conversion de la date Gregorian en date SQL
-			Timestamp dateSQLDebut = new Timestamp(seance.getDebut().getTimeInMillis());
+			Timestamp dateSQLDebut = new Timestamp(seance.getDebut()
+					.getTimeInMillis());
 
 			// On ajoute l'heure d'une seance pour avoir la date de fin
 			long journee = seance.getDebut().getTimeInMillis();
 			long millis = (3600000);
 			long heureCreneau = 0;
-			if (seance.getCreneau().equals(Seance.Creneau.APRES_MIDI)){
+			if (seance.getCreneau().equals(Seance.Creneau.APRES_MIDI)) {
 				heureCreneau = 3 * millis;
-			}
-			else {
+			} else {
 				heureCreneau = 4 * millis;
 			}
 			journee = journee + heureCreneau;
@@ -114,7 +115,7 @@ public class SeanceDao {
 
 			// On insere le creneau grace à l'enum
 			int idCreneau = 1;
-			if (seance.getCreneau().equals(Seance.Creneau.APRES_MIDI)){
+			if (seance.getCreneau().equals(Seance.Creneau.APRES_MIDI)) {
 				idCreneau = 2;
 			}
 
@@ -136,15 +137,16 @@ public class SeanceDao {
 		return etat;
 	}
 
-
 	private static java.sql.PreparedStatement pDeleteSeance = null;
 	/**
 	 * Requete pour supprimer une séance
 	 */
 	static {
 		try {
-			pDeleteSeance = DataBase.getConnection().prepareStatement(
-					"DELETE FROM lagarenne2015.seance WHERE debut=? AND id_session=?;");
+			pDeleteSeance = DataBase
+					.getConnection()
+					.prepareStatement(
+							"DELETE FROM lagarenne2015.seance WHERE debut=? AND id_session=?;");
 		} catch (Exception e) {
 			e.getMessage();
 			System.out.println("Requete deleteSeance échouée.");
@@ -152,11 +154,12 @@ public class SeanceDao {
 	}
 
 	/**
-	 * Methode qui supprime une seance grace à la date et heure de debut et l'id de la session
+	 * Methode qui supprime une seance grace à la date et heure de debut et l'id
+	 * de la session
 	 * 
 	 * @param debut
 	 * @param idSession
-	 * @return
+	 * @return booléen
 	 */
 	public Boolean deleteSeance(GregorianCalendar debut, int idSession) {
 		Boolean etat = new Boolean(false);
@@ -174,17 +177,18 @@ public class SeanceDao {
 		return etat;
 	}
 
-
 	private static java.sql.PreparedStatement pUpdateSeance = null;
 	/**
 	 * Requete pour mettre à jour une séance
 	 */
 	static {
 		try {
-			pUpdateSeance = DataBase.getConnection().prepareStatement(
-					"UPDATE lagarenne2015.seance SET "
-					+ "id_module = ?, id_formateur = ?, id_salle = ?, contenu = ? "
-					+ "WHERE id_session = ? AND debut = ?;");
+			pUpdateSeance = DataBase
+					.getConnection()
+					.prepareStatement(
+							"UPDATE lagarenne2015.seance SET "
+									+ "id_module = ?, id_formateur = ?, id_salle = ?, contenu = ? "
+									+ "WHERE id_session = ? AND debut = ?;");
 		} catch (Exception e) {
 			e.getMessage();
 			System.out.println("Requete updateSeance échouée.");
@@ -192,7 +196,8 @@ public class SeanceDao {
 	}
 
 	/**
-	 * Methode qui met à jour les elements d'une seance d'une session et d'une date et heure de debut donnée
+	 * Methode qui met à jour les elements d'une seance d'une session et d'une
+	 * date et heure de debut donnée
 	 * 
 	 * @param idModule
 	 * @param idFormateur
@@ -200,9 +205,10 @@ public class SeanceDao {
 	 * @param contenu
 	 * @param idSession
 	 * @param debut
-	 * @return
+	 * @return booléen
 	 */
-	public Boolean updateSeance(int idModule, int idFormateur, int idSalle, String contenu, int idSession, GregorianCalendar debut) {
+	public Boolean updateSeance(int idModule, int idFormateur, int idSalle,
+			String contenu, int idSession, GregorianCalendar debut) {
 		Boolean etat = new Boolean(false);
 		try {
 			// Conversion de la date Gregorian en date SQL

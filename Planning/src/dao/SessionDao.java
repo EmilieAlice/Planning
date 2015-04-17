@@ -14,7 +14,8 @@ public class SessionDao {
 	static {
 		try {
 			pfindSessionByNom = DataBase.getConnection().prepareStatement(
-					"SELECT * FROM lagarenne2015.session " + "WHERE nom_session=?; ");
+					"SELECT * FROM lagarenne2015.session "
+							+ "WHERE nom_session=?; ");
 		} catch (Exception e) {
 			e.getMessage();
 			System.out.println("Requete findSession échouée.");
@@ -26,7 +27,7 @@ public class SessionDao {
 	 * de la session
 	 * 
 	 * @param nomSession
-	 * @return
+	 * @return Session
 	 */
 	public Session findSessionByNom(String nomSession) {
 		Session session = new Session();
@@ -48,7 +49,8 @@ public class SessionDao {
 				dateFin.setTime(resultat.getDate("date_fin"));
 				session.setDateFin(dateFin);
 
-				session.setDescriptionSession(resultat.getString("description_session"));
+				session.setDescriptionSession(resultat
+						.getString("description_session"));
 				session.setIdFormation(resultat.getInt("id_formation"));
 
 				// Conversion de la date de début d'inscription SQL en
@@ -93,7 +95,7 @@ public class SessionDao {
 	 * Méthode qui récupère dans la base données un objet Session grâce à son id
 	 * 
 	 * @param idSession
-	 * @return 
+	 * @return Session
 	 */
 	public Session findSessionById(int idSession) {
 		Session session = new Session();
@@ -115,7 +117,8 @@ public class SessionDao {
 				dateFin.setTime(resultat.getDate("date_fin"));
 				session.setDateFin(dateFin);
 
-				session.setDescriptionSession(resultat.getString("description_session"));
+				session.setDescriptionSession(resultat
+						.getString("description_session"));
 				session.setIdFormation(resultat.getInt("id_formation"));
 
 				// Conversion de la date de début d'inscription SQL en

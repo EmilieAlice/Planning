@@ -8,15 +8,18 @@ public class PersonneDao {
 
 	private static java.sql.PreparedStatement pFindPersonneByNomModule = null;
 	/**
-	 * Requete pour récupérer une personne grâce à son nom de module
+	 * Requete pour récupérer une personne (un formateur) grâce à son nom de
+	 * module
 	 */
 	static {
 		try {
-			pFindPersonneByNomModule = DataBase.getConnection().prepareStatement(
-					"SELECT * FROM lagarenne2015.formateur "
-							+ "INNER JOIN personne on personne.id_personne = formateur.id_formateur "
-							+ "INNER JOIN module on module.id_module = formateur.id_module "
-							+ "WHERE module.nom = ?;");
+			pFindPersonneByNomModule = DataBase
+					.getConnection()
+					.prepareStatement(
+							"SELECT * FROM lagarenne2015.formateur "
+									+ "INNER JOIN personne on personne.id_personne = formateur.id_formateur "
+									+ "INNER JOIN module on module.id_module = formateur.id_module "
+									+ "WHERE module.nom = ?;");
 		} catch (Exception e) {
 			e.getMessage();
 			System.out.println("Requete findPersonneByNomModule échouée.");
@@ -28,7 +31,7 @@ public class PersonneDao {
 	 * formateur grace au module qu'elle enseigne
 	 * 
 	 * @param nomModule
-	 * @return
+	 * @return Personne
 	 */
 	public Personne findPersonneByNomModule(String nomModule) {
 		Personne personne = new Personne();
