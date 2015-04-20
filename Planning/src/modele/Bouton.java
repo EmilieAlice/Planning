@@ -2,7 +2,6 @@ package modele;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Observable;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JRadioButton;
@@ -16,7 +15,7 @@ import dao.ModuleDao;
  * @author Jerome
  *
  */
-public class Bouton extends Observable {
+public class Bouton {
 
 	private ArrayList<JRadioButton> boutonDesModules;
 	private ButtonGroup groupeDeBoutons;
@@ -76,8 +75,6 @@ public class Bouton extends Observable {
 		boutonDesModules.add(boutonSupprimer);
 		groupeDeBoutons.add(boutonSupprimer);
 
-		setChanged();
-		notifyObservers();
 
 	}
 }

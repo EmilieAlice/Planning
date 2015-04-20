@@ -8,18 +8,8 @@ import modele.Seance.Creneau;
 
 public class Planning {
 
-	private int idPlanning;
 	private int idSession;
 	private ArrayList<Seance> listeSeance;
-
-
-	public int getIdPlanning() {
-		return idPlanning;
-	}
-
-	public void setIdPlanning(int idPlanning) {
-		this.idPlanning = idPlanning;
-	}
 
 	public int getIdSession() {
 		return idSession;
@@ -97,7 +87,7 @@ public class Planning {
 
 	@Override
 	public String toString() {
-		return "Planning [idPlanning=" + idPlanning + ", idSession="
+		return "Planning [idSession="
 				+ idSession + ", listeSeance=" + listeSeance + "]";
 	}
 
