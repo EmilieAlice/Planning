@@ -78,12 +78,12 @@ public class GestionPlanning {
 		scrollPane = new JScrollPane();
 		scrollPane.setBounds(20, 20, 940, 685);
 		frame.getContentPane().add(scrollPane);
-
+		
 		panelTableau = new TableauPanel(idSession);
 		table = panelTableau.getTable();
 		table.addMouseListener(new ecouteur());
 
-		scrollPane.setViewportView(panelTableau);
+		scrollPane.setViewportView(table);
 
 		panelBouttons = new SelectionMatierePanel(idSession);
 		panelBouttons.setBounds(1001, 172, 293, 315);
@@ -147,7 +147,7 @@ public class GestionPlanning {
 			for (int i = 0; i < tableau.length; i++) {
 				tableauBoutton.add((JRadioButton) tableau[i]);
 			}
-			
+
 			/* On initialise les objets */
 			seance = new Seance();
 			Seance.Creneau matin = Creneau.MATIN;
@@ -232,14 +232,14 @@ public class GestionPlanning {
 													.findHeuresSessionModule(
 															seance.getIdSession(),
 															moduleDao
-																	.findModuleByNom(
-																			ancienModule)
+															.findModuleByNom(
+																	ancienModule)
 																	.getIdModule());
 											heureDispoDao
-													.updateModuleAvecHeures(
-															heureDispo,
-															seance.getCreneau(),
-															true);
+											.updateModuleAvecHeures(
+													heureDispo,
+													seance.getCreneau(),
+													true);
 											/*
 											 * On recupere le nombre d'heure
 											 * apres l'update
@@ -248,23 +248,23 @@ public class GestionPlanning {
 													.findHeuresSessionModule(
 															seance.getIdSession(),
 															moduleDao
-																	.findModuleByNom(
-																			ancienModule)
+															.findModuleByNom(
+																	ancienModule)
 																	.getIdModule());
 											/*
 											 * on met à jour le texte du bouton
 											 * pour afficher la bonne heure
 											 */
 											jRadioButtonSuppr
-													.setText(ancienModule
-															+ " : "
-															+ heureDispo
-																	.getNbreHeuresDisponibles()
-															+ "/"
-															+ moduleDao
-																	.findModuleByNom(
-																			ancienModule)
-																	.getNbHeuresAnnuelles()
+											.setText(ancienModule
+													+ " : "
+													+ heureDispo
+													.getNbreHeuresDisponibles()
+													+ "/"
+													+ moduleDao
+													.findModuleByNom(
+															ancienModule)
+															.getNbHeuresAnnuelles()
 															+ " heures disponibles");
 										}
 										if (jRadioButtonSuppr.getText().split(
@@ -277,14 +277,14 @@ public class GestionPlanning {
 													.findHeuresSessionModule(
 															seance.getIdSession(),
 															moduleDao
-																	.findModuleByNom(
-																			nouveauModule)
+															.findModuleByNom(
+																	nouveauModule)
 																	.getIdModule());
 											heureDispoDao
-													.updateModuleAvecHeures(
-															heureDispo,
-															seance.getCreneau(),
-															false);
+											.updateModuleAvecHeures(
+													heureDispo,
+													seance.getCreneau(),
+													false);
 											/*
 											 * On recupere le nombre d'heure
 											 * apres l'update
@@ -293,23 +293,23 @@ public class GestionPlanning {
 													.findHeuresSessionModule(
 															seance.getIdSession(),
 															moduleDao
-																	.findModuleByNom(
-																			nouveauModule)
+															.findModuleByNom(
+																	nouveauModule)
 																	.getIdModule());
 											/*
 											 * On met à jour le texte du bouton
 											 * pour afficher la bonne heure
 											 */
 											jRadioButtonSuppr
-													.setText(nouveauModule
-															+ " : "
-															+ heureDispo
-																	.getNbreHeuresDisponibles()
-															+ "/"
-															+ moduleDao
-																	.findModuleByNom(
-																			nouveauModule)
-																	.getNbHeuresAnnuelles()
+											.setText(nouveauModule
+													+ " : "
+													+ heureDispo
+													.getNbreHeuresDisponibles()
+													+ "/"
+													+ moduleDao
+													.findModuleByNom(
+															nouveauModule)
+															.getNbHeuresAnnuelles()
 															+ " heures disponibles");
 										}
 									}
@@ -338,12 +338,12 @@ public class GestionPlanning {
 									jRadioButton.setText(nomModule
 											+ " : "
 											+ heureDispo
-													.getNbreHeuresDisponibles()
+											.getNbreHeuresDisponibles()
 											+ "/"
 											+ moduleDao.findModuleByNom(
 													nomModule)
 													.getNbHeuresAnnuelles()
-											+ " heures disponibles");
+													+ " heures disponibles");
 								}
 								/* On affiche le nom du module dans le planning */
 								table.setValueAt(nomModule,
@@ -402,15 +402,15 @@ public class GestionPlanning {
 											.equals(nomModule)) {
 										/* Et mettre à jour son nombre d'heure */
 										jRadioButtonSuppr
-												.setText(nomModule
-														+ " : "
-														+ heureDispo
-																.getNbreHeuresDisponibles()
-														+ "/"
-														+ moduleDao
-																.findModuleByNom(
-																		nomModule)
-																.getNbHeuresAnnuelles()
+										.setText(nomModule
+												+ " : "
+												+ heureDispo
+												.getNbreHeuresDisponibles()
+												+ "/"
+												+ moduleDao
+												.findModuleByNom(
+														nomModule)
+														.getNbHeuresAnnuelles()
 														+ " heures disponibles");
 									}
 								}

@@ -26,15 +26,19 @@ public class DonneesTableauDouble extends AbstractTableModel {
 	SimpleDateFormat format = new SimpleDateFormat("dd/MM/YYYY");
 
 	/* On remplit le nom des colonnes de titre */
-	private final String[] columnNames = { "Semaine", "LUNDI Matin",
-			"Après-midi", "MARDI Matin", "Après-midi", "MERCREDI Matin",
-			"Après-midi", "JEUDI Matin", "Après-midi", "VENDREDI matin",
+	private final String[] columnNames = { "Semaine", "LUNDI",
+			"Après-midi", "MARDI", "Après-midi", "MERCREDI",
+			"Après-midi", "JEUDI", "Après-midi", "VENDREDI",
 			"Après-midi" };
 
 	/* On créé un tableau d'objet à deux dimensions pour remplir notre JTable */
 	private final Object[][] data;
 
-	/* Constructeur qui prend en paramètre l'id de la session */
+	/**
+	 * Constructeur qui prend en paramètre l'id de la session
+	 * 
+	 * @param idSession
+	 */
 	public DonneesTableauDouble(int idSession) {
 
 		/* On récupère la session */
@@ -231,7 +235,7 @@ public class DonneesTableauDouble extends AbstractTableModel {
 		}
 	}
 
-	/*
+	/**
 	 * Toutes les méthodes de la classe AbstractTableModel pour récupérer,
 	 * savoir si une cellule est éditable et écrire dans une cellule
 	 */

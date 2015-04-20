@@ -29,7 +29,7 @@ public class FenetreTest extends JFrame {
 	}
 
 	/**
-	 * A COMPLETER
+	 * Methode pour initialiser le composant
 	 */
 	private void initComposants() {
 		selectionMatierePanel = new SelectionMatierePanel(1);

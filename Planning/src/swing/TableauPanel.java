@@ -20,10 +20,12 @@ public class TableauPanel extends JPanel {
 		this.table = table;
 	}
 
-	/*
+	/**
 	 * Constructeur du panel du tableau qui ajoute un tableau qui contient les
 	 * données de la classe DonneesTableauDouble. Ajout aussi de la méthode pour
 	 * sélectionner une seule case
+	 * 
+	 * @param idSession
 	 */
 	public TableauPanel(int idSession) {
 
