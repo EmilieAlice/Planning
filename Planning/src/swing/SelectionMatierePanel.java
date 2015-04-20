@@ -11,9 +11,11 @@ public class SelectionMatierePanel extends JPanel {
 
 	private final Bouton bouton;
 
-	/*
+	/**
 	 * Constructeur qui remplit le panneau des boutons grace à la méthode
 	 * remplir de la classe bouton
+	 * 
+	 * @param idSession
 	 */
 	public SelectionMatierePanel(int idSession) {
 

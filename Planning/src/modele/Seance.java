@@ -13,9 +13,6 @@ public class Seance {
 	private String contenu;
 	private Creneau creneau;
 
-	/**
-	 * Le jour et le contenu sont null
-	 */
 	public Seance() {
 	}
 
@@ -74,8 +71,6 @@ public class Seance {
 
 	public void setDebut(GregorianCalendar debut) {
 		this.debut = debut;
-		// pour le moment pas utile la suite mais je ne supprime pas au cas ou
-		// on en aurait besoin
 		long journee = debut.getTimeInMillis();
 		long millis = (3600000);
 		long debutSeance = 0;

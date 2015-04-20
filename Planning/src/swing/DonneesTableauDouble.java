@@ -236,7 +236,7 @@ public class DonneesTableauDouble extends AbstractTableModel {
 	}
 
 	/**
-	 * Toutes les méthodes de la classe AbstractTableModel pour récupérer,
+	 * Toutes les méthodes de la classe AbstractTableModel pour récupérer et 
 	 * savoir si une cellule est éditable et écrire dans une cellule
 	 */
 	public String getColumnName(int columnIndex) {
