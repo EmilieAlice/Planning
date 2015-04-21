@@ -34,6 +34,7 @@ public class GestionPlanning {
 	private Component[] tableau;
 	private ArrayList<JRadioButton> tableauBoutton;
 	private JScrollPane scrollPane;
+	private JPanel panelSeancePresente;
 
 	/**
 	 * Permet de lancer la fenetre
@@ -84,8 +85,12 @@ public class GestionPlanning {
 		scrollPane.setViewportView(table);
 
 		panelBouttons = new SelectionMatierePanel(idSession);
-		panelBouttons.setBounds(1001, 172, 293, 315);
+		panelBouttons.setBounds(981, 20, 293, 276);
 		frame.getContentPane().add(panelBouttons);
+		
+		panelSeancePresente = new JPanel();
+		panelSeancePresente.setBounds(981, 307, 293, 398);
+		frame.getContentPane().add(panelSeancePresente);
 
 		session = new Session();
 		session.setIdSession(idSession);

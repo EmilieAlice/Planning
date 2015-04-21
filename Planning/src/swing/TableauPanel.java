@@ -37,6 +37,7 @@ public class TableauPanel extends JPanel {
 		table.setFont(new Font("Arial", Font.PLAIN, 12));
 		table.setRowHeight(25);
 		table.setRowMargin(5);
+		table.setDefaultRenderer(Object.class, new jTableRender());
 		this.add(table);
 	}
 
