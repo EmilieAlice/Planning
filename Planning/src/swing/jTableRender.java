@@ -24,8 +24,10 @@ public class jTableRender extends DefaultTableCellRenderer {
 			Color color = new Color(219, 214, 214);
 			component.setBackground(color);
 		} else {
+			if(! isSelected){
 			Color color = Color.white;
 			component.setBackground(color);
+			}
 		}
 		/**
 		 * Colorier les cellules en orange si la cellule est vide
