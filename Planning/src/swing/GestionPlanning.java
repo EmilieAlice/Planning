@@ -8,6 +8,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
@@ -25,6 +26,7 @@ import dao.SeanceDao;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
+import javax.xml.ws.handler.MessageContext.Scope;
 
 public class GestionPlanning {
 
@@ -36,9 +38,10 @@ public class GestionPlanning {
 	private Component[] tableau;
 	private ArrayList<JRadioButton> tableauBoutton;
 	private JScrollPane scrollPane;
-	private JPanel panelSeancePresente;
 	private JTable tableListeSeance;
-	JRadioButton bouton = new JRadioButton();
+	private JRadioButton bouton = new JRadioButton();
+	private JScrollPane scrollPaneTableauSeance;
+	private DonneesTableauListeSeances donneesSeance;
 
 	/**
 	 * Permet de lancer la fenetre
@@ -81,6 +84,10 @@ public class GestionPlanning {
 		scrollPane.setBounds(20, 20, 940, 685);
 		frame.getContentPane().add(scrollPane);
 
+		scrollPaneTableauSeance = new JScrollPane();
+		scrollPaneTableauSeance.setBounds(981, 385, 293, 320);
+		frame.getContentPane().add(scrollPaneTableauSeance);
+
 		panelTableau = new TableauPanel(idSession);
 		table = panelTableau.getTable();
 		table.addMouseListener(new ecouteur());
@@ -89,13 +96,8 @@ public class GestionPlanning {
 		scrollPane.setViewportView(table);
 
 		panelBouttons = new SelectionMatierePanel(idSession);
-		panelBouttons.setBounds(981, 20, 293, 276);
-		// panelBouttons.addMouseListener(new ecouteurBoutton());
+		panelBouttons.setBounds(981, 64, 293, 276);
 		frame.getContentPane().add(panelBouttons);
-
-		panelSeancePresente = new JPanel();
-		panelSeancePresente.setBounds(981, 307, 293, 398);
-		frame.getContentPane().add(panelSeancePresente);
 
 		tableau = panelBouttons.getComponents();
 		tableauBoutton = new ArrayList<JRadioButton>();
@@ -152,6 +154,34 @@ public class GestionPlanning {
 			} else {
 				gregJour = null;
 			}
+		}
+		return gregJour;
+
+	}
+
+	/**
+	 * Methode qui recupere la date de la case dans laquel on à cliquer
+	 * 
+	 * @return GregorianCalendar
+	 */
+	public GregorianCalendar transformeDateDeLaCaseSelectionneePourListeSeance() {
+		String recupDate;
+		int year;
+		int month;
+		int day;
+		GregorianCalendar gregJour;
+
+
+		recupDate = (String) tableListeSeance.getValueAt(tableListeSeance.getSelectedRow(),
+				tableListeSeance.getSelectedColumn());
+		if (recupDate != null) {
+			year = Integer.parseInt(recupDate.split("/")[2]);
+			month = Integer.parseInt(recupDate.split("/")[1]) - 1;
+			day = Integer.parseInt(recupDate.split("/")[0]);
+			gregJour = new GregorianCalendar(year, month, day);
+		} else {
+			gregJour = null;
+
 		}
 		return gregJour;
 
@@ -260,6 +290,11 @@ public class GestionPlanning {
 												seance.getIdSalle(), contenu,
 												seance.getIdSession(),
 												seance.getDebut());
+
+										tableListeSeance = new JTable(donneesSeance);
+										donneesSeance.remplir(session.getIdSession(), nomModule);
+										scrollPaneTableauSeance.setViewportView(tableListeSeance);
+										tableListeSeance.addKeyListener(new ecouteurBoutton());
 										/* On recupere le nom du nouveau Module */
 										String nouveauModule = jRadioButton
 												.getText().split(" ")[0];
@@ -271,7 +306,7 @@ public class GestionPlanning {
 											 */
 											if (jRadioButtonSuppr.getText()
 													.split(" ")[0]
-													.equals(ancienModule)) {
+															.equals(ancienModule)) {
 												/*
 												 * On recupere le nombre d'heure
 												 * avant l'update
@@ -280,14 +315,14 @@ public class GestionPlanning {
 														.findHeuresSessionModule(
 																seance.getIdSession(),
 																moduleDao
-																		.findModuleByNom(
-																				ancienModule)
+																.findModuleByNom(
+																		ancienModule)
 																		.getIdModule());
 												heureDispoDao
-														.updateModuleAvecHeures(
-																heureDispo,
-																seance.getCreneau(),
-																true);
+												.updateModuleAvecHeures(
+														heureDispo,
+														seance.getCreneau(),
+														true);
 												/*
 												 * On recupere le nombre d'heure
 												 * apres l'update
@@ -296,8 +331,8 @@ public class GestionPlanning {
 														.findHeuresSessionModule(
 																seance.getIdSession(),
 																moduleDao
-																		.findModuleByNom(
-																				ancienModule)
+																.findModuleByNom(
+																		ancienModule)
 																		.getIdModule());
 												/*
 												 * on met à jour le texte du
@@ -305,20 +340,20 @@ public class GestionPlanning {
 												 * heure
 												 */
 												jRadioButtonSuppr
-														.setText(ancienModule
-																+ " : "
-																+ heureDispo
-																		.getNbreHeuresDisponibles()
-																+ "/"
-																+ moduleDao
-																		.findModuleByNom(
-																				ancienModule)
-																		.getNbHeuresAnnuelles()
+												.setText(ancienModule
+														+ " : "
+														+ heureDispo
+														.getNbreHeuresDisponibles()
+														+ "/"
+														+ moduleDao
+														.findModuleByNom(
+																ancienModule)
+																.getNbHeuresAnnuelles()
 																+ " heures disponibles");
 											}
 											if (jRadioButtonSuppr.getText()
 													.split(" ")[0]
-													.equals(nouveauModule)) {
+															.equals(nouveauModule)) {
 												/*
 												 * On recupere le nombre d'heure
 												 * avant l'update
@@ -327,14 +362,14 @@ public class GestionPlanning {
 														.findHeuresSessionModule(
 																seance.getIdSession(),
 																moduleDao
-																		.findModuleByNom(
-																				nouveauModule)
+																.findModuleByNom(
+																		nouveauModule)
 																		.getIdModule());
 												heureDispoDao
-														.updateModuleAvecHeures(
-																heureDispo,
-																seance.getCreneau(),
-																false);
+												.updateModuleAvecHeures(
+														heureDispo,
+														seance.getCreneau(),
+														false);
 												/*
 												 * On recupere le nombre d'heure
 												 * apres l'update
@@ -343,8 +378,8 @@ public class GestionPlanning {
 														.findHeuresSessionModule(
 																seance.getIdSession(),
 																moduleDao
-																		.findModuleByNom(
-																				nouveauModule)
+																.findModuleByNom(
+																		nouveauModule)
 																		.getIdModule());
 												/*
 												 * On met à jour le texte du
@@ -352,15 +387,15 @@ public class GestionPlanning {
 												 * heure
 												 */
 												jRadioButtonSuppr
-														.setText(nouveauModule
-																+ " : "
-																+ heureDispo
-																		.getNbreHeuresDisponibles()
-																+ "/"
-																+ moduleDao
-																		.findModuleByNom(
-																				nouveauModule)
-																		.getNbHeuresAnnuelles()
+												.setText(nouveauModule
+														+ " : "
+														+ heureDispo
+														.getNbreHeuresDisponibles()
+														+ "/"
+														+ moduleDao
+														.findModuleByNom(
+																nouveauModule)
+																.getNbHeuresAnnuelles()
 																+ " heures disponibles");
 											}
 										}
@@ -374,6 +409,10 @@ public class GestionPlanning {
 										heureDispoDao.updateModuleAvecHeures(
 												heureDispo,
 												seance.getCreneau(), false);
+										tableListeSeance = new JTable(donneesSeance);
+										donneesSeance.remplir(session.getIdSession(), nomModule);
+										scrollPaneTableauSeance.setViewportView(tableListeSeance);
+										tableListeSeance.addKeyListener(new ecouteurBoutton());
 										/*
 										 * On recupere le nombre d'heure apres
 										 * le update
@@ -387,15 +426,15 @@ public class GestionPlanning {
 										 * afficher la bonne heure
 										 */
 										jRadioButton
-												.setText(nomModule
-														+ " : "
-														+ heureDispo
-																.getNbreHeuresDisponibles()
-														+ "/"
-														+ moduleDao
-																.findModuleByNom(
-																		nomModule)
-																.getNbHeuresAnnuelles()
+										.setText(nomModule
+												+ " : "
+												+ heureDispo
+												.getNbreHeuresDisponibles()
+												+ "/"
+												+ moduleDao
+												.findModuleByNom(
+														nomModule)
+														.getNbHeuresAnnuelles()
 														+ " heures disponibles");
 									}
 									/*
@@ -415,7 +454,7 @@ public class GestionPlanning {
 							 * Si le bouton sélectionné est supprimer on
 							 * recupere a nouveau le nom du module
 							 */
-							
+
 							nomModule = (String) table.getValueAt(
 									table.getSelectedRow(),
 									table.getSelectedColumn());
@@ -447,6 +486,11 @@ public class GestionPlanning {
 										seanceDao.deleteSeance(
 												seance.getDebut(),
 												session.getIdSession());
+
+										tableListeSeance = new JTable(donneesSeance);
+										donneesSeance.remplir(session.getIdSession(), nomModule);
+										scrollPaneTableauSeance.setViewportView(tableListeSeance);
+										tableListeSeance.addKeyListener(new ecouteurBoutton());
 										/* On vide la case du planning */
 										table.setValueAt(texteVide,
 												table.getSelectedRow(),
@@ -467,28 +511,28 @@ public class GestionPlanning {
 											 */
 											if (jRadioButtonSuppr.getText()
 													.split(" ")[0]
-													.equals(nomModule)) {
+															.equals(nomModule)) {
 												/*
 												 * Et mettre à jour son nombre
 												 * d'heure
 												 */
 												jRadioButtonSuppr
-														.setText(nomModule
-																+ " : "
-																+ heureDispo
-																		.getNbreHeuresDisponibles()
-																+ "/"
-																+ moduleDao
-																		.findModuleByNom(
-																				nomModule)
-																		.getNbHeuresAnnuelles()
+												.setText(nomModule
+														+ " : "
+														+ heureDispo
+														.getNbreHeuresDisponibles()
+														+ "/"
+														+ moduleDao
+														.findModuleByNom(
+																nomModule)
+																.getNbHeuresAnnuelles()
 																+ " heures disponibles");
 											}
 										}
 									} catch (Exception exc) {
 										exc.getMessage();
 										System.out
-												.println("DeleteSeance échoué");
+										.println("DeleteSeance échoué");
 									}
 								}
 							}
@@ -547,6 +591,11 @@ public class GestionPlanning {
 							/* On supprime la seance */
 							seanceDao.deleteSeance(seance.getDebut(),
 									session.getIdSession());
+
+							tableListeSeance = new JTable(donneesSeance);
+							donneesSeance.remplir(session.getIdSession(), nomModule);
+							scrollPaneTableauSeance.setViewportView(tableListeSeance);
+							tableListeSeance.addKeyListener(new ecouteurBoutton());
 							/* On vide la case du planning */
 							table.setValueAt(texteVide, table.getSelectedRow(),
 									table.getSelectedColumn());
@@ -566,12 +615,12 @@ public class GestionPlanning {
 									jRadioButtonSuppr.setText(nomModule
 											+ " : "
 											+ heureDispo
-													.getNbreHeuresDisponibles()
+											.getNbreHeuresDisponibles()
 											+ "/"
 											+ moduleDao.findModuleByNom(
 													nomModule)
 													.getNbHeuresAnnuelles()
-											+ " heures disponibles");
+													+ " heures disponibles");
 								}
 							}
 
@@ -596,32 +645,21 @@ public class GestionPlanning {
 
 	}
 
-	public class ecouteurBoutton implements ActionListener {
+	public class ecouteurBoutton implements ActionListener, KeyListener {
 
 		String texteDuBouton = "";
 		String nomModule;
+		String texteVide = "";
+		String contenu = "null";
+		Seance.Creneau matin = Creneau.MATIN;
+		Seance.Creneau apresMidi = Creneau.APRES_MIDI;
+		GregorianCalendar dateSeance;
 
-		/*
-		 * @Override public void mouseClicked(MouseEvent arg0) {
-		 * 
-		 * }
-		 * 
-		 * @Override public void mouseEntered(MouseEvent arg0) {
-		 * 
-		 * }
-		 * 
-		 * @Override public void mouseExited(MouseEvent arg0) {
-		 * 
-		 * }
-		 * 
-		 * @Override public void mousePressed(MouseEvent arg0) {
-		 * 
-		 * }
-		 * 
-		 * @Override public void mouseReleased(MouseEvent arg0) {
-		 * 
-		 * }
-		 */
+		Seance seance = new Seance();
+		SeanceDao seanceDao = new SeanceDao();
+		ModuleDao moduleDao = new ModuleDao();
+		HeuresSessionModule heureDispo = new HeuresSessionModule();
+		HeuresSessionModuleDao heureDispoDao = new HeuresSessionModuleDao();
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -642,18 +680,113 @@ public class GestionPlanning {
 					if (!texteDuBouton.equals("Supprimer")) {
 						nomModule = texteDuBouton.split(" ")[0];
 					}
-					DonneesTableauListeSeances donneesSeance = new DonneesTableauListeSeances();
+					
 					if (nomModule != null) {
-						donneesSeance.remplir(1, nomModule);
-
+						donneesSeance = new DonneesTableauListeSeances();
 						tableListeSeance = new JTable(donneesSeance);
-						panelSeancePresente.removeAll();
-						panelSeancePresente.repaint();
-						panelSeancePresente.add(tableListeSeance);
-						
+						donneesSeance.remplir(session.getIdSession(), nomModule);
+						tableListeSeance.addKeyListener(new ecouteurBoutton());
+						scrollPaneTableauSeance.setViewportView(tableListeSeance);
+
 					}
 				}
 			}
+
+		}
+
+		@Override
+		public void keyPressed(KeyEvent e) {
+//
+//			tableau = panelBouttons.getComponents();
+//			tableauBoutton = new ArrayList<JRadioButton>();
+//			for (int i = 0; i < tableau.length; i++) {
+//				tableauBoutton.add((JRadioButton) tableau[i]);
+//			}
+//			for (JRadioButton jRadioButton : tableauBoutton) {
+//				/* Si un bouton est selectione */
+//				if (jRadioButton.isSelected()) {
+//					texteDuBouton = jRadioButton.getText();
+//					/* si le texte du bouton selectionné n'est pas Supprimer */
+//					if (!texteDuBouton.equals("Supprimer")) {
+//						nomModule = texteDuBouton.split(" ")[0];
+//					}
+//				}
+//			}
+//			if (e.getKeyCode() == KeyEvent.VK_DELETE) {
+//
+//				seance.setIdModule(moduleDao.findModuleByNom(nomModule).getIdModule());
+//				dateSeance = transformeDateDeLaCaseSelectionneePourListeSeance();
+//				seance.setDebut(dateSeance);
+//				if(tableListeSeance.getValueAt(tableListeSeance.getSelectedRow(),
+//						tableListeSeance.getSelectedColumn() + 1) == "MATIN" || tableListeSeance.getValueAt(tableListeSeance.getSelectedRow(),
+//								tableListeSeance.getSelectedColumn()) == "MATIN"){
+//					seance.setCreneau(matin);
+//				}
+//				else{
+//					seance.setCreneau(apresMidi);
+//				}
+//				seance.setIdSession(session.getIdSession());
+//				/* On recupere le nombre d'heure du module */
+//				heureDispo = heureDispoDao.findHeuresSessionModule(
+//						seance.getIdSession(), seance.getIdModule());
+//
+//				try {
+//					/* On supprime la seance */
+//					seanceDao.deleteSeance(seance.getDebut(),
+//							seance.getIdSession());
+//
+//					
+//					donneesSeance.remplir(session.getIdSession(), nomModule);
+//					tableListeSeance = new JTable(donneesSeance);
+//					tableListeSeance.addKeyListener(new ecouteurBoutton());
+//					
+//					/* On vide la case du planning */
+//					System.out.println("heureDispo avant update : " + heureDispo);
+//					heureDispoDao.updateModuleAvecHeures(heureDispo,
+//							seance.getCreneau(), true);
+//					/* On recupere le nombre d'heure dispo */
+//					heureDispo = heureDispoDao
+//							.findHeuresSessionModule(
+//									seance.getIdSession(),
+//									seance.getIdModule());
+//					System.out.println("heureDispo apres update : " + heureDispo);
+//					/* On va parcourir les boutons */
+//					for (JRadioButton jRadioButtonSuppr : tableauBoutton) {
+//						/* Pour trouver celui du module selectionné */
+//						if (jRadioButtonSuppr.getText().split(" ")[0]
+//								.equals(nomModule)) {
+//							/* Et mettre à jour son nombre d'heure */
+//							jRadioButtonSuppr.setText(nomModule
+//									+ " : "
+//									+ heureDispo
+//									.getNbreHeuresDisponibles()
+//									+ "/"
+//									+ moduleDao.findModuleByNom(
+//											nomModule)
+//											.getNbHeuresAnnuelles()
+//											+ " heures disponibles");
+//						}
+//					}
+//
+//					scrollPaneTableauSeance.setViewportView(tableListeSeance);
+//					scrollPane.setViewportView(table);
+//
+//				} catch (Exception exc) {
+//					exc.getMessage();
+//					System.out.println("DeleteSeance échoué");
+//				}
+//
+//			}
+//
+		}
+
+		@Override
+		public void keyReleased(KeyEvent e) {
+
+		}
+
+		@Override
+		public void keyTyped(KeyEvent e) {
 
 		}
 

@@ -12,6 +12,8 @@ import modele.Seance;
 
 public class DonneesTableauListeSeances extends AbstractTableModel {
 	
+	private static final long serialVersionUID = 1L;
+
 	/* Pour formater une date au format désiré */
 	private SimpleDateFormat format = new SimpleDateFormat("dd/MM/YYYY");
 
