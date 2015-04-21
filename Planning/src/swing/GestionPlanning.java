@@ -648,7 +648,9 @@ public class GestionPlanning {
 
 						tableListeSeance = new JTable(donneesSeance);
 						panelSeancePresente.removeAll();
+						panelSeancePresente.repaint();
 						panelSeancePresente.add(tableListeSeance);
+						
 					}
 				}
 			}
