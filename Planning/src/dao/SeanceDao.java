@@ -229,5 +229,61 @@ public class SeanceDao {
 		}
 		return etat;
 	}
+	
+	private static java.sql.PreparedStatement pFindSeanceByNomByIdSession = null;
+	/**
+	 * Requete pour récupérer un module grâce à son nom
+	 */
+	static {
+		try {
+			pFindSeanceByNomByIdSession = DataBase
+					.getConnection()
+					.prepareStatement(
+							"SELECT * FROM lagarenne2015.seance "
+							+ "WHERE seance.id_module = ? "
+							+ "AND seance.id_session = ?;");
+		} catch (Exception e) {
+			e.getMessage();
+			System.out.println("Requete findSeanceByNomByIdSession échouée.");
+		}
+	}
+
+	/**
+	 * Méthode qui récupère dans la base données une liste d'objet Seance
+	 * grace a l'id module et l'id session
+	 * 
+	 * @param idModule
+	 * @param idSession
+	 * @return
+	 */
+	public ArrayList<Seance> findSeanceByNomByIdSession(int idModule, int idSession) {
+		ArrayList<Seance> listeSeance = new ArrayList<Seance>();
+		try {
+			pFindSeanceByNomByIdSession.setInt(1, idModule);
+			pFindSeanceByNomByIdSession.setInt(2, idSession);
+			ResultSet resultat = pFindSeanceByNomByIdSession.executeQuery();
+			while (resultat.next()) {
+				// Conversion de la date format SQL en format Gregorian Calendar
+				Timestamp dateSql = resultat.getTimestamp("debut");
+				GregorianCalendar jour = new GregorianCalendar();
+				jour.setTime(dateSql);
+				
+				int idCreneau = resultat.getInt("id_creneau");
+				Seance.Creneau creneau = Seance.Creneau.APRES_MIDI;
+				if (idCreneau == 1) {
+					creneau = Seance.Creneau.MATIN;
+				} 
+
+				Seance seance = new Seance();
+				seance.setDebut(jour);
+				seance.setCreneau(creneau);
+				listeSeance.add(seance);
+			} 
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return listeSeance;
+	}
+
 
 }

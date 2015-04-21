@@ -26,6 +26,8 @@ import javax.swing.JScrollPane;
 
 public class GestionPlanning {
 
+	
+
 	private JFrame frame;
 	private JTable table;
 	private JPanel panelBouttons;
@@ -35,6 +37,7 @@ public class GestionPlanning {
 	private ArrayList<JRadioButton> tableauBoutton;
 	private JScrollPane scrollPane;
 	private JPanel panelSeancePresente;
+	private JTable tableListeSeance;
 
 	/**
 	 * Permet de lancer la fenetre
@@ -86,12 +89,13 @@ public class GestionPlanning {
 
 		panelBouttons = new SelectionMatierePanel(idSession);
 		panelBouttons.setBounds(981, 20, 293, 276);
+		panelBouttons.addMouseListener(new ecouteurBoutton());
 		frame.getContentPane().add(panelBouttons);
 		
 		panelSeancePresente = new JPanel();
 		panelSeancePresente.setBounds(981, 307, 293, 398);
 		frame.getContentPane().add(panelSeancePresente);
-
+		
 		session = new Session();
 		session.setIdSession(idSession);
 	}
@@ -539,6 +543,62 @@ public class GestionPlanning {
 
 		@Override
 		public void keyTyped(KeyEvent arg0) {
+
+		}
+
+	}
+	public class ecouteurBoutton implements MouseListener {
+		
+		String texteDuBouton = "";
+		String nomModule;
+		
+		@Override
+		public void mouseClicked(MouseEvent arg0) {
+			/*
+			 * On récupère les boutons du panel des boutons et on remplit un
+			 * tableau avec
+			 */
+			tableau = panelBouttons.getComponents();
+			tableauBoutton = new ArrayList<JRadioButton>();
+			for (int i = 0; i < tableau.length; i++) {
+				tableauBoutton.add((JRadioButton) tableau[i]);
+			}
+			for (JRadioButton jRadioButton : tableauBoutton) {
+				/* Si un bouton est selectione */
+				if (jRadioButton.isSelected()) {
+					texteDuBouton = jRadioButton.getText();
+					/* si le texte du bouton selectionné n'est pas Supprimer */
+					if (!texteDuBouton.equals("Supprimer")) {
+						nomModule = texteDuBouton.split(" ")[0];
+					}
+					}
+				}
+						
+			DonneesTableauListeSeances donneesSeance = new DonneesTableauListeSeances();
+			donneesSeance.remplir(1, nomModule);
+
+			tableListeSeance = new JTable(donneesSeance);
+			panelSeancePresente.removeAll();
+			panelSeancePresente.add(tableListeSeance);
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent arg0) {
+
+		}
+
+		@Override
+		public void mouseExited(MouseEvent arg0) {
+
+		}
+
+		@Override
+		public void mousePressed(MouseEvent arg0) {
+
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent arg0) {
 
 		}
 

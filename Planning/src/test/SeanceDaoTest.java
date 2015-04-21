@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 import modele.Seance;
+import modele.Seance.Creneau;
 
 import org.junit.Test;
 
@@ -86,6 +87,26 @@ public class SeanceDaoTest {
 	@Test
 	public void testUpdateSeance() {
 
+	}
+	
+	@Test
+	public void testFindSeanceByNomByIdSession() {
+		GregorianCalendar debut = new GregorianCalendar(2015,05,23,9,00,00);
+		Seance.Creneau creneau = Creneau.MATIN;
+		
+		Seance seance = new Seance();
+		seance.setDebut(debut);
+		seance.setCreneau(creneau);
+		ArrayList<Seance> listeSeanceTest = new ArrayList<Seance>();
+		listeSeanceTest.add(seance);
+		
+		ArrayList<Seance> listeSeanceBdd = new ArrayList<Seance>();
+		SeanceDao seanceDao = new SeanceDao();
+		listeSeanceBdd = seanceDao.findSeanceByNomByIdSession(1, 1);		
+		
+		System.out.println(listeSeanceTest);
+		System.out.println(listeSeanceBdd);
+		
 	}
 
 }
