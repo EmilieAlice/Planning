@@ -10,7 +10,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 /**
  * Définir l'affichage dans un JTable
  */
-public class jTableRender extends DefaultTableCellRenderer {
+public class JTableRender extends DefaultTableCellRenderer {
 
 	private static final long serialVersionUID = 1L;
 
