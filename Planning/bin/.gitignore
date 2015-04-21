@@ -1,2 +1,8 @@
+<<<<<<< Updated upstream
 /.DS_Store
+=======
+/.DS_Store
+/dao/
+/modele/
+>>>>>>> Stashed changes
 /swing/
