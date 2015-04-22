@@ -85,7 +85,8 @@ public class GestionPlanning {
 		scrollPaneTableauSeance.setBounds(981, 385, 293, 320);
 		frame.getContentPane().add(scrollPaneTableauSeance);
 
-		panelTableau = new TableauPanel(idSession);
+		panelTableau = new TableauPanel();
+		panelTableau.remplir(idSession);
 		table = panelTableau.getTable();
 		table.addMouseListener(new ecouteur());
 		table.addKeyListener(new ecouteur());

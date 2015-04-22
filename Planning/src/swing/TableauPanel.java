@@ -11,6 +11,15 @@ public class TableauPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	private JTable table;
+	private JTableRender jTableRender;
+
+	public JTableRender getjTableRender() {
+		return jTableRender;
+	}
+
+	public void setjTableRender(JTableRender jTableRender) {
+		this.jTableRender = jTableRender;
+	}
 
 	public JTable getTable() {
 		return table;
@@ -37,7 +46,23 @@ public class TableauPanel extends JPanel {
 		table.setFont(new Font("Arial", Font.PLAIN, 12));
 		table.setRowHeight(25);
 		table.setRowMargin(5);
-		table.setDefaultRenderer(Object.class, new JTableRender());
+		table.setDefaultRenderer(Object.class, jTableRender);
+		this.add(table);
+	}
+	
+	public TableauPanel(){
+	}
+	
+	public void remplir(int idSession){
+		this.setBounds(6, 6, 930, 675);
+
+		table = new JTable(new DonneesTableauDouble(idSession));
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		table.setCellSelectionEnabled(true);
+		table.setFont(new Font("Arial", Font.PLAIN, 12));
+		table.setRowHeight(25);
+		table.setRowMargin(5);
+		table.setDefaultRenderer(Object.class, jTableRender);
 		this.add(table);
 	}
 
