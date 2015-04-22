@@ -8,7 +8,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
@@ -26,7 +25,6 @@ import dao.SeanceDao;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
-import javax.xml.ws.handler.MessageContext.Scope;
 
 public class GestionPlanning {
 
@@ -39,7 +37,6 @@ public class GestionPlanning {
 	private ArrayList<JRadioButton> tableauBoutton;
 	private JScrollPane scrollPane;
 	private JTable tableListeSeance;
-	private JRadioButton bouton = new JRadioButton();
 	private JScrollPane scrollPaneTableauSeance;
 	private DonneesTableauListeSeances donneesSeance;
 
@@ -294,7 +291,6 @@ public class GestionPlanning {
 										tableListeSeance = new JTable(donneesSeance);
 										donneesSeance.remplir(session.getIdSession(), nomModule);
 										scrollPaneTableauSeance.setViewportView(tableListeSeance);
-										tableListeSeance.addKeyListener(new ecouteurBoutton());
 										/* On recupere le nom du nouveau Module */
 										String nouveauModule = jRadioButton
 												.getText().split(" ")[0];
@@ -412,7 +408,6 @@ public class GestionPlanning {
 										tableListeSeance = new JTable(donneesSeance);
 										donneesSeance.remplir(session.getIdSession(), nomModule);
 										scrollPaneTableauSeance.setViewportView(tableListeSeance);
-										tableListeSeance.addKeyListener(new ecouteurBoutton());
 										/*
 										 * On recupere le nombre d'heure apres
 										 * le update
@@ -490,7 +485,6 @@ public class GestionPlanning {
 										tableListeSeance = new JTable(donneesSeance);
 										donneesSeance.remplir(session.getIdSession(), nomModule);
 										scrollPaneTableauSeance.setViewportView(tableListeSeance);
-										tableListeSeance.addKeyListener(new ecouteurBoutton());
 										/* On vide la case du planning */
 										table.setValueAt(texteVide,
 												table.getSelectedRow(),
@@ -595,7 +589,6 @@ public class GestionPlanning {
 							tableListeSeance = new JTable(donneesSeance);
 							donneesSeance.remplir(session.getIdSession(), nomModule);
 							scrollPaneTableauSeance.setViewportView(tableListeSeance);
-							tableListeSeance.addKeyListener(new ecouteurBoutton());
 							/* On vide la case du planning */
 							table.setValueAt(texteVide, table.getSelectedRow(),
 									table.getSelectedColumn());
@@ -645,7 +638,7 @@ public class GestionPlanning {
 
 	}
 
-	public class ecouteurBoutton implements ActionListener, KeyListener {
+	public class ecouteurBoutton implements ActionListener {
 
 		String texteDuBouton = "";
 		String nomModule;
@@ -683,10 +676,12 @@ public class GestionPlanning {
 					
 					if (nomModule != null) {
 						donneesSeance = new DonneesTableauListeSeances();
-						tableListeSeance = new JTable(donneesSeance);
 						donneesSeance.remplir(session.getIdSession(), nomModule);
-						tableListeSeance.addKeyListener(new ecouteurBoutton());
+						tableListeSeance = new JTable(donneesSeance);
 						scrollPaneTableauSeance.setViewportView(tableListeSeance);
+
+
+						
 
 					}
 				}
@@ -694,101 +689,6 @@ public class GestionPlanning {
 
 		}
 
-		@Override
-		public void keyPressed(KeyEvent e) {
-//
-//			tableau = panelBouttons.getComponents();
-//			tableauBoutton = new ArrayList<JRadioButton>();
-//			for (int i = 0; i < tableau.length; i++) {
-//				tableauBoutton.add((JRadioButton) tableau[i]);
-//			}
-//			for (JRadioButton jRadioButton : tableauBoutton) {
-//				/* Si un bouton est selectione */
-//				if (jRadioButton.isSelected()) {
-//					texteDuBouton = jRadioButton.getText();
-//					/* si le texte du bouton selectionné n'est pas Supprimer */
-//					if (!texteDuBouton.equals("Supprimer")) {
-//						nomModule = texteDuBouton.split(" ")[0];
-//					}
-//				}
-//			}
-//			if (e.getKeyCode() == KeyEvent.VK_DELETE) {
-//
-//				seance.setIdModule(moduleDao.findModuleByNom(nomModule).getIdModule());
-//				dateSeance = transformeDateDeLaCaseSelectionneePourListeSeance();
-//				seance.setDebut(dateSeance);
-//				if(tableListeSeance.getValueAt(tableListeSeance.getSelectedRow(),
-//						tableListeSeance.getSelectedColumn() + 1) == "MATIN" || tableListeSeance.getValueAt(tableListeSeance.getSelectedRow(),
-//								tableListeSeance.getSelectedColumn()) == "MATIN"){
-//					seance.setCreneau(matin);
-//				}
-//				else{
-//					seance.setCreneau(apresMidi);
-//				}
-//				seance.setIdSession(session.getIdSession());
-//				/* On recupere le nombre d'heure du module */
-//				heureDispo = heureDispoDao.findHeuresSessionModule(
-//						seance.getIdSession(), seance.getIdModule());
-//
-//				try {
-//					/* On supprime la seance */
-//					seanceDao.deleteSeance(seance.getDebut(),
-//							seance.getIdSession());
-//
-//					
-//					donneesSeance.remplir(session.getIdSession(), nomModule);
-//					tableListeSeance = new JTable(donneesSeance);
-//					tableListeSeance.addKeyListener(new ecouteurBoutton());
-//					
-//					/* On vide la case du planning */
-//					System.out.println("heureDispo avant update : " + heureDispo);
-//					heureDispoDao.updateModuleAvecHeures(heureDispo,
-//							seance.getCreneau(), true);
-//					/* On recupere le nombre d'heure dispo */
-//					heureDispo = heureDispoDao
-//							.findHeuresSessionModule(
-//									seance.getIdSession(),
-//									seance.getIdModule());
-//					System.out.println("heureDispo apres update : " + heureDispo);
-//					/* On va parcourir les boutons */
-//					for (JRadioButton jRadioButtonSuppr : tableauBoutton) {
-//						/* Pour trouver celui du module selectionné */
-//						if (jRadioButtonSuppr.getText().split(" ")[0]
-//								.equals(nomModule)) {
-//							/* Et mettre à jour son nombre d'heure */
-//							jRadioButtonSuppr.setText(nomModule
-//									+ " : "
-//									+ heureDispo
-//									.getNbreHeuresDisponibles()
-//									+ "/"
-//									+ moduleDao.findModuleByNom(
-//											nomModule)
-//											.getNbHeuresAnnuelles()
-//											+ " heures disponibles");
-//						}
-//					}
-//
-//					scrollPaneTableauSeance.setViewportView(tableListeSeance);
-//					scrollPane.setViewportView(table);
-//
-//				} catch (Exception exc) {
-//					exc.getMessage();
-//					System.out.println("DeleteSeance échoué");
-//				}
-//
-//			}
-//
-		}
-
-		@Override
-		public void keyReleased(KeyEvent e) {
-
-		}
-
-		@Override
-		public void keyTyped(KeyEvent e) {
-
-		}
 
 	}
 }
