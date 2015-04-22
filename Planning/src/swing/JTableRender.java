@@ -34,7 +34,7 @@ public class JTableRender extends DefaultTableCellRenderer {
 		for (Integer contrainteFormateur : listeContrainteFormateurs) {
 			int col = contrainteFormateur;
 			if (row %2 != 0 && column == col) {
-				Color color = Color.red;
+				Color color = new Color(226, 133, 133);
 				component.setBackground(color);
 			}
 		}

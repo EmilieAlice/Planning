@@ -189,6 +189,8 @@ public class GestionPlanning {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 
+			ArrayList<Integer> listeContrainteFormateur = new ArrayList<Integer>();
+			ContrainteFormateurDao contrainteDao = new ContrainteFormateurDao();
 			/*
 			 * On récupère les boutons du panel des boutons et on remplit un
 			 * tableau avec
@@ -216,7 +218,13 @@ public class GestionPlanning {
 								break;
 							}
 							nomModule = texteDuBouton.split(" ")[0];
-							
+							int idFormateur = moduleDao.findFormateurByNomModule(nomModule).getIdFormateur();
+							listeContrainteFormateur = contrainteDao.donneJourCreneauIndispo(idFormateur);
+							for (Integer integer : listeContrainteFormateur) {
+								if (table.getSelectedColumn() == integer) {	
+								}
+								
+							}
 							seance.setIdModule(moduleDao.findModuleByNom(
 									nomModule).getIdModule());
 							/* si la colonne est paire */
@@ -694,11 +702,12 @@ public class GestionPlanning {
 						listeContrainteFormateur = contrainteDao.donneJourCreneauIndispo(idFormateur);
 						JTableRender graphiqueTableau = new JTableRender();
 						graphiqueTableau.setListeContrainteFormateurs(listeContrainteFormateur);
-						TableauPanel tableauPanel = new TableauPanel();
-						tableauPanel.setjTableRender(graphiqueTableau);
-						tableauPanel.remplir(1);
-						table = tableauPanel.getTable();
+						panelTableau.setjTableRender(graphiqueTableau);
+						panelTableau.remplir(1);
+						table = panelTableau.getTable();
 						scrollPane.setViewportView(table);
+						table.addMouseListener(new ecouteur());
+						table.addKeyListener(new ecouteur());
 						/* On rempli la table de la liste des seances */
 						donneesSeance = new DonneesTableauListeSeances();
 						donneesSeance
