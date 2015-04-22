@@ -104,11 +104,7 @@ public class GestionPlanning {
 			tableauBoutton.add((JRadioButton) tableau[i]);
 		}
 		for (JRadioButton jRadioButton : tableauBoutton) {
-			String texteDuBouton = jRadioButton.getText();
-			/* si le texte du bouton selectionné n'est pas Supprimer */
-			if (!texteDuBouton.equals("Supprimer")) {
-				jRadioButton.addActionListener(new ecouteurBoutton());
-			}
+			jRadioButton.addActionListener(new ecouteurBoutton());
 		}
 
 		session = new Session();
@@ -218,11 +214,14 @@ public class GestionPlanning {
 								break;
 							}
 							nomModule = texteDuBouton.split(" ")[0];
-							int idFormateur = moduleDao.findFormateurByNomModule(nomModule).getIdFormateur();
-							listeContrainteFormateur = contrainteDao.donneJourCreneauIndispo(idFormateur);
+							int idFormateur = moduleDao
+									.findFormateurByNomModule(nomModule)
+									.getIdFormateur();
+							listeContrainteFormateur = contrainteDao
+									.donneJourCreneauIndispo(idFormateur);
 							boolean testContrainte = false;
 							for (Integer integer : listeContrainteFormateur) {
-								if (table.getSelectedColumn() == integer) {	
+								if (table.getSelectedColumn() == integer) {
 									testContrainte = true;
 									break;
 								}
@@ -686,7 +685,7 @@ public class GestionPlanning {
 			 */
 			ArrayList<Integer> listeContrainteFormateur = new ArrayList<Integer>();
 			ContrainteFormateurDao contrainteDao = new ContrainteFormateurDao();
-			
+
 			tableau = panelBouttons.getComponents();
 			tableauBoutton = new ArrayList<JRadioButton>();
 			for (int i = 0; i < tableau.length; i++) {
@@ -699,27 +698,41 @@ public class GestionPlanning {
 					/* si le texte du bouton selectionné n'est pas Supprimer */
 					if (!texteDuBouton.equals("Supprimer")) {
 						nomModule = texteDuBouton.split(" ")[0];
-					}
-					
-					/* Si la case selectionné est non null */
-					if (nomModule != null) {
-						int idFormateur = moduleDao.findFormateurByNomModule(nomModule).getIdFormateur();
-						listeContrainteFormateur = contrainteDao.donneJourCreneauIndispo(idFormateur);
+
+						/* Si le module du bouton selectionné est non null */
+						if (nomModule != null) {
+							int idFormateur = moduleDao
+									.findFormateurByNomModule(nomModule)
+									.getIdFormateur();
+							listeContrainteFormateur = contrainteDao
+									.donneJourCreneauIndispo(idFormateur);
+							JTableRender graphiqueTableau = new JTableRender();
+							graphiqueTableau
+									.setListeContrainteFormateurs(listeContrainteFormateur);
+							panelTableau.setjTableRender(graphiqueTableau);
+							panelTableau.remplir(1);
+							table = panelTableau.getTable();
+							scrollPane.setViewportView(table);
+							table.addMouseListener(new ecouteur());
+							table.addKeyListener(new ecouteur());
+							/* On rempli la table de la liste des seances */
+							donneesSeance = new DonneesTableauListeSeances();
+							donneesSeance.remplir(session.getIdSession(),
+									nomModule);
+							tableListeSeance = new JTable(donneesSeance);
+							scrollPaneTableauSeance
+									.setViewportView(tableListeSeance);
+						}
+					} else {
 						JTableRender graphiqueTableau = new JTableRender();
-						graphiqueTableau.setListeContrainteFormateurs(listeContrainteFormateur);
+						graphiqueTableau
+								.setListeContrainteFormateurs(listeContrainteFormateur);
 						panelTableau.setjTableRender(graphiqueTableau);
 						panelTableau.remplir(1);
 						table = panelTableau.getTable();
 						scrollPane.setViewportView(table);
 						table.addMouseListener(new ecouteur());
 						table.addKeyListener(new ecouteur());
-						/* On rempli la table de la liste des seances */
-						donneesSeance = new DonneesTableauListeSeances();
-						donneesSeance
-								.remplir(session.getIdSession(), nomModule);
-						tableListeSeance = new JTable(donneesSeance);
-						scrollPaneTableauSeance
-								.setViewportView(tableListeSeance);
 					}
 				}
 			}
