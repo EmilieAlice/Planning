@@ -490,17 +490,7 @@ public class GestionPlanning {
 										seanceDao.deleteSeance(
 												seance.getDebut(),
 												session.getIdSession());
-										/*
-										 * On instanci la table de la liste des
-										 * seances et on la rempli
-										 */
-										tableListeSeance = new JTable(
-												donneesSeance);
-										donneesSeance.remplir(
-												session.getIdSession(),
-												nomModule);
-										scrollPaneTableauSeance
-												.setViewportView(tableListeSeance);
+										
 										/* On vide la case du planning */
 										table.setValueAt(texteVide,
 												table.getSelectedRow(),
@@ -544,6 +534,17 @@ public class GestionPlanning {
 										System.out
 												.println("DeleteSeance échoué");
 									}
+									/*
+									 * On instanci la table de la liste des
+									 * seances et on la rempli
+									 */
+									/*tableListeSeance = new JTable(
+											donneesSeance);
+									donneesSeance.remplir(
+											session.getIdSession(),
+											nomModule);
+									scrollPaneTableauSeance
+											.setViewportView(tableListeSeance);*/
 								}
 							}
 						}
@@ -603,15 +604,7 @@ public class GestionPlanning {
 							/* On supprime la seance */
 							seanceDao.deleteSeance(seance.getDebut(),
 									session.getIdSession());
-							/*
-							 * On instanci la table de la liste des seances et
-							 * on la rempli
-							 */
-							tableListeSeance = new JTable(donneesSeance);
-							donneesSeance.remplir(session.getIdSession(),
-									nomModule);
-							scrollPaneTableauSeance
-									.setViewportView(tableListeSeance);
+							
 							/* On vide la case du planning */
 							table.setValueAt(texteVide, table.getSelectedRow(),
 									table.getSelectedColumn());
@@ -644,6 +637,15 @@ public class GestionPlanning {
 							exc.getMessage();
 							System.out.println("DeleteSeance échoué");
 						}
+						/*
+						 * On instanci la table de la liste des seances et
+						 * on la rempli
+						 */
+						/*tableListeSeance = new JTable(donneesSeance);
+						donneesSeance.remplir(session.getIdSession(),
+								nomModule);
+						scrollPaneTableauSeance
+								.setViewportView(tableListeSeance);*/
 					}
 				}
 			}
