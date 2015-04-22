@@ -406,17 +406,7 @@ public class GestionPlanning {
 										heureDispoDao.updateModuleAvecHeures(
 												heureDispo,
 												seance.getCreneau(), false);
-										/*
-										 * On instanci la table de la liste des
-										 * seances et on la rempli
-										 */
-										tableListeSeance = new JTable(
-												donneesSeance);
-										donneesSeance.remplir(
-												session.getIdSession(),
-												nomModule);
-										scrollPaneTableauSeance
-												.setViewportView(tableListeSeance);
+										
 										/*
 										 * On recupere le nombre d'heure apres
 										 * le update
@@ -448,6 +438,17 @@ public class GestionPlanning {
 									table.setValueAt(nomModule,
 											table.getSelectedRow(),
 											table.getSelectedColumn());
+									/*
+									 * On instanci la table de la liste des
+									 * seances et on la rempli
+									 */
+									tableListeSeance = new JTable(
+											donneesSeance);
+									donneesSeance.remplir(
+											session.getIdSession(),
+											nomModule);
+									scrollPaneTableauSeance
+											.setViewportView(tableListeSeance);
 								} catch (Exception ex) {
 									ex.getMessage();
 									System.out.println("Insert Seance échoué");
@@ -541,7 +542,7 @@ public class GestionPlanning {
 									/*tableListeSeance = new JTable(
 											donneesSeance);
 									donneesSeance.remplir(
-											session.getIdSession(),
+											1,
 											nomModule);
 									scrollPaneTableauSeance
 											.setViewportView(tableListeSeance);*/
@@ -642,7 +643,7 @@ public class GestionPlanning {
 						 * on la rempli
 						 */
 						/*tableListeSeance = new JTable(donneesSeance);
-						donneesSeance.remplir(session.getIdSession(),
+						donneesSeance.remplir(1,
 								nomModule);
 						scrollPaneTableauSeance
 								.setViewportView(tableListeSeance);*/
