@@ -220,10 +220,15 @@ public class GestionPlanning {
 							nomModule = texteDuBouton.split(" ")[0];
 							int idFormateur = moduleDao.findFormateurByNomModule(nomModule).getIdFormateur();
 							listeContrainteFormateur = contrainteDao.donneJourCreneauIndispo(idFormateur);
+							boolean testContrainte = false;
 							for (Integer integer : listeContrainteFormateur) {
 								if (table.getSelectedColumn() == integer) {	
+									testContrainte = true;
+									break;
 								}
-								
+							}
+							if (testContrainte) {
+								break;
 							}
 							seance.setIdModule(moduleDao.findModuleByNom(
 									nomModule).getIdModule());
