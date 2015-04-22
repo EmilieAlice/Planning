@@ -41,7 +41,7 @@ public class JTableRender extends DefaultTableCellRenderer {
 		/**
 		 * Centrer tous les textes
 		 */
-		Object o = table.getValueAt(row, 3);
+		Object o = table.getValueAt(row, column);
 		if (o != null && component instanceof JLabel) {
 			JLabel label = (JLabel) component;
 			label.setHorizontalAlignment(CENTER);
