@@ -18,6 +18,7 @@ import modele.HeuresSessionModule;
 import modele.Seance;
 import modele.Seance.Creneau;
 import modele.Session;
+import dao.ContrainteFormateurDao;
 import dao.HeuresSessionModuleDao;
 import dao.ModuleDao;
 import dao.SeanceDao;
@@ -215,6 +216,7 @@ public class GestionPlanning {
 								break;
 							}
 							nomModule = texteDuBouton.split(" ")[0];
+							
 							seance.setIdModule(moduleDao.findModuleByNom(
 									nomModule).getIdModule());
 							/* si la colonne est paire */
@@ -669,6 +671,9 @@ public class GestionPlanning {
 			 * On récupère les boutons du panel des boutons et on remplit un
 			 * tableau avec
 			 */
+			ArrayList<Integer> listeContrainteFormateur = new ArrayList<Integer>();
+			ContrainteFormateurDao contrainteDao = new ContrainteFormateurDao();
+			
 			tableau = panelBouttons.getComponents();
 			tableauBoutton = new ArrayList<JRadioButton>();
 			for (int i = 0; i < tableau.length; i++) {
@@ -682,8 +687,18 @@ public class GestionPlanning {
 					if (!texteDuBouton.equals("Supprimer")) {
 						nomModule = texteDuBouton.split(" ")[0];
 					}
+					
 					/* Si la case selectionné est non null */
 					if (nomModule != null) {
+						int idFormateur = moduleDao.findFormateurByNomModule(nomModule).getIdFormateur();
+						listeContrainteFormateur = contrainteDao.donneJourCreneauIndispo(idFormateur);
+						JTableRender graphiqueTableau = new JTableRender();
+						graphiqueTableau.setListeContrainteFormateurs(listeContrainteFormateur);
+						TableauPanel tableauPanel = new TableauPanel();
+						tableauPanel.setjTableRender(graphiqueTableau);
+						tableauPanel.remplir(1);
+						table = tableauPanel.getTable();
+						scrollPane.setViewportView(table);
 						/* On rempli la table de la liste des seances */
 						donneesSeance = new DonneesTableauListeSeances();
 						donneesSeance

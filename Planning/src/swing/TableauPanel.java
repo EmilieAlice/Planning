@@ -11,7 +11,7 @@ public class TableauPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	private JTable table;
-	private JTableRender jTableRender;
+	private JTableRender jTableRender = new JTableRender();
 
 	public JTableRender getjTableRender() {
 		return jTableRender;

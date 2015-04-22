@@ -32,11 +32,10 @@ public class JTableRender extends DefaultTableCellRenderer {
 		}
 		
 		for (Integer contrainteFormateur : listeContrainteFormateurs) {
-			column = contrainteFormateur;
-			if (row %2 != 0) {
+			int col = contrainteFormateur;
+			if (row %2 != 0 && column == col) {
 				Color color = Color.red;
 				component.setBackground(color);
-				component.setEnabled(false);
 			}
 		}
 		/**
