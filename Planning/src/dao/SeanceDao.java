@@ -28,7 +28,7 @@ public class SeanceDao {
 	 * Méthode qui récupère dans la base données une liste de Seance grâce à
 	 * l'id de la session
 	 * 
-	 * @param idSession
+	 * @param idSession un entier
 	 * @return collection de séances
 	 */
 	public ArrayList<Seance> findSeanceByIdSession(int idSession) {
@@ -91,7 +91,7 @@ public class SeanceDao {
 	/**
 	 * Méthode qui insère une séance dans la base de données
 	 * 
-	 * @param seance
+	 * @param seance un objet séance
 	 * @return booleen
 	 */
 	public Boolean insertSeance(Seance seance) {
@@ -256,7 +256,7 @@ public class SeanceDao {
 	 * @param idSession
 	 * @return
 	 */
-	public ArrayList<Seance> findSeanceByNomByIdSession(int idModule, int idSession) {
+	public ArrayList<Seance> findSeanceByIdModuleByIdSession(int idModule, int idSession) {
 		ArrayList<Seance> listeSeance = new ArrayList<Seance>();
 		try {
 			pFindSeanceByNomByIdSession.setInt(1, idModule);
@@ -267,6 +267,9 @@ public class SeanceDao {
 				Timestamp dateSql = resultat.getTimestamp("debut");
 				GregorianCalendar jour = new GregorianCalendar();
 				jour.setTime(dateSql);
+				Timestamp dateSqlFin = resultat.getTimestamp("fin");
+				GregorianCalendar fin = new GregorianCalendar();
+				fin.setTime(dateSqlFin);
 				
 				int idCreneau = resultat.getInt("id_creneau");
 				Seance.Creneau creneau = Seance.Creneau.APRES_MIDI;
@@ -277,6 +280,11 @@ public class SeanceDao {
 				Seance seance = new Seance();
 				seance.setDebut(jour);
 				seance.setCreneau(creneau);
+				seance.setIdModule(resultat.getInt("id_module"));
+				seance.setIdSession(resultat.getInt("id_session"));
+				seance.setIdFormateur(resultat.getInt("id_formateur"));
+				seance.setFin(fin);
+				seance.setIdSalle(resultat.getInt("id_salle"));
 				listeSeance.add(seance);
 			} 
 		} catch (Exception e) {

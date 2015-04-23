@@ -278,7 +278,7 @@ public class GestionPlanning {
 												seance.getIdSession(),
 												seance.getDebut());
 										/*
-										 * On instanci le tableau contenant la
+										 * On instancie le tableau contenant la
 										 * liste des seances puis on le rempli
 										 */
 										tableListeSeance = new JTable(

@@ -19,7 +19,7 @@ import dao.SeanceDao;
  *
  */
 public class SeanceDaoTest {
-
+	
 	/**
 	 * test JUnit de la methode findSeanceByIdSession : permet de verifier si la
 	 * methode retourne la liste des seances grace à l'id de la session
@@ -88,25 +88,54 @@ public class SeanceDaoTest {
 	public void testUpdateSeance() {
 
 	}
-	
+
+	/**
+	 * Test qui permet de vérifier le bon fonctionnement de la méthode qui
+	 * récupère une liste de séance en fonction du numéro de la session et du
+	 * nom du module
+	 */
 	@Test
 	public void testFindSeanceByNomByIdSession() {
-		GregorianCalendar debut = new GregorianCalendar(2015,05,23,9,00,00);
-		Seance.Creneau creneau = Creneau.MATIN;
 		
-		Seance seance = new Seance();
-		seance.setDebut(debut);
-		seance.setCreneau(creneau);
+		GregorianCalendar debut = new GregorianCalendar(2015, 04, 27, 9, 00, 00);
+		GregorianCalendar fin = new GregorianCalendar(2015, 04, 27, 13, 00, 00);
+		Seance.Creneau creneauMatin = Creneau.MATIN;
+		Seance seanceUn = new Seance();
+		seanceUn.setIdModule(1);
+		seanceUn.setIdSession(1);
+		seanceUn.setIdFormateur(4);
+		seanceUn.setDebut(debut);
+		seanceUn.setFin(fin);
+		seanceUn.setCreneau(creneauMatin);
+		seanceUn.setIdSalle(1);
+		seanceUn.setContenu(null);
+		
+		GregorianCalendar debutDeux = new GregorianCalendar(2015, 05, 11, 14, 00, 00);
+		GregorianCalendar finDeux = new GregorianCalendar(2015, 05, 11, 17, 00, 00);
+		Seance.Creneau creneauApresMidi = Creneau.APRES_MIDI;
+		Seance seanceDeux = new Seance();
+		seanceDeux.setIdModule(1);
+		seanceDeux.setIdSession(1);
+		seanceDeux.setIdFormateur(4);
+		seanceDeux.setDebut(debutDeux);
+		seanceDeux.setFin(finDeux);
+		seanceDeux.setCreneau(creneauApresMidi);
+		seanceDeux.setIdSalle(1);
+		seanceDeux.setContenu(null);
+		
 		ArrayList<Seance> listeSeanceTest = new ArrayList<Seance>();
-		listeSeanceTest.add(seance);
-		
+		listeSeanceTest.add(seanceUn);
+		listeSeanceTest.add(seanceDeux);
+
 		ArrayList<Seance> listeSeanceBdd = new ArrayList<Seance>();
 		SeanceDao seanceDao = new SeanceDao();
-		listeSeanceBdd = seanceDao.findSeanceByNomByIdSession(1, 1);		
+		listeSeanceBdd = seanceDao.findSeanceByIdModuleByIdSession(1, 1);
 		
-		System.out.println(listeSeanceTest);
-		System.out.println(listeSeanceBdd);
+		for (int i = 0; i < listeSeanceBdd.size(); i++) {
+			assertEquals(listeSeanceTest.get(i).getDebut(), listeSeanceBdd.get(i).getDebut());
+		}
 		
+
 	}
 
 }
