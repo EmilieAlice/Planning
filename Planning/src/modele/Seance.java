@@ -89,6 +89,16 @@ public class Seance {
 
 	public void setFin(GregorianCalendar fin) {
 		this.fin = fin;
+		long journee = debut.getTimeInMillis();
+		long millis = (3600000);
+		long debutSeance = 0;
+		if (getCreneau() == Creneau.APRES_MIDI) {
+			debutSeance = 14 * millis;
+		} else {
+			debutSeance = 9 * millis;
+		}
+		journee = journee + debutSeance;
+		fin.setTimeInMillis(journee);
 	}
 
 	public Creneau getCreneau() {

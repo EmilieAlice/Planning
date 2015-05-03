@@ -95,7 +95,7 @@ public class SeanceDaoTest {
 	 * nom du module
 	 */
 	@Test
-	public void testFindSeanceByNomByIdSession() {
+	public void testFindSeanceByIdModuleByIdSession() {
 		
 		GregorianCalendar debut = new GregorianCalendar(2015, 04, 27, 9, 00, 00);
 		GregorianCalendar fin = new GregorianCalendar(2015, 04, 27, 13, 00, 00);
@@ -132,7 +132,9 @@ public class SeanceDaoTest {
 		listeSeanceBdd = seanceDao.findSeanceByIdModuleByIdSession(1, 1);
 		
 		for (int i = 0; i < listeSeanceBdd.size(); i++) {
-			assertEquals(listeSeanceTest.get(i).getDebut(), listeSeanceBdd.get(i).getDebut());
+			System.out.println(listeSeanceTest.get(i));
+			System.out.println(listeSeanceBdd.get(i));
+			assertEquals(listeSeanceTest.get(i), listeSeanceBdd.get(i));
 		}
 		
 
