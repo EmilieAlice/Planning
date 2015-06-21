@@ -23,6 +23,7 @@ import dao.HeuresSessionModuleDao;
 import dao.ModuleDao;
 import dao.SeanceDao;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
@@ -63,7 +64,9 @@ public class GestionPlanning {
 	 * Initialise la fenetre
 	 */
 	public GestionPlanning() {
-		initialize(1);
+		String question = JOptionPane.showInputDialog("De quelle session voulez vous gérer le planning ?");
+		int entierQeustion  = Integer.parseInt(question);
+		initialize(entierQeustion);
 	}
 
 	/**

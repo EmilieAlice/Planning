@@ -267,12 +267,9 @@ public class SeanceDao {
 				Timestamp dateSqlDebut = resultat.getTimestamp("debut");
 				GregorianCalendar debut = new GregorianCalendar();
 				debut.setTime(dateSqlDebut);
-				System.out.println("debut " + debut);
 				Timestamp dateSqlFin = resultat.getTimestamp("fin");
 				GregorianCalendar fin = new GregorianCalendar();
 				fin.setTime(dateSqlFin);
-				System.out.println("sql fin " + dateSqlFin);
-				System.out.println("fin " + fin);
 				int idCreneau = resultat.getInt("id_creneau");
 				Seance.Creneau creneau = Seance.Creneau.APRES_MIDI;
 				if (idCreneau == 1) {
